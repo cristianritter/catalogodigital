@@ -30,20 +30,22 @@
     </head>
     <body id="page-top">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <!--<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">-->
+        <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav">
+ 
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="{% static 'catalogodigital/assets/img/navbar-logo.svg' %}" alt="..." /></a>
+                <a class="navbar-brand" href="#page-top"><img src="{% static 'catalogodigital/assets/img/navbar-logo2.svg' %}" alt="Logo" style="width: 80px; height: auto;"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Serviços</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
+                        <!--<li class="nav-item"><a class="nav-link" href="#team">Team</a></li>-->
+                        <li class="nav-item"><a class="nav-link" href="#new-contact">Contato</a></li>
                     </ul>
                 </div>
             </div>
@@ -53,14 +55,14 @@
             <div class="container">
                 <div class="masthead-subheading">Bem Vindo ao Catálogo Digital!</div>
                 <div class="masthead-heading text-uppercase">A melhor landing page para o seu negócio</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#new-contact"> Entre em contato</a>
             </div>
         </header>
         <!-- Services-->
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Services</h2>
+                    <h2 class="section-heading text-uppercase">Nossos Serviços</h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
                 <div class="row text-center">
@@ -196,7 +198,7 @@
         <section class="page-section" id="about">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
+                    <h2 class="section-heading text-uppercase">Um pouco mais sobre nós</h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
                 <ul class="timeline">
@@ -254,7 +256,7 @@
                 </ul>
             </div>
         </section>
-        <!-- Team-->
+        <!-- Team
         <section class="page-section bg-light" id="team">
             <div class="container">
                 <div class="text-center">
@@ -297,8 +299,8 @@
                     <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
                 </div>
             </div>
-        </section>
-        <!-- Clients-->
+        </section>-->
+        <!-- Clients
         <div class="py-5">
             <div class="container">
                 <div class="row align-items-center">
@@ -316,81 +318,85 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Contact-->
-        <section class="page-section" id="contact">
+        </div>-->
+        
+        <!-- New Contact Section -->
+        <section class="page-section" id="new-contact">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Entre em Contato</h2>
+                    <h3 class="section-subheading text-muted">Estamos disponíveis de seg à sex das 07 às 17.</h3>
                 </div>
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <div class="row align-items-stretch mb-5">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <!-- Name input-->
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                            </div>
-                            <div class="form-group">
-                                <!-- Email address input-->
-                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                            </div>
-                            <div class="form-group mb-md-0">
-                                <!-- Phone number input-->
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-textarea mb-md-0">
-                                <!-- Message input-->
-                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                            </div>
+
+                <!-- Contact Information -->
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                        <p><strong>Endereço:</strong> Your Company Address</p>
+                        <p><strong>Telefone:</strong> (123) 456-7890</p>
+                        <p><strong>Email:</strong> info@example.com</p>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Google Maps Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <!-- Replace the "YOUR_GOOGLE_MAPS_EMBED_LINK" with your actual Google Maps embed link -->
+                            <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3535.7633956596496!2d-48.59909488829659!3d-27.60086417614461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x952737c600227a53%3A0xebd8c5e9c12ae616!2sAngeloni%20Capoeiras!5e0!3m2!1sen!2sbr!4v1702950262606!5m2!1sen!2sbr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your users will see when the form-->
-                    <!-- has successfully submitted-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center text-white mb-3">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <!-- Submit error message-->
-                    <!---->
-                    <!-- This is what your users will see when there is-->
-                    <!-- an error submitting the form-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                    <!-- Submit Button-->
-                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
-                </form>
+                </div>
+
+                <!-- WhatsApp Link -->
+                <div class="text-center mb-5">
+                    <p><strong>Podemos ajudá-lo? Converse conosco no WhatsApp:</strong></p>
+                    <!-- Replace "YOUR_WHATSAPP_NUMBER" with your actual WhatsApp number -->
+                    <a href="https://wa.me/+5548996810518" target="_blank" class="btn btn-success btn-xl text-uppercase">Conversar no WhatsApp</a>
+                </div>
+
+                <!-- Submit success message, error message, and form (if needed) can be added here -->
             </div>
         </section>
+
+        <!-- Explore Local Businesses Section -->
+        <section class="page-section" id="explore-businesses">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Sugestões</h2>
+                    <h3 class="section-subheading text-muted">Outros empreendimentos da região que vocë pode gostar de conhecer.</h3>
+                </div>
+
+                <!-- Business List (Replace with actual links and descriptions) -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Business 1</h4>
+                        <p>Description of Business 1. <a href="#">Learn more</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Business 2</h4>
+                        <p>Description of Business 2. <a href="#">Learn more</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Business 3</h4>
+                        <p>Description of Business 3. <a href="#">Learn more</a></p>
+                    </div>
+                </div>
+
+                <!-- Link to Explore More Businesses -->
+                <div class="text-center mt-4">
+                    <p>Explore mais comercios na região. <a href="#">Ver todas as opções</a></p>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Footer-->
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-3 text-lg-start">Copyright &copy; Your Website 2021</div>
-                    <div class="col-lg-3 text-lg-start">Distributed By <a href="https://themewagon.com/">Themewagon</a></div>
+                    <div class="col-lg-3 text-lg-start">Copyright &copy; Catálogo Digital 2024</div>
+                    <div class="col-lg-3 text-lg-start">Feito por <a href="https://cristianritter-portifolio.webnode.page/">Cristian Ritter</a></div>
                     <div class="col-lg-3 my-3 my-lg-0">
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/cristianritter/"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <div class="col-lg-3 text-lg-end">
                         <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
@@ -618,6 +624,6 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> 
     </body>
 </html>
