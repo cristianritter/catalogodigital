@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>AJR Cutelaria - Parceira Catálogo Digital</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'catalogodigital/assets/favicon.ico' %}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'common/css/styles.css' %}" rel="stylesheet" />
+        <style>
+            header.masthead {
+              background-image: url("{% static 'cities/sapiranga/ajrcutelaria/assets/img/header-bg.jpg' %}");
+              color: rgb(253, 253, 253);
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adicione esta linha para o sombreado */
+            }
+            section#contact {
+              background-image: url("{% static 'catalogodigital/assets/img/map-image.png' %}");
+            }
+
+        </style>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <!--<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">-->
+        <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav">
+ 
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="{% static 'catalogodigital/assets/img/navbar-logo2.svg' %}" alt="Logo" style="width: 80px; height: auto;"/></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#services">Conheça</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#testimonials">Depoimentos</a></li>
+                        <!--<li class="nav-item"><a class="nav-link" href="#team">Team</a></li>-->
+                        <li class="nav-item"><a class="nav-link" href="#new-contact">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Afiação e Venda de Ferramentas para Salões de beleza</div>
+                <div class="masthead-heading text-uppercase">AJR Cutelaria</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#new-contact"> Entre em contato</a>
+            </div>
+        </header>
+        <!-- Services-->
+        <section class="page-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Nossos serviços</h2>
+                    <h3 class="section-subheading text-muted">Conheça abaixo os serviços que oferecemos.</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-tools fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Afiação</h4>
+                        <p class="text-muted">Oferecemos um serviço especializado de afiação para alicates, tesouras, navalhas de máquina e diversas ferramentas profissionais. Revitalizamos suas ferramentas, garantindo um fio preciso e otimizando seu desempenho no dia a dia. Conte conosco para manter suas ferramentas sempre afiadas e prontas para enfrentar qualquer desafio profissional.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Venda de ferramentas</h4>
+                        <p class="text-muted">Explore nossa seleção de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, como molas metálicas e de silicone para alicates. Oferecemos produtos duráveis, projetados para atender às necessidades dos profissionais, proporcionando praticidade e desempenho excepcionais. Renove seu kit de ferramentas conosco e eleve a qualidade do seu trabalho.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-shipping-fast fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Nós vamos até você</h4>
+                        <p class="text-muted">Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <!-- About-->
+        <section class="page-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Um pouco mais sobre nós</h2>
+                    <h3 class="section-subheading text-muted">Conheça a empresa.</h3>
+                </div>
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'catalogodigital/assets/img/about/1.jpg' %}" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>A História</h4>
+                                <h4 class="subheading">Since 2003</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">
+                                Com seu trabalho desde 2003, a AJR Cutelaria trilha uma história de excelência na afiação de alicates e tesouras. Desde o início, a empresa comprometeu-se a aprimorar constantemente suas técnicas, combinando habilidade artesanal com inovação. Com foco na satisfação do cliente, a AJR estabeleceu parcerias duradouras, expandindo seus serviços para atender diversas ferramentas profissionais. Reconhecida pela qualidade técnica e atendimento personalizado, a empresa cresceu ao longo dos anos, mantendo-se na vanguarda da indústria. Hoje, a AJR Cutelaria continua a ser uma referência, oferecendo ferramentas afiadas e confiáveis que elevam o desempenho de profissionais em diversas áreas.</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/adelcio.png' %}" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>The Sharpener</h4>
+                                <h4 class="subheading">Adelcio Jair Ritter</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Adelcio é um afiador dedicado que sempre faz um excelente trabalho, mostrando disposição total para atender seus clientes da melhor maneira possível.</p></div>
+                        </div>
+                    </li>
+                    
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>
+                                Seja Você
+                                <br />
+                                Também Um
+                                <br />
+                                Cliente!
+                            </h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+         </section>
+    
+         <!-- Testimonials Section
+         <section class="page-section" id="testimonials">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Depoimentos</h2>
+                    <h3 class="section-subheading text-muted">O que nossos clientes dizem sobre nós</h3>
+                </div>
+
+                <!-- Testimonial Carousel (Replace with actual testimonials) --
+                <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Testimonial 1 --
+                        <div class="carousel-item active">
+                            <div class="testimonial-text">
+                                <p>"A galera da empresa, tipo o Cristian, é sensacional! As landing pages que eles fizeram pra gente deram um up no nosso negócio. Preço camarada e a equipe tá sempre lá, de boa! Recomendo demais!!"</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <h5>Rafael Santos</h5>
+                                <p>CEO, XYZ Company</p>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 --
+                        <div class="carousel-item">
+                            <div class="testimonial-text">
+                                <p>"Desde que o Alex botou a mão na massa com as landing pages, a coisa explodiu aqui! Facinho de usar, o visu ficou massa demais. Tamo felizão com os resultados!"</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <h5>Mariana Silva</h5>
+                                <p>Founder, ABC Corporation</p>
+                            </div>
+                        </div>
+
+                         <!-- Testimonial 3 --
+                         <div class="carousel-item">
+                            <div class="testimonial-text">
+                                <p>"A empresa não é só um fornecedor, é o Cristian e o Alex sendo parceirões! Sempre nos ajudando, soluções maneiras e uma vibe super positiva. Agradecemos muito, galera!"</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <h5>Pedro Lima</h5>
+                                <p>Founder, ABC Corporation</p>
+                            </div>
+                        </div>
+                        
+                         <!-- Testimonial 4 --
+                         <div class="carousel-item">
+                            <div class="testimonial-text">
+                                <p>"A forma que o Cristian cuidou das landing pages foi top! Rápido, fácil e o design ficou chique demais. É a nossa cara! Recomendadíssimo!"</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <h5>Gabriel Costa</h5>
+                                <p>Founder, ABC Corporation</p>
+                            </div>
+                        </div>
+                        
+                         <!-- Testimonial 5 --
+                         <div class="carousel-item">
+                            <div class="testimonial-text">
+                                <p>"O Alex foi o cara que colocou a nossa marca no mapa digital! As soluções que eles trouxeram não só modernizaram nossa presença online, como também alavancaram as vendas. Escolha mais que acertada pro nosso negócio!""</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <h5>Jane Smith</h5>
+                                <p>Founder, ABC Corporation</p>
+                            </div>
+                        </div>
+
+                        
+                        <!-- Add more testimonials as needed -->
+
+                    </div>
+
+                    <!-- Testimonial Navigation Arrows --
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>-->
+
+
+        
+
+        <!-- New Contact Section -->
+        <section class="page-section" id="new-contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Fale conosco</h2>
+                    <h3 class="section-subheading text-muted">Estamos prontos pra lhe atender de seg à sex das 07 às 19.</h3>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                        <p><strong>Endereço:</strong> Rua Duque de Caxias, 634, Centenário, Sapiranga, RS</p>
+                        <p><strong>Telefone:</strong> (51) 980159178</p>
+                        <!--<p><strong>Email:</strong> adelcioritter@gmail.com</p>-->
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Google Maps Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <!-- Replace the "YOUR_GOOGLE_MAPS_EMBED_LINK" with your actual Google Maps embed link -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28410110.396424346!2d-87.92509459999997!3d-29.631841299999973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703093346605!5m2!1sen!2sbr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Link -->
+                <div class="text-center mb-5">
+                    <p><strong>Podemos ajudá-lo? Converse conosco no WhatsApp:</strong></p>
+                    <!-- Replace "YOUR_WHATSAPP_NUMBER" with your actual WhatsApp number -->
+                    <a href="https://wa.me/+5551980159178" target="_blank" class="btn btn-success btn-xl text-uppercase">Conversar no WhatsApp</a>
+                </div>
+
+                <!-- Submit success message, error message, and form (if needed) can be added here -->
+            </div>
+        </section>
+
+       
+        <!-- Explore Local Businesses Section -->
+        <section class="page-section" id="explore-businesses">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Sugestões</h2>
+                    <h3 class="section-subheading text-muted">Outros empreendimentos da região que vocë pode gostar de conhecer.</h3>
+                </div>
+
+                <!-- Business List (Replace with actual links and descriptions) -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Business 1</h4>
+                        <p>Description of Business 1. <a href="#">Learn more</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Business 2</h4>
+                        <p>Description of Business 2. <a href="#">Learn more</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Business 3</h4>
+                        <p>Description of Business 3. <a href="#">Learn more</a></p>
+                    </div>
+                </div>
+
+                <!-- Link to Explore More Businesses -->
+                <div class="text-center mt-4">
+                    <p>Explore mais comercios na região. <a href="#">Ver todas as opções</a></p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 text-lg-start">Copyright &copy; Catálogo Digital 2024</div>
+                    <div class="col-lg-3 text-lg-start">Feito por <a href="https://cristianritter-portifolio.webnode.page/">Cristian Ritter</a></div>
+                    <div class="col-lg-3 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/cristianritter/"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-3 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'common/js/scripts.js' %}"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> 
+    </body>
+</html>

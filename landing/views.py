@@ -8,3 +8,5 @@ def index(request):
 def nicetomeetyou(request):
     return render(request, 'cities/florianopolis/nicetomeetyou.html')
 
+def ajrcutelaria(request):
+    return render(request, 'cities/sapiranga/ajrcutelaria.html')
