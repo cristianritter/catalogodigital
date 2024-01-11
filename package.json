@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "purify-css": "^1.2.5"
+    "grunt": "^1.6.1",
+    "purify-css": "^1.1.9"
   }
 }
