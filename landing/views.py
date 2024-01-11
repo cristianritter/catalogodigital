@@ -8,3 +8,5 @@ def index(request):
 def ajrcutelaria(request):
     return render(request, 'cities/sapiranga/ajrcutelaria/ajrcutelaria.html')
 
+def residencialvivatorres(request):
+    return render(request, 'cities/torres/residencialvivatorres/residencialvivatorres.html')
