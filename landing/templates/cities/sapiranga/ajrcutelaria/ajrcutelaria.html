@@ -174,9 +174,23 @@
                         <!-- Google Maps Embed -->
                         <div class="embed-responsive embed-responsive-16by9">
                             <!-- Replace the "YOUR_GOOGLE_MAPS_EMBED_LINK" with your actual Google Maps embed link -->
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>   
+                            <div class="embed-responsive embed-responsive-16by9" id="google-map-container">
                         </div>
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var mapContainer = document.getElementById('google-map-container');
+                            var iframe = document.createElement('iframe');
+                            iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr";
+                            iframe.width = "100%";
+                            iframe.height = "200";
+                            iframe.style.border = "0";
+                            iframe.allowfullscreen = true;
+                            iframe.loading = "lazy";
+                            iframe.referrerpolicy = "no-referrer-when-downgrade";
+                            mapContainer.appendChild(iframe);
+                        });
+                    </script>
                 </div>
 
                 <!-- WhatsApp Link -->
