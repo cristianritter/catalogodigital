@@ -8,5 +8,3 @@ def index(request):
 def ajrcutelaria(request):
     return render(request, 'cities/sapiranga/ajrcutelaria/ajrcutelaria.html')
 
-def padrao(request):
-    return render(request, 'cities/florianopolis/template-padrao/index.html')
