@@ -15,9 +15,14 @@
         <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />-->
         <!--<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />-->
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'cities/sapiranga/ajrcutelaria/assets/css/styles.css' %}" rel="stylesheet" />
+    
+        <header class="masthead">
+            <div class="lazy-background" data-src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/header-bg.webp' %}"></div>
+            <!-- Conteúdo do cabeçalho -->
+        </header>
     </head>
     <body id="page-top">
+        <link href="{% static 'cities/sapiranga/ajrcutelaria/assets/css/styles.css' %}" rel="stylesheet" />
         <title>Seção de Serviços</title>
  
         <!-- Adicione estas linhas para incluir as bibliotecas Bootstrap e jQuery utilizadas nas miniaturas-->
@@ -286,16 +291,7 @@
                     <p>Divulgue sua empresa aqui. <a href="home#new-contact">Saiba mais</a></p>
                 </div>
             </div>
-        </section>
-
-        <style>
-            header.masthead {
-              background-image: url("{% static 'cities/sapiranga/ajrcutelaria/assets/img/header-bg.webp' %}");
-              color: rgb(253, 253, 253);
-              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adicione esta linha para o sombreado */
-            }
-            
-
+        </section>            
         </style>
 
         <!-- Footer-->
