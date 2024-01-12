@@ -1570,26 +1570,14 @@ iframe {
   color: #fff;
 }
 
+.img-thumbnail {
+  width: 100%;
+  height: auto;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.page-section {
+  padding-top: 80px; /* Ajuste conforme necessário para garantir que o título seja exibido corretamente */
+}
 
 
 
