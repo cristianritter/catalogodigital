@@ -40,55 +40,43 @@
         </header>
         
         <!-- Services -->
-        <section class="page-section mb-4" id="services">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Um pouco mais sobre nós</h2>
-                    <h5 class="section-subheading text-muted">Nossa história, serviços e compromisso com a excelência.</h5>
-                </div>
+<section class="page-section mb-4" id="services">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Um pouco mais sobre nós</h2>
+            <h5 class="section-subheading text-muted">Nossa história, serviços e compromisso com a excelência.</h5>
+        </div>
 
-                <!-- Miniaturas para abrir em um modal -->
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <a href="#" data-toggle="modal" data-target="#imgModal">
-                            <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/tesoura.webp' %}" alt="Imagem História" class="img-thumbnail">
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#" data-toggle="modal" data-target="#imgModal">
-                            <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/faca.webp' %}" alt="Imagem Produtos e Serviços" class="img-thumbnail">
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#" data-toggle="modal" data-target="#imgModal">
-                            <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/alicate.webp' %}" alt="Imagem Nosso Diferencial" class="img-thumbnail">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <h3 class="my-3">Nossa História</h3>
-                        <p class="text-muted">Oferecemos um serviço especializado com mais de 20 anos de experiência.
-                            Serviço reconhecido por nossos amigos e clientes.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3 class="my-3">Produtos e Serviços</h3>
-                        <p class="text-muted">Serviço especializado de afiação para alicates, tesouras, facas
-                            e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais,
-                            incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de
-                            molas metálicas a borrachas de silicone para alicates. </p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3 class="my-3">Nosso Diferencial</h3>
-                        <p class="text-muted">Oferecemos não apenas serviços e produtos de qualidade, mas também
-                            comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja
-                            presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de
-                            trabalho. Agende uma visita.</p>
-                    </div>
-                </div>
+        <!-- Imagens lado a lado (responsivas com borda) -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/tesoura.webp' %}" alt="Imagem 1" class="img-thumbnail img-fluid border">
             </div>
-        </section>
+            <div class="col-md-4">
+                <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/faca.webp' %}" alt="Imagem 2" class="img-thumbnail img-fluid border">
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/alicate.webp' %}" alt="Imagem 3" class="img-thumbnail img-fluid border">
+            </div>
+        </div>   
+
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h3 class="my-3">Nossa História</h3>
+                <p class="text-muted">Oferecemos um serviço especializado com mais de 20 anos de experiência. Serviço reconhecido por nossos amigos e clientes.</p>
+            </div>
+            <div class="col-md-4">
+                <h3 class="my-3">Produtos e Serviços</h3>
+                <p class="text-muted">Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.</p>
+            </div>
+            <div class="col-md-4">
+                <h3 class="my-3">Nosso Diferencial</h3>
+                <p class="text-muted">Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 
         <!-- Seção de Classificação -->
         <section class="page-section mb-4" id="avaliacoes">
@@ -263,30 +251,8 @@
 
         <!-- Bootstrap core JS-->
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
         <script defer src="{% static 'cities/sapiranga/ajrcutelaria/assets/js/scripts.js' %}"></script>
-        <!-- Adicione estas linhas para incluir as bibliotecas Bootstrap e jQuery utilizadas nas miniaturas-->
-        <link defer rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-            crossorigin="anonymous">
-        <script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-        <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-        <script defer>
-            // Atualiza a fonte da imagem no modal ao clicar nas miniaturas
-            document.querySelectorAll('.img-thumbnail').forEach(function (element) {
-                element.addEventListener('click', function () {
-                    document.getElementById('modalImage').src = this.src;
-                });
-            });
-        </script>
-
+      
         
     </body>
 </html>
