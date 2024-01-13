@@ -26,6 +26,7 @@ window.addEventListener('DOMContentLoaded', event => {
         iframe.setAttribute("allowfullscreen", "");
         iframe.setAttribute("loading", "lazy");
         iframe.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+        iframe.setAttribute("title", "mapa google maps");
 
         // Adicionar o iframe ao contêiner
         document.getElementById("google-map-container").appendChild(iframe);
