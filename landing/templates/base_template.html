@@ -5,11 +5,11 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Landing page comercio local afiação amolador alicates de unha tesouras facas." />
+        <meta name="description" content={{description}} />
         <meta name="author" content="Cristian Ritter / Alex Amaro" />
-        <title>Adelcio Afiador - Afiação e Venda de Ferramentas para Salões de beleza</title>
+        <title>{{title}}</title>
         {% compress css %}
-        <link defer href="{% static 'cities/sapiranga/ajrcutelaria/assets/css/styles.css' %}" rel="stylesheet" />
+        <link defer href="{% static 'common/css/styles.css'%}" rel="stylesheet" />
         {% endcompress %}
     </head>
 
@@ -36,8 +36,8 @@
         <!-- Masthead-->
         <header class="masthead mb-2">
             <div class="container">
-                <div class="masthead-subheading">Afiação e Venda de Ferramentas para Salões de beleza</div>
-                <div class="masthead-heading text-uppercase">Adélcio Amolador</div>
+                <div class="masthead-subheading">{{sobretitulo_text}}</div>
+                <div class="masthead-heading text-uppercase">{{titulo_text}}</div>
                 <a class="btn btn-primary text-uppercase" href="#new-contact"> Entre em contato</a>
             </div>
         </header>
@@ -52,28 +52,28 @@
 
         <div class="row mt-4">
             <div class="col-md-4">
-                <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/tesoura.webp' %}" alt="Imagem 1" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                <img src="{% static static_assets_path %}/img/image1.webp" alt="Imagem 1" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
             </div>
             <div class="col-md-4">
-                <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/faca.webp' %}" alt="Imagem 2" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                <img src="{% static static_assets_path %}/img/image2.webp" alt="Imagem 2" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
             </div>
             <div class="col-md-4">
-                <img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/alicate.webp' %}" alt="Imagem 3" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                <img src="{% static static_assets_path %}/img/image3.webp" alt="Imagem 3" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
             </div>
         </div>   
 
         <div class="row text-center">
             <div class="col-md-4">
                 <h3 class="my-3">Nossa História</h3>
-                <p class="text-muted">Oferecemos um serviço especializado com mais de 20 anos de experiência. Serviço reconhecido por nossos amigos e clientes.</p>
+                <p class="text-muted">{{nossa_historia_content}}</p>
             </div>
             <div class="col-md-4">
                 <h3 class="my-3">Produtos e Serviços</h3>
-                <p class="text-muted">Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.</p>
+                <p class="text-muted">{{produtos_servicos_content}}</p>
             </div>
             <div class="col-md-4">
                 <h3 class="my-3">Nosso Diferencial</h3>
-                <p class="text-muted">Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.</p>
+                <p class="text-muted">{{nosso_diferencial_content}}</p>
             </div>
         </div>
     </div>
@@ -84,7 +84,6 @@
         <section class="page-section mb-2" id="avaliacoes">
             <div class="container text-center">
                 <h2 class="section-heading text-uppercase">O que nossos clientes dizem</h2>
-            
                 <a href="https://www.google.com/search?sca_esv=597798541&sxsrf=ACQVn09tK96UcndKVhfl9U_sMqt54Dwi9Q%3A1705064039711&q=Ad%C3%A9lcio%20Afiador%20-%20AJR%20Cutelaria&stick=H4sIAAAAAAAAAONgU1I1qLA0NbQ0TktKNTOyNLK0MDC0MqhIS7KwME1KM7FIMTcEEmaLWBUcUw6vzEnOzFdwTMtMTMkvUtBVcPQKUnAuLUnNSSzKTAQAs9zl1EwAAAA&mat=CeFeXWGYZgoG&ved=2ahUKEwip2J_D8teDAxV3ILkGHZbCBH4QrMcEegQICBAD" target="_blank" class="btn btn-primary">Ver Avaliações no Google</a>
             </div>
         </section>
@@ -94,13 +93,13 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Oferta Especial</h2>
-                    <p class="text-muted">Aproveite nosso desconto exclusivo!</p>
+                    <p class="text-muted">{{promocao_titulo}}</p>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-8 mx-auto text-center">
-                        <p class="large text-muted">Informe que conheceu o nosso local através do nosso site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$20)</p>
-                        <p class="large text-muted">Estamos ansiosos para atendê-lo!</p>
+                        <p class="large text-muted">{{promocao_content}}</p>
+                        <p class="large text-muted">Estamos ansiosos para recebê-lo!</p>
                     </div>
                 </div>
             </div>
@@ -116,25 +115,32 @@
                 <!-- Contact Information -->
                 <div class="row mb-2">
                     <div class="col-md-4">
-                        <p><strong>Horário de Atendimento:</strong> Seg à Sex das 07-19h.</p>
-                        <p><strong>Telefone(s):</strong> (51) 980159178</p>
-                        <p><strong>Endereço:</strong> Rua Duque de Caxias, 634, Centenário, Sapiranga, RS</p>
-                        <a href="https://wa.me/+5551980159178" target="_blank" class="btn btn-primary text-uppercase">Converse conosco no WhatsApp</a>
+                        <p><strong>Horário de Atendimento:</strong> {{horario_atendimento}}</p>
+                        <p><strong>Telefone:</strong> {{telefones}}</p>
+                        <p><strong>Endereço:</strong> {{endereco}}</p>
+                        <a href="{{whatslink}}" target="_blank" class="btn btn-primary text-uppercase">Converse conosco no WhatsApp</a>
                         
                         <button style="background-color: #4CAF50; color: rgb(0, 0, 0);" class="btn btn-primary text-uppercase" onclick="carregarMapa()" id="map-button">Ou nos encontre no Google Maps</button>
                     </div>
                     <div class="col-md-8 mx-auto">
+                        <!-- Google Maps Embed -->
                         <div class="embed-responsive embed-responsive-16by9" id="google-map-container">
+                            <!-- O script do Google Maps pode ser carregado dinamicamente aqui -->
                         </div>
                     </div>
-                  </div>
+                </div>
 
-                  <script async>
+                <script async>
                     function carregarMapa() {
+                        // Coletar o elemento do iframe
                         var iframe = document.createElement("iframe");
-                        iframe.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr");
+                
+                        // Adiar a adição do atributo src até que o botão seja clicado
+                        iframe.setAttribute("src", "{{gmaps_embed_link}}");
                         iframe.setAttribute("width", "100%");
                         iframe.setAttribute("height", "200");
+                       
+                        // Adicionar o iframe ao contêiner
                         document.getElementById("google-map-container").appendChild(iframe);
                         document.getElementById("map-button").style.display = "none";
                     }
@@ -169,11 +175,13 @@
         <style>
             header.masthead {
               background-image: url("{% static 'cities/sapiranga/ajrcutelaria/assets/img/header-bg.webp' %}");
+              color: rgb(253, 253, 253);
+
             }
         </style>
 
         <!-- Bootstrap core JS-->
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script defer src="{% static 'cities/sapiranga/ajrcutelaria/assets/js/scripts.js' %}"></script>
+        <script defer src="{% static 'common/js/scripts.js' %}"></script>
     </body>
 </html>
