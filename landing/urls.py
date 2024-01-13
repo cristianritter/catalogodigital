@@ -1,11 +1,8 @@
 from django.urls import path
-from . import views
+from .views import CatalogoDigital, AJRCutelaria
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('home', views.index, name='index'),
-    path('catalogodigital', views.index, name='index'),
-    path('ajrcutelaria', views.ajrcutelaria, name='ajrcutelaria'),
-    path('residencialvivatorres', views.residencialvivatorres, name='residencialvivatorres'),
+    path('catalogodigital', CatalogoDigital.as_view(), name='catalogodigital'),
+    path('ajrcutelaria', AJRCutelaria.as_view(), name='ajrcutelaria'),
     
 ]
