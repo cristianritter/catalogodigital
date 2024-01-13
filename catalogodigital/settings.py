@@ -40,6 +40,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "landing",
+    'compressor',
+    'whitenoise.runserver_nostatic',
+]
+
+COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+COMPRESS_OFFLINE = True
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.rCSSMinFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
 ]
 
 MIDDLEWARE = [
@@ -137,12 +149,11 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_USE_BROTLI = True
-
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 django_heroku.settings(locals())
 
 
