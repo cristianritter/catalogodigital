@@ -161,37 +161,10 @@ label {
   display: inline-block;
 }
 
-button {
-  border-radius: 0;
-}
-
-button:focus:not(:focus-visible) {
-  outline: 0;
-}
-
-button {
-  margin: 0;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-button {
-  text-transform: none;
-}
-
-[role=button] {
-  cursor: pointer;
-}
-
 [list]::-webkit-calendar-picker-indicator {
   display: none;
 }
 
-
-button:not(:disabled),[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled) {
-  cursor: pointer;
-}
 
 ::-moz-focus-inner {
   padding: 0;
@@ -3747,3 +3720,4 @@ section#contact .section-heading {
   background-color: #ffc800;
   border-color: #ffc800;
 }
+

@@ -34,7 +34,7 @@
         </nav>
 
         <!-- Masthead-->
-        <header class="masthead mb-4">
+        <header class="masthead mb-2">
             <div class="container">
                 <div class="masthead-subheading">Afiação e Venda de Ferramentas para Salões de beleza</div>
                 <div class="masthead-heading text-uppercase">Adélcio Amolador</div>
@@ -43,7 +43,7 @@
         </header>
         
         <!-- Services -->
-<section class="page-section mb-4" id="services">
+<section class="page-section mb-2" id="services">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Um pouco mais sobre nós</h2>
@@ -82,7 +82,7 @@
 
 
         <!-- Seção de Classificação -->
-        <section class="page-section mb-4" id="avaliacoes">
+        <section class="page-section mb-2" id="avaliacoes">
             <div class="container text-center">
                 <h2 class="section-heading text-uppercase">O que nossos clientes dizem</h2>
             
@@ -91,7 +91,7 @@
         </section>
 
         <!-- Promoção Section -->
-        <section class="page-section mb-4" id="promocao">
+        <section class="page-section mb-2" id="promocao">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Oferta Especial</h2>
@@ -108,18 +108,21 @@
         </section>
 
         <!-- New Contact Section -->
-        <section class="page-section mb-4" id="new-contact">
+        <section class="page-section mb-2" id="new-contact">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Fale conosco</h2>
                 </div>
 
                 <!-- Contact Information -->
-                <div class="row mb-4">
+                <div class="row mb-2">
                     <div class="col-md-4">
-                        <p><strong>Endereço:</strong> Rua Duque de Caxias, 634, Centenário, Sapiranga, RS</p>
-                        <p><strong>Telefone:</strong> (51) 980159178</p>
                         <p><strong>Horário de Atendimento:</strong> Seg à Sex das 07-19h.</p>
+                        <p><strong>Telefone:</strong> (51) 980159178</p>
+                        <p><strong>Endereço:</strong> Rua Duque de Caxias, 634, Centenário, Sapiranga, RS</p>
+                        <a href="https://wa.me/+5551980159178" target="_blank" class="btn btn-primary text-uppercase">Converse conosco no WhatsApp</a>
+                        
+                        <button style="background-color: #4CAF50; color: rgb(0, 0, 0);" class="btn btn-primary text-uppercase" onclick="carregarMapa()">Ou nos encontre no Google Maps</button>
                     </div>
                     <div class="col-md-8 mx-auto">
                         <!-- Google Maps Embed -->
@@ -129,14 +132,20 @@
                     </div>
                   </div>
 
-                <!-- WhatsApp Link -->
-                <div class="text-center mb-4">
-                    <p><strong>Podemos ajudá-lo? Converse conosco no WhatsApp:</strong></p>
-                    <!-- Replace "YOUR_WHATSAPP_NUMBER" with your actual WhatsApp number -->
-                    <a href="https://wa.me/+5551980159178" target="_blank" class="btn btn-primary text-uppercase">Conversar no WhatsApp</a>
-                </div>
-
-                <!-- Submit success message, error message, and form (if needed) can be added here -->
+                  <script async>
+                    function carregarMapa() {
+                        // Coletar o elemento do iframe
+                        var iframe = document.createElement("iframe");
+                
+                        // Adiar a adição do atributo src até que o botão seja clicado
+                        iframe.setAttribute("src", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr");
+                        iframe.setAttribute("width", "100%");
+                        iframe.setAttribute("height", "200");
+                       
+                        // Adicionar o iframe ao contêiner
+                        document.getElementById("google-map-container").appendChild(iframe);
+                    }
+                </script>
             </div>
         </section>
 
