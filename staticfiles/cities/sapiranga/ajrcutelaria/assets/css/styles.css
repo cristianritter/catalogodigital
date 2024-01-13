@@ -188,9 +188,6 @@ button {
   display: none;
 }
 
-button,[type=button],[type=reset],[type=submit] {
-  -webkit-appearance: button;
-}
 
 button:not(:disabled),[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled) {
   cursor: pointer;
@@ -209,10 +206,6 @@ button:not(:disabled),[type=button]:not(:disabled),[type=reset]:not(:disabled),[
   height: auto;
 }
 
-[type=search] {
-  outline-offset: -2px;
-  -webkit-appearance: textfield;
-}
 
 /* rtl:raw:
 [type="tel"],
