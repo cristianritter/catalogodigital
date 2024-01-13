@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content={{description}} />
         <meta name="author" content="Cristian Ritter / Alex Amaro" />
-        <title>{{title}}</title>
+        <title>{{window_title}}</title>
         {% compress css %}
         <link defer href="{% static 'common/css/styles.css'%}" rel="stylesheet" />
         {% endcompress %}
@@ -18,7 +18,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav"> 
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="{% static 'cities/sapiranga/ajrcutelaria/assets/img/navbar-logo.svg' %}" alt="Logo" style="width: 80px; height: 30px;"/></a>
+                <a class="navbar-brand" href="#page-top">Topo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
@@ -36,8 +36,8 @@
         <!-- Masthead-->
         <header class="masthead mb-2">
             <div class="container">
-                <div class="masthead-subheading">{{sobretitulo_text}}</div>
-                <div class="masthead-heading text-uppercase">{{titulo_text}}</div>
+                <div class="masthead-subheading">{{sobretitulo}}</div>
+                <div class="masthead-heading text-uppercase">{{titulo}}</div>
                 <a class="btn btn-primary text-uppercase" href="#new-contact"> Entre em contato</a>
             </div>
         </header>
@@ -46,8 +46,8 @@
 <section class="page-section mb-2" id="services">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">Um pouco mais sobre nós</h2>
-            <h3 class="section-subheading text-muted">Nossa história, serviços e compromisso com a excelência.</h5>
+            <h2 class="section-heading text-uppercase">{{body_title}}</h2>
+            <h3 class="section-subheading text-muted">{{body_subtitle}}</h5>
         </div>
 
         <div class="row mt-4">
@@ -64,16 +64,16 @@
 
         <div class="row text-center">
             <div class="col-md-4">
-                <h3 class="my-3">Nossa História</h3>
-                <p class="text-muted">{{nossa_historia_content}}</p>
+                <h3 class="my-3">{{item1_title}}</h3>
+                <p class="text-muted">{{item1_content}}</p>
             </div>
             <div class="col-md-4">
-                <h3 class="my-3">Produtos e Serviços</h3>
-                <p class="text-muted">{{produtos_servicos_content}}</p>
+                <h3 class="my-3">{{item2_title}}</h3>
+                <p class="text-muted">{{item2_content}}</p>
             </div>
             <div class="col-md-4">
-                <h3 class="my-3">Nosso Diferencial</h3>
-                <p class="text-muted">{{nosso_diferencial_content}}</p>
+                <h3 class="my-3">{{item3_title}}</h3>
+                <p class="text-muted">{{item3_content}}</p>
             </div>
         </div>
     </div>
@@ -174,7 +174,7 @@
 
         <style>
             header.masthead {
-              background-image: url("{% static 'cities/sapiranga/ajrcutelaria/assets/img/header-bg.webp' %}");
+              background-image: url("{% static static_assets_path %}/img/header-bg.webp");
               color: rgb(253, 253, 253);
 
             }
