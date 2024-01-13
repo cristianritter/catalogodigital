@@ -1,3 +1,4 @@
+{% load compress %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt">
@@ -7,7 +8,9 @@
         <meta name="description" content="Landing page de comercio local de afiação de alicates de unha e tesouras." />
         <meta name="author" content="Cristian Ritter / Alex Amaro" />
         <title>Adelcio Afiador - Afiação e Venda de Ferramentas para Salões de beleza</title>
+        {% compress css %}
         <link defer href="{% static 'cities/sapiranga/ajrcutelaria/assets/css/styles.css' %}" rel="stylesheet" />
+        {% endcompress %}
     </head>
 
     <body id="page-top">
