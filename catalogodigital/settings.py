@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware", 
+    'django.middleware.gzip.GZipMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -52,6 +53,17 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+GZIP_CONTENT_TYPES = [
+    'text/html',
+    'text/css',
+    'application/javascript',
+    # Add other content types as needed
+]
+
+
+GZIP_COMPRESS_LEVEL = 6  # Adjust the compression level as needed
+
 
 ROOT_URLCONF = "catalogodigital.urls"
 WHITENOISE_USE_GZIP = True
@@ -119,9 +131,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-STATIC_URL = "static/"
+WHITENOISE_AUTOREFRESH = True
+WHITENOISE_USE_FINDERS = True
+STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_USE_BROTLI = True
 
 # Default primary key field type
