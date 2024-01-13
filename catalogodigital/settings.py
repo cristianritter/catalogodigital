@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -102,13 +104,15 @@ WSGI_APPLICATION = "catalogodigital.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
+}"""
+DATABASES = {
+    'default': dj_database_url.config(default=config('postgres://qxjylqvelttvcw:2e77404bcd01545f478169abaab7afed1aef5230129cf30b74e15d28271bacaa@ec2-44-213-151-75.compute-1.amazonaws.com:5432/d10v0oab2sajr0'))
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
