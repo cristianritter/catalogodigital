@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from .models import PageViewsCounter
+#from .models import PageViewsCounter
 
 # Create your views here.
 class BaseLandPage(View):
@@ -11,14 +11,14 @@ class BaseLandPage(View):
         self.context = {}
         self.contador_model = None
         self.contador_key = None
-
-    def get_contagem(self):
+        """    
+        def get_contagem(self):
         contador, created = PageViewsCounter.objects.get_or_create(key=self.contador_key)
         contador.increment()
-        self.context['contador_visitas'] = contador.value
-        
+        self.context['contador_visitas'] = contador.value"""
+             
     def get(self, request, *args, **kwargs):
-        self.get_contagem()
+        #self.get_contagem()
         return render(request, self.template_name, self.context)
 
 class CatalogoDigital(BaseLandPage):
