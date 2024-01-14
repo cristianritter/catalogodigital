@@ -8,7 +8,6 @@ urlpatterns = [
     path('home', CatalogoDigital.as_view(), name='catalogodigital'),
     path('catalogodigital', CatalogoDigital.as_view(), name='catalogodigital'),
     path('ajrcutelaria', AJRCutelaria.as_view(), name='ajrcutelaria'),
-    path('ajrcutelaria', AJRCutelaria.as_view(), name='ajrcutelaria'),
     path('residencialvivatorres', ResidencialVivaTorres.as_view(), name='residencialvivatorres'),
     
 ]
