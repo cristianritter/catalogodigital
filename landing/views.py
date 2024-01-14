@@ -1,10 +1,21 @@
+from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
-import json, os
+from django.http import HttpResponse
 
 
 #from .models import PageViewsCounter
 # Create your views here.
+
+def set_visitas(request):
+    # Obter o valor do argumento 'visitas' da URL
+    visitas_argumento = int(request.GET.get('visitas', 0))
+
+    # Definir o novo valor da contagem de visitas
+    cache.set('pagina_visitas', str(visitas_argumento))
+
+    return HttpResponse(f'Contagem de visitas definida para {visitas_argumento}.')
+
 class BaseLandPage(View):
     template_name = 'base_template.html'
 
@@ -13,11 +24,11 @@ class BaseLandPage(View):
         self.context = {}
              
     def get_contagem(self):
-        minha_pagina_visitas = os.environ.get('VISITAS', 0)
-        return int(minha_pagina_visitas)
+        minha_pagina_visitas = cache.get('pagina_visitas')
+        return int(minha_pagina_visitas) if minha_pagina_visitas else 0
 
     def set_contagem(self, minha_pagina_visitas):
-        os.environ['VISITAS'] = str(minha_pagina_visitas)
+        cache.set('pagina_visitas', str(minha_pagina_visitas))
       
     def get(self, request, *args, **kwargs):
         visitas = 1 + self.get_contagem()

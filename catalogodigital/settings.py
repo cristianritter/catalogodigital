@@ -75,6 +75,12 @@ GZIP_CONTENT_TYPES = [
     # Add other content types as needed
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/tmp/django_cache',
+    }
+}
 
 GZIP_COMPRESS_LEVEL = 6  # Adjust the compression level as needed
 
