@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views import View
 import json, os
-from catalogodigital.settings import VISITAS
 
 
 #from .models import PageViewsCounter
@@ -12,28 +11,23 @@ class BaseLandPage(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {}
-        self.contador_key = None
              
     def get_contagem(self):
-        minha_pagina_visitas = os.environ.get('VISITAS', '{}')
-        return json.loads(minha_pagina_visitas)
+        minha_pagina_visitas = os.environ.get('VISITAS', 0)
+        return int(minha_pagina_visitas)
 
     def set_contagem(self, minha_pagina_visitas):
-        os.environ['VISITAS'] = json.dumps(minha_pagina_visitas)
-
+        os.environ['VISITAS'] = str(minha_pagina_visitas)
+      
     def get(self, request, *args, **kwargs):
-        visitas = self.get_contagem()
-        contagem = visitas.get(self.contador_key, 0)
-        contagem += 1
-        visitas[self.contador_key] = contagem
+        visitas = 1 + self.get_contagem()
         self.set_contagem(visitas)
-        self.context['contador_visitas'] = contagem
+        self.context['contador_visitas'] = visitas
         return render(request, self.template_name, self.context)
 
 class CatalogoDigital(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.contador_key = 'catalogo_digital'
         self.context = {
             'description' : 'Desenvolvimento de landing page para negócios, marketing e divulgação organica',
             'window_title': 'Catálogo Digital - Seu negócio na Web',
@@ -60,7 +54,6 @@ class CatalogoDigital(BaseLandPage):
 class AJRCutelaria(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.contador_key = 'ajr_cutelaria'
         self.context = {
             'description' : 'Landing page comercio local afiação amolador alicates de unha tesouras facas.',
             'window_title': 'Adelcio Afiador - Afiação e Venda de Ferramentas para Salões de beleza',
