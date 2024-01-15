@@ -32,20 +32,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  /*  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-*/
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-
 h6,.h6,h5,.h5,h4,.h4,h3,.h3,h2,.h2,h1,.h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -104,7 +90,7 @@ h6,.h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 ul {
@@ -3728,7 +3714,7 @@ section#contact .section-heading {
 
 
 .btn-primary {
-  color: #000000;
+  color: #b11d1d;
   background-color: #ffc800;
   border-color: #ffc800;
 }
