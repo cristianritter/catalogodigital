@@ -3756,3 +3756,11 @@ section#contact .section-heading {
   background-color: #ffc800;
   border-color: #ffc800;
 }
+
+/* Seletor de classe corrigido sem ponto no início */
+.meu-paragrafo {
+  /* Adicione seus estilos personalizados aqui */
+  font-size: 16px;
+  color: #333;
+  /* Outras propriedades de estilo conforme necessário */
+}
