@@ -59,13 +59,25 @@
                 <div class="row mt-4">
                     <h2 class="section-heading text-uppercase text-center">Conheça mais sobre nós</h2>
                     <div class="col-md-4">
+                        {% if image1link %}
+                        <img src='{{image1link}}' alt="Imagem 1" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                        {% else %}
                         <img src="{% static static_assets_path %}/img/1.webp" alt="Imagem 1" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                        {% endif %}
                     </div>
                     <div class="col-md-4">
+                        {% if image2link %}
+                        <img src='{{image2link}}' alt="Imagem 2" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                        {% else %}
                         <img src="{% static static_assets_path %}/img/2.webp" alt="Imagem 2" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                        {% endif %}
                     </div>
                     <div class="col-md-4">
+                        {% if image3link %}
+                        <img src='{{image3link}}' alt="Imagem 3" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                        {% else %}
                         <img src="{% static static_assets_path %}/img/3.webp" alt="Imagem 3" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
+                        {% endif %}
                     </div>
                 </div>   
 

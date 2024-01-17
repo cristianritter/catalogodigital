@@ -1,13 +1,13 @@
 import requests
-import json
 
 url = 'http://192.168.2.130:8000/set-demo-view/'
+#url = 'https://catalogodigital-437b69889213.herokuapp.com/set-demo-view/'
 dados_json = {
             'static_assets_path': 'cities/florianopolis/catalogodigital/assets',
             'image0link': 'https://img.freepik.com/fotos-gratis/flores-roxas-em-um-vaso_1340-25662.jpg?w=740&t=st=1705512703~exp=1705513303~hmac=0bbdbe0c2b53358feadf03e3fdb58be6fea5ec21c00b928838453ab67cd0530f',
-            'image1link': '',
-            'image2link': '',
-            'image3link': '',            
+            'image1link': 'https://img.freepik.com/fotos-gratis/flores-roxas-com-uma-bela-vista-da-ilha-da-madeira-em-portugal_181624-27202.jpg?size=626&ext=jpg&ga=GA1.1.177824122.1705512621&semt=sph',
+            'image2link': 'https://img.freepik.com/fotos-gratis/flores-cor-de-rosa-em-rosa_24837-301.jpg?w=740&t=st=1705513525~exp=1705514125~hmac=a6a67ae86580b495f7b5208352f669f2c0412795cc54687c9ecb2bbe77cec712',
+            'image3link': 'https://img.freepik.com/fotos-premium/as-flores-no-jardim-estao-florescendo-em-uma-bela-primavera_215913-135.jpg?w=740',            
             'meta_description' : 'Desenvolvimento e hospedagem de landing pages para negócios, marketing e divulgação organica',
             'window_title': 'Catálogo Digital - Seu negócio na Web',
             'sobretitulo': 'Bem Vindo',
