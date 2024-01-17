@@ -1,7 +1,7 @@
 import requests
 
-url = 'http://192.168.2.130:8000/set-demo-view/'
-#url = 'https://catalogodigital-437b69889213.herokuapp.com/set-demo-view/'
+##url = 'http://192.168.2.130:8000/set-demo-view/'
+url = 'https://catalogodigital-437b69889213.herokuapp.com/set-demo-view/'
 dados_json = {
             'static_assets_path': 'cities/florianopolis/catalogodigital/assets',
             'image0link': 'https://img.freepik.com/fotos-gratis/flores-roxas-em-um-vaso_1340-25662.jpg?w=740&t=st=1705512703~exp=1705513303~hmac=0bbdbe0c2b53358feadf03e3fdb58be6fea5ec21c00b928838453ab67cd0530f',
