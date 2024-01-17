@@ -117,7 +117,7 @@ class KelliSenaAcessoria(BaseLandPage):
             'telefones': '(11) 95296-4549',
             'email':'', 
             'whatslink': 'https://wa.me/+5511952964549',
-            'google_share_link': 'https://maps.app.goo.gl/pTZvag2fg7ytV74eA',
+            'google_share_link': '',
             'endereco': '',
             'gmaps_embed_link': '',
         }
