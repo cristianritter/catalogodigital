@@ -3,10 +3,10 @@ from .views import CatalogoDigital, AJRCutelaria, ResidencialVivaTorres, KelliSe
 from .views import  set_visitas, set_demo_view, DemoView, ListaPedidos
 
 urlpatterns = [
-    path('set-visitas/', set_visitas, name='set_visitas'),
-    path('set-demo-view/', set_demo_view, name='set-demo-view'),
+    path('set_visitas/', set_visitas, name='set_visitas'),
+    path('set_demo_view/', set_demo_view, name='set_demo_view'),
     path('demo_view', DemoView.as_view(), name='demo_view'),
-    path('lista-pedidos', ListaPedidos.as_view(), name='lista-pedidos'),
+    path('lista_pedidos', ListaPedidos.as_view(), name='lista_pedidos'),
     path('', CatalogoDigital.as_view(), name='catalogodigital'),
     path('index', CatalogoDigital.as_view(), name='catalogodigital'),
     path('home', CatalogoDigital.as_view(), name='catalogodigital'),

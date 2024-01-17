@@ -1,19 +1,19 @@
 import requests
 
-url = 'http://192.168.2.130:8000/set-demo-view/'
-#url = 'https://catalogodigital-437b69889213.herokuapp.com/set-demo-view/'
+url = 'http://192.168.2.130:8000/set_demo_view/'
+#url = 'https://catalogodigital-437b69889213.herokuapp.com/set_demo_view/'
 dados_json = {
             'static_assets_path': 'cities/florianopolis/catalogodigital/assets',
-            'image0link': 'https://img.freepik.com/fotos-gratis/flores-roxas-em-um-vaso_1340-25662.jpg?w=740&t=st=1705512703~exp=1705513303~hmac=0bbdbe0c2b53358feadf03e3fdb58be6fea5ec21c00b928838453ab67cd0530f',
+            'image0link': 'https://img.freepik.com/fotos-gratis/arranjo-lindo-de-papel-de-parede-de-flores_23-2149057015.jpg?w=740&t=st=1705514234~exp=1705514834~hmac=1713136e4e62e730ee095c34beb70f15c0bf164e0e2beaedf0dec25cbd6ec2eb',
             'image1link': 'https://img.freepik.com/fotos-gratis/flores-roxas-com-uma-bela-vista-da-ilha-da-madeira-em-portugal_181624-27202.jpg?size=626&ext=jpg&ga=GA1.1.177824122.1705512621&semt=sph',
             'image2link': 'https://img.freepik.com/fotos-gratis/flores-cor-de-rosa-em-rosa_24837-301.jpg?w=740&t=st=1705513525~exp=1705514125~hmac=a6a67ae86580b495f7b5208352f669f2c0412795cc54687c9ecb2bbe77cec712',
             'image3link': 'https://img.freepik.com/fotos-premium/as-flores-no-jardim-estao-florescendo-em-uma-bela-primavera_215913-135.jpg?w=740',            
             'meta_description' : 'Desenvolvimento e hospedagem de landing pages para negócios, marketing e divulgação organica',
             'window_title': 'Catálogo Digital - Seu negócio na Web',
-            'sobretitulo': 'Bem Vindo',
-            'titulo': 'A melhor landing page para o seu negócio',
-            'body_title': 'O que é uma landing page?',
-            'body_subtitle': 'Uma landing page é como a vitrine virtual do seu negócio. É uma página da web criada sob medida para você. Imagine-a como a porta de entrada direta para o que sua empresa oferece de melhor. Permita que seus clientes o encontrem com os nossos serviços.',
+            'sobretitulo': 'Seja Bem Vindo',
+            'titulo': 'Floricultura Central',
+            'body_title': 'Seja bem vindo',
+            'body_subtitle': 'Nossa floricultura presta serviços especializados desde 2023.',
             'item1_title': 'Presença Online',
             'item1_content': 'Oferecemos um serviço especializado com mais de 20 anos de experiência. Serviço reconhecido por nossos amigos e clientes.',
             'item2_title': 'Credibilidade',
@@ -26,9 +26,13 @@ dados_json = {
             'telefones': '(48) 996810518',
             'whatslink': 'https://wa.me/+5551996810518',
             'email':'cristianritter@gmail.com', 
-            'google_share_link': '',
+            'google_share_link': 'https://maps.app.goo.gl/pTZvag2fg7ytV74eA',
             'endereco': '',
             'gmaps_embed_link': ''}
+
+
+
+
 
 # Faz uma requisição GET para obter o token CSRF
 response_csrf = requests.get(url)
