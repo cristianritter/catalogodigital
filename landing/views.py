@@ -2,11 +2,30 @@ from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
-
+from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 #from .models import PageViewsCounter
 # Create your views here.
 
+#@csrf_protect
+@csrf_exempt
+def set_demo_view(request):
+    if request.method == 'POST':
+        # Recebe o JSON do corpo da requisição
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+            #print('data',data)
+            cache.set('demo_view_context',  data, timeout=None)
+            print(cache.get('demo_view_context'))
+            #print("JSON recebido:", data)
+            return JsonResponse({'status': 'success', 'message': 'JSON recebido com sucesso'})
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Erro ao decodificar JSON'}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
+    
 def set_visitas(request):
     # Obter o valor do argumento 'visitas' da URL
     visitas_argumento = int(request.GET.get('visitas', 0))
@@ -67,6 +86,12 @@ class BaseLandPage(View):
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas
         return render(request, self.template_name, self.context)
+
+class DemoView(BaseLandPage):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.context = cache.get('demo_view_context')
+        print(self.context)
 
 class CatalogoDigital(BaseLandPage):
     def __init__(self, *args, **kwargs):

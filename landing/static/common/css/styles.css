@@ -3756,3 +3756,7 @@ section#contact .section-heading {
   background-color: #ffc800;
   border-color: #ffc800;
 }
+
+header.masthead {
+  color: rgb(253, 253, 253);
+}

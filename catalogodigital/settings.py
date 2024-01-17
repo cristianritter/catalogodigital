@@ -86,6 +86,8 @@ GZIP_COMPRESS_LEVEL = 6  # Adjust the compression level as needed
 ROOT_URLCONF = "catalogodigital.urls"
 WHITENOISE_USE_GZIP = True
 
+#CSRF_TRUSTED_ORIGINS = ['http://192.168.2.130']
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

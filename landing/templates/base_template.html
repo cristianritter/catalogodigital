@@ -35,11 +35,16 @@
         </nav>
 
         <!-- Masthead-->
-        <header class="masthead mb-2">
+        {% if image0link %}
+            <header class="masthead mb-2" style="background-image: url('{{image0link}}'); background-position: center; color: #fff;  text-align: center;">
+        {% else %}
+            <header class="masthead mb-2" style="background-image: url('{% static static_assets_path %}/img/0.webp'); background-position: center; color: #fff;  text-align: center;">
+        {% endif %}
             <div class="container">
                 <div class="masthead-subheading">{{sobretitulo}}</div>
                 <div class="masthead-heading text-uppercase">{{titulo}}</div>
                 <a class="btn btn-primary text-uppercase" href="#new-contact"> Entre em contato</a>
+                <header >
             </div>
         </header>
         
@@ -174,14 +179,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
-
-        <style>
-            header.masthead {
-              background-image: url("{% static static_assets_path %}/img/0.webp");
-              color: rgb(253, 253, 253);
-            }
-        </style>
+        </footer>        
 
         <!-- Bootstrap core JS-->
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
