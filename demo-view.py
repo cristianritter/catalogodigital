@@ -1,7 +1,7 @@
 import requests
 
-url = 'http://192.168.2.130:8000/set_demo_view/'
-#url = 'https://catalogodigital-437b69889213.herokuapp.com/set_demo_view/'
+#url = 'http://192.168.2.130:8000/set_demo_view/'
+url = 'https://catalogodigital-437b69889213.herokuapp.com/set_demo_view/'
 dados_json = {
             'static_assets_path': 'cities/florianopolis/catalogodigital/assets',
             'image0link': 'https://img.freepik.com/fotos-gratis/arranjo-lindo-de-papel-de-parede-de-flores_23-2149057015.jpg?w=740&t=st=1705514234~exp=1705514834~hmac=1713136e4e62e730ee095c34beb70f15c0bf164e0e2beaedf0dec25cbd6ec2eb',
