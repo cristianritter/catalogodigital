@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link defer href="{% static 'common/css/styles.css'%}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofgKfjLOk9giotfsW8R2Kx2BohYYuZ9jN" crossorigin="anonymous">
+    <title>Lista de Pedidos</title>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h1>Lista de Pedidos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Horário</th>
+                <th scope="col">Mesa</th>
+                <th scope="col">Itens do Pedido</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Status</th>
+                <th scope="col">Pago</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+                <tr>
+                    <td>{{ pedido.horario }}</td>
+                    <td>{{ pedido.mesa }}</td>
+                    <td>{{ pedido.itens }}</td>
+                    <td>R$ {{ pedido.valor }}</td>
+                    <td>
+                        <select class="form-select" aria-label="Status do Pedido">
+                            <option selected>{{ pedido.status }}</option>
+                            <option value="aguardando">Aguardando</option>
+                            <option value="preparando">Preparando</option>
+                            <option value="pronto">Pronto para retirada</option>
+                            <option value="entregue">Entregue</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" {% if pedido.pago %}checked{% endif %} disabled>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></script>
+</body>
+</html>

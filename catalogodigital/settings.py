@@ -83,8 +83,6 @@ CACHES = {
 }
 
 GZIP_COMPRESS_LEVEL = 6  # Adjust the compression level as needed
-
-
 ROOT_URLCONF = "catalogodigital.urls"
 WHITENOISE_USE_GZIP = True
 
@@ -105,10 +103,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "catalogodigital.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
 DATABASES = {

@@ -16,6 +16,38 @@ def set_visitas(request):
 
     return HttpResponse(f'Contagem de visitas definida para {visitas_argumento}.')
 
+class ListaPedidos(View):
+    template_name = 'lista_pedidos.html'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.context = {}
+      
+    def get(self, request, *args, **kwargs):
+        # Criando um contexto fictício para testar a aparência
+        pedidos = [
+            {
+                'horario': '2024-01-16 10:30:00',
+                'mesa': 1,
+                'itens': 'Hamburguer, Batata Frita',
+                'valor': 15.99,
+                'status': 'Aguardando',
+                'pago': False,
+            },
+            {
+                'horario': '2024-01-16 11:45:00',
+                'mesa': 2,
+                'itens': 'Pizza, Refrigerante',
+                'valor': 25.50,
+                'status': 'Preparando',
+                'pago': True,
+            },
+        # Adicione mais pedidos conforme necessário
+        ]
+
+        self.context = {'pedidos': pedidos}
+        return render(request, self.template_name, self.context)
+
 class BaseLandPage(View):
     template_name = 'base_template.html'
 
@@ -61,6 +93,31 @@ class CatalogoDigital(BaseLandPage):
             'whatslink': 'https://wa.me/+5551996810518',
             'gmaps_embed_link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr',
         }
+
+class KelliSenaAcessoria(BaseLandPage):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.context = {
+            'description' : 'Landing page assessoria juridica atendimento em todo o pais, são paulo.',
+            'window_title': 'Kelli Sena - Assessoria trabalhista e financeira',
+            'static_assets_path': 'cities/sapiranga/ajrcutelaria/assets',
+            'sobretitulo': 'Assessoria trabalhista e financeira',
+            'titulo': 'Kelli Sena',
+            'item1_title': 'Nossa História',
+            'item1_content': 'Serviço especializado com mais de 14 anos de experiência.',
+            'item2_title': 'Serviços Oferecidos',
+            'item2_content': 'Assessoria admissional, gozo de férias, cálculos recisórios e elaboração de folha de pagamento, encargos e obrigações assessórias.',
+            'item3_title': 'Nosso Diferencial',
+            'item3_content': 'Assessoria jurídica especializada com expertise legislativa, cálculos precisos e atendimento personalizado.',
+            'promocao_titulo': 'Aproveite nosso desconto exclusivo!',
+            'promocao_content': 'Informe que conheceu o nosso local através do nosso site e ganhe 5% de desconto no valor total da sua primeira compra! (Limitado à R$20)',
+            'horario_atendimento': 'Seg à Sex das 09-17h.',
+            'telefones': '(11) 95296-4549',
+            'endereco': 'Alto Ipiranga, São Paulo, SP',
+            'whatslink': 'https://wa.me/+5511952964549',
+            'gmaps_embed_link': '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10341.049867764943!2d-46.62931362676512!3d-23.600271298884838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5ba9cdaeaf81%3A0x8cccb9a54c7a0280!2sIpiranga!5e0!3m2!1sen!2sbr!4v1705458908604!5m2!1sen!2sbr"></iframe>',
+        }
+
 
 class AJRCutelaria(BaseLandPage):
     def __init__(self, *args, **kwargs):
