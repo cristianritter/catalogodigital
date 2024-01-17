@@ -100,7 +100,7 @@ class KelliSenaAcessoria(BaseLandPage):
         self.context = {
             'description' : 'Landing page assessoria juridica atendimento em todo o pais, são paulo.',
             'window_title': 'Kelli Sena - Assessoria trabalhista e financeira',
-            'static_assets_path': 'cities/sapiranga/ajrcutelaria/assets',
+            'static_assets_path': 'cities/saopaulo/kellisenaassessoria/assets',
             'sobretitulo': 'Assessoria trabalhista e financeira',
             'titulo': 'Kelli Sena',
             'item1_title': 'Nossa História',
