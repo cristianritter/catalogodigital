@@ -25,6 +25,8 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 if not IS_HEROKU_APP:
     DEBUG = True
+else:
+    DEBUG = False
 
 COMPRESS_ENABLED = not DEBUG
 
