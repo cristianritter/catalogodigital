@@ -125,7 +125,7 @@ strong {
 }
 
 a {
-  color: #d1a400;
+  color: #aa8500;
   text-decoration: underline;
 }
 
@@ -180,72 +180,13 @@ button {
   text-transform: none;
 }
 
-[role=button] {
-  cursor: pointer;
-}
-
-[list]::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
-button,[type=button],[type=reset],[type=submit] {
-  -webkit-appearance: button;
-}
 
 button:not(:disabled),[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled) {
   cursor: pointer;
 }
 
-::-moz-focus-inner {
-  padding: 0;
-  border-style: none;
-}
-
-::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-text,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-year-field {
-  padding: 0;
-}
-
-::-webkit-inner-spin-button {
-  height: auto;
-}
-
-[type=search] {
-  outline-offset: -2px;
-  -webkit-appearance: textfield;
-}
-
-/* rtl:raw:
-[type="tel"],
-[type="url"],
-[type="email"],
-[type="number"] {
-  direction: ltr;
-}
-*/
-
-::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-::-webkit-color-swatch-wrapper {
-  padding: 0;
-}
-
-::file-selector-button {
-  font: inherit;
-}
-
-::-webkit-file-upload-button {
-  font: inherit;
-  -webkit-appearance: button;
-}
-
 iframe {
   border: 0;
-}
-
-[hidden] {
-  display: none !important;
 }
 
 .container,.container-xl,.container-lg,.container-md,.container-sm {
