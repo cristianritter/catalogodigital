@@ -4,6 +4,7 @@ from .views import CatalogoDigital, AJRCutelaria, ResidencialVivaTorres, KelliSe
 app_name = 'landing'  # Substitua 'seu_app_nome' pelo nome real do seu aplicativo
 
 urlpatterns = [
+    path('', CatalogoDigital.as_view(), name='index'),
     path('set_visitas/', set_visitas, name='set_visitas'),
     path('set_demo_view/', set_demo_view, name='set_demo_view'),
     path('demo_view/', DemoView.as_view(), name='demo_view'),
