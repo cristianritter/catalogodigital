@@ -50,8 +50,8 @@ COMPRESS_JS_FILTERS = [
 COMPRESS_OFFLINE = True
 
 MIDDLEWARE = [
-    "whitenoise.middleware.WhiteNoiseMiddleware", 
     'django.middleware.gzip.GZipMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
