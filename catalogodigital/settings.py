@@ -13,16 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
-from decouple import config
-#from whitenoise.storage import CompressedManifestStaticFilesStorage
+#from decouple import config
 
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 SECRET_KEY = "django-insecure-)cb+5%vn8)pa84q4#_*t(lv)5pjs)_nvo$a@iuh@p1k9$uj6t("
 
@@ -43,23 +36,20 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "landing",
     'compressor',
-#    'whitenoise.runserver_nostatic',
 ]
 
-#COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', True)
-COMPRESS_OFFLINE = True
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.cssmin.rCSSMinFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
 
-#COMPRESS_CSS_FILTERS = [
-#    'compressor.filters.css_default.CssAbsoluteFilter',
-#    'compressor.filters.cssmin.rCSSMinFilter',
-#]
-#COMPRESS_JS_FILTERS = [
-#    'compressor.filters.jsmin.JSMinFilter',
-#]
+COMPRESS_OFFLINE = True
 
 MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware", 
-#    'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -69,12 +59,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-#GZIP_CONTENT_TYPES = [
-#    'text/html',
-#    'text/css',
-#    'application/javascript',
-    # Add other content types as needed
-#]
 
 CACHES = {
     'default': {
@@ -83,12 +67,7 @@ CACHES = {
     }
 }
 
-#GZIP_COMPRESS_LEVEL = 6  # Adjust the compression level as needed
-
 ROOT_URLCONF = "catalogodigital.urls"
-
-#WHITENOISE_USE_GZIP = True
-
 
 TEMPLATES = [
     {
@@ -109,11 +88,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "catalogodigital.wsgi.application"
 
 if IS_HEROKU_APP:
-    # In production on Heroku the database configuration is derived from the `DATABASE_URL`
-    # environment variable by the dj-database-url package. `DATABASE_URL` will be set
-    # automatically by Heroku when a database addon is attached to your Heroku app. See:
-    # https://devcenter.heroku.com/articles/provisioning-heroku-postgres
-    # https://github.com/jazzband/dj-database-url
     DATABASES = {
         "default": dj_database_url.config(
             conn_max_age=600,
@@ -122,8 +96,6 @@ if IS_HEROKU_APP:
         ),
     }
 else:
-    # When running locally in development or in CI, a sqlite database file will be used instead
-    # to simplify initial setup. Longer term it's recommended to use Postgres locally too.
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -155,24 +127,12 @@ USE_I18N = True
 USE_TZ = True
 
 STATICFILES_FINDERS = [
-#    'django.contrib.staticfiles.finders.FileSystemFinder',
-#    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 ]
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Don't store the original (un-hashed filename) version of static files, to reduce slug size:
-# https://whitenoise.readthedocs.io/en/latest/django.html#WHITENOISE_KEEP_ONLY_HASHED_FILES
-
-#COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-#django_heroku.settings(locals())
 
 
