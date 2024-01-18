@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 import dj_database_url
 from decouple import config
-from whitenoise.storage import CompressedManifestStaticFilesStorage
+#from whitenoise.storage import CompressedManifestStaticFilesStorage
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,19 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-)cb+5%vn8)pa84q4#_*t(lv)5pjs)_nvo$a@iuh@p1k9$uj6t("
 
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = ['catalogodigital.herokuapp.com']
 
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -52,6 +48,7 @@ INSTALLED_APPS = [
 
 #COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', True)
 COMPRESS_OFFLINE = True
+
 #COMPRESS_CSS_FILTERS = [
 #    'compressor.filters.css_default.CssAbsoluteFilter',
 #    'compressor.filters.cssmin.rCSSMinFilter',
@@ -134,7 +131,6 @@ else:
         }
     }
 
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -150,7 +146,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = "pt-br"
 
 TIME_ZONE = "America/Sao_Paulo"
@@ -159,11 +154,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-#STATICFILES_FINDERS = [
+STATICFILES_FINDERS = [
 #    'django.contrib.staticfiles.finders.FileSystemFinder',
 #    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'compressor.finders.CompressorFinder',
-#]
+    'compressor.finders.CompressorFinder',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
