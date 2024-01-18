@@ -9,10 +9,6 @@
         <meta name="author" content="Cristian Ritter / Alex Amaro" />
         <link rel="icon" type="image/x-icon" href="{% static 'common/favicon.ico' %}">
         <title>{{window_title}}</title>
-        {% compress css %}
-        <link defer href="{% static 'common/css/styles.css'%}" rel="stylesheet" />
-        {% endcompress %}
-        
     </head>
 
     <body id="page-top">
@@ -20,10 +16,9 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav"> 
             <div class="container">
-                <a class="navbar-brand" href="#page-top">Topo</a>
+                <a class="navbar-brand" href="#page-top">MK4 Digital</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
-                    <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
@@ -37,9 +32,9 @@
 
         <!-- Masthead-->
         {% if image0link %}
-            <header class="masthead mb-2" style="background-image: url('{{image0link}}'); background-position: center; color: #fff;  text-align: center;">
+            <header class="masthead mb-2" style="background-image: url({{image0link}}); background-position: center; text-align: center; height: 550px;">
         {% else %}
-            <header class="masthead mb-2" style="background-image: url('{% static static_assets_path %}/img/0.webp'); background-position: center; color: #fff;  text-align: center;">
+            <header class="masthead mb-2" style="background-image: url('{% static static_assets_path %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
         {% endif %}
             <div class="container">
                 <div class="masthead-subheading">{{sobretitulo}}</div>
@@ -53,86 +48,116 @@
         <section class="page-section mb-2" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">{{body_title}}</h2>
-                    <h3 class="section-subheading text-muted">{{body_subtitle}}</h5>
+                    <div class="container mt-5">
+                        <h2>{{body_title}}</h2>
+                        <ul class="list-unstyled">
+                            {% for item in lista_servicos %}
+                            <li>
+                                <span class="text-secondary me-2">&#9658;</span> <!-- Setinha ASCII -->
+                                <span class="fw fs-5">{{ item }}</span> <!-- Letra maior e em negrito -->
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>  
+
+    <section class="page-section mb-2" id="photos">
+        <div class="container">
+            <div class="text-center">
+                
+                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            {% if image1link %}
+                                <img src="{{image1link}}" class="d-block w-100" alt="Imagem 1">
+                            {% else %}
+                                <img src="{% static static_assets_path %}/img/1.webp" class="d-block w-100" alt="Imagem 1"> 
+                            {% endif %}
+                        </div>
+                        <div class="carousel-item">
+                            {% if image2link %}
+                                <img src="{{image2link}}" class="d-block w-100" alt="Imagem 2">
+                            {% else %}
+                                <img src="{% static static_assets_path %}/img/2.webp" class="d-block w-100" alt="Imagem 2"> 
+                            {% endif %}
+                        </div>
+                        <div class="carousel-item">
+                            {% if image3link %}
+                                <img src="{{image3link}}" class="d-block w-100" alt="Imagem 3">
+                            {% else %}
+                                <img src="{% static static_assets_path %}/img/3.webp" class="d-block w-100" alt="Imagem 3"> 
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Próximo</span>
+                    </button>
                 </div>
 
-                <div class="row mt-4">
-                    <h2 class="section-heading text-uppercase text-center">Conheça mais sobre nós</h2>
-                    <div class="col-md-4">
-                        {% if image1link %}
-                        <img src='{{image1link}}' alt="Imagem 1" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
-                        {% else %}
-                        <img src="{% static static_assets_path %}/img/1.webp" alt="Imagem 1" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
-                        {% endif %}
-                    </div>
-                    <div class="col-md-4">
-                        {% if image2link %}
-                        <img src='{{image2link}}' alt="Imagem 2" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
-                        {% else %}
-                        <img src="{% static static_assets_path %}/img/2.webp" alt="Imagem 2" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
-                        {% endif %}
-                    </div>
-                    <div class="col-md-4">
-                        {% if image3link %}
-                        <img src='{{image3link}}' alt="Imagem 3" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
-                        {% else %}
-                        <img src="{% static static_assets_path %}/img/3.webp" alt="Imagem 3" style="width: 100%; height: 100%;" class="img-thumbnail img-fluid border">
-                        {% endif %}
-                    </div>
-                </div>   
-
                 <div class="row text-center">
-                    <div class="col-md-4">
-                        <h3 class="my-3">{{item1_title}}</h3>
-                        <p class="text-muted">{{item1_content}}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3 class="my-3">{{item2_title}}</h3>
-                        <p class="text-muted">{{item2_content}}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3 class="my-3">{{item3_title}}</h3>
-                        <p class="text-muted">{{item3_content}}</p>
-                    </div>
+                    {% if item1_title %}
+                        <div class="col-md-4">
+                            <h3 class="my-3">{{item1_title}}</h3>
+                            <p class="text-muted">{{item1_content}}</p>
+                        </div>
+                    {% endif %}
+                    {% if item2_title %}
+                        <div class="col-md-4">
+                            <h3 class="my-3">{{item2_title}}</h3>
+                            <p class="text-muted">{{item2_content}}</p>
+                        </div>
+                    {% endif %}
+                    {% if item3_title %}
+                        <div class="col-md-4">
+                            <h3 class="my-3">{{item3_title}}</h3>
+                            <p class="text-muted">{{item3_content}}</p>
+                        </div>
+                    {% endif %}
                     {% if google_share_link %}
-                    <div class="col-md-4">
-                        <h3 class="my-3">Nossa reputação</h3>
-                        <a href="{{google_share_link}}" target="_blank" >Veja nossas avaliações no Google</a>
-                    </div>
+                        <div class="col-md-4">
+                            <h3 class="my-3">Nossa reputação</h3>
+                            <a href="{{google_share_link}}" target="_blank" >Veja nossas avaliações no Google</a>
+                        </div>
                     {% endif %}
                 </div>
             </div>
         </section>
         
         <!-- New Contact Section -->
-        <section class="page-section " id="new-contact">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Contato</h2>
-                </div>
+        <section class="page-section text-center" id="new-contact">
+            <div class="container mx-auto">
+                <h2 class="section-heading text-uppercase">Contato</h2>
                 <!-- Contact Information -->
-                <div class="row">
-                    <div class="col-md-4 text-center">
-                        <p><strong>Horário de Atendimento:</strong> {{horario_atendimento}}</p>
-                        <p><strong>Telefone:</strong> {{telefones}}</p>
-                        {% if email %}
+                <div class="col-md-4 mx-auto text-center">
+                    <p><strong>Horário de Atendimento:</strong> {{horario_atendimento}}</p>
+                    <p><strong>Telefone:</strong> {{telefones}}</p>
+                    {% if email %}
                         <p><strong>E-mail:</strong> <a href="mailto:{{email}}">{{email}}</a></p>
-                        {% endif %}     
-                        <a href="{{whatslink}}" target="_blank" class="btn btn-primary mb-4">Enviar uma mensagem no WhatsApp</a>
-                        {% if endereco %}
+                    {% endif %}     
+                    <a href="{{whatslink}}" target="_blank" class="btn btn-primary mb-4">Enviar uma mensagem no WhatsApp</a>
+                    {% if endereco %}
                         <p><strong>Endereço:</strong> {{endereco}}</p>
                         <button class="btn btn-primary text-uppercase" onclick="carregarMapa()" id="map-button">Ver mapa</button>
                         <a class="btn btn-primary text-uppercase" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank">Obter Direções</a>
-                        {% endif %}
-                    </div>
-                    <div class="col-md-8 mx-auto">
-                        <!-- Google Maps Embed -->
-                        <div class="embed-responsive embed-responsive-16by9" id="google-map-container">
-                            <!-- O script do Google Maps pode ser carregado dinamicamente aqui -->
-                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8 mx-auto">
+                    <!-- Google Maps Embed with Margin -->
+                    <div class="embed-responsive embed-responsive-16by9 my-4" id="google-map-container">
+                        <!-- O script do Google Maps pode ser carregado dinamicamente aqui -->
                     </div>
                 </div>
+            </div>
+        </section>
+        
+        
 
                 <script async>
                     function carregarMapa() {
@@ -196,6 +221,10 @@
 
         <!-- Bootstrap core JS-->
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <script defer src="{% static 'common/js/scripts.js' %}"></script>
+        {% compress css %}
+        <link href="{% static 'common/css/styles.css'%}" rel="stylesheet" />
+        {% endcompress %}
     </body>
 </html>

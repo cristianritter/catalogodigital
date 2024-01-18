@@ -23,11 +23,13 @@ SECRET_KEY = "django-insecure-)cb+5%vn8)pa84q4#_*t(lv)5pjs)_nvo$a@iuh@p1k9$uj6t(
 
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
-DEBUG = False
+if not IS_HEROKU_APP:
+    DEBUG = True
+
+COMPRESS_ENABLED = not DEBUG
 
 ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = ['catalogodigital.herokuapp.com']
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -54,15 +56,14 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.cache.UpdateCacheMiddleware",
+#    "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
+#    "django.middleware.cache.FetchFromCacheMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
 
 CACHES = {
     'default': {
