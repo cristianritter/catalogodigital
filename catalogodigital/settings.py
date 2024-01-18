@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+import secrets
 from pathlib import Path
 import dj_database_url
 #from decouple import config
@@ -135,7 +136,7 @@ STATICFILES_FINDERS = [
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+COMPRESS_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
