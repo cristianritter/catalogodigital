@@ -31,7 +31,7 @@ def set_visitas(request):
     visitas_argumento = int(request.GET.get('visitas', 0))
 
     # Definir o novo valor da contagem de visitas
-    cache.set('pagina_visitas', str(visitas_argumento))
+    cache.set('pagina_visitas', str(visitas_argumento), timeout=None)
 
     return HttpResponse(f'Contagem de visitas definida para {visitas_argumento}.')
 
@@ -79,7 +79,7 @@ class BaseLandPage(View):
         return int(minha_pagina_visitas) if minha_pagina_visitas else 0
 
     def set_contagem(self, minha_pagina_visitas):
-        cache.set('pagina_visitas', str(minha_pagina_visitas))
+        cache.set('pagina_visitas', str(minha_pagina_visitas), timeout=None)
       
     def get(self, request, *args, **kwargs):
         visitas = 1 + self.get_contagem()

@@ -32,8 +32,6 @@ dados_json = {
 
 
 
-
-
 # Faz uma requisição GET para obter o token CSRF
 response_csrf = requests.get(url)
 csrftoken = response_csrf.cookies.get('csrftoken', '')
