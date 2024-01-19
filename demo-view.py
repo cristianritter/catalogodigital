@@ -2,10 +2,10 @@ import requests
 
 url = 'https://www.mk4digital.com/set_demo_view/'
 dados_json = {
-            'image0link': 'https://img.freepik.com/fotos-gratis/arranjo-lindo-de-papel-de-parede-de-flores_23-2149057015.jpg?w=740&t=st=1705514234~exp=1705514834~hmac=1713136e4e62e730ee095c34beb70f15c0bf164e0e2beaedf0dec25cbd6ec2eb',
-            'image1link': 'https://img.freepik.com/fotos-gratis/flores-roxas-com-uma-bela-vista-da-ilha-da-madeira-em-portugal_181624-27202.jpg?size=626&ext=jpg&ga=GA1.1.177824122.1705512621&semt=sph',
-            'image2link': 'https://img.freepik.com/fotos-gratis/flores-cor-de-rosa-em-rosa_24837-301.jpg?w=740&t=st=1705513525~exp=1705514125~hmac=a6a67ae86580b495f7b5208352f669f2c0412795cc54687c9ecb2bbe77cec712',
-            'image3link': 'https://img.freepik.com/fotos-premium/as-flores-no-jardim-estao-florescendo-em-uma-bela-primavera_215913-135.jpg?w=740',            
+            'img0': 'https://img.freepik.com/fotos-gratis/arranjo-lindo-de-papel-de-parede-de-flores_23-2149057015.jpg?w=740&t=st=1705514234~exp=1705514834~hmac=1713136e4e62e730ee095c34beb70f15c0bf164e0e2beaedf0dec25cbd6ec2eb',
+            'img1': 'https://img.freepik.com/fotos-gratis/flores-roxas-com-uma-bela-vista-da-ilha-da-madeira-em-portugal_181624-27202.jpg?size=626&ext=jpg&ga=GA1.1.177824122.1705512621&semt=sph',
+            'img2': 'https://img.freepik.com/fotos-gratis/flores-cor-de-rosa-em-rosa_24837-301.jpg?w=740&t=st=1705513525~exp=1705514125~hmac=a6a67ae86580b495f7b5208352f669f2c0412795cc54687c9ecb2bbe77cec712',
+            'img3': 'https://img.freepik.com/fotos-premium/as-flores-no-jardim-estao-florescendo-em-uma-bela-primavera_215913-135.jpg?w=740',            
             'meta_description' : 'Desenvolvimento e hospedagem de landing pages para negócios, marketing e divulgação organica',
             'window_title': 'Catálogo Digital - Seu negócio na Web',
             'sobretitulo': 'Bem Vindo ao Catálogo Digital!',
@@ -27,10 +27,9 @@ dados_json = {
             'google_share_link': '',
             'endereco': '',
             'gmaps_embed_link': '',
-
 }
 
-
+dados_json['img_links'] = [dados_json['img0'], dados_json['img1'], dados_json['img2'], dados_json['img3']]
 
 # Faz uma requisição GET para obter o token CSRF
 response_csrf = requests.get(url)

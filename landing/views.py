@@ -111,27 +111,31 @@ class DemoView(BaseLandPage):
         self.context = cache.get('demo_view_context')
         print(self.context)
 
-class CatalogoDigital(BaseLandPage):
+class SejaNossoCliente(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {
-            'static_assets_path': 'cities/florianopolis/catalogodigital/assets',
-            'meta_description' : 'Desenvolvimento e hospedagem de landing pages para negócios, marketing e divulgação organica',
-            'window_title': 'Catálogo Digital - Seu negócio na Web',
-            'sobretitulo': 'Bem Vindo ao Catálogo Digital!',
+            'static_assets_path': 'cities/florianopolis/seja_nosso_cliente/assets',
+            'carousel_counter': range(4),
+            'meta_description' : 'Serviço de desenvolvimento e hospedagem de landing pages para negócios, marketing e divulgação organica',
+            'window_title': 'MK4 Digital - Seu negócio na Web',
+            'sobretitulo': 'Bem Vindo a MK4 Digital!',
             'titulo': 'A melhor landing page para o seu negócio',
-            'body_title': 'O que é uma landing page?',
-            'lista_servicos': ['É como a vitrine virtual do seu negócio', 'É uma página da web criada sob medida para você', 'A porta de entrada direta para o que sua empresa oferece de melhor', 'Permita que seus clientes o encontrem com os nossos serviços.'],
+            'body_title': 'O que é uma LANDING PAGE?',
+            'lista_servicos': ['É a vitrine virtual do seu negócio', 
+                               'Um cartão de visita na web feito sob medida para você', 
+                               'Uma ponte entre você e o seu cliente', 
+                                ],
             'item1_title': 'Presença Online',
-            'item1_content': 'Oferecemos um serviço especializado com mais de 20 anos de experiência. Serviço reconhecido por nossos amigos e clientes.',
+            'item1_content': 'Torne-se conhecido deixando seus clientes saberem que você existe e a qualidade do seu serviço.',
             'item2_title': 'Credibilidade',
             'item2_content': 'Com um design profissional e informações claras, transmitimos confiança, destacando sua marca de maneira sólida e confiável.',
             'item3_title': 'Publicidade Orgânica',
-            'item3_content': 'Ao utilizar nossa plataforma, cada usuário é estimulado a explorar e conhecer outros empreendimentos na mesma área, promovendo uma rede colaborativa que amplia a visibilidade de todos. Assim, seu crescimento não é apenas individual, mas contribui para fortalecer e promover a prosperidade local.',
-            'promocao_content': 'Informe que nos encontrou através do nosso site e ganhe 10% de desconto no valor da sua primeira anuidade!',
+            'item3_content': 'Ao utilizar nossa plataforma, cada usuário é estimulado a explorar e conhecer outros empreendimentos na mesma área, promovendo uma rede colaborativa que amplia a visibilidade de todos. Assim, seu crescimento não é apenas individual, mas contribui para fortalecer e promover a prosperidade local. (Nosso Portal está em desenvolvimento)',
+            'promocao_content': 'Condições especiais para os primeiros assinantes!',
             'horario_atendimento': 'Seg à Sex das 07-19h.',
             'telefones': '(48) 996810518',
-            'whatslink': 'https://wa.me/+5551996810518',
+            'whatslink': 'https://wa.me/+5548996810518',
             'email':'mkquatrodigital@gmail.com', 
             'google_share_link': '',
             'endereco': '',
@@ -170,6 +174,7 @@ class AJRCutelaria(BaseLandPage):
         super().__init__(*args, **kwargs)
         self.context = {
             'static_assets_path': 'cities/sapiranga/ajrcutelaria/assets',
+            'carousel_counter': range(3),
             'meta_description' : 'Landing page comercio local afiação amolador alicates de unha tesouras facas em Sapiranga Rio Grande do Sul.',
             'window_title': 'Adelcio Afiador - Afiação e Venda de Ferramentas para Salões de beleza',
             'sobretitulo': 'Afiação e Venda de Ferramentas para Salões de beleza',
@@ -182,7 +187,7 @@ class AJRCutelaria(BaseLandPage):
             'item2_content': 'Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.',
             'item3_title': 'Nosso Diferencial',
             'item3_content': 'Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.',
-            'promocao_content': 'Informe que conheceu o nosso local através do nosso site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$10)',
+            'promocao_content': 'Informe que conheceu a empresa através do site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$10)',
             'horario_atendimento': 'Seg à Sex das 07-19h.',
             'telefones': '(51) 980159178',
             'email':'', 

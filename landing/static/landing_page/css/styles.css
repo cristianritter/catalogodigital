@@ -3673,7 +3673,7 @@ header.masthead {
 /* Estilos padrão para o carrossel */
 #myCarousel.carousel {
   width: 100%; /* Ajuste automático para largura total em dispositivos móveis */
-  max-width: 600px; /* Largura máxima no desktop (ajuste conforme necessário) */
+  max-width: 430px; /* Largura máxima no desktop (ajuste conforme necessário) */
   margin: auto; /* Centraliza o carrossel */
 }
 
