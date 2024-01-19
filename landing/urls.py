@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import CatalogoDigital, AJRCutelaria, set_visitas, set_demo_view, DemoView
+from .views import Homepage, CatalogoDigital, AJRCutelaria, set_visitas, set_demo_view, DemoView
 #from .views import ResidencialVivaTorres, KelliSenaAcessoria, ListaPedidos
 app_name = 'landing'  # Substitua 'seu_app_nome' pelo nome real do seu aplicativo
 
 urlpatterns = [
     path('', CatalogoDigital.as_view(), name='index'),
+    path('home', Homepage.as_view(), name='home'),
     path('set_visitas/', set_visitas, name='set_visitas'),
     path('set_demo_view/', set_demo_view, name='set_demo_view'),
     path('demo_view/', DemoView.as_view(), name='demo_view'),

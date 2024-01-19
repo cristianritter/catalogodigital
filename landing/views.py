@@ -6,6 +6,8 @@ from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
 
+EmpresasDivulgadas = list()
+
 #from .models import PageViewsCounter
 # Create your views here.
 
@@ -86,6 +88,12 @@ class BaseLandPage(View):
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas
         return render(request, self.template_name, self.context)
+
+class Homepage(View):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        return render(request, 'index.html')
 
 class DemoView(BaseLandPage):
     def __init__(self, *args, **kwargs):
