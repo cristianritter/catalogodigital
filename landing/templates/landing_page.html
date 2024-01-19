@@ -37,9 +37,9 @@
 
         <!-- Masthead-->
         {% if image0link %}
-            <header class="masthead mb-2" style="background-image: url({{image0link}}); background-position: center; text-align: center; height: 550px;">
+            <header class="masthead" style="background-image: url({{image0link}}); background-position: center; text-align: center; height: 550px;">
         {% else %}
-            <header class="masthead mb-2" style="background-image: url('{% static static_assets_path %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
+            <header class="masthead" style="background-image: url('{% static static_assets_path %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
         {% endif %}
             <div class="container">
                 <div class="masthead-subheading">{{sobretitulo}}</div>
@@ -50,63 +50,64 @@
         </header>
         
         <!-- Services -->
-        <section class="page-section mb-2" id="services">
+        <section class="page-section" id="services">
             <div class="container">
-                <div class="text-center">
-                    <div class="container mt-5">
-                        <h2>{{body_title}}</h2>
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <h2 class="text-center">{{body_title}}</h2>
+                    <div class="text-left" style="margin: 0 20px;"> <!-- Adicionando margem nas laterais da lista -->
                         <ul class="list-unstyled">
                             {% for item in lista_servicos %}
                             <li>
-                                <span class="text-secondary me-2">&#9658;</span> <!-- Setinha ASCII -->
-                                <span class="fw fs-5">{{ item }}</span> <!-- Letra maior e em negrito -->
+                                <span class="text-secondary me-2">&#9658;</span>
+                                <span class="fw fs-5">{{ item }}</span>
                             </li>
                             {% endfor %}
                         </ul>
                     </div>
                 </div>
             </div>
-        </section>  
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        {% if image1link %}
+                            <img src="{{image1link}}" class="d-block w-100" alt="Imagem 1" width="300" height="auto">
+                        {% else %}
+                            <img src="{% static static_assets_path %}/img/1.webp" class="d-block w-100" alt="Imagem 1" width="300" height="225"> 
+                        {% endif %}
+                    </div>
+                    <div class="carousel-item">
+                        {% if image2link %}
+                            <img src="{{image2link}}" class="d-block w-100" alt="Imagem 2" width="300" height="auto">
+                        {% else %}
+                            <img src="{% static static_assets_path %}/img/2.webp" class="d-block w-100" alt="Imagem 2" width="300" height="225"> 
+                        {% endif %}
+                    </div>
+                    <div class="carousel-item">
+                        {% if image3link %}
+                            <img src="{{image3link}}" class="d-block w-100" alt="Imagem 3" width="300" height="auto">
+                        {% else %}
+                            <img src="{% static static_assets_path %}/img/3.webp" class="d-block w-100" alt="Imagem 3" width="300" height="225"> 
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+            </div>
 
-    <section class="page-section mb-2" id="photos">
+        </section>
+
+        
+
+    <section class="page-section" id="photos">
         <div class="container">
             <div class="text-center">
-                
-                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            {% if image1link %}
-                                <img src="{{image1link}}" class="d-block w-100" alt="Imagem 1" width="300" height="auto">
-                            {% else %}
-                                <img src="{% static static_assets_path %}/img/1.webp" class="d-block w-100" alt="Imagem 1" width="300" height="auto"> 
-                            {% endif %}
-                        </div>
-                        <div class="carousel-item">
-                            {% if image2link %}
-                                <img src="{{image2link}}" class="d-block w-100" alt="Imagem 2" width="300" height="auto">
-                            {% else %}
-                                <img src="{% static static_assets_path %}/img/2.webp" class="d-block w-100" alt="Imagem 2" width="300" height="auto"> 
-                            {% endif %}
-                        </div>
-                        <div class="carousel-item">
-                            {% if image3link %}
-                                <img src="{{image3link}}" class="d-block w-100" alt="Imagem 3" width="300" height="auto">
-                            {% else %}
-                                <img src="{% static static_assets_path %}/img/3.webp" class="d-block w-100" alt="Imagem 3" width="300" height="auto"> 
-                            {% endif %}
-                        </div>
-                        
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Próximo</span>
-                    </button>
-                </div>
-
                 <div class="row text-center">
                     {% if item1_title %}
                         <div class="col-md-4">
@@ -126,12 +127,28 @@
                             <p class="text-muted">{{item3_content}}</p>
                         </div>
                     {% endif %}
+                    {% if promocao_content %}
+                        <div class="col-md-4">
+                            <h3 class="my-3 text-uppercase">Oferta Especial</h3>
+                            <p class="large text-muted">{{promocao_content}}</p>
+                    </div>
+                    {% endif %}
                     {% if google_share_link %}
                         <div class="col-md-4">
-                            <h3 class="my-3">Nossa reputação</h3>
+                            <h3 class="my-3">  Nossa reputação</h3>
                             <a href="{{google_share_link}}" target="_blank" >Veja nossas avaliações no Google</a>
                         </div>
                     {% endif %}
+                </div>
+            </div>
+            <div class="container">
+                <div class="text-center">
+                   
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                    </div>
                 </div>
             </div>
         </section>
@@ -183,23 +200,6 @@
             </div>
         </section>
 
-        <!-- Promoção Section -->
-        <section class="page-section mb-2" id="promocao">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Oferta Especial</h2>
-                    <p class="text-muted">{{promocao_titulo}}</p>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <p class="large text-muted">{{promocao_content}}</p>
-                        <p class="large text-muted">Estamos ansiosos para recebê-lo!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
         <!-- Footer-->    
         <footer class="footer py-4">
             <div class="container text-center">

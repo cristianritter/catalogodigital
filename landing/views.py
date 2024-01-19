@@ -69,8 +69,18 @@ def set_visitas(request):
         self.context = {'pedidos': pedidos}
         return render(request, self.template_name, self.context)
 '''
+
+class BaseCardapioSimples(View):
+    template_name = 'cardapio_simples.html'
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.context = {}
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.context)
+
 class BaseLandPage(View):
-    template_name = 'base_template.html'
+    template_name = 'landing_page.html'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -118,7 +128,6 @@ class CatalogoDigital(BaseLandPage):
             'item2_content': 'Com um design profissional e informações claras, transmitimos confiança, destacando sua marca de maneira sólida e confiável.',
             'item3_title': 'Publicidade Orgânica',
             'item3_content': 'Ao utilizar nossa plataforma, cada usuário é estimulado a explorar e conhecer outros empreendimentos na mesma área, promovendo uma rede colaborativa que amplia a visibilidade de todos. Assim, seu crescimento não é apenas individual, mas contribui para fortalecer e promover a prosperidade local.',
-            'promocao_titulo': 'Aproveite nosso desconto exclusivo de lançamento!',
             'promocao_content': 'Informe que nos encontrou através do nosso site e ganhe 10% de desconto no valor da sua primeira anuidade!',
             'horario_atendimento': 'Seg à Sex das 07-19h.',
             'telefones': '(48) 996810518',
@@ -146,7 +155,6 @@ class CatalogoDigital(BaseLandPage):
             'item2_content': 'Assessoria admissional, gozo de férias, cálculos recisórios e elaboração de folha de pagamento, encargos e obrigações assessórias.',
             'item3_title': 'Nosso Diferencial',
             'item3_content': 'Assessoria jurídica especializada com expertise legislativa, cálculos precisos e atendimento personalizado.',
-            'promocao_titulo': 'Aproveite nosso desconto exclusivo!',
             'promocao_content': 'Informe que conheceu o nosso local através do nosso site e ganhe 5% de desconto no valor total do seu primeiro serviço!5',
             'horario_atendimento': 'Seg à Sex das 09-17h.',
             'telefones': '(11) 95296-4549',
@@ -174,8 +182,7 @@ class AJRCutelaria(BaseLandPage):
             'item2_content': 'Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.',
             'item3_title': 'Nosso Diferencial',
             'item3_content': 'Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.',
-            'promocao_titulo': 'Aproveite nosso desconto exclusivo!',
-            'promocao_content': 'Informe que conheceu o nosso local através do nosso site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$20)',
+            'promocao_content': 'Informe que conheceu o nosso local através do nosso site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$10)',
             'horario_atendimento': 'Seg à Sex das 07-19h.',
             'telefones': '(51) 980159178',
             'email':'', 
@@ -203,7 +210,6 @@ class AJRCutelaria(BaseLandPage):
             'item2_content': 'Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.',
             'item3_title': 'Nosso Diferencial',
             'item3_content': 'Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.',
-            'promocao_titulo': 'Aproveite nosso desconto exclusivo!',
             'promocao_content': 'Informe que conheceu o nosso local através do nosso site e ganhe um brinde exclusivo.',
             'horario_atendimento': 'Seg à Sex das 07-19h.',
             'telefones': '(51) 982120577',
