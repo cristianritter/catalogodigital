@@ -58,14 +58,25 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-#    "django.middleware.cache.UpdateCacheMiddleware",
+#   "django.middleware.cache.UpdateCacheMiddleware",
+    "subdomains.middleware.SubdomainURLRoutingMiddleware",
     "django.middleware.common.CommonMiddleware",
-#    "django.middleware.cache.FetchFromCacheMiddleware",
+#   "django.middleware.cache.FetchFromCacheMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+ROOT_URLCONF = "catalogodigital.urls"
+
+SUBDOMAIN_URLCONFS = {
+    None: 'catalogodigital.urls',           # Default configuration
+    'teste': 'catalogodigital.landing.urls_ajrcutelaria',   # Configuration for subdomain 'teste1'
+    # Add more subdomains and configurations as needed    # Adicione mais subdomínios se necessário
+}
+
+#SUBDOMAIN_DOMAIN = "*"
 
 CACHES = {
     'default': {
@@ -74,7 +85,6 @@ CACHES = {
     }
 }
 
-ROOT_URLCONF = "catalogodigital.urls"
 
 TEMPLATES = [
     {
