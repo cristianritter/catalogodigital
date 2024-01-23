@@ -97,6 +97,8 @@ class BaseLandPage(View):
     def get(self, request, *args, **kwargs):
         logger = logging.getLogger(__name__)
         logger.info(f"Request for {request.get_host()}")
+        subdomain = request.subdomain
+        logger.info(f"Subdomain: {subdomain}")
         visitas = 1 + self.get_contagem()
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas
