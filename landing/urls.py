@@ -1,6 +1,5 @@
 from django.urls import path
 from .views import render_root_page, Homepage, BaseCardapioSimples, SejaNossoCliente, AJRCutelaria, set_visitas, set_demo_view, DemoView
-#from .views import ResidencialVivaTorres, KelliSenaAcessoria, ListaPedidos
 app_name = 'landing'  # Substitua 'seu_app_nome' pelo nome real do seu aplicativo
 
 urlpatterns = [

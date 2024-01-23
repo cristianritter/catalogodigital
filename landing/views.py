@@ -5,9 +5,6 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
-import logging
-
-
 EmpresasDivulgadas = list()
 
 #from .models import PageViewsCounter
@@ -32,7 +29,7 @@ def set_demo_view(request):
 
 def render_root_page(request):
     subdomain = request.subdomain
-    if str(subdomain).lower() == 'ajrcutelaria': 
+    if str(subdomain).lower() == 'teste': 
         return AJRCutelaria.as_view()(request)
     else:
         return SejaNossoCliente.as_view()(request)
