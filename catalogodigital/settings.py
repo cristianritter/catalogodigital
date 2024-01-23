@@ -26,11 +26,9 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 if not IS_HEROKU_APP:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
-    SUBDOMAIN_DOMAIN = "localhost"
 else:
     DEBUG = False
     ALLOWED_HOSTS = ['.mk4digital.com', '*.mk4digital.com']
-    SUBDOMAIN_DOMAIN = "mk4digital.com"
 
 COMPRESS_ENABLED = not DEBUG
 
@@ -79,6 +77,7 @@ SUBDOMAIN_URLCONFS = {
     # Add more subdomains and configurations as needed    # Adicione mais subdomínios se necessário
 }
 
+SUBDOMAIN_DOMAIN = "mk4digital.com"
 
 CACHES = {
     'default': {
