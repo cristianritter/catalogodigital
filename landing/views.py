@@ -99,6 +99,7 @@ class BaseLandPage(View):
         logger.info(f"Request for {request.get_host()}")
         subdomain = request.subdomain
         logger.info(f"Subdomain: {subdomain}")
+        print(subdomain)
         visitas = 1 + self.get_contagem()
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas

@@ -30,7 +30,7 @@ else:
 
 COMPRESS_ENABLED = not DEBUG
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.mk4digital.com', '*.mk4digital.com']
 #ALLOWED_HOSTS = ['catalogodigital.herokuapp.com']
 
 INSTALLED_APPS = [
