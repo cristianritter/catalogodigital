@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
+import logging
 
 EmpresasDivulgadas = list()
 
@@ -94,6 +95,8 @@ class BaseLandPage(View):
         cache.set('pagina_visitas', str(minha_pagina_visitas), timeout=None)
       
     def get(self, request, *args, **kwargs):
+        logger = logging.getLogger(__name__)
+        logger.info(f"Request for {request.get_host()}")
         visitas = 1 + self.get_contagem()
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas
