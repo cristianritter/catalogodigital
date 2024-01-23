@@ -25,12 +25,13 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 if not IS_HEROKU_APP:
     DEBUG = True
+    ALLOWED_HOSTS = ['*']
 else:
     DEBUG = False
+    ALLOWED_HOSTS = ['.mk4digital.com', '*.mk4digital.com']
 
 COMPRESS_ENABLED = not DEBUG
 
-ALLOWED_HOSTS = ['.mk4digital.com', '*.mk4digital.com']
 #ALLOWED_HOSTS = ['catalogodigital.herokuapp.com']
 
 INSTALLED_APPS = [
@@ -59,7 +60,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
 #   "django.middleware.cache.UpdateCacheMiddleware",
-    "subdomains.middleware.SubdomainURLRoutingMiddleware",
+     "subdomains.middleware.SubdomainURLRoutingMiddleware",
     "django.middleware.common.CommonMiddleware",
 #   "django.middleware.cache.FetchFromCacheMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -72,11 +73,11 @@ ROOT_URLCONF = "catalogodigital.urls"
 
 SUBDOMAIN_URLCONFS = {
     None: 'catalogodigital.urls',           # Default configuration
-    'teste': 'catalogodigital.landing.urls_ajrcutelaria',   # Configuration for subdomain 'teste1'
+#    'teste': 'catalogodigital.landing.teste_urls',   # Configuration for subdomain 'teste1'
     # Add more subdomains and configurations as needed    # Adicione mais subdomínios se necessário
 }
 
-#SUBDOMAIN_DOMAIN = "*"
+SUBDOMAIN_DOMAIN = "localhost"
 
 CACHES = {
     'default': {

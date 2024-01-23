@@ -7,6 +7,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 import logging
 
+
 EmpresasDivulgadas = list()
 
 #from .models import PageViewsCounter
@@ -28,7 +29,14 @@ def set_demo_view(request):
             return JsonResponse({'status': 'error', 'message': 'Erro ao decodificar JSON'}, status=400)
     else:
         return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
-    
+
+def render_root_page(request):
+    subdomain = request.subdomain
+    if str(subdomain).lower() == 'ajrcutelaria': 
+        return AJRCutelaria.as_view()(request)
+    else:
+        return SejaNossoCliente.as_view()(request)
+
 def set_visitas(request):
     # Obter o valor do argumento 'visitas' da URL
     visitas_argumento = int(request.GET.get('visitas', 0))
@@ -95,11 +103,6 @@ class BaseLandPage(View):
         cache.set('pagina_visitas', str(minha_pagina_visitas), timeout=None)
       
     def get(self, request, *args, **kwargs):
-        logger = logging.getLogger(__name__)
-        logger.info(f"Request for {request.get_host()}")
-        subdomain = request.subdomain
-        logger.info(f"Subdomain: {subdomain}")
-        print(subdomain)
         visitas = 1 + self.get_contagem()
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas
