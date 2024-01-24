@@ -28,7 +28,7 @@ def set_demo_view(request):
 
 def render_root_page(request):
     subdomain = request.subdomain
-    if str(subdomain).lower() == 'teste': 
+    if str(subdomain).lower() == 'ajrcutelaria': 
         return AJRCutelaria.as_view()(request)
     else:
         return SejaNossoCliente.as_view()(request)
@@ -41,39 +41,6 @@ def set_visitas(request):
     cache.set('pagina_visitas', str(visitas_argumento), timeout=None)
 
     return HttpResponse(f'Contagem de visitas definida para {visitas_argumento}.')
-
-'''class ListaPedidos(View):
-    template_name = 'lista_pedidos.html'
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.context = {}
-      
-    def get(self, request, *args, **kwargs):
-        # Criando um contexto fictício para testar a aparência
-        pedidos = [
-            {
-                'horario': '2024-01-16 10:30:00',
-                'mesa': 1,
-                'itens': 'Hamburguer, Batata Frita',
-                'valor': 15.99,
-                'status': 'Aguardando',
-                'pago': False,
-            },
-            {
-                'horario': '2024-01-16 11:45:00',
-                'mesa': 2,
-                'itens': 'Pizza, Refrigerante',
-                'valor': 25.50,
-                'status': 'Preparando',
-                'pago': True,
-            },
-        # Adicione mais pedidos conforme necessário
-        ]
-
-        self.context = {'pedidos': pedidos}
-        return render(request, self.template_name, self.context)
-'''
 
 class BaseLandPage(View):
     template_name = 'landing_page.html'
@@ -95,17 +62,17 @@ class BaseLandPage(View):
         self.context['contador_visitas'] = visitas
         return render(request, self.template_name, self.context)
 
-class Homepage(View):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-    def get(self, request, *args, **kwargs):
-        return render(request, 'portal.html')
-
 class DemoView(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = cache.get('demo_view_context')
         print(self.context)
+
+class Homepage(View):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        return render(request, 'portal.html')
 
 class SejaNossoCliente(BaseLandPage):
     def __init__(self, *args, **kwargs):
@@ -164,7 +131,6 @@ class SejaNossoCliente(BaseLandPage):
             'endereco': '',
             'gmaps_embed_link': '',
         }'''
-
 class AJRCutelaria(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
