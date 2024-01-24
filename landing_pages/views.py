@@ -75,15 +75,6 @@ def set_visitas(request):
         return render(request, self.template_name, self.context)
 '''
 
-class BaseCardapioSimples(View):
-    template_name = 'cardapio_simples.html'
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.context = {}
-
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.context)
-
 class BaseLandPage(View):
     template_name = 'landing_page.html'
 

@@ -29,7 +29,7 @@ if not IS_HEROKU_APP:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-            'LOCATION': '/tmp/django_cache',
+            'LOCATION': BASE_DIR /'tmp/django_cache',
         }
     }
 

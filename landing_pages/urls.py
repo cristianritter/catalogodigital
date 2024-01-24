@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import render_root_page, Homepage, BaseCardapioSimples, SejaNossoCliente, AJRCutelaria, set_visitas, set_demo_view, DemoView
+from .views import render_root_page, Homepage, SejaNossoCliente, AJRCutelaria, set_visitas, set_demo_view, DemoView
 app_name = 'landing'  # Substitua 'seu_app_nome' pelo nome real do seu aplicativo
 
 urlpatterns = [
-    path('cardapio_simples/', BaseCardapioSimples.as_view(), name='cardapio_simples'),
     path('', render_root_page, name='index'),
     path('home', Homepage.as_view(), name='home'),
     path('set_visitas/', set_visitas, name='set_visitas'),
