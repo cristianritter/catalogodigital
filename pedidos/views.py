@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views import View
 
 def hello_world(request):
-    return HttpResponse("Hello, World!")
+    return HttpResponse("Você está na raiz do subdominio pedidos.")
 
 class BaseCardapioSimples(View):
     template_name = 'cardapio_simples.html'
