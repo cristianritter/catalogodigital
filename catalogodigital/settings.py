@@ -26,14 +26,43 @@ if not IS_HEROKU_APP:
     ALLOWED_HOSTS = ['*']
     SUBDOMAIN_DOMAIN = "localhost"
 
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': '/tmp/django_cache',
+        }
+    }
+
+
 else:
     DEBUG = False
     ALLOWED_HOSTS = ['.mk4digital.com', '*.mk4digital.com']
     SUBDOMAIN_DOMAIN = "mk4digital.com"
+    
+    servers = os.environ['MEMCACHIER_SERVERS']
+    username = os.environ['MEMCACHIER_USERNAME']
+    password = os.environ['MEMCACHIER_PASSWORD']
+    CACHES = {
+        'default': {
+            # Use django-bmemcached
+            'BACKEND': 'django_bmemcached.memcached.BMemcached',
+
+            # TIMEOUT is not the connection timeout! It's the default expiration
+            # timeout that should be applied to keys! Setting it to `None`
+            # disables expiration.
+            'TIMEOUT': None,
+
+            'LOCATION': servers,
+
+            'OPTIONS': {
+                'username': username,
+                'password': password,
+            }
+        }
+    }
 
 COMPRESS_ENABLED = not DEBUG
 
-#ALLOWED_HOSTS = ['catalogodigital.herokuapp.com']
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -42,8 +71,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "landing_pages",
     'compressor',
+    "landing_pages",
+    "pedidos",
+    "lojas"
 ]
 
 COMPRESS_CSS_FILTERS = [
@@ -60,10 +91,8 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-#   "django.middleware.cache.UpdateCacheMiddleware",
      "subdomains.middleware.SubdomainURLRoutingMiddleware",
     "django.middleware.common.CommonMiddleware",
-#   "django.middleware.cache.FetchFromCacheMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -71,19 +100,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "catalogodigital.urls"
-
 SUBDOMAIN_URLCONFS = {
     None: 'catalogodigital.urls',           # Default configuration
-#    'teste': 'catalogodigital.landing.teste_urls',   # Configuration for subdomain 'teste1'
-    # Add more subdomains and configurations as needed    # Adicione mais subdomínios se necessário
-}
-
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/tmp/django_cache',
-    }
+    'admin': 'admin.urls',
+    'landingpages': 'landing_pages.urls',
+    'lojas': 'lojas.urls',
+    'pedidos': 'pedidos.urls',
 }
 
 

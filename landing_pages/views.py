@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 EmpresasDivulgadas = list()
 
 #from .models import PageViewsCounter
-# Create your views here.
 
 #@csrf_protect
 @csrf_exempt
@@ -109,7 +108,7 @@ class Homepage(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
+        return render(request, 'portal.html')
 
 class DemoView(BaseLandPage):
     def __init__(self, *args, **kwargs):
