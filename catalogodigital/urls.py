@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include('landing.urls',namespace='landing')),
+    path("", include('landing_pages.urls',namespace='landing')),
 ]
 
 if settings.DEBUG:
