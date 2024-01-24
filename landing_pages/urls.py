@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import render_root_page, Homepage, SejaNossoCliente, AJRCutelaria, set_visitas, set_demo_view, DemoView
+from .views import ResidencialVivaTorres, render_root_page, Homepage, SejaNossoCliente, AJRCutelaria, set_visitas, set_demo_view, DemoView
 app_name = 'landing'  # Substitua 'seu_app_nome' pelo nome real do seu aplicativo
 
 urlpatterns = [
@@ -13,6 +13,6 @@ urlpatterns = [
 
 ### Urls de clientes
     path('ajr_cutelaria/', AJRCutelaria.as_view(), name='ajr_cutelaria'),
+    path('residencial_viva_torres/', ResidencialVivaTorres.as_view(), name='residencial_viva_torres'),
 #   path('kelli_sena_assessoria/', KelliSenaAcessoria.as_view(), name='kelli_sena_assessoria'),
-#   path('residencial_viva_torres/', ResidencialVivaTorres.as_view(), name='residencial_viva_torres'),
 ]

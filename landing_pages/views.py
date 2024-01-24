@@ -159,31 +159,32 @@ class AJRCutelaria(BaseLandPage):
             'gmaps_embed_link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr',
         }
 
-"""class ResidencialVivaTorres(BaseLandPage):
+class ResidencialVivaTorres(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {
             'static_assets_path': 'cities/torres/residencialvivatorres/assets',
-            'meta_description' : 'Landing page de alugueis de temporada em Torres Rio Grande do Sul.',
-            'window_title': 'Residencial VivaTorres - Alugueis de Temporada',
-            'sobretitulo': 'Residencial Viva Torres',
-            'titulo': 'Aluguéis de temporada',
-            'body_title': 'teste1 ',
-            'body_title': 'O que é uma landing page?',
-            'lista_servicos': ['É como a vitrine virtual do seu negócio', 'É uma página da web criada sob medida para você', 'A porta de entrada direta para o que sua empresa oferece de melhor', 'Permita que seus clientes o encontrem com os nossos serviços.'],
+            'carousel_counter': range(3),
+            'meta_description' : 'Landing page comercio local afiação amolador alicates de unha tesouras facas em Sapiranga Rio Grande do Sul.',
+            'window_title': 'Adelcio Afiador - Afiação e Venda de Ferramentas para Salões de beleza',
+            'sobretitulo': 'Afiação e Venda de Ferramentas para Salões de beleza',
+            'titulo': 'Adélcio Amolador',
+            'body_title': 'Produtos e Serviços',
+            'lista_servicos': ['Afiação de Alicates e Tesouras', 'Afiação de facas', 'Venda de Ferramentas', 'Atendimento à domicílio', 'Consulte as regiões de cobertura'],
             'item1_title': 'Nossa História',
             'item1_content': 'Oferecemos um serviço especializado com mais de 20 anos de experiência. Serviço reconhecido por nossos amigos e clientes.',
-            'item2_title': 'Produtos e Serviços',
+            'item2_title': 'Tudo o que você precisa',
             'item2_content': 'Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.',
             'item3_title': 'Nosso Diferencial',
             'item3_content': 'Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.',
-            'promocao_content': 'Informe que conheceu o nosso local através do nosso site e ganhe um brinde exclusivo.',
+            'promocao_content': 'Informe que conheceu a empresa através do site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$10)',
             'horario_atendimento': 'Seg à Sex das 07-19h.',
-            'telefones': '(51) 982120577',
+            'telefones': '(51) 980159178',
             'email':'', 
-            'whatslink': 'https://wa.me/+5551982120577',
-            'google_share_link': 'https://maps.app.goo.gl/EsewY1fpYjL3o8dE6',
-            'endereco': 'Rua São Marcos, 335, Praia da Cal, Torres, RS',
-            'gmaps_embed_link': '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3477.7191789237595!2d-49.74209812380591!3d-29.349224675280954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9522695ce084c5a7%3A0xdcf89d2645bfa164!2sResidencial%20Viva%20Torres%3A%20Apt%20naPraia%20c%2F%20Piscina!5e0!3m2!1sen!2sbr!4v1705499583213!5m2!1sen!2sbr',
+            'whatslink': 'https://wa.me/+5551980159178',
+            'google_share_link': 'https://maps.app.goo.gl/pTZvag2fg7ytV74eA',
+            'endereco': 'Rua Duque de Caxias, 634, Centenário, Sapiranga, RS',
+            'gmaps_embed_link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr',
+
         }
-        """
+        
