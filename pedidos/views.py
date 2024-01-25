@@ -10,66 +10,25 @@ class BaseCardapioSimples(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {
-            'coluna1': [
-                {
-                    'title': 'Hamburguer da casa',
-                    'description': 'TrÊs carnes especiais angus de 120g',
-                    'price': '32,90',
-                    'image': '01.jpg'
-                },
-                {
-                    'title': 'Hamburguer Duplo',
-                    'description': 'Duas carnes especiais angus de 120g',
-                    'price': '22,90',
-                    'image': '02.jpg'
-                }, 
-                {
-                    'title': 'Hamburguer da casa',
-                    'description': 'TrÊs carnes especiais angus de 120g',
-                    'price': '32,90',
-                    'image': '03.jpg'
-                },
-            ],
-            'coluna2': [
-                {
-                    'title': 'Hamburguer da casa',
-                    'description': 'TrÊs carnes especiais angus de 120g',
-                    'price': '32,90',
-                    'image': '04.jpg'
-                },
-                {
-                    'title': 'Hamburguer Duplo',
-                    'description': 'Duas carnes especiais angus de 120g',
-                    'price': '22,90',
-                    'image': '05.jpg'
-                }, 
-                {
-                    'title': 'Hamburguer da casa',
-                    'description': 'TrÊs carnes especiais angus de 120g',
-                    'price': '32,90',
-                    'image': '06.jpg'
-                },
-            ],
-             'coluna3': [
-                {
-                    'title': 'Hamburguer da casa',
-                    'description': 'TrÊs carnes especiais angus de 120g',
-                    'price': '32,90',
-                    'image': '07.jpg'
-                },
-                {
-                    'title': 'Hamburguer Duplo',
-                    'description': 'Duas carnes especiais angus de 120g',
-                    'price': '22,90',
-                    'image': '08.jpg'
-                }, 
-                {
-                    'title': 'Hamburguer da casa',
-                    'description': 'TrÊs carnes especiais angus de 120g',
-                    'price': '32,90',
-                    'image': '03.jpg'
-                },
-            ]
+            'cardapio': {
+                'pizza': [
+                    {'title': 'Pizza Margherita', 'description': 'Delicious Margherita pizza.', 'price': 12.99, 'image': '01.jpg'},
+                    {'title': 'Pizza Pepperoni', 'description': 'Spicy Pepperoni pizza.', 'price': 14.99, 'image': '02.jpg'},
+                    {'title': 'Pizza Margherita', 'description': 'Delicious Margherita pizza.', 'price': 12.99, 'image': '01.jpg'},
+                    # Adicione mais itens de pizza conforme necessário
+                ],
+                'salad': [
+                    {'title': 'Caesar Salad', 'description': 'Fresh Caesar salad.', 'price': 8.99, 'image': '03.jpg'},
+                    {'title': 'Greek Salad', 'description': 'Classic Greek salad.', 'price': 9.99, 'image': '04.jpg'},
+                    # Adicione mais itens de salada conforme necessário
+                ],
+                'noodle': [
+                    {'title': 'Spaghetti Bolognese', 'description': 'Hearty Bolognese spaghetti.', 'price': 10.99, 'image': '05.jpg'},
+                    {'title': 'Pad Thai', 'description': 'Authentic Pad Thai.', 'price': 11.99, 'image': '06.jpg'},
+                    # Adicione mais itens de macarrão conforme necessário
+                ],
+                # Adicione mais categorias conforme necessário
+            }
         }
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.context)
