@@ -17,15 +17,13 @@ import dj_database_url
 
 load_dotenv()
 
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-)cb+5%vn8)pa84q4#_*t(lv)5pjs)_nvo$a@iuh@p1k9$uj6t("
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
-CSRF_TRUSTED_ORIGINS = ['https://mk4digital.com']
+CSRF_TRUSTED_ORIGINS = ['https://admin.mk4digital.com']
 
 if not IS_HEROKU_APP:
     DEBUG = True
