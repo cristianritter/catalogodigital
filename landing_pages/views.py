@@ -186,7 +186,7 @@ class AJRCutelaria(BaseLandPage):
 class ResidencialVivaTorres(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        landing_page_data = LandingPageData.objects.filter(url_cadastrado='ajr_cutelaria').first()
+        landing_page_data = LandingPageData.objects.filter(url_cadastrado='residencial_viva_torres').first()
         if landing_page_data:
             self.context = {
                 'num_imagens_carrousel': range(landing_page_data.num_imagens_carrousel),
