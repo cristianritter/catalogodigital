@@ -188,7 +188,7 @@ html {
 }
 
 .img-fluid {
-  max-width: 100%;
+  max-width: 250px;
   height: auto;
 }
 
@@ -851,3 +851,4 @@ address {
 .panel p {
   padding: 5px 20px 30px;
 }
+

@@ -15,9 +15,12 @@ class BaseCardapioSimples(View):
                     {'title': 'Pizza Margherita', 'description': 'Delicious Margherita pizza.', 'price': 12.99, 'image': '01.jpg'},
                     {'title': 'Pizza Pepperoni', 'description': 'Spicy Pepperoni pizza.', 'price': 14.99, 'image': '02.jpg'},
                     {'title': 'Pizza Margherita', 'description': 'Delicious Margherita pizza.', 'price': 12.99, 'image': '01.jpg'},
+                    {'title': 'Pizza Margherita', 'description': 'Delicious Margherita pizza.', 'price': 12.99, 'image': '01.jpg'},
+                    {'title': 'Pizza Margherita', 'description': 'Delicious Margherita pizza.', 'price': 12.99, 'image': '01.jpg'},
                     # Adicione mais itens de pizza conforme necessário
                 ],
                 'salad': [
+                    {'title': 'Caesar Salad', 'description': 'Fresh Caesar salad.', 'price': 8.99, 'image': '03.jpg'},
                     {'title': 'Caesar Salad', 'description': 'Fresh Caesar salad.', 'price': 8.99, 'image': '03.jpg'},
                     {'title': 'Greek Salad', 'description': 'Classic Greek salad.', 'price': 9.99, 'image': '04.jpg'},
                     # Adicione mais itens de salada conforme necessário

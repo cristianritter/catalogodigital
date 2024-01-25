@@ -188,7 +188,7 @@ https://templatemo.com/tm-539-simple-house
 						var largeImage = document.createElement('img');
 						largeImage.src = image.src;
 						largeImage.alt = image.alt;
-						largeImage.style.maxWidth = '100%';
+						largeImage.style.maxWidth = '350px';
 						largeImage.style.height = 'auto';
 	
 						// Cria elementos para descrição e preço
@@ -220,14 +220,6 @@ https://templatemo.com/tm-539-simple-house
 						popup.appendChild(closeButton);
 	
 						isOpen = true; // Define a flag como true ao abrir a popup
-	
-						// Verifica se é um dispositivo móvel e ajusta o tamanho da popup
-						if (window.innerWidth <= 767) {
-							popup.style.maxWidth = '100%';
-							popup.style.width = '100%';
-							popup.style.height = '100%';
-							popup.style.borderRadius = '0';
-						}
 					}
 				});
 			});
