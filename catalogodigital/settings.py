@@ -25,6 +25,8 @@ SECRET_KEY = "django-insecure-)cb+5%vn8)pa84q4#_*t(lv)5pjs)_nvo$a@iuh@p1k9$uj6t(
 
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
+CSRF_TRUSTED_ORIGINS = ['https://mk4digital.com']
+
 if not IS_HEROKU_APP:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
@@ -96,7 +98,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-     "subdomains.middleware.SubdomainURLRoutingMiddleware",
+    "subdomains.middleware.SubdomainURLRoutingMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
