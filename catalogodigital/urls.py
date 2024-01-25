@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path("", include('landing_pages.urls',namespace='landing')),
+    path("", include('landing_pages.urls',namespace='landing')),  
+    path("pedidos/", include('pedidos.urls')),  
 ]
 
 if settings.DEBUG:

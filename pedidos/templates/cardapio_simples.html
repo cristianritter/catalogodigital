@@ -10,54 +10,7 @@
     <title>Simple House Template</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />    
 	<link href="{% static 'cardapio_simples/css/templatemo-style.css' %}" rel="stylesheet" />
-	<style>
-		.popup {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background: white;
-			padding: 20px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-			z-index: 1000;
-			text-align: center;
-			max-width: 80vw; /* Defina a largura máxima conforme necessário */
-		}
 
-		.popup img {
-			max-width: 100%;
-			max-height: 70vh;
-			margin-bottom: 10px;
-		}
-
-		.popup p {
-			font-size: 16px;
-			line-height: 1.6;
-			color: #333;
-			margin-bottom: 10px;
-		}
-
-		.popup .tm-gallery-title {
-			font-size: 24px;
-			margin-bottom: 10px;
-		}
-
-		.popup .tm-gallery-price {
-			font-size: 18px;
-			font-weight: bold;
-		}
-
-		.close-button {
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			background: none;
-			border: none;
-			font-size: 20px;
-			cursor: pointer;
-		}
-
-	</style>
 </head>
 <!--
 
@@ -170,65 +123,5 @@ https://templatemo.com/tm-539-simple-house
 			});
 		});
 	</script>
-	
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			var lightboxImages = document.querySelectorAll('.lightbox-img');
-			var isOpen = false; // Flag para controlar se a popup está aberta
-	
-			lightboxImages.forEach(function (image) {
-				image.addEventListener('click', function () {
-					// Verifica se uma popup já está aberta
-					if (!isOpen) {
-						// Cria um elemento de popup
-						var popup = document.createElement('div');
-						popup.className = 'popup tm-gallery-item'; // Adiciona classes da página principal
-	
-						// Cria a imagem maior dentro do popup
-						var largeImage = document.createElement('img');
-						largeImage.src = image.src;
-						largeImage.alt = image.alt;
-						largeImage.style.maxWidth = '350px';
-						largeImage.style.height = 'auto';
-	
-						// Cria elementos para descrição e preço
-						var description = document.createElement('p');
-						description.className = 'tm-gallery-description'; // Adiciona classe da página principal
-						description.textContent = image.nextElementSibling.querySelector('.tm-gallery-description').textContent;
-	
-						var price = document.createElement('p');
-						price.className = 'tm-gallery-price'; // Adiciona classe da página principal
-						price.textContent = image.nextElementSibling.querySelector('.tm-gallery-price').textContent;
-	
-						// Adiciona os elementos ao popup
-						popup.appendChild(largeImage);
-						popup.appendChild(description);
-						popup.appendChild(price);
-	
-						// Adiciona o popup ao corpo do documento
-						document.body.appendChild(popup);
-	
-						// Adiciona um botão de fechar ao popup
-						var closeButton = document.createElement('button');
-						closeButton.textContent = 'X';
-						closeButton.className = 'close-button';
-						closeButton.addEventListener('click', function () {
-							document.body.removeChild(popup);
-							isOpen = false; // Define a flag como false ao fechar a popup
-						});
-	
-						popup.appendChild(closeButton);
-	
-						isOpen = true; // Define a flag como true ao abrir a popup
-					}
-				});
-			});
-		});
-	</script>
-	
-	
-	
-	
-	
 </body>
 </html>
