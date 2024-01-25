@@ -1,3 +1,4 @@
+from .models import LandingPageData
 from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
@@ -57,6 +58,9 @@ class BaseLandPage(View):
         cache.set('pagina_visitas', str(minha_pagina_visitas), timeout=None)
       
     def get(self, request, *args, **kwargs):
+        print(self.context)
+        if not self.context:
+            return HttpResponse("Os dados solicitados não se encontram no banco de dados.")
         visitas = 1 + self.get_contagem()
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas
@@ -134,57 +138,73 @@ class SejaNossoCliente(BaseLandPage):
 class AJRCutelaria(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.context = {
-            'static_assets_path': 'cities/sapiranga/ajrcutelaria/assets',
-            'carousel_counter': range(3),
-            'meta_description' : 'Landing page comercio local afiação amolador alicates de unha tesouras facas em Sapiranga Rio Grande do Sul.',
-            'window_title': 'Adelcio Afiador - Afiação e Venda de Ferramentas para Salões de beleza',
-            'sobretitulo': 'Afiação e Venda de Ferramentas para Salões de beleza',
-            'titulo': 'Adélcio Amolador',
-            'body_title': 'Produtos e Serviços',
-            'lista_servicos': ['Afiação de Alicates e Tesouras', 'Afiação de facas', 'Venda de Ferramentas', 'Atendimento à domicílio', 'Consulte as regiões de cobertura'],
-            'item1_title': 'Nossa História',
-            'item1_content': 'Oferecemos um serviço especializado com mais de 20 anos de experiência. Serviço reconhecido por nossos amigos e clientes.',
-            'item2_title': 'Tudo o que você precisa',
-            'item2_content': 'Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.',
-            'item3_title': 'Nosso Diferencial',
-            'item3_content': 'Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.',
-            'promocao_content': 'Informe que conheceu a empresa através do site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$10)',
+        landing_page_data = LandingPageData.objects.filter(url_cadastrado='ajr_cutelaria').first()
+        if landing_page_data:
+            self.context = {
+                'num_imagens_carrousel': range(landing_page_data.num_imagens_carrousel),
+                'caminho_arquivos': landing_page_data.caminho_de_arquivos,
+                'nome_empresa': landing_page_data.nome_empresa,
+                'descricao_curta': landing_page_data.descricao_curta,
+                'meta_description': landing_page_data.meta_description,
+                'lista_titulo': landing_page_data.lista_titulo,
+                'lista_items': landing_page_data.lista_items.split(','),  # Convertendo a string em uma lista
+                'colunas_items': landing_page_data.colunas_items.split('#'),
+                'numeros_telefone': landing_page_data.numeros_telefone,
+                'email_contato': landing_page_data.email_contato,
+                'endereco': landing_page_data.endereco,
+                'horario_atendimento': landing_page_data.horario_atendimento,
+                'whats_link': landing_page_data.whats_link,
+                'reviews_link': landing_page_data.reviews_link,
+                'gmaps_link': landing_page_data.gmaps_link,
+            }
+            pares_colunas=zip(self.context['colunas_items'][::2], self.context['colunas_items'][1::2])
+            self.context['pares_colunas'] = pares_colunas
+        
+        """
+            'caminho_arquivos': 'sapiranga/ajr_cutelaria',
+            'caminho_arquivos': 'sapiranga/ajr_cutelaria',
+            'num_imagens_carrousel': range(3),
+            'meta_description' : 'Afiador e Amolador de Alicates de cutícula, tesouras e facas. Serviço e comercio local em Sapiranga, Rio Grande do Sul.',
+            'descricao_curta': 'Afiação e Venda de Ferramentas para Salões de beleza',
+            'nome_empresa': 'Adélcio Amolador',
+            'lista_titulo': 'Produtos e Serviços',
+            'lista_items': ['Afiação de Alicates e Tesouras', 'Afiação de facas', 'Venda de Ferramentas', 'Atendimento à domicílio', 'Consulte as regiões de cobertura'],
+            'colunas_items': ['Nossa História', 'Oferecemos um serviço especializado com mais de 20 anos de experiência. Serviço reconhecido por nossos amigos e clientes.',
+                'Tudo o que você precisa', 'Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.',
+                'Nosso Diferencial', 'Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.',
+                'Aproveite',  'Informe que conheceu a empresa através do site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$10)',
+            ],  
             'horario_atendimento': 'Seg à Sex das 07-19h.',
-            'telefones': '(51) 980159178',
-            'email':'', 
-            'whatslink': 'https://wa.me/+5551980159178',
-            'google_share_link': 'https://maps.app.goo.gl/pTZvag2fg7ytV74eA',
+            'numeros_telefone': '(51) 980159178',
+            'email_contato':'', 
+            'whats_link': 'https://wa.me/+5551980159178',
+            'reviews_link': 'https://maps.app.goo.gl/pTZvag2fg7ytV74eA',
             'endereco': 'Rua Duque de Caxias, 634, Centenário, Sapiranga, RS',
-            'gmaps_embed_link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr',
-        }
-
+            'gmaps_link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr',
+            """        
+ 
 class ResidencialVivaTorres(BaseLandPage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.context = {
-            'static_assets_path': 'cities/torres/residencialvivatorres/assets',
-            'carousel_counter': range(3),
-            'meta_description' : 'Landing page comercio local afiação amolador alicates de unha tesouras facas em Sapiranga Rio Grande do Sul.',
-            'window_title': 'Adelcio Afiador - Afiação e Venda de Ferramentas para Salões de beleza',
-            'sobretitulo': 'Afiação e Venda de Ferramentas para Salões de beleza',
-            'titulo': 'Adélcio Amolador',
-            'body_title': 'Produtos e Serviços',
-            'lista_servicos': ['Afiação de Alicates e Tesouras', 'Afiação de facas', 'Venda de Ferramentas', 'Atendimento à domicílio', 'Consulte as regiões de cobertura'],
-            'item1_title': 'Nossa História',
-            'item1_content': 'Oferecemos um serviço especializado com mais de 20 anos de experiência. Serviço reconhecido por nossos amigos e clientes.',
-            'item2_title': 'Tudo o que você precisa',
-            'item2_content': 'Serviço especializado de afiação para alicates, tesouras, facas e outras ferramentas profissionais. Temos também uma loja de ferramentas profissionais, incluindo espatulas de cutícula de alta qualidade e uma variedade de acessórios de reposição, de molas metálicas a borrachas de silicone para alicates.',
-            'item3_title': 'Nosso Diferencial',
-            'item3_content': 'Oferecemos não apenas serviços e produtos de qualidade, mas também comodidade, pois disponibilizamos atendimento personalizado no seu local de preferência, seja presencial ou remoto. Renove suas ferramentas com praticidade, sem sair do seu espaço de trabalho. Agende uma visita.',
-            'promocao_content': 'Informe que conheceu a empresa através do site e ganhe 10% de desconto no valor total da sua primeira compra! (Limitado à R$10)',
-            'horario_atendimento': 'Seg à Sex das 07-19h.',
-            'telefones': '(51) 980159178',
-            'email':'', 
-            'whatslink': 'https://wa.me/+5551980159178',
-            'google_share_link': 'https://maps.app.goo.gl/pTZvag2fg7ytV74eA',
-            'endereco': 'Rua Duque de Caxias, 634, Centenário, Sapiranga, RS',
-            'gmaps_embed_link': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3468.0310528904797!2d-51.01371158831997!3d-29.631841339516633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95193fbe62929801%3A0xfb885bf48d7148d6!2sAJR%20Cutelaria!5e0!3m2!1sen!2sbr!4v1703100728491!5m2!1sen!2sbr',
-
-        }
+        landing_page_data = LandingPageData.objects.filter(url_cadastrado='ajr_cutelaria').first()
+        if landing_page_data:
+            self.context = {
+                'num_imagens_carrousel': range(landing_page_data.num_imagens_carrousel),
+                'caminho_arquivos': landing_page_data.caminho_de_arquivos,
+                'nome_empresa': landing_page_data.nome_empresa,
+                'descricao_curta': landing_page_data.descricao_curta,
+                'meta_description': landing_page_data.meta_description,
+                'lista_titulo': landing_page_data.lista_titulo,
+                'lista_items': landing_page_data.lista_items.split(','),  # Convertendo a string em uma lista
+                'colunas_items': landing_page_data.colunas_items.split('#'),
+                'numeros_telefone': landing_page_data.numeros_telefone,
+                'email_contato': landing_page_data.email_contato,
+                'endereco': landing_page_data.endereco,
+                'horario_atendimento': landing_page_data.horario_atendimento,
+                'whats_link': landing_page_data.whats_link,
+                'reviews_link': landing_page_data.reviews_link,
+                'gmaps_link': landing_page_data.gmaps_link,
+            }
+            pares_colunas=zip(self.context['colunas_items'][::2], self.context['colunas_items'][1::2])
+            self.context['pares_colunas'] = pares_colunas
         

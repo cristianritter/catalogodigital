@@ -8,7 +8,7 @@
         <meta name="description" content={{meta_description}} />
         <meta name="author" content="Cristian Ritter / Alex Amaro" />
         <link rel="icon" type="image/x-icon" href="{% static 'landing_page/favicon.ico' %}">
-        <title>{{window_title}}</title>
+        <title>{{nome_empresa}} - {{descricao_curta}}</title>
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
         {% compress css %}
@@ -34,29 +34,27 @@
                 </div>
             </div>
         </nav>
-
         <!-- Masthead-->
         {% if image0link %}
             <header class="masthead" style="background-image: url({{image0link}}); background-position: center; text-align: center; height: 550px;">
         {% else %}
-            <header class="masthead" style="background-image: url('{% static static_assets_path %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
+            <header class="masthead" style="background-image: url('{% static caminho_arquivos %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
         {% endif %}
-            <div class="container">
-                <div class="masthead-subheading">{{sobretitulo}}</div>
-                <div class="masthead-heading text-uppercase">{{titulo}}</div>
-                <a class="btn btn-primary text-uppercase" href="#new-contact"> Entre em contato</a>
-                <header >
-            </div>
-        </header>
+                <div class="container">
+                    <div class="masthead-subheading">{{descricao_curta}}</div>
+                    <div class="masthead-heading text-uppercase">{{nome_empresa}}</div>
+                    <a class="btn btn-primary text-uppercase" href="#new-contact"> Entre em contato</a>
+                </div>
+            </header>
         
         <!-- Services -->
         <section class="page-section" id="services">
             <div class="container">
                 <div style="max-width: 500px; margin: 0 auto;">
-                    <h2 class="text-center">{{body_title}}</h2>
+                    <h2 class="text-center">{{lista_titulo}}</h2>
                     <div class="text-left" style="margin: 0 20px;"> <!-- Adicionando margem nas laterais da lista -->
                         <ul class="list-unstyled">
-                            {% for item in lista_servicos %}
+                            {% for item in lista_items %}
                             <li>
                                 <span class="text-secondary me-2">&#9658;</span>
                                 <span class="fw fs-5">{{ item }}</span>
@@ -66,7 +64,6 @@
                     </div>
                 </div>
             </div>
-
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     {% for image_link in image_links %}
@@ -74,9 +71,9 @@
                             <img src="{{ image_link }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
                         </div>
                     {% endfor %}
-                    {% for i in carousel_counter|default:0 %}
+                    {% for i in num_imagens_carrousel|default:0 %}
                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{% static static_assets_path %}/img/{{ forloop.counter }}.webp" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
+                            <img src="{% static caminho_arquivos %}/img/{{ forloop.counter }}.webp" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
                         </div>
                     {% endfor %}  
                 </div>
@@ -90,57 +87,22 @@
                 </button>
             </div>
         </section>
-
-        
-
-    <section class="page-section" id="photos">
-        <div class="container">
-            <div class="text-center">
-                <div class="row text-center">
-                    {% if item1_title %}
-                        <div class="col-md-4">
-                            <h3 class="my-3">{{item1_title}}</h3>
-                            <p class="fw fs-5">{{item1_content}}</p>
-                        </div>
-                    {% endif %}
-                    {% if item2_title %}
-                        <div class="col-md-4">
-                            <h3 class="my-3">{{item2_title}}</h3>
-                            <p class="fw fs-5">{{item2_content}}</p>
-                        </div>
-                    {% endif %}
-                    {% if item3_title %}
-                        <div class="col-md-4">
-                            <h3 class="my-3">{{item3_title}}</h3>
-                            <p class="fw fs-5">{{item3_content}}</p>
-                        </div>
-                    {% endif %}
-                    {% if promocao_content %}
-                        <div class="col-md-4">
-                            <h3 class="my-3 text-uppercase">Oferta Especial</h3>
-                            <p class="fw fs-5">{{promocao_content}}</p>
-                    </div>
-                    {% endif %}
-                    {% if google_share_link %}
-                        <div class="col-md-4">
-                            <h3 class="my-3">  Nossa reputação</h3>
-                            <a href="{{google_share_link}}" target="_blank" >Veja nossas avaliações no Google</a>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
+        <section class="page-section" id="photos">
             <div class="container">
                 <div class="text-center">
-                   
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center">
+                    <div class="row text-center">
+                        {% for item1, item2 in pares_colunas %}
+                        <div class="col-md-4">
+                            <h3 class="my-3 text-uppercase">{{ item1 }}</h3>
+                            <p class="fw fs-5">{{ item2 }}</p>
+                        </div>    
+                        {% endfor %}
+                        <p><a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4 text-uppercase">consulte aqui nossas avaliações</a></p>
                     </div>
                 </div>
             </div>
         </section>
-        
+            
         <!-- New Contact Section -->
         <section class="page-section text-center" id="new-contact">
             <div class="container mx-auto">
@@ -148,17 +110,17 @@
                 <!-- Contact Information -->
                 <div class="col-md-4 mx-auto text-center">
                     <p><strong>Horário de Atendimento:</strong> {{horario_atendimento}}</p>
-                    <p><strong>Telefone:</strong> {{telefones}}</p>
-                    {% if email %}
-                        <p><strong>E-mail:</strong> <a href="mailto:{{email}}">{{email}}</a></p>
-                    {% endif %}     
-                    <a href="{{whatslink}}" target="_blank" class="btn btn-primary mb-4">Enviar uma mensagem no WhatsApp</a>
+                    <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
+                    <p><a href="{{whats_link}}" target="_blank" class="btn btn-primary mb-4 text-uppercase">Conversar no WhatsApp</a></p>
                     {% if endereco %}
                         <p><strong>Endereço:</strong> {{endereco}}</p>
                         <button class="btn btn-primary text-uppercase" onclick="carregarMapa()" id="map-button">Ver mapa</button>
                         <a class="btn btn-primary text-uppercase" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank">Obter Direções</a>
                     {% endif %}
-                </div>
+                    {% if email %}
+                        <p><strong>E-mail:</strong> <a href="mailto:{{email_contato}}">{{email_contato}}</a></p>
+                    {% endif %}     
+                    </div>
                 <div class="col-md-8 mx-auto">
                     <!-- Google Maps Embed with Margin -->
                     <div class="embed-responsive embed-responsive-16by9 my-4" id="google-map-container">
@@ -166,28 +128,23 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>  
+        <script async>
+            function carregarMapa() {
+                // Coletar o elemento do iframe
+                var iframe = document.createElement("iframe");
         
-        
-
-                <script async>
-                    function carregarMapa() {
-                        // Coletar o elemento do iframe
-                        var iframe = document.createElement("iframe");
+                // Adiar a adição do atributo src até que o botão seja clicado
+                iframe.setAttribute("src", "{{gmaps_link}}");
+                iframe.setAttribute("width", "100%");
+                iframe.setAttribute("height", "200");
                 
-                        // Adiar a adição do atributo src até que o botão seja clicado
-                        iframe.setAttribute("src", "{{gmaps_embed_link}}");
-                        iframe.setAttribute("width", "100%");
-                        iframe.setAttribute("height", "200");
-                       
-                        // Adicionar o iframe ao contêiner
-                        document.getElementById("google-map-container").appendChild(iframe);
-                        document.getElementById("map-button").style.display = "none";
-                    }
-                </script>
-            </div>
-        </section>
-
+                // Adicionar o iframe ao contêiner
+                document.getElementById("google-map-container").appendChild(iframe);
+                document.getElementById("map-button").style.display = "none";
+            }
+        </script>
+      
         <!-- Footer-->    
         <footer class="footer py-4">
             <div class="container text-center">
