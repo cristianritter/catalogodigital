@@ -58,6 +58,7 @@ class BaseLandPage(View):
         cache.set('pagina_visitas', str(minha_pagina_visitas), timeout=None)
       
     def get(self, request, *args, **kwargs):
+        print(request.path)
         if not self.context:
             return HttpResponse("Os dados solicitados ainda não se encontram no banco de dados. Aguarde ou entre em contato com o administrador.")
         visitas = 1 + self.get_contagem()
@@ -95,6 +96,7 @@ class DemoView(BaseLandPage):
                 'whats_link': landing_page_data.whats_link,
                 'reviews_link': landing_page_data.reviews_link,
                 'gmaps_link': landing_page_data.gmaps_link,
+                'link_loja': landing_page_data.link_loja,
             }          
 
 class SejaNossoCliente(BaseLandPage):
@@ -119,6 +121,8 @@ class SejaNossoCliente(BaseLandPage):
                 'whats_link': landing_page_data.whats_link,
                 'reviews_link': landing_page_data.reviews_link,
                 'gmaps_link': landing_page_data.gmaps_link,
+                'link_loja': landing_page_data.link_loja,
+
             }            
 
 class AJRCutelaria(BaseLandPage):
@@ -143,5 +147,7 @@ class AJRCutelaria(BaseLandPage):
                 'whats_link': landing_page_data.whats_link,
                 'reviews_link': landing_page_data.reviews_link,
                 'gmaps_link': landing_page_data.gmaps_link,
+                'link_loja': landing_page_data.link_loja,
+
             }
-          
+

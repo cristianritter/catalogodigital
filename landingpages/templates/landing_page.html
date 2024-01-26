@@ -41,15 +41,15 @@
         <header class="masthead" style="background-image: url('{% static caminho_arquivos %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
         {% endif %}
             <div class="container">
+                <div class="col">
+                    <div class="masthead-subheading">{{ descricao_curta }}</div>
+                    <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
+                </div>
                 <div class="row">
-                    <div class="col">
-                        <div class="masthead-subheading">{{ descricao_curta }}</div>
-                        <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
-                    </div>
                     <div class="col">
                         <a class="btn btn-primary text-uppercase" href="#new-contact">Entre em contato</a>
                         {% if link_loja %}
-                            <a class="btn btn-secondary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
+                            <a class="btn btn-primary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
                         {% endif %}
                     </div>
                 </div>

@@ -7,18 +7,13 @@
 	<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Simple House Template</title>
+    <title>{{nome_empresa}} - {{slogam}}</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />    
 	<link href="{% static 'common/store/css/templatemo-style.css' %}" rel="stylesheet" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+					
 
 </head>
-<!--
-
-Simple House
-
-https://templatemo.com/tm-539-simple-house
-
--->
 <body> 
 	{% if link_whats %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -26,8 +21,8 @@ https://templatemo.com/tm-539-simple-house
 		<i class="fab fa-whatsapp  fa-3x"></i>
 		Atendimento
 	</a>
-    </a>
- 	<style>
+	{% endif %}
+    <style>
         .floating-button {
             position: fixed;
             bottom: 20px;
@@ -35,10 +30,7 @@ https://templatemo.com/tm-539-simple-house
             z-index: 1000;
         }
     </style>
-	{% endif %}
 	<div class="container">
-	<!-- Top box -->
-		<!-- Logo & Site Name -->
 		<div class="placeholder">
 			<div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'common/store/img/simple-house-01.jpg' %}">
 				<div class="tm-header">
@@ -50,12 +42,11 @@ https://templatemo.com/tm-539-simple-house
 								<h6 class="tm-site-description">{{slogam}}</h6>	
 							</div>
 						</div>
-						<!--<nav class="col-md-6 col-12 tm-nav">
+						<nav class="col-md-6 col-12 tm-nav">
 							<ul class="tm-nav-ul">
-								<li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Home</a></li>
-								<li class="tm-nav-li"><a href="about.html" class="tm-nav-link">About</a></li>
-								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Contact</a></li>
-							</ul>-->
+								<li class="tm-nav-li"><a href="#" class="tm-nav-link active">Home</a></li>
+								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Promoções</a></li>
+							</ul>
 						</nav>	
 					</div>
 				</div>
@@ -120,7 +111,6 @@ https://templatemo.com/tm-539-simple-house
 					<div class="col-md-6">
 						<div class="tm-description-box"> 
 							<!-- Adicione a folha de estilo do Bootstrap (se ainda não estiver incluída) -->
-							<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 							<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 							<!-- Botões de Acesso às Redes Sociais -->
 							<div class="tm-social-buttons">
