@@ -1,7 +1,8 @@
 from django.contrib import admin
-from lojas.models import LojaData
+from landingpages.models import LandingPageData
 from import_export.admin import ImportExportModelAdmin
 
-@admin.register(LojaData)
+@admin.register(LandingPageData)
 class ProductAdmin(ImportExportModelAdmin):
     pass
+

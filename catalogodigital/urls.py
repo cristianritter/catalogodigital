@@ -17,11 +17,12 @@ Including another URLconf
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from landingpages.views import render_especial_subdomain
 
 urlpatterns = [
-    path("", include('landing_pages.urls',namespace='landing')),  
-    path("pedidos/", include('pedidos.urls')),  
+     path('', render_especial_subdomain, name='index'),
+
+#    path("", include('landing_pages.urls',namespace='landing')),  
 ]
 
 if settings.DEBUG:
