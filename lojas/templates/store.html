@@ -20,7 +20,22 @@ https://templatemo.com/tm-539-simple-house
 
 -->
 <body> 
-
+	{% if whats_link %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <a href="{{whats_link}}" class="btn btn-success floating-button" target="_blank">
+		<i class="fab fa-whatsapp  fa-3x"></i>
+		Atendimento
+	</a>
+    </a>
+ 	<style>
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+	{% endif %}
 	<div class="container">
 	<!-- Top box -->
 		<!-- Logo & Site Name -->

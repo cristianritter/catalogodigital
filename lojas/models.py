@@ -14,8 +14,9 @@ class LojaData(models.Model):
                                 {"pizza": [["Pizza de Calabresa", "Calabresa, Queijo Chedar e massa especial", 59.90, "01.jpg"]\]}')
     #Links
     link_facebook = models.URLField(blank=True)
-    link_intagram = models.URLField(blank=True)
+    link_instagram = models.URLField(blank=True)
     link_facebook = models.URLField(blank=True)
+    link_whats = models.URLField(blank=True)
     
     def __str__(self):
         return self.url_cadastrado
