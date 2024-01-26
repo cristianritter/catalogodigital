@@ -21,6 +21,9 @@ class BaseLoja(View):
             'slogam': loja__data.slogam,
             'titulo': loja__data.titulo,
             'paragrafo': loja__data.paragrafo,
+            'link_whats': loja__data.link_whats,
+            'link_instagram': loja__data.link_instagram,
+            'link_facebook': loja__data.link_facebook,
             'produtos': json.loads(loja__data.produtos.lower()),
         }
         print(self.context['produtos'])
