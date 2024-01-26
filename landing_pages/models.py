@@ -1,19 +1,5 @@
 from django.db import models
 
-class ModelRoute(models.Model):
-    path = models.CharField(max_length=100, unique=True)
-    view_name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.path
-    
-class ModelView(models.Model):
-    name = models.CharField(max_length=100)
-    code = models.TextField()
-
-    def __str__(self):
-        return self.name
-
 class LandingPageData(models.Model):
     #Dados técnicos
     url_cadastrado = models.CharField(max_length=50, help_text='O endereço final do link da página')
@@ -33,13 +19,12 @@ class LandingPageData(models.Model):
     # Links (usando URLField)
     whats_link = models.URLField()
     reviews_link = models.URLField()
-    gmaps_link = models.URLField()
+    gmaps_link = models.URLField(max_length=500)
 
     def __str__(self):
         return self.nome_empresa
 
 
-from django.db import models
 """class PageViewsCounter(models.Model):
     key = models.CharField(max_length=255, unique=True)
     value = models.IntegerField(default=0)

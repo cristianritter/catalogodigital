@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import dj_database_url
 
 load_dotenv()
 
@@ -24,7 +23,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 CSRF_TRUSTED_ORIGINS = ['https://admin.mk4digital.com']
-
+#IMPORT_EXPORT_USE_TRANSACTIONS = True
 if not IS_HEROKU_APP:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
@@ -36,8 +35,6 @@ if not IS_HEROKU_APP:
             'LOCATION': BASE_DIR /'tmp/django_cache',
         }
     }
-
-
 else:
     DEBUG = False
     ALLOWED_HOSTS = ['.mk4digital.com', '*.mk4digital.com']
@@ -69,18 +66,42 @@ COMPRESS_ENABLED = not DEBUG
 
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.auth",
     "django.contrib.sessions",
+    "django.contrib.admin",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    #'django.contrib.postgres',
     'import_export',
     'compressor',
     'landing_pages',
     "pedidos",
     "lojas",
 ]
+
+if IS_HEROKU_APP:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('SUPABASE_DB_NAME'),
+            'USER': os.getenv('SUPABASE_USER'),
+            'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
+            'HOST': os.getenv('SUPABASE_HOST'), # ou o endereço do seu banco de dados
+            'PORT': os.getenv('SUPABASE_PORT'), # ou a porta do seu banco de dados
+            'OPTIONS': {
+                'sslmode': 'verify-full',
+                'sslrootcert': 'catalogodigital/prod-ca-2021.crt',
+            }
+        }
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.cssmin.rCSSMinFilter',
@@ -132,22 +153,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "catalogodigital.wsgi.application"
 
-#if IS_HEROKU_APP:
-DATABASES = {
-    "default": dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=True,
-    ),
-}
-#else:
-#    DATABASES = {
-#        "default": {
-#            "ENGINE": "django.db.backends.sqlite3",
-#            "NAME": BASE_DIR / "db.sqlite3",
-#        }
-#    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
