@@ -89,10 +89,10 @@ if IS_HEROKU_APP:
             'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
             'HOST': os.getenv('SUPABASE_HOST'), # ou o endereço do seu banco de dados
             'PORT': os.getenv('SUPABASE_PORT'), # ou a porta do seu banco de dados
-            'OPTIONS': {
-                'sslmode': 'verify-full',
-                'sslrootcert': 'catalogodigital/prod-ca-2021.crt',
-            }
+            #'OPTIONS': {
+            #    'sslmode': 'verify-full',
+            #    'sslrootcert': 'catalogodigital/prod-ca-2021.crt', #precisa hospedar em algum lugar
+            #}
         }
     }
 else:
