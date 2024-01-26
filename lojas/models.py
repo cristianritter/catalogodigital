@@ -16,7 +16,7 @@ class LojaData(models.Model):
     link_facebook = models.URLField(blank=True)
     link_instagram = models.URLField(blank=True)
     link_facebook = models.URLField(blank=True)
-    link_whats = models.URLField(blank=True)
+    link_whats = models.URLField(blank=True, help_text='https://api.whatsapp.com/send?phone=SEU_NUMERO_DE_TELEFONE')
     
     def __str__(self):
         return self.url_cadastrado

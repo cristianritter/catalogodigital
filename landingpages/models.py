@@ -18,7 +18,7 @@ class LandingPageData(models.Model):
     horario_atendimento = models.CharField(max_length=100, help_text='Digite o horário de atendimento')
     # Links (usando URLField)
     link_loja = models.URLField(blank=True)
-    whats_link = models.URLField(blank=True)
+    whats_link = models.URLField(blank=True, help_text='https://api.whatsapp.com/send?phone=SEU_NUMERO_DE_TELEFONE')
     reviews_link = models.URLField(blank=True)
     gmaps_link = models.URLField(blank=True, max_length=500)
 
