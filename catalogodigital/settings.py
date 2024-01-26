@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -12,6 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 CSRF_TRUSTED_ORIGINS = ['https://admin.mk4digital.com']
+
 #IMPORT_EXPORT_USE_TRANSACTIONS = True
 if not IS_HEROKU_APP:
     DEBUG = True
@@ -28,25 +28,20 @@ else:
     DEBUG = False
     ALLOWED_HOSTS = ['.mk4digital.com', '*.mk4digital.com']
     SUBDOMAIN_DOMAIN = "mk4digital.com"
-    
-    servers = os.environ['MEMCACHIER_SERVERS']
-    username = os.environ['MEMCACHIER_USERNAME']
-    password = os.environ['MEMCACHIER_PASSWORD']
     CACHES = {
         'default': {
             # Use django-bmemcached
             'BACKEND': 'django_bmemcached.memcached.BMemcached',
             'TIMEOUT': None,
-            'LOCATION': servers,
+            'LOCATION': os.environ['MEMCACHIER_SERVERS'],
             'OPTIONS': {
-                'username': username,
-                'password': password,
+                'username': os.environ['MEMCACHIER_USERNAME'],
+                'password': os.environ['MEMCACHIER_PASSWORD'],
             }
         }
     }
 
 COMPRESS_ENABLED = not DEBUG
-
 
 INSTALLED_APPS = [
     "django.contrib.contenttypes",
