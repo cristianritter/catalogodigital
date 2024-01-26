@@ -6,3 +6,4 @@ python manage.py runserver 0.0.0.0:8000
 heroku logs --tail -a catalogodigital
 heroku domains:add ajrcutelaria.mk4digital.com -a catalogodigital
 pip freeze > .\requirements.txt
+heroku logs --tail -a catalogodigital  

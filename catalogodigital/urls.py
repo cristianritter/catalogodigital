@@ -21,8 +21,6 @@ from landingpages.views import render_especial_subdomain
 
 urlpatterns = [
      path('', render_especial_subdomain, name='index'),
-
-#    path("", include('landing_pages.urls',namespace='landing')),  
 ]
 
 if settings.DEBUG:

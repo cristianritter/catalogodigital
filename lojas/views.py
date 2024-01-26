@@ -1,8 +1,13 @@
-
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import View
 from .models import LojaData
 import json
+
+def redirect_to_landingpage(request):
+    # Redireciona para a URL de landingpage
+    return redirect('landingpages:seja_nosso_cliente')
+
 class BaseLoja(View):
     template_name = 'store.html'     
     def __init__(self, *args, **kwargs):

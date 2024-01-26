@@ -70,7 +70,7 @@ https://templatemo.com/tm-539-simple-house
 						{% for item in items %}
 							<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 								<figure>
-									<img src="{% static 'common/store/img/'|add:item.3 %}" alt="Image" class="img-fluid tm-gallery-img lightbox-img" />
+									<img src="{% static caminho_arquivos|add:'/img/'|add:item.3 %}" alt="Image" class="img-fluid tm-gallery-img lightbox-img" />
 									<figcaption>
 										<h4 class="tm-gallery-title">{{ item.0 |title}}</h4>
 										<p class="tm-gallery-description">{{ item.1 |capfirst}}</p>
@@ -86,24 +86,55 @@ https://templatemo.com/tm-539-simple-house
 			<div class="tm-section tm-container-inner">
 				<div class="row">
 					<div class="col-md-6">
-						<figure class="tm-description-figure">
-							<img src="{% static 'common/store/img/img-01.jpg' %}" alt="Image" class="img-fluid" />
-						</figure>
-					</div>
-					<div class="col-md-6">
 						<div class="tm-description-box"> 
-							<h4 class="tm-gallery-title">Maecenas nulla neque</h4>
-							<p class="tm-mb-45">Redistributing this template as a downloadable ZIP file on any template collection site is strictly prohibited. You will need to <a rel="nofollow" href="https://templatemo.com/contact">talk to us</a> for additional permissions about our templates. Thank you.</p>
-							<a href="about.html" class="tm-btn tm-btn-default tm-right">Read More</a>
+							<h4 class="tm-gallery-title">Promoções Especiais e Eventos</h4>
+							<p class="tm-mb-45">Aqui você pode encontrar informações sobre nossas promoções especiais e eventos atuais.</p>
+							<!-- Adicione aqui o código para exibir as promoções especiais e eventos dinamicamente -->
+							{% if promocoes %}
+								<ul>
+									{% for promocao in promocoes %}
+										<li>{{ promocao }}</li>
+									{% endfor %}
+								</ul>
+							{% else %}
+								<p>Não há promoções no momento.</p>
+							{% endif %}
 						</div>
 					</div>
+					{% if link_facebook or link_instagram or link_twitter %}
+					<div class="col-md-6">
+						<div class="tm-description-box"> 
+							<!-- Adicione a folha de estilo do Bootstrap (se ainda não estiver incluída) -->
+							<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+							<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+							<!-- Botões de Acesso às Redes Sociais -->
+							<div class="tm-social-buttons">
+								{% if link_facebook %}
+									<a href="{{ link_facebook }}" class="btn btn-primary"><i class="fab fa-facebook-f"></i></a>
+								{% endif %}
+								{% if link_instagram %}
+									<a href="{{ link_instagram }}" class="btn btn-danger"><i class="fab fa-instagram"></i></a>
+								{% endif %}
+								{% if link_twitter %}
+									<a href="{{ link_twitter }}" class="btn btn-info"><i class="fab fa-twitter"></i></a>
+								{% endif %}
+								<!-- Adicione mais ícones de redes sociais conforme necessário -->
+							</div>
+							<!-- Descrição das Redes Sociais -->
+							{% if link_facebook or link_instagram or link_twitter %}
+								<p class="tm-mt-20">Conheça também as nossas redes sociais.</p>
+							{% endif %}
+						</div>
+					</div>
+					{% endif %}
 				</div>
 			</div>
-		</main>
+			
+			
 
 		<footer class="tm-footer text-center">
+			<p class="mb-4"><a href="https://mk4digital.com" class="text-dark fs-5">Gostou dessa solução? Converse conosco.</a></p>
 			<p>Copyright &copy; 2024 MK4 Digital 
-            
             | Design: <a rel="nofollow" href="https://www.linkedin.com/in/cristianritter/">Cristian Ritter</a></p>
 		</footer>
 	</div>

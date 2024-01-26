@@ -67,8 +67,6 @@ class BaseLandPage(View):
         self.context['pares_colunas'] = pares_colunas
         return render(request, self.template_name, self.context)
 
-  
-
 class Homepage(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

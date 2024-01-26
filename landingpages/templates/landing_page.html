@@ -36,16 +36,25 @@
         </nav>
         <!-- Masthead-->
         {% if image0link %}
-            <header class="masthead" style="background-image: url({{image0link}}); background-position: center; text-align: center; height: 550px;">
+        <header class="masthead" style="background-image: url({{image0link}}); background-position: center; text-align: center; height: 550px;">
         {% else %}
-            <header class="masthead" style="background-image: url('{% static caminho_arquivos %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
+        <header class="masthead" style="background-image: url('{% static caminho_arquivos %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
         {% endif %}
-                <div class="container">
-                    <div class="masthead-subheading">{{descricao_curta}}</div>
-                    <div class="masthead-heading text-uppercase">{{nome_empresa}}</div>
-                    <a class="btn btn-primary text-uppercase" href="#new-contact"> Entre em contato</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="masthead-subheading">{{ descricao_curta }}</div>
+                        <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-primary text-uppercase" href="#new-contact">Entre em contato</a>
+                        {% if link_loja %}
+                            <a class="btn btn-secondary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
+                        {% endif %}
+                    </div>
                 </div>
-            </header>
+            </div>   
+        </header>
         
         <!-- Services -->
         <section class="page-section" id="services">
@@ -158,16 +167,12 @@
         <!-- Footer-->    
         <footer class="footer py-4">
             <div class="container text-center">
-                <p class="mb-4"><a href="/seja_nosso_cliente#" class="text-dark fs-5">Divulgue sua empresa aqui.</a></p>
+                <p class="mb-4"><a href="https://mk4digital.com" class="text-dark fs-5">Divulgue sua empresa aqui.</a></p>
                 <div class="row align-items-center">
                     <div class="col-lg-3 text-lg-start">Copyright &copy; MK4DIGITAL 2024</div>
                     <div class="col-lg-3 text-lg-start">Você é o visitante número <strong>{{contador_visitas}}</strong></div>
                     <div class="col-lg-3 text-lg-start">Desenvolvido por <a href="https://www.linkedin.com/in/cristianritter/" class="text-dark">Cristian Ritter</a></div>
-                    <div class="col-lg-3 text-lg-end">
-                        <a href="#!" class="text-dark">Privacy Policy </a>
-                        <a href="#!" class="text-dark"> Terms of Use</a>
-                    </div>
-                </div>
+                 </div>
             </div>
         </footer>        
         <script defer src="{% static 'common/landing_page/js/scripts.js' %}"></script>
