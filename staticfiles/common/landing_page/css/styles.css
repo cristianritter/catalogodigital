@@ -109,12 +109,11 @@ p {
 
 ul {
   padding-left: 2rem;
-}
-
-ul {
+  list-style-type: disc; /* Remove o marcador padrão da lista */
   margin-top: 0;
   margin-bottom: 1rem;
 }
+
 
 ul ul {
   margin-bottom: 0;
