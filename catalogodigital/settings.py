@@ -14,7 +14,7 @@ CSRF_TRUSTED_ORIGINS = ['https://admin.mk4digital.com']
 
 #IMPORT_EXPORT_USE_TRANSACTIONS = True
 if not IS_HEROKU_APP:
-    DEBUG = True
+    DEBUG = False
     ALLOWED_HOSTS = ['*']
     SUBDOMAIN_DOMAIN = "localhost"
     CACHES = {
@@ -151,10 +151,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-STORAGES = {
-    # ...
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
 
