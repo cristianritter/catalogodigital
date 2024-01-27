@@ -3620,7 +3620,7 @@ section#contact .section-heading {
 }
 
 
-.btn {
+.btn2 {
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;
@@ -3654,13 +3654,13 @@ section#contact .section-heading {
 
 
 
-.btn-primary {
+.btn-primary2 {
   color: #000000;
   background-color: #ffc800;
   border-color: #ffc800;
 }
 
-.btn-primary:hover {
+.btn-primary2:hover {
   color: #fff;
   background-color: #d9aa00;
   border-color: #cca000;
