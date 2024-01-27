@@ -41,6 +41,15 @@ else:
         }
     }
 
+ROOT_URLCONF = "catalogodigital.urls"
+SUBDOMAIN_URLCONFS = {
+    None: 'landingpages.urls', 
+    'landingpage': 'landingpages.urls',
+    'loja': 'lojas.urls',
+    'admin': 'admin.urls',
+}
+
+
 COMPRESS_ENABLED = not DEBUG
 
 INSTALLED_APPS = [
@@ -99,15 +108,6 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
 COMPRESS_OFFLINE = True
-
-
-ROOT_URLCONF = "catalogodigital.urls"
-SUBDOMAIN_URLCONFS = {
-    None: 'catalogodigital.urls',           # Default configuration
-    'admin': 'admin.urls',
-    'landingpage': 'landingpages.urls',
-    'loja': 'lojas.urls',
-}
 
 TEMPLATES = [
     {

@@ -3,7 +3,6 @@ from django.db import models
 class LandingPageData(models.Model):
     #Dados técnicos
     url_cadastrado = models.CharField(max_length=50, help_text='O endereço final do link da página')
-    num_imagens_carrousel = models.IntegerField(help_text='O número de imagens no carrossel')
     endereco_bucket = models.CharField(blank=True, max_length=200, help_text='https://gjvoxpezczvyqbnmonap.supabase.co/storage/v1/object/public/conecta_bucket/')
     nomes_arquivos_imagens = models.TextField(blank=True, help_text='Links para os arquivos, separados por virgula')
     #Dados Gerais da empresa

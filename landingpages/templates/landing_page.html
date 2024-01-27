@@ -15,14 +15,13 @@
         <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
         {% endcompress %}
         </head>
-        {{imagens_links}}
                
     <body id="page-top">
         <title>Seção de Serviços</title>           
         <!-- Navigation-->
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav"> 
             <div class="container">
-                <a class="navbar-brand" href="/catalogo_digital">MK4 Digital</a>
+                <a class="navbar-brand" href="/seja_nosso_cliente">MK4 Digital</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                 </button>
@@ -75,7 +74,7 @@
                 <div class="carousel-inner">
                     {% for filename in nomes_arquivos_imagens|slice:"1:" %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{ endereco_bucket }}{{ url|add:'/' }}{{ filename }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
+                            <img src="{{ endereco_bucket }}{{ filename }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
                         </div>
                     {% endfor %} 
                 </div>
@@ -103,8 +102,7 @@
                     </div>
                 </div>
             </div>
-        </section>
-            
+        </section>    
         <!-- New Contact Section -->
         <section class="page-section text-center" id="new-contact">
             <div class="container mx-auto">
@@ -160,7 +158,7 @@
         <!-- Footer-->    
         <footer class="footer py-4">
             <div class="container text-center">
-                <p class="mb-4"><a href="https://mk4digital.com" class="text-dark fs-5">Divulgue sua empresa aqui.</a></p>
+                <p class="mb-4"><a href="\seja_nosso_cliente" class="text-dark fs-5">Divulgue sua empresa aqui.</a></p>
                 <div class="row align-items-center">
                     <div class="col-lg-3 text-lg-start">Copyright &copy; MK4DIGITAL 2024</div>
                     <div class="col-lg-3 text-lg-start">Você é o visitante número <strong>{{contador_visitas}}</strong></div>
