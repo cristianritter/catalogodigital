@@ -51,7 +51,7 @@ SUBDOMAIN_URLCONFS = {
 }
 
 
-COMPRESS_ENABLED =  DEBUG
+COMPRESS_ENABLED =  False
 
 INSTALLED_APPS = [
     "django.contrib.contenttypes",
