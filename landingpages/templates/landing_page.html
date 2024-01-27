@@ -15,7 +15,8 @@
         <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
         {% endcompress %}
         </head>
-
+        {{imagens_links}}
+               
     <body id="page-top">
         <title>Seção de Serviços</title>           
         <!-- Navigation-->
@@ -35,11 +36,7 @@
             </div>
         </nav>
         <!-- Masthead-->
-        {% if image0link %}
-        <header class="masthead" style="background-image: url({{image0link}}); background-position: center; text-align: center; height: 550px;">
-        {% else %}
-        <header class="masthead" style="background-image: url('{% static caminho_arquivos %}/img/0.webp'); background-position: center; text-align: center; height: 550px;">
-        {% endif %}
+        <header class="masthead" style="background-image: url('{{ endereco_bucket }}{{ url|add:'/' }}{{ nomes_arquivos_imagens.0 }}'); background-position: center; text-align: center; height: 550px;">
             <div class="container">
                 <div class="col">
                     <div class="masthead-subheading">{{ descricao_curta }}</div>
@@ -47,9 +44,10 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a class="btn btn-primary text-uppercase" href="#new-contact">Entre em contato</a>
                         {% if link_loja %}
-                            <a class="btn btn-primary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
+                        <a class="btn btn-primary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
+                        {% else %}
+                        <a class="btn btn-primary text-uppercase" href="#new-contact">Entre em contato</a>
                         {% endif %}
                     </div>
                 </div>
@@ -75,16 +73,11 @@
             </div>
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    {% for image_link in image_links %}
+                    {% for filename in nomes_arquivos_imagens|slice:"1:" %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{ image_link }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
+                            <img src="{{ endereco_bucket }}{{ url|add:'/' }}{{ filename }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
                         </div>
-                    {% endfor %}
-                    {% for i in num_imagens_carrousel|default:0 %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{% static caminho_arquivos %}/img/{{ forloop.counter }}.webp" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
-                        </div>
-                    {% endfor %}  
+                    {% endfor %} 
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
