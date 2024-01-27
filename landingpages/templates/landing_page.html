@@ -1,4 +1,4 @@
-{% load compress %}
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt">
@@ -10,9 +10,7 @@
         <link rel="icon" type="image/x-icon" href="{% static 'common/landing_page/favicon.ico' %}">
         <title>{{nome_empresa}} - {{descricao_curta}}</title>
         <!--<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>--> 
-        {% compress css %}
         <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
-        {% endcompress %}
 </head>               
     <body id="page-top">
         <title>Seção de Serviços</title>           

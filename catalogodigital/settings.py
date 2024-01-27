@@ -17,7 +17,6 @@ if not IS_HEROKU_APP:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
     SUBDOMAIN_DOMAIN = "localhost"
-
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
@@ -50,9 +49,6 @@ SUBDOMAIN_URLCONFS = {
     'admin': 'admin.urls',
 }
 
-
-COMPRESS_ENABLED =  False
-
 INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.auth",
@@ -61,13 +57,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'import_export',
-    'compressor',
+#    'compressor',
     'landingpages',
     'lojas',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.gzip.GZipMiddleware',
+    'django_brotli.middleware.BrotliMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -101,8 +97,6 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
-COMPRESS_OFFLINE = True
 
 TEMPLATES = [
     {
@@ -148,12 +142,19 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
+#    'compressor.finders.CompressorFinder',
 ]
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-COMPRESS_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#COMPRESS_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
