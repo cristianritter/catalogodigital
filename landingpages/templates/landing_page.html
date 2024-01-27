@@ -60,11 +60,26 @@
                         <ul class="list-unstyled">
                             {% for item in lista_items %}
                             <li>
-                                <span class="text-secondary me-2">&#9658;</span>
+                                <span class="text-secondary me-2"></span>
                                 <span class="fw fs-5">{{ item }}</span>
                             </li>
                             {% endfor %}
                         </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="text-center">
+                    <div class="row text-center">
+                        {% for item1, item2 in pares_colunas %}
+                        <div class="col-md-4">
+                            <h3 class="my-3 text-uppercase">{{ item1 }}</h3>
+                            <p class="fw fs-5">{{ item2 }}</p>
+                        </div>    
+                        {% endfor %}
+                        <div class="p-3">
+                            <p><a href="{{reviews_link}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">consulte aqui nossas avaliações</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,22 +99,6 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Próximo</span>
                 </button>
-            </div>
-        </section>
-        
-        <section class="page-section" id="photos">
-            <div class="container">
-                <div class="text-center">
-                    <div class="row text-center">
-                        {% for item1, item2 in pares_colunas %}
-                        <div class="col-md-4">
-                            <h3 class="my-3 text-uppercase">{{ item1 }}</h3>
-                            <p class="fw fs-5">{{ item2 }}</p>
-                        </div>    
-                        {% endfor %}
-                        <p><a href="{{reviews_link}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">consulte aqui nossas avaliações</a></p>
-                    </div>
-                </div>
             </div>
         </section>    
         <!-- New Contact Section -->
