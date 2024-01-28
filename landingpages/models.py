@@ -2,6 +2,7 @@ from django.db import models
 
 class LandingPageData(models.Model):
     #Dados técnicos
+    on_air = models.BooleanField(help_text='Indica se a página está no ar.')
     url_cadastrado = models.CharField(max_length=50, help_text='O endereço final do link da página')
     endereco_bucket = models.CharField(blank=True, max_length=200, help_text='https://gjvoxpezczvyqbnmonap.supabase.co/storage/v1/object/public/conecta_bucket/')
     nomes_arquivos_imagens = models.TextField(blank=True, help_text='Links para os arquivos, separados por virgula')

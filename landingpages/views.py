@@ -27,12 +27,13 @@ class DefaultLandingPage(View):
         cache.set('pagina_visitas', str(minha_pagina_visitas), timeout=None)
       
     def get(self, request, *args, **kwargs):
-        url_cadastrada = request.path.replace('/','')
-        if not url_cadastrada: url_cadastrada = 'seja_nosso_cliente'
-        landing_page_data = LandingPageData.objects.filter(url_cadastrado=url_cadastrada).first()
-        if landing_page_data:
+        url_recebida = request.path.replace('/','')
+        if not url_recebida: 
+            url_recebida = 'seja_nosso_cliente'
+        landing_page_data = LandingPageData.objects.filter(url_cadastrado=url_recebida).first()
+        if landing_page_data and landing_page_data.on_air:
             self.context = {
-                'endereco_bucket': landing_page_data.endereco_bucket+url_cadastrada+'/',
+                'endereco_bucket': landing_page_data.endereco_bucket+url_recebida+'/',
                 'nomes_arquivos_imagens': landing_page_data.nomes_arquivos_imagens.replace('\r\n','').split(','),
                 'nome_empresa': landing_page_data.nome_empresa,
                 'descricao_curta': landing_page_data.descricao_curta,
@@ -48,7 +49,9 @@ class DefaultLandingPage(View):
                 'reviews_link': landing_page_data.reviews_link,
                 'gmaps_link': landing_page_data.gmaps_link,
                 'link_loja': landing_page_data.link_loja,
-            }   
+            } 
+        else:
+            return render(request, '404.html')  
         visitas = 1 + self.get_contagem()
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas

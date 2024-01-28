@@ -12,9 +12,8 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 CSRF_TRUSTED_ORIGINS = ['https://admin.mk4digital.com']
 
-#IMPORT_EXPORT_USE_TRANSACTIONS = True
 if not IS_HEROKU_APP:
-    DEBUG = False
+    DEBUG = True
     ALLOWED_HOSTS = ['*']
     SUBDOMAIN_DOMAIN = "localhost"
     CACHES = {
@@ -57,7 +56,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'import_export',
-#    'compressor',
     'landingpages',
     'lojas',
 ]
@@ -142,12 +140,10 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'compressor.finders.CompressorFinder',
 ]
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-#COMPRESS_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
