@@ -1,26 +1,10 @@
-/*!
-  * Bootstrap v5.0.1 (https://getbootstrap.com/)
-  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-  */
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrap = factory());
   }(this, (function () { 'use strict';
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): dom/selector-engine.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-  
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
     const NODE_TEXT = 3;
     const SelectorEngine = {
       find(selector, element = document.documentElement) {
@@ -31,9 +15,9 @@
         return Element.prototype.querySelector.call(element, selector);
       },
   
-      children(element, selector) {
-        return [].concat(...element.children).filter(child => child.matches(selector));
-      },
+   //   children(element, selector) {
+   //     return [].concat(...element.children).filter(child => child.matches(selector));
+   //   },
   
       parents(element, selector) {
         const parents = [];
@@ -50,7 +34,7 @@
         return parents;
       },
   
-      prev(element, selector) {
+ /*     prev(element, selector) {
         let previous = element.previousElementSibling;
   
         while (previous) {
@@ -63,8 +47,8 @@
   
         return [];
       },
-  
-      next(element, selector) {
+  */
+   /*   next(element, selector) {
         let next = element.nextElementSibling;
   
         while (next) {
@@ -77,19 +61,13 @@
   
         return [];
       }
-  
+  */
     };
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): util/index.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-  
+    
     const MAX_UID = 1000000;
     const MILLISECONDS_MULTIPLIER = 1000;
-    const TRANSITION_END = 'transitionend'; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+    const TRANSITION_END = 'transitionend'; 
   
     const toType = obj => {
       if (obj === null || obj === undefined) {
@@ -98,11 +76,6 @@
   
       return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
     };
-    /**
-     * --------------------------------------------------------------------------
-     * Public Util Api
-     * --------------------------------------------------------------------------
-     */
   
   
     const getUID = prefix => {
@@ -117,14 +90,11 @@
       let selector = element.getAttribute('data-bs-target');
   
       if (!selector || selector === '#') {
-        let hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
-        // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
-        // `document.querySelector` will rightfully complain it is invalid.
-        // See https://github.com/twbs/bootstrap/issues/32273
+        let hrefAttr = element.getAttribute('href'); 
   
         if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) {
           return null;
-        } // Just in case some CMS puts out a full URL with the anchor appended
+        } 
   
   
         if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
@@ -155,7 +125,7 @@
     const getTransitionDurationFromElement = element => {
       if (!element) {
         return 0;
-      } // Get transition-duration of the element
+      } 
   
   
       let {
@@ -163,11 +133,11 @@
         transitionDelay
       } = window.getComputedStyle(element);
       const floatTransitionDuration = Number.parseFloat(transitionDuration);
-      const floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+      const floatTransitionDelay = Number.parseFloat(transitionDelay); 
   
       if (!floatTransitionDuration && !floatTransitionDelay) {
         return 0;
-      } // If multiple durations are defined, take the first
+      }
   
   
       transitionDuration = transitionDuration.split(',')[0];
@@ -193,7 +163,7 @@
   
     const getElement = obj => {
       if (isElement$1(obj)) {
-        // it's a jQuery object or a node element
+   
         return obj.jquery ? obj[0] : obj;
       }
   
@@ -248,7 +218,7 @@
       return false;
     };
   
-    const isDisabled = element => {
+   /* const isDisabled = element => {
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
         return true;
       }
@@ -263,11 +233,11 @@
   
       return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
     };
-  
-    const findShadowRoot = element => {
+  */
+  /*  const findShadowRoot = element => {
       if (!document.documentElement.attachShadow) {
         return null;
-      } // Can find the shadow root otherwise it'll return the document
+      } 
   
   
       if (typeof element.getRootNode === 'function') {
@@ -277,7 +247,7 @@
   
       if (element instanceof ShadowRoot) {
         return element;
-      } // when we don't find a shadow root
+      } 
   
   
       if (!element.parentNode) {
@@ -286,7 +256,7 @@
   
       return findShadowRoot(element.parentNode);
     };
-  
+  */
     const noop = () => {};
   
     const reflow = element => element.offsetHeight;
@@ -316,7 +286,6 @@
     const defineJQueryPlugin = plugin => {
       onDOMContentLoaded(() => {
         const $ = getjQuery();
-        /* istanbul ignore if */
   
         if ($) {
           const name = plugin.NAME;
@@ -338,18 +307,6 @@
       }
     };
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): dom/data.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-  
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
     const elementMap = new Map();
     var Data = {
       set(element, key, instance) {
@@ -357,11 +314,10 @@
           elementMap.set(element, new Map());
         }
   
-        const instanceMap = elementMap.get(element); // make it clear we only want one instance per element
-        // can be removed later when multiple key/instances are fine to be used
+        const instanceMap = elementMap.get(element);
   
         if (!instanceMap.has(key) && instanceMap.size !== 0) {
-          // eslint-disable-next-line no-console
+         
           console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
           return;
         }
@@ -383,7 +339,7 @@
         }
   
         const instanceMap = elementMap.get(element);
-        instanceMap.delete(key); // free up element references if there are no instances left for an element
+        instanceMap.delete(key); 
   
         if (instanceMap.size === 0) {
           elementMap.delete(element);
@@ -392,22 +348,10 @@
   
     };
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): dom/event-handler.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-  
     const namespaceRegex = /[^.]*(?=\..*)\.|.*/;
     const stripNameRegex = /\..*/;
     const stripUidRegex = /::\d+$/;
-    const eventRegistry = {}; // Events storage
+    const eventRegistry = {}; 
   
     let uidEvent = 1;
     const customEvents = {
@@ -416,12 +360,7 @@
     };
     const customEventsRegex = /^(mouseenter|mouseleave)/i;
     const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
-    /**
-     * ------------------------------------------------------------------------
-     * Private methods
-     * ------------------------------------------------------------------------
-     */
-  
+
     function getUidEvent(element, uid) {
       return uid && `${uid}::${uidEvent++}` || element.uidEvent || uidEvent++;
     }
@@ -457,14 +396,14 @@
               event.delegateTarget = target;
   
               if (handler.oneOff) {
-                // eslint-disable-next-line unicorn/consistent-destructuring
+             
                 EventHandler.off(element, event.type, selector, fn);
               }
   
               return fn.apply(target, [event]);
             }
           }
-        } // To please ESLint
+        }
   
   
         return null;
@@ -506,10 +445,10 @@
       if (!handler) {
         handler = delegationFn;
         delegationFn = null;
-      } // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
-      // this prevents the handler from being dispatched the same way as mouseover or mouseout does
+      }
+      
   
-  
+  /*
       if (customEventsRegex.test(originalTypeEvent)) {
         const wrapFn = fn => {
           return function (event) {
@@ -525,7 +464,7 @@
           handler = wrapFn(handler);
         }
       }
-  
+  */
       const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
       const events = getEvent(element);
       const handlers = events[typeEvent] || (events[typeEvent] = {});
@@ -556,7 +495,7 @@
       element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
       delete events[typeEvent][fn.uidEvent];
     }
-  
+  /*
     function removeNamespacedHandlers(element, events, typeEvent, namespace) {
       const storeElementEvent = events[typeEvent] || {};
       Object.keys(storeElementEvent).forEach(handlerKey => {
@@ -566,9 +505,9 @@
         }
       });
     }
-  
+  */
     function getTypeEvent(event) {
-      // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
+    
       event = event.replace(stripNameRegex, '');
       return customEvents[event] || event;
     }
@@ -593,7 +532,7 @@
         const isNamespace = originalTypeEvent.startsWith('.');
   
         if (typeof originalHandler !== 'undefined') {
-          // Simplest case: handler is passed, remove that listener ONLY.
+        
           if (!events || !events[typeEvent]) {
             return;
           }
@@ -650,8 +589,7 @@
             bubbles,
             cancelable: true
           });
-        } // merge custom information in our event
-  
+        }
   
         if (typeof args !== 'undefined') {
           Object.keys(args).forEach(key => {
@@ -681,18 +619,6 @@
   
     };
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): base-component.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-  
     const VERSION = '5.0.1';
   
     class BaseComponent {
@@ -706,7 +632,7 @@
         this._element = element;
         Data.set(this._element, this.constructor.DATA_KEY, this);
       }
-  
+  /*
       dispose() {
         Data.remove(this._element, this.constructor.DATA_KEY);
         EventHandler.off(this._element, this.constructor.EVENT_KEY);
@@ -714,7 +640,7 @@
           this[propertyName] = null;
         });
       }
-  
+  */
       _queueCallback(callback, element, isAnimated = true) {
         if (!isAnimated) {
           execute(callback);
@@ -725,9 +651,8 @@
         EventHandler.one(element, 'transitionend', () => execute(callback));
         emulateTransitionEnd(element, transitionDuration);
       }
-      /** Static */
   
-  
+  /*
       static getInstance(element) {
         return Data.get(element, this.DATA_KEY);
       }
@@ -735,11 +660,11 @@
       static get VERSION() {
         return VERSION;
       }
-  
+  *//*
       static get NAME() {
         throw new Error('You have to implement the static method "NAME", for each component!');
       }
-  
+  */
       static get DATA_KEY() {
         return `bs.${this.NAME}`;
       }
@@ -749,18 +674,7 @@
       }
   
     }
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): alert.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
+
   
     const NAME$c = 'alert';
     const DATA_KEY$b = 'bs.alert';
@@ -773,17 +687,12 @@
     const CLASS_NAME_ALERT = 'alert';
     const CLASS_NAME_FADE$6 = 'fade';
     const CLASS_NAME_SHOW$9 = 'show';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
   
     class Alert extends BaseComponent {
-      // Getters
+   
       static get NAME() {
         return NAME$c;
-      } // Public
+      } 
   
   
       close(element) {
@@ -796,7 +705,7 @@
         }
   
         this._removeElement(rootElement);
-      } // Private
+      } 
   
   
       _getRootElement(element) {
@@ -820,7 +729,7 @@
         }
   
         EventHandler.trigger(element, EVENT_CLOSED);
-      } // Static
+      } 
   
   
       static jQueryInterface(config) {
@@ -848,34 +757,10 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-  
   
     EventHandler.on(document, EVENT_CLICK_DATA_API$7, SELECTOR_DISMISS, Alert.handleDismiss(new Alert()));
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Alert to jQuery only if jQuery is present
-     */
-  
+
     defineJQueryPlugin(Alert);
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): button.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
   
     const NAME$b = 'button';
     const DATA_KEY$a = 'bs.button';
@@ -884,23 +769,18 @@
     const CLASS_NAME_ACTIVE$3 = 'active';
     const SELECTOR_DATA_TOGGLE$5 = '[data-bs-toggle="button"]';
     const EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$a}${DATA_API_KEY$7}`;
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
-  
+ 
     class Button extends BaseComponent {
-      // Getters
+
       static get NAME() {
         return NAME$b;
-      } // Public
+      }
   
   
       toggle() {
-        // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
+       
         this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE$3));
-      } // Static
+      }
   
   
       static jQueryInterface(config) {
@@ -918,12 +798,6 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-  
   
     EventHandler.on(document, EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$5, event => {
       event.preventDefault();
@@ -936,21 +810,10 @@
   
       data.toggle();
     });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Button to jQuery only if jQuery is present
-     */
+
   
     defineJQueryPlugin(Button);
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): dom/manipulator.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
+
     function normalizeData(val) {
       if (val === 'true') {
         return true;
@@ -1018,18 +881,7 @@
       }
   
     };
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): carousel.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
+
   
     const NAME$a = 'carousel';
     const DATA_KEY$9 = 'bs.carousel';
@@ -1037,7 +889,7 @@
     const DATA_API_KEY$6 = '.data-api';
     const ARROW_LEFT_KEY = 'ArrowLeft';
     const ARROW_RIGHT_KEY = 'ArrowRight';
-    const TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
+    const TOUCHEVENT_COMPAT_WAIT = 500;
   
     const SWIPE_THRESHOLD = 40;
     const Default$9 = {
@@ -1092,11 +944,7 @@
     const SELECTOR_DATA_RIDE = '[data-bs-ride="carousel"]';
     const POINTER_TYPE_TOUCH = 'touch';
     const POINTER_TYPE_PEN = 'pen';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
+
   
     class Carousel extends BaseComponent {
       constructor(element, config) {
@@ -1115,7 +963,7 @@
         this._pointerEvent = Boolean(window.PointerEvent);
   
         this._addEventListeners();
-      } // Getters
+      } 
   
   
       static get Default() {
@@ -1124,7 +972,7 @@
   
       static get NAME() {
         return NAME$a;
-      } // Public
+      } 
   
   
       next() {
@@ -1134,8 +982,7 @@
       }
   
       nextWhenVisible() {
-        // Don't call next when the page isn't visible
-        // or the carousel or its parent isn't visible
+       
         if (!document.hidden && isVisible(this._element)) {
           this.next();
         }
@@ -1201,7 +1048,7 @@
         const order = index > activeIndex ? ORDER_NEXT : ORDER_PREV;
   
         this._slide(order, this._items[index]);
-      } // Private
+      } 
   
   
       _getConfig(config) {
@@ -1254,7 +1101,7 @@
         };
   
         const move = event => {
-          // ensure swiping with one touch and not pinching
+        
           this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this.touchStartX;
         };
   
@@ -1266,13 +1113,7 @@
           this._handleSwipe();
   
           if (this._config.pause === 'hover') {
-            // If it's a touch-enabled device, mouseenter/leave are fired as
-            // part of the mouse compatibility events on first tap - the carousel
-            // would stop cycling until user tapped out of it;
-            // here, we listen for touchend, explicitly pause the carousel
-            // (as if it's the second time we tap on it, mouseenter compat event
-            // is NOT fired) and after a timeout (to allow for mouse compatibility
-            // events to fire) we explicitly restart cycling
+          
             this.pause();
   
             if (this.touchTimeout) {
@@ -1415,7 +1256,7 @@
         }
   
         if (!activeElement || !nextElement) {
-          // Some weirdness is happening, so we bail
+         
           return;
         }
   
@@ -1487,7 +1328,7 @@
         }
   
         return order === ORDER_PREV ? DIRECTION_RIGHT : DIRECTION_LEFT;
-      } // Static
+      } 
   
   
       static carouselInterface(element, config) {
@@ -1553,13 +1394,8 @@
         event.preventDefault();
       }
   
-    }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
   
+    }
   
     EventHandler.on(document, EVENT_CLICK_DATA_API$5, SELECTOR_DATA_SLIDE, Carousel.dataApiClickHandler);
     EventHandler.on(window, EVENT_LOAD_DATA_API$2, () => {
@@ -1569,26 +1405,9 @@
         Carousel.carouselInterface(carousels[i], Data.get(carousels[i], DATA_KEY$9));
       }
     });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Carousel to jQuery only if jQuery is present
-     */
+
   
     defineJQueryPlugin(Carousel);
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): collapse.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
   
     const NAME$9 = 'collapse';
     const DATA_KEY$8 = 'bs.collapse';
@@ -1615,11 +1434,7 @@
     const HEIGHT = 'height';
     const SELECTOR_ACTIVES = '.show, .collapsing';
     const SELECTOR_DATA_TOGGLE$4 = '[data-bs-toggle="collapse"]';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
+
   
     class Collapse extends BaseComponent {
       constructor(element, config) {
@@ -1650,7 +1465,7 @@
         if (this._config.toggle) {
           this.toggle();
         }
-      } // Getters
+      } 
   
   
       static get Default() {
@@ -1659,7 +1474,7 @@
   
       static get NAME() {
         return NAME$9;
-      } // Public
+      } 
   
   
       toggle() {
@@ -1809,14 +1624,14 @@
   
       setTransitioning(isTransitioning) {
         this._isTransitioning = isTransitioning;
-      } // Private
+      } 
   
   
       _getConfig(config) {
         config = { ...Default$8,
           ...config
         };
-        config.toggle = Boolean(config.toggle); // Coerce string values
+        config.toggle = Boolean(config.toggle); 
   
         typeCheckConfig(NAME$9, config, DefaultType$8);
         return config;
@@ -1855,7 +1670,7 @@
   
           elem.setAttribute('aria-expanded', isOpen);
         });
-      } // Static
+      } 
   
   
       static collapseInterface(element, config) {
@@ -1889,15 +1704,11 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
+
   
   
     EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function (event) {
-      // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
+      
       if (event.target.tagName === 'A' || event.delegateTarget && event.delegateTarget.tagName === 'A') {
         event.preventDefault();
       }
@@ -1910,7 +1721,7 @@
         let config;
   
         if (data) {
-          // update parent attribute
+    
           if (data._parent === null && typeof triggerData.parent === 'string') {
             data._config.parent = triggerData.parent;
             data._parent = data._getParent();
@@ -1924,12 +1735,6 @@
         Collapse.collapseInterface(element, config);
       });
     });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Collapse to jQuery only if jQuery is present
-     */
   
     defineJQueryPlugin(Collapse);
   
@@ -1945,27 +1750,27 @@
     var viewport = 'viewport';
     var popper = 'popper';
     var reference = 'reference';
-    var variationPlacements = /*#__PURE__*/basePlacements.reduce(function (acc, placement) {
+    var variationPlacements = basePlacements.reduce(function (acc, placement) {
       return acc.concat([placement + "-" + start, placement + "-" + end]);
     }, []);
-    var placements = /*#__PURE__*/[].concat(basePlacements, [auto]).reduce(function (acc, placement) {
+    var placements = [].concat(basePlacements, [auto]).reduce(function (acc, placement) {
       return acc.concat([placement, placement + "-" + start, placement + "-" + end]);
-    }, []); // modifiers that need to read the DOM
+    }, []); 
   
     var beforeRead = 'beforeRead';
     var read = 'read';
-    var afterRead = 'afterRead'; // pure-logic modifiers
+    var afterRead = 'afterRead'; 
   
     var beforeMain = 'beforeMain';
     var main = 'main';
-    var afterMain = 'afterMain'; // modifier with the purpose to write to the DOM (or write into a framework state)
+    var afterMain = 'afterMain'; 
   
     var beforeWrite = 'beforeWrite';
     var write = 'write';
     var afterWrite = 'afterWrite';
     var modifierPhases = [beforeRead, read, afterRead, beforeMain, main, afterMain, beforeWrite, write, afterWrite];
   
-    function getNodeName(element) {
+   /* function getNodeName(element) {
       return element ? (element.nodeName || '').toLowerCase() : null;
     }
   
@@ -1991,10 +1796,9 @@
       var OwnElement = getWindow(node).HTMLElement;
       return node instanceof OwnElement || node instanceof HTMLElement;
     }
-  
+  */
     function isShadowRoot(node) {
-      // IE 11 has no ShadowRoot
-      if (typeof ShadowRoot === 'undefined') {
+          if (typeof ShadowRoot === 'undefined') {
         return false;
       }
   
@@ -2002,20 +1806,17 @@
       return node instanceof OwnElement || node instanceof ShadowRoot;
     }
   
-    // and applies them to the HTMLElements such as popper and arrow
-  
+ 
     function applyStyles(_ref) {
       var state = _ref.state;
       Object.keys(state.elements).forEach(function (name) {
         var style = state.styles[name] || {};
         var attributes = state.attributes[name] || {};
-        var element = state.elements[name]; // arrow is optional + virtual elements
+        var element = state.elements[name]; 
   
         if (!isHTMLElement(element) || !getNodeName(element)) {
           return;
-        } // Flow doesn't support to extend this property, but it's the most
-        // effective way to apply styles to an HTMLElement
-        // $FlowFixMe[cannot-write]
+        } 
   
   
         Object.assign(element.style, style);
@@ -2056,12 +1857,12 @@
         Object.keys(state.elements).forEach(function (name) {
           var element = state.elements[name];
           var attributes = state.attributes[name] || {};
-          var styleProperties = Object.keys(state.styles.hasOwnProperty(name) ? state.styles[name] : initialStyles[name]); // Set all values to an empty string to unset them
+          var styleProperties = Object.keys(state.styles.hasOwnProperty(name) ? state.styles[name] : initialStyles[name]); 
   
           var style = styleProperties.reduce(function (style, property) {
             style[property] = '';
             return style;
-          }, {}); // arrow is optional + virtual elements
+          }, {}); 
   
           if (!isHTMLElement(element) || !getNodeName(element)) {
             return;
@@ -2073,7 +1874,7 @@
           });
         });
       };
-    } // eslint-disable-next-line import/no-unused-modules
+    } 
   
   
     var applyStyles$1 = {
@@ -2103,11 +1904,9 @@
       };
     }
   
-    // means it doesn't take into account transforms.
-  
     function getLayoutRect(element) {
-      var clientRect = getBoundingClientRect(element); // Use the clientRect sizes if it's not been transformed.
-      // Fixes https://github.com/popperjs/popper-core/issues/1223
+      var clientRect = getBoundingClientRect(element); 
+      
   
       var width = element.offsetWidth;
       var height = element.offsetHeight;
@@ -2129,23 +1928,23 @@
     }
   
     function contains(parent, child) {
-      var rootNode = child.getRootNode && child.getRootNode(); // First, attempt with faster native method
+      var rootNode = child.getRootNode && child.getRootNode();
   
       if (parent.contains(child)) {
         return true;
-      } // then fallback to custom implementation with Shadow DOM support
+      } 
       else if (rootNode && isShadowRoot(rootNode)) {
           var next = child;
   
           do {
             if (next && parent.isSameNode(next)) {
               return true;
-            } // $FlowFixMe[prop-missing]: need a better way to handle this...
+            } 
   
   
             next = next.parentNode || next.host;
           } while (next);
-        } // Give up, the result is false
+        }
   
   
       return false;
@@ -2160,8 +1959,8 @@
     }
   
     function getDocumentElement(element) {
-      // $FlowFixMe[incompatible-return]: assume body is always available
-      return ((isElement(element) ? element.ownerDocument : // $FlowFixMe[prop-missing]
+  
+      return ((isElement(element) ? element.ownerDocument : 
       element.document) || window.document).documentElement;
     }
   
@@ -2170,27 +1969,25 @@
         return element;
       }
   
-      return (// this is a quicker (but less type safe) way to save quite some bytes from the bundle
-        // $FlowFixMe[incompatible-return]
-        // $FlowFixMe[prop-missing]
-        element.assignedSlot || // step into the shadow DOM of the parent of a slotted node
-        element.parentNode || ( // DOM Element detected
-        isShadowRoot(element) ? element.host : null) || // ShadowRoot detected
-        // $FlowFixMe[incompatible-call]: HTMLElement is a Node
-        getDocumentElement(element) // fallback
+      return (
+     
+        element.assignedSlot ||
+        element.parentNode || ( 
+        isShadowRoot(element) ? element.host : null) || 
+       
+        getDocumentElement(element) 
   
       );
     }
   
     function getTrueOffsetParent(element) {
-      if (!isHTMLElement(element) || // https://github.com/popperjs/popper-core/issues/837
+      if (!isHTMLElement(element) || 
       getComputedStyle$1(element).position === 'fixed') {
         return null;
       }
   
       return element.offsetParent;
-    } // `.offsetParent` reports `null` for fixed elements, while absolute elements
-    // return the containing block
+    } 
   
   
     function getContainingBlock(element) {
@@ -2198,7 +1995,7 @@
       var isIE = navigator.userAgent.indexOf('Trident') !== -1;
   
       if (isIE && isHTMLElement(element)) {
-        // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
+     
         var elementCss = getComputedStyle$1(element);
   
         if (elementCss.position === 'fixed') {
@@ -2209,10 +2006,8 @@
       var currentNode = getParentNode(element);
   
       while (isHTMLElement(currentNode) && ['html', 'body'].indexOf(getNodeName(currentNode)) < 0) {
-        var css = getComputedStyle$1(currentNode); // This is non-exhaustive but covers the most common CSS properties that
-        // create a containing block.
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
-  
+        var css = getComputedStyle$1(currentNode); 
+    
         if (css.transform !== 'none' || css.perspective !== 'none' || css.contain === 'paint' || ['transform', 'perspective'].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === 'filter' || isFirefox && css.filter && css.filter !== 'none') {
           return currentNode;
         } else {
@@ -2221,9 +2016,7 @@
       }
   
       return null;
-    } // Gets the closest ancestor positioned element. Handles some edge cases,
-    // such as table ancestors and cross browser bugs.
-  
+    } 
   
     function getOffsetParent(element) {
       var window = getWindow(element);
@@ -2304,13 +2097,13 @@
       var startDiff = popperOffsets[axis] - state.rects.reference[axis];
       var arrowOffsetParent = getOffsetParent(arrowElement);
       var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
-      var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
-      // outside of the popper bounds
+      var centerToReference = endDiff / 2 - startDiff / 2;
+   
   
       var min = paddingObject[minProp];
       var max = clientSize - arrowRect[len] - paddingObject[maxProp];
       var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference;
-      var offset = within(min, center, max); // Prevents breaking syntax highlighting...
+      var offset = within(min, center, max); 
   
       var axisProp = axis;
       state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, _state$modifiersData$.centerOffset = offset - center, _state$modifiersData$);
@@ -2324,7 +2117,7 @@
   
       if (arrowElement == null) {
         return;
-      } // CSS selector
+      }
   
   
       if (typeof arrowElement === 'string') {
@@ -2341,7 +2134,7 @@
       }
   
       state.elements.arrow = arrowElement;
-    } // eslint-disable-next-line import/no-unused-modules
+    } 
   
   
     var arrow$1 = {
@@ -2359,9 +2152,7 @@
       right: 'auto',
       bottom: 'auto',
       left: 'auto'
-    }; // Round the offsets to the nearest suitable subpixel based on the DPR.
-    // Zooming can change the DPR, but it seems to report a value that will
-    // cleanly divide the values into the appropriate subpixels.
+    };
   
     function roundOffsetsByDPR(_ref) {
       var x = _ref.x,
@@ -2410,20 +2201,20 @@
             heightProp = 'scrollHeight';
             widthProp = 'scrollWidth';
           }
-        } // $FlowFixMe[incompatible-cast]: force type refinement, we compare offsetParent with window above, but Flow doesn't detect it
+        } 
   
   
         offsetParent = offsetParent;
   
         if (placement === top) {
-          sideY = bottom; // $FlowFixMe[prop-missing]
+          sideY = bottom; 
   
           y -= offsetParent[heightProp] - popperRect.height;
           y *= gpuAcceleration ? 1 : -1;
         }
   
         if (placement === left) {
-          sideX = right; // $FlowFixMe[prop-missing]
+          sideX = right; 
   
           x -= offsetParent[widthProp] - popperRect.width;
           x *= gpuAcceleration ? 1 : -1;
@@ -2481,7 +2272,7 @@
       state.attributes.popper = Object.assign({}, state.attributes.popper, {
         'data-popper-placement': state.placement
       });
-    } // eslint-disable-next-line import/no-unused-modules
+    }
   
   
     var computeStyles$1 = {
@@ -2528,7 +2319,7 @@
           window.removeEventListener('resize', instance.update, passive);
         }
       };
-    } // eslint-disable-next-line import/no-unused-modules
+    } 
   
   
     var eventListeners = {
@@ -2573,16 +2364,10 @@
     }
   
     function getWindowScrollBarX(element) {
-      // If <html> has a CSS width greater than the viewport, then this will be
-      // incorrect for RTL.
-      // Popper 1 is broken in this case and never had a bug report so let's assume
-      // it's not an issue. I don't think anyone ever specifies width on <html>
-      // anyway.
-      // Browsers where the left scrollbar doesn't cause an issue report `0` for
-      // this (e.g. Edge 2019, IE11, Safari)
+   
       return getBoundingClientRect(getDocumentElement(element)).left + getWindowScroll(element).scrollLeft;
     }
-  
+  /*
     function getViewportRect(element) {
       var win = getWindow(element);
       var html = getDocumentElement(element);
@@ -2590,22 +2375,11 @@
       var width = html.clientWidth;
       var height = html.clientHeight;
       var x = 0;
-      var y = 0; // NB: This isn't supported on iOS <= 12. If the keyboard is open, the popper
-      // can be obscured underneath it.
-      // Also, `html.clientHeight` adds the bottom bar height in Safari iOS, even
-      // if it isn't open, so if this isn't available, the popper will be detected
-      // to overflow the bottom of the screen too early.
+      var y = 0; 
   
       if (visualViewport) {
         width = visualViewport.width;
-        height = visualViewport.height; // Uses Layout Viewport (like Chrome; Safari does not currently)
-        // In Chrome, it returns a value very close to 0 (+/-) but contains rounding
-        // errors due to floating point numbers, so we need to check precision.
-        // Safari returns a number <= 0, usually < -1 when pinch-zoomed
-        // Feature detection fails in mobile emulation mode in Chrome.
-        // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
-        // 0.001
-        // Fallback here: "Not Safari" userAgent
+        height = visualViewport.height; 
   
         if (!/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
           x = visualViewport.offsetLeft;
@@ -2620,9 +2394,8 @@
         y: y
       };
     }
-  
-    // of the `<html>` and `<body>` rect bounds if horizontally scrollable
-  
+  */
+     /* 
     function getDocumentRect(element) {
       var _element$ownerDocumen;
   
@@ -2645,9 +2418,9 @@
         y: y
       };
     }
-  
+  */
     function isScrollParent(element) {
-      // Firefox wants us to check `-x` and `-y` variations as well
+    
       var _getComputedStyle = getComputedStyle$1(element),
           overflow = _getComputedStyle.overflow,
           overflowX = _getComputedStyle.overflowX,
@@ -2658,7 +2431,7 @@
   
     function getScrollParent(node) {
       if (['html', 'body', '#document'].indexOf(getNodeName(node)) >= 0) {
-        // $FlowFixMe[incompatible-return]: assume body is always available
+
         return node.ownerDocument.body;
       }
   
@@ -2669,13 +2442,7 @@
       return getScrollParent(getParentNode(node));
     }
   
-    /*
-    given a DOM element, return the list of all scroll parents, up the list of ancesors
-    until we get to the top window object. This list is what we attach scroll listeners
-    to, because if any of these parent elements scroll, we'll need to re-calculate the
-    reference element's position.
-    */
-  
+
     function listScrollParents(element, list) {
       var _element$ownerDocumen;
   
@@ -2688,7 +2455,7 @@
       var win = getWindow(scrollParent);
       var target = isBody ? [win].concat(win.visualViewport || [], isScrollParent(scrollParent) ? scrollParent : []) : scrollParent;
       var updatedList = list.concat(target);
-      return isBody ? updatedList : // $FlowFixMe[incompatible-call]: isBody tells us target will be an HTMLElement here
+      return isBody ? updatedList : 
       updatedList.concat(listScrollParents(getParentNode(target)));
     }
   
@@ -2716,9 +2483,7 @@
   
     function getClientRectFromMixedType(element, clippingParent) {
       return clippingParent === viewport ? rectToClientRect(getViewportRect(element)) : isHTMLElement(clippingParent) ? getInnerBoundingClientRect(clippingParent) : rectToClientRect(getDocumentRect(getDocumentElement(element)));
-    } // A "clipping parent" is an overflowable container with the characteristic of
-    // clipping (or hiding) overflowing elements with a position different from
-    // `initial`
+    } 
   
   
     function getClippingParents(element) {
@@ -2728,14 +2493,13 @@
   
       if (!isElement(clipperElement)) {
         return [];
-      } // $FlowFixMe[incompatible-return]: https://github.com/facebook/flow/issues/1414
+      } 
   
   
       return clippingParents.filter(function (clippingParent) {
         return isElement(clippingParent) && contains(clippingParent, clipperElement) && getNodeName(clippingParent) !== 'body';
       });
-    } // Gets the maximum area that the element is visible in due to any number of
-    // clipping parents
+    } 
   
   
     function getClippingRect(element, boundary, rootBoundary) {
@@ -2858,8 +2622,8 @@
         placement: placement
       });
       var popperClientRect = rectToClientRect(Object.assign({}, popperRect, popperOffsets));
-      var elementClientRect = elementContext === popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
-      // 0 or negative = within the clipping rect
+      var elementClientRect = elementContext === popper ? popperClientRect : referenceClientRect; 
+   
   
       var overflowOffsets = {
         top: clippingClientRect.top - elementClientRect.top + paddingObject.top,
@@ -2867,7 +2631,7 @@
         left: clippingClientRect.left - elementClientRect.left + paddingObject.left,
         right: elementClientRect.right - clippingClientRect.right + paddingObject.right
       };
-      var offsetData = state.modifiersData.offset; // Offsets can be applied only to the popper element
+      var offsetData = state.modifiersData.offset; 
   
       if (elementContext === popper && offsetData) {
         var offset = offsetData[placement];
@@ -2904,7 +2668,7 @@
   
       if (allowedPlacements.length === 0) {
         allowedPlacements = placements$1;
-      } // $FlowFixMe[incompatible-type]: Flow seems to have problems with two array unions...
+      }
   
   
       var overflows = allowedPlacements.reduce(function (acc, placement) {
@@ -3015,7 +2779,7 @@
       }
   
       if (makeFallbackChecks) {
-        // `2` may be desired in some cases – research later
+      
         var numberOfChecks = flipVariations ? 3 : 1;
   
         var _loop = function _loop(_i) {
@@ -3047,7 +2811,7 @@
         state.placement = firstFittingPlacement;
         state.reset = true;
       }
-    } // eslint-disable-next-line import/no-unused-modules
+    }
   
   
     var flip$1 = {
@@ -3109,7 +2873,7 @@
         'data-popper-reference-hidden': isReferenceHidden,
         'data-popper-escaped': hasPopperEscaped
       });
-    } // eslint-disable-next-line import/no-unused-modules
+    }
   
   
     var hide$2 = {
@@ -3161,7 +2925,7 @@
       }
   
       state.modifiersData[name] = data;
-    } // eslint-disable-next-line import/no-unused-modules
+    }
   
   
     var offset$1 = {
@@ -3175,17 +2939,14 @@
     function popperOffsets(_ref) {
       var state = _ref.state,
           name = _ref.name;
-      // Offsets are the actual position the popper needs to have to be
-      // properly positioned near its reference element
-      // This is the most basic placement, and will be adjusted by
-      // the modifiers in the next step
+    
       state.modifiersData[name] = computeOffsets({
         reference: state.rects.reference,
         element: state.rects.popper,
         strategy: 'absolute',
         placement: state.placement
       });
-    } // eslint-disable-next-line import/no-unused-modules
+    } 
   
   
     var popperOffsets$1 = {
@@ -3251,8 +3012,8 @@
         var max$1 = popperOffsets[mainAxis] - overflow[altSide];
         var additive = tether ? -popperRect[len] / 2 : 0;
         var minLen = variation === start ? referenceRect[len] : popperRect[len];
-        var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
-        // outside the reference bounds
+        var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; 
+   
   
         var arrowElement = state.elements.arrow;
         var arrowRect = tether && arrowElement ? getLayoutRect(arrowElement) : {
@@ -3261,11 +3022,7 @@
         };
         var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : getFreshSideObject();
         var arrowPaddingMin = arrowPaddingObject[mainSide];
-        var arrowPaddingMax = arrowPaddingObject[altSide]; // If the reference length is smaller than the arrow length, we don't want
-        // to include its full size in the calculation. If the reference is small
-        // and near the edge of a boundary, the popper can overflow even if the
-        // reference is not overflowing as well (e.g. virtual elements with no
-        // width or height)
+        var arrowPaddingMax = arrowPaddingObject[altSide]; 
   
         var arrowLen = within(0, referenceRect[len], arrowRect[len]);
         var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - tetherOffsetValue : minLen - arrowLen - arrowPaddingMin - tetherOffsetValue;
@@ -3301,7 +3058,7 @@
       }
   
       state.modifiersData[name] = data;
-    } // eslint-disable-next-line import/no-unused-modules
+    } 
   
   
     var preventOverflow$1 = {
@@ -3327,7 +3084,7 @@
       }
     }
   
-    // Composite means it takes into account transforms as well as layout.
+   
   
     function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
       if (isFixed === void 0) {
@@ -3347,7 +3104,7 @@
       };
   
       if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
-        if (getNodeName(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
+        if (getNodeName(offsetParent) !== 'body' || 
         isScrollParent(documentElement)) {
           scroll = getNodeScroll(offsetParent);
         }
@@ -3375,7 +3132,7 @@
       var result = [];
       modifiers.forEach(function (modifier) {
         map.set(modifier.name, modifier);
-      }); // On visiting object, check for its dependencies and visit them recursively
+      }); 
   
       function sort(modifier) {
         visited.add(modifier.name);
@@ -3394,7 +3151,7 @@
   
       modifiers.forEach(function (modifier) {
         if (!visited.has(modifier.name)) {
-          // check for visited object
+     
           sort(modifier);
         }
       });
@@ -3402,8 +3159,8 @@
     }
   
     function orderModifiers(modifiers) {
-      // order based on dependencies
-      var orderedModifiers = order(modifiers); // order based on phase
+    
+      var orderedModifiers = order(modifiers);
   
       return modifierPhases.reduce(function (acc, phase) {
         return acc.concat(orderedModifiers.filter(function (modifier) {
@@ -3436,7 +3193,7 @@
           data: Object.assign({}, existing.data, current.data)
         }) : current;
         return merged;
-      }, {}); // IE11 does not support Object.values
+      }, {}); 
   
       return Object.keys(merged).map(function (key) {
         return merged[key];
@@ -3496,23 +3253,18 @@
             state.scrollParents = {
               reference: isElement(reference) ? listScrollParents(reference) : reference.contextElement ? listScrollParents(reference.contextElement) : [],
               popper: listScrollParents(popper)
-            }; // Orders the modifiers based on their dependencies and `phase`
-            // properties
+            }; 
   
-            var orderedModifiers = orderModifiers(mergeByName([].concat(defaultModifiers, state.options.modifiers))); // Strip out disabled modifiers
+            var orderedModifiers = orderModifiers(mergeByName([].concat(defaultModifiers, state.options.modifiers))); 
   
             state.orderedModifiers = orderedModifiers.filter(function (m) {
               return m.enabled;
-            }); // Validate the provided modifiers so that the consumer will get warned
+            }); 
   
             runModifierEffects();
             return instance.update();
           },
-          // Sync update – it will always be executed, even if not necessary. This
-          // is useful for low frequency updates where sync behavior simplifies the
-          // logic.
-          // For high frequency updates (e.g. `resize` and `scroll` events), always
-          // prefer the async Popper#update method
+        
           forceUpdate: function forceUpdate() {
             if (isDestroyed) {
               return;
@@ -3520,29 +3272,22 @@
   
             var _state$elements = state.elements,
                 reference = _state$elements.reference,
-                popper = _state$elements.popper; // Don't proceed if `reference` or `popper` are not valid elements
-            // anymore
+                popper = _state$elements.popper; 
+   
   
             if (!areValidElements(reference, popper)) {
   
               return;
-            } // Store the reference and popper rects to be read by modifiers
+            } 
   
   
             state.rects = {
               reference: getCompositeRect(reference, getOffsetParent(popper), state.options.strategy === 'fixed'),
               popper: getLayoutRect(popper)
-            }; // Modifiers have the ability to reset the current update cycle. The
-            // most common use case for this is the `flip` modifier changing the
-            // placement, which then needs to re-run all the modifiers, because the
-            // logic was previously ran for the previous placement and is therefore
-            // stale/incorrect
+            }; 
   
             state.reset = false;
-            state.placement = state.options.placement; // On each update cycle, the `modifiersData` property for each modifier
-            // is filled with the initial data specified by the modifier. This means
-            // it doesn't persist and is fresh on each update.
-            // To ensure persistent data, use `${name}#persistent`
+            state.placement = state.options.placement; 
   
             state.orderedModifiers.forEach(function (modifier) {
               return state.modifiersData[modifier.name] = Object.assign({}, modifier.data);
@@ -3572,8 +3317,7 @@
               }
             }
           },
-          // Async and optimistically optimized update – it will not be executed if
-          // not necessary (debounced to run at most once-per-tick)
+        
           update: debounce(function () {
             return new Promise(function (resolve) {
               instance.forceUpdate();
@@ -3595,11 +3339,7 @@
           if (!isDestroyed && options.onFirstUpdate) {
             options.onFirstUpdate(state);
           }
-        }); // Modifiers have the ability to execute arbitrary code before the first
-        // update cycle runs. They will be executed in the same order as the update
-        // cycle. This is useful when a modifier adds some persistent data that
-        // other modifiers need to use, but the modifier is run after the dependent
-        // one.
+        }); 
   
         function runModifierEffects() {
           state.orderedModifiers.forEach(function (_ref3) {
@@ -3633,19 +3373,19 @@
         return instance;
       };
     }
-    var createPopper$2 = /*#__PURE__*/popperGenerator(); // eslint-disable-next-line import/no-unused-modules
+    var createPopper$2 =popperGenerator(); 
   
     var defaultModifiers$1 = [eventListeners, popperOffsets$1, computeStyles$1, applyStyles$1];
-    var createPopper$1 = /*#__PURE__*/popperGenerator({
+    var createPopper$1 = popperGenerator({
       defaultModifiers: defaultModifiers$1
-    }); // eslint-disable-next-line import/no-unused-modules
+    }); 
   
     var defaultModifiers = [eventListeners, popperOffsets$1, computeStyles$1, applyStyles$1, offset$1, flip$1, preventOverflow$1, arrow$1, hide$2];
-    var createPopper = /*#__PURE__*/popperGenerator({
+    var createPopper = popperGenerator({
       defaultModifiers: defaultModifiers
-    }); // eslint-disable-next-line import/no-unused-modules
+    }); 
   
-    var Popper = /*#__PURE__*/Object.freeze({
+    var Popper = Object.freeze({
       __proto__: null,
       popperGenerator: popperGenerator,
       detectOverflow: detectOverflow,
@@ -3687,17 +3427,6 @@
       preventOverflow: preventOverflow$1
     });
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): dropdown.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
   
     const NAME$8 = 'dropdown';
     const DATA_KEY$7 = 'bs.dropdown';
@@ -3708,7 +3437,7 @@
     const TAB_KEY = 'Tab';
     const ARROW_UP_KEY = 'ArrowUp';
     const ARROW_DOWN_KEY = 'ArrowDown';
-    const RIGHT_MOUSE_BUTTON = 2; // MouseEvent.button value for the secondary button, usually the right button
+    const RIGHT_MOUSE_BUTTON = 2;
   
     const REGEXP_KEYDOWN = new RegExp(`${ARROW_UP_KEY}|${ARROW_DOWN_KEY}|${ESCAPE_KEY$2}`);
     const EVENT_HIDE$4 = `hide${EVENT_KEY$7}`;
@@ -3750,11 +3479,6 @@
       popperConfig: '(null|object|function)',
       autoClose: '(boolean|string)'
     };
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
   
     class Dropdown extends BaseComponent {
       constructor(element, config) {
@@ -3765,7 +3489,7 @@
         this._inNavbar = this._detectNavbar();
   
         this._addEventListeners();
-      } // Getters
+      } 
   
   
       static get Default() {
@@ -3778,7 +3502,7 @@
   
       static get NAME() {
         return NAME$8;
-      } // Public
+      } 
   
   
       toggle() {
@@ -3809,7 +3533,7 @@
   
         if (showEvent.defaultPrevented) {
           return;
-        } // Totally disable Popper for Dropdowns in Navbar
+        } 
   
   
         if (this._inNavbar) {
@@ -3837,10 +3561,7 @@
           if (isDisplayStatic) {
             Manipulator.setDataAttribute(this._menu, 'popper', 'static');
           }
-        } // If this is a touch-enabled device we add extra
-        // empty mouseover listeners to the body's immediate children;
-        // only needed because of broken event delegation on iOS
-        // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+        } 
   
   
         if ('ontouchstart' in document.documentElement && !parent.closest(SELECTOR_NAVBAR_NAV)) {
@@ -3884,7 +3605,7 @@
         if (this._popper) {
           this._popper.update();
         }
-      } // Private
+      }
   
   
       _addEventListeners() {
@@ -3899,8 +3620,7 @@
   
         if (hideEvent.defaultPrevented) {
           return;
-        } // If this is a touch-enabled device we remove the extra
-        // empty mouseover listeners we added for iOS support
+        } 
   
   
         if ('ontouchstart' in document.documentElement) {
@@ -3929,7 +3649,7 @@
         typeCheckConfig(NAME$8, config, this.constructor.DefaultType);
   
         if (typeof config.reference === 'object' && !isElement$1(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
-          // Popper virtual elements require a getBoundingClientRect method
+          
           throw new TypeError(`${NAME$8.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
         }
   
@@ -3949,7 +3669,7 @@
   
         if (parentDropdown.classList.contains(CLASS_NAME_DROPSTART)) {
           return PLACEMENT_LEFT;
-        } // We need to trim the value because custom properties can also include spaces
+        } 
   
   
         const isEnd = getComputedStyle(this._menu).getPropertyValue('--bs-position').trim() === 'end';
@@ -3995,7 +3715,7 @@
               offset: this._getOffset()
             }
           }]
-        }; // Disable Popper if we have a static display
+        };
   
         if (this._config.display === 'static') {
           defaultBsPopperConfig.modifiers = [{
@@ -4016,21 +3736,21 @@
           return;
         }
   
-        let index = items.indexOf(event.target); // Up
+        let index = items.indexOf(event.target); 
   
         if (event.key === ARROW_UP_KEY && index > 0) {
           index--;
-        } // Down
+        } 
   
   
         if (event.key === ARROW_DOWN_KEY && index < items.length - 1) {
           index++;
-        } // index is -1 if the first keydown is an ArrowUp
+        }
   
   
         index = index === -1 ? 0 : index;
         items[index].focus();
-      } // Static
+      } 
   
   
       static dropdownInterface(element, config) {
@@ -4085,7 +3805,7 @@
   
             if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
               continue;
-            } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
+            } 
   
   
             if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY || /input|select|option|textarea|form/i.test(event.target.tagName))) {
@@ -4106,13 +3826,7 @@
       }
   
       static dataApiKeydownHandler(event) {
-        // If not input/textarea:
-        //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
-        // If input/textarea:
-        //  - If space key => not a dropdown command
-        //  - If key is other than escape
-        //    - If key is not up or down => not a dropdown command
-        //    - If trigger inside the menu => not a dropdown command
+     
         if (/input|textarea/i.test(event.target.tagName) ? event.key === SPACE_KEY || event.key !== ESCAPE_KEY$2 && (event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY || event.target.closest(SELECTOR_MENU)) : !REGEXP_KEYDOWN.test(event.key)) {
           return;
         }
@@ -4152,12 +3866,6 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-  
   
     EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$3, Dropdown.dataApiKeydownHandler);
     EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown.dataApiKeydownHandler);
@@ -4167,35 +3875,25 @@
       event.preventDefault();
       Dropdown.dropdownInterface(this);
     });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Dropdown to jQuery only if jQuery is present
-     */
+
   
     defineJQueryPlugin(Dropdown);
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): util/scrollBar.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
+
     const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
     const SELECTOR_STICKY_CONTENT = '.sticky-top';
   
     const getWidth = () => {
-      // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
+      
       const documentWidth = document.documentElement.clientWidth;
       return Math.abs(window.innerWidth - documentWidth);
     };
   
     const hide = (width = getWidth()) => {
-      _disableOverFlow(); // give padding to element to balances the hidden scrollbar width
+      _disableOverFlow(); 
   
   
-      _setElementAttributes('body', 'paddingRight', calculatedValue => calculatedValue + width); // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements, to keep shown fullwidth
+      _setElementAttributes('body', 'paddingRight', calculatedValue => calculatedValue + width); 
   
   
       _setElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight', calculatedValue => calculatedValue + width);
@@ -4249,19 +3947,13 @@
         }
       });
     };
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): util/backdrop.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-     * --------------------------------------------------------------------------
-     */
+
     const Default$6 = {
       isVisible: true,
-      // if false, we use the backdrop helper without adding any element to the dom
+     
       isAnimated: false,
       rootElement: document.body,
-      // give the choice to place backdrop under different elements
+    
       clickCallback: null
     };
     const DefaultType$6 = {
@@ -4314,7 +4006,7 @@
           this.dispose();
           execute(callback);
         });
-      } // Private
+      }
   
   
       _getElement() {
@@ -4378,18 +4070,7 @@
       }
   
     }
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): modal.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
+
   
     const NAME$6 = 'modal';
     const DATA_KEY$6 = 'bs.modal';
@@ -4426,11 +4107,7 @@
     const SELECTOR_MODAL_BODY = '.modal-body';
     const SELECTOR_DATA_TOGGLE$2 = '[data-bs-toggle="modal"]';
     const SELECTOR_DATA_DISMISS$2 = '[data-bs-dismiss="modal"]';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
+
   
     class Modal extends BaseComponent {
       constructor(element, config) {
@@ -4441,7 +4118,7 @@
         this._isShown = false;
         this._ignoreBackdropClick = false;
         this._isTransitioning = false;
-      } // Getters
+      } 
   
   
       static get Default() {
@@ -4450,7 +4127,7 @@
   
       static get NAME() {
         return NAME$6;
-      } // Public
+      } 
   
   
       toggle(relatedTarget) {
@@ -4539,24 +4216,19 @@
         this._backdrop.dispose();
   
         super.dispose();
-        /**
-         * `document` has 2 events `EVENT_FOCUSIN` and `EVENT_CLICK_DATA_API`
-         * Do not move `document` in `htmlElements` array
-         * It will remove `EVENT_CLICK_DATA_API` event that should remain
-         */
-  
+
         EventHandler.off(document, EVENT_FOCUSIN$2);
       }
   
       handleUpdate() {
         this._adjustDialog();
-      } // Private
+      }
   
   
       _initializeBackDrop() {
         return new Backdrop({
           isVisible: Boolean(this._config.backdrop),
-          // 'static' option will be translated to true, and booleans will keep their value
+         
           isAnimated: this._isAnimated()
         });
       }
@@ -4576,7 +4248,7 @@
         const modalBody = SelectorEngine.findOne(SELECTOR_MODAL_BODY, this._dialog);
   
         if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-          // Don't move modal's DOM position
+         
           document.body.appendChild(this._element);
         }
   
@@ -4619,7 +4291,7 @@
       }
   
       _enforceFocus() {
-        EventHandler.off(document, EVENT_FOCUSIN$2); // guard against infinite focus loop
+        EventHandler.off(document, EVENT_FOCUSIN$2); 
   
         EventHandler.on(document, EVENT_FOCUSIN$2, event => {
           if (document !== event.target && this._element !== event.target && !this._element.contains(event.target)) {
@@ -4727,9 +4399,7 @@
         emulateTransitionEnd(this._element, modalTransitionDuration);
   
         this._element.focus();
-      } // ----------------------------------------------------------------------
-      // the following methods are used to handle overflowing modals
-      // ----------------------------------------------------------------------
+      } 
   
   
       _adjustDialog() {
@@ -4749,7 +4419,7 @@
       _resetAdjustments() {
         this._element.style.paddingLeft = '';
         this._element.style.paddingRight = '';
-      } // Static
+      } 
   
   
       static jQueryInterface(config, relatedTarget) {
@@ -4769,12 +4439,7 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-  
+
   
     EventHandler.on(document, EVENT_CLICK_DATA_API$2, SELECTOR_DATA_TOGGLE$2, function (event) {
       const target = getElementFromSelector(this);
@@ -4785,7 +4450,7 @@
   
       EventHandler.one(target, EVENT_SHOW$3, showEvent => {
         if (showEvent.defaultPrevented) {
-          // only register focus restorer if modal will actually get shown
+          
           return;
         }
   
@@ -4798,26 +4463,9 @@
       const data = Modal.getInstance(target) || new Modal(target);
       data.toggle(this);
     });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Modal to jQuery only if jQuery is present
-     */
+
   
     defineJQueryPlugin(Modal);
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): offcanvas.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
   
     const NAME$5 = 'offcanvas';
     const DATA_KEY$5 = 'bs.offcanvas';
@@ -4847,11 +4495,6 @@
     const EVENT_KEYDOWN_DISMISS = `keydown.dismiss${EVENT_KEY$5}`;
     const SELECTOR_DATA_DISMISS$1 = '[data-bs-dismiss="offcanvas"]';
     const SELECTOR_DATA_TOGGLE$1 = '[data-bs-toggle="offcanvas"]';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
   
     class Offcanvas extends BaseComponent {
       constructor(element, config) {
@@ -4861,7 +4504,7 @@
         this._backdrop = this._initializeBackDrop();
   
         this._addEventListeners();
-      } // Getters
+      } 
   
   
       static get NAME() {
@@ -4870,7 +4513,7 @@
   
       static get Default() {
         return Default$4;
-      } // Public
+      } 
   
   
       toggle(relatedTarget) {
@@ -4963,7 +4606,7 @@
   
         super.dispose();
         EventHandler.off(document, EVENT_FOCUSIN$1);
-      } // Private
+      } 
   
   
       _getConfig(config) {
@@ -4985,7 +4628,7 @@
       }
   
       _enforceFocusOnElement(element) {
-        EventHandler.off(document, EVENT_FOCUSIN$1); // guard against infinite focus loop
+        EventHandler.off(document, EVENT_FOCUSIN$1); 
   
         EventHandler.on(document, EVENT_FOCUSIN$1, event => {
           if (document !== event.target && element !== event.target && !element.contains(event.target)) {
@@ -5002,7 +4645,7 @@
             this.hide();
           }
         });
-      } // Static
+      } 
   
   
       static jQueryInterface(config) {
@@ -5022,13 +4665,7 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-  
-  
+
     EventHandler.on(document, EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE$1, function (event) {
       const target = getElementFromSelector(this);
   
@@ -5041,11 +4678,11 @@
       }
   
       EventHandler.one(target, EVENT_HIDDEN$2, () => {
-        // focus on trigger when it is closed
+      
         if (isVisible(this)) {
           this.focus();
         }
-      }); // avoid conflict when clicking a toggler of an offcanvas, while another is open
+      });
   
       const allReadyOpen = SelectorEngine.findOne(OPEN_SELECTOR);
   
@@ -5059,35 +4696,15 @@
     EventHandler.on(window, EVENT_LOAD_DATA_API$1, () => {
       SelectorEngine.find(OPEN_SELECTOR).forEach(el => (Data.get(el, DATA_KEY$5) || new Offcanvas(el)).show());
     });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
-  
+ 
     defineJQueryPlugin(Offcanvas);
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): util/sanitizer.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
+
     const uriAttrs = new Set(['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href']);
     const ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
-    /**
-     * A pattern that recognizes a commonly useful subset of URLs that are safe.
-     *
-     * Shoutout to Angular 7 https://github.com/angular/angular/blob/7.2.4/packages/core/src/sanitization/url_sanitizer.ts
-     */
+ 
   
     const SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file):|[^#&/:?]*(?:[#/?]|$))/i;
-    /**
-     * A pattern that matches safe data URLs. Only matches image, video and audio types.
-     *
-     * Shoutout to Angular 7 https://github.com/angular/angular/blob/7.2.4/packages/core/src/sanitization/url_sanitizer.ts
-     */
-  
+
     const DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[\d+/a-z]+=*$/i;
   
     const allowedAttribute = (attr, allowedAttributeList) => {
@@ -5101,7 +4718,7 @@
         return true;
       }
   
-      const regExp = allowedAttributeList.filter(attrRegex => attrRegex instanceof RegExp); // Check if a regular expression validates the attribute.
+      const regExp = allowedAttributeList.filter(attrRegex => attrRegex instanceof RegExp); 
   
       for (let i = 0, len = regExp.length; i < len; i++) {
         if (regExp[i].test(attrName)) {
@@ -5113,7 +4730,7 @@
     };
   
     const DefaultAllowlist = {
-      // Global attributes allowed on any supplied element below.
+     
       '*': ['class', 'dir', 'id', 'lang', 'role', ARIA_ATTRIBUTE_PATTERN],
       a: ['target', 'href', 'title', 'rel'],
       area: [],
@@ -5180,17 +4797,6 @@
       return createdDocument.body.innerHTML;
     }
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): tooltip.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
   
     const NAME$4 = 'tooltip';
     const DATA_KEY$4 = 'bs.tooltip';
@@ -5265,11 +4871,7 @@
     const TRIGGER_FOCUS = 'focus';
     const TRIGGER_CLICK = 'click';
     const TRIGGER_MANUAL = 'manual';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
+
   
     class Tooltip extends BaseComponent {
       constructor(element, config) {
@@ -5277,19 +4879,19 @@
           throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)');
         }
   
-        super(element); // private
+        super(element); 
   
         this._isEnabled = true;
         this._timeout = 0;
         this._hoverState = '';
         this._activeTrigger = {};
-        this._popper = null; // Protected
+        this._popper = null; 
   
         this._config = this._getConfig(config);
         this.tip = null;
   
         this._setListeners();
-      } // Getters
+      } 
   
   
       static get Default() {
@@ -5306,7 +4908,7 @@
   
       static get DefaultType() {
         return DefaultType$3;
-      } // Public
+      } 
   
   
       enable() {
@@ -5418,10 +5020,7 @@
   
         if (customClass) {
           tip.classList.add(...customClass.split(' '));
-        } // If this is a touch-enabled device we add extra
-        // empty mouseover listeners to the body's immediate children;
-        // only needed because of broken event delegation on iOS
-        // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+        } 
   
   
         if ('ontouchstart' in document.documentElement) {
@@ -5480,8 +5079,7 @@
           return;
         }
   
-        tip.classList.remove(CLASS_NAME_SHOW$3); // If this is a touch-enabled device we remove the extra
-        // empty mouseover listeners we added for iOS support
+        tip.classList.remove(CLASS_NAME_SHOW$3); 
   
         if ('ontouchstart' in document.documentElement) {
           [].concat(...document.body.children).forEach(element => EventHandler.off(element, 'mouseover', noop));
@@ -5501,7 +5099,7 @@
         if (this._popper !== null) {
           this._popper.update();
         }
-      } // Protected
+      } 
   
   
       isWithContent() {
@@ -5531,7 +5129,7 @@
         }
   
         if (isElement$1(content)) {
-          content = getElement(content); // content is a DOM node or a jQuery
+          content = getElement(content); 
   
           if (this._config.html) {
             if (content.parentNode !== element) {
@@ -5576,7 +5174,7 @@
         }
   
         return attachment;
-      } // Private
+      } 
   
   
       _initializeOnDelegatedTarget(event, context) {
@@ -5840,7 +5438,7 @@
         this._cleanTipClass();
   
         this._addAttachmentClass(this._getAttachment(state.placement));
-      } // Static
+      } 
   
   
       static jQueryInterface(config) {
@@ -5868,28 +5466,11 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Tooltip to jQuery only if jQuery is present
-     */
-  
+
   
     defineJQueryPlugin(Tooltip);
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): popover.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-  
+ 
     const NAME$3 = 'popover';
     const DATA_KEY$3 = 'bs.popover';
     const EVENT_KEY$3 = `.${DATA_KEY$3}`;
@@ -5921,14 +5502,10 @@
     const CLASS_NAME_SHOW$2 = 'show';
     const SELECTOR_TITLE = '.popover-header';
     const SELECTOR_CONTENT = '.popover-body';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
+
   
     class Popover extends Tooltip {
-      // Getters
+   
       static get Default() {
         return Default$2;
       }
@@ -5943,7 +5520,7 @@
   
       static get DefaultType() {
         return DefaultType$2;
-      } // Overrides
+      } 
   
   
       isWithContent() {
@@ -5951,8 +5528,8 @@
       }
   
       setContent() {
-        const tip = this.getTipElement(); // we use append for html objects to maintain js events
-  
+        const tip = this.getTipElement();
+          
         this.setElementContent(SelectorEngine.findOne(SELECTOR_TITLE, tip), this.getTitle());
   
         let content = this._getContent();
@@ -5963,7 +5540,7 @@
   
         this.setElementContent(SelectorEngine.findOne(SELECTOR_CONTENT, tip), content);
         tip.classList.remove(CLASS_NAME_FADE$2, CLASS_NAME_SHOW$2);
-      } // Private
+      }
   
   
       _addAttachmentClass(attachment) {
@@ -5981,7 +5558,7 @@
         if (tabClass !== null && tabClass.length > 0) {
           tabClass.map(token => token.trim()).forEach(tClass => tip.classList.remove(tClass));
         }
-      } // Static
+      } 
   
   
       static jQueryInterface(config) {
@@ -6010,27 +5587,9 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Popover to jQuery only if jQuery is present
-     */
-  
-  
+
     defineJQueryPlugin(Popover);
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): scrollspy.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
+ 
   
     const NAME$2 = 'scrollspy';
     const DATA_KEY$2 = 'bs.scrollspy';
@@ -6060,11 +5619,7 @@
     const SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
     const METHOD_OFFSET = 'offset';
     const METHOD_POSITION = 'position';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
+
   
     class ScrollSpy extends BaseComponent {
       constructor(element, config) {
@@ -6080,7 +5635,7 @@
         this.refresh();
   
         this._process();
-      } // Getters
+      } 
   
   
       static get Default() {
@@ -6089,7 +5644,7 @@
   
       static get NAME() {
         return NAME$2;
-      } // Public
+      } 
   
   
       refresh() {
@@ -6123,7 +5678,7 @@
       dispose() {
         EventHandler.off(this._scrollElement, EVENT_KEY$2);
         super.dispose();
-      } // Private
+      } 
   
   
       _getConfig(config) {
@@ -6212,12 +5767,11 @@
           SelectorEngine.findOne(SELECTOR_DROPDOWN_TOGGLE$1, link.closest(SELECTOR_DROPDOWN$1)).classList.add(CLASS_NAME_ACTIVE$1);
           link.classList.add(CLASS_NAME_ACTIVE$1);
         } else {
-          // Set triggered link as active
+         
           link.classList.add(CLASS_NAME_ACTIVE$1);
           SelectorEngine.parents(link, SELECTOR_NAV_LIST_GROUP$1).forEach(listGroup => {
-            // Set triggered links parents as active
-            // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
-            SelectorEngine.prev(listGroup, `${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1)); // Handle special case when .nav-link is inside .nav-item
+          
+            SelectorEngine.prev(listGroup, `${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1)); 
   
             SelectorEngine.prev(listGroup, SELECTOR_NAV_ITEMS).forEach(navItem => {
               SelectorEngine.children(navItem, SELECTOR_NAV_LINKS).forEach(item => item.classList.add(CLASS_NAME_ACTIVE$1));
@@ -6232,7 +5786,7 @@
   
       _clear() {
         SelectorEngine.find(this._selector).filter(node => node.classList.contains(CLASS_NAME_ACTIVE$1)).forEach(node => node.classList.remove(CLASS_NAME_ACTIVE$1));
-      } // Static
+      } 
   
   
       static jQueryInterface(config) {
@@ -6252,36 +5806,17 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
+
   
   
     EventHandler.on(window, EVENT_LOAD_DATA_API, () => {
       SelectorEngine.find(SELECTOR_DATA_SPY).forEach(spy => new ScrollSpy(spy));
     });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .ScrollSpy to jQuery only if jQuery is present
-     */
+  
   
     defineJQueryPlugin(ScrollSpy);
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): tab.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
+
   
     const NAME$1 = 'tab';
     const DATA_KEY$1 = 'bs.tab';
@@ -6303,17 +5838,13 @@
     const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]';
     const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
     const SELECTOR_DROPDOWN_ACTIVE_CHILD = ':scope > .dropdown-menu .active';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
+
   
     class Tab extends BaseComponent {
-      // Getters
+  
       static get NAME() {
         return NAME$1;
-      } // Public
+      } 
   
   
       show() {
@@ -6359,7 +5890,7 @@
         } else {
           complete();
         }
-      } // Private
+      } 
   
   
       _activate(element, container, callback) {
@@ -6423,7 +5954,7 @@
         if (callback) {
           callback();
         }
-      } // Static
+      } 
   
   
       static jQueryInterface(config) {
@@ -6441,11 +5972,6 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
   
   
     EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
@@ -6460,26 +5986,10 @@
       const data = Data.get(this, DATA_KEY$1) || new Tab(this);
       data.show();
     });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Tab to jQuery only if jQuery is present
-     */
-  
+
     defineJQueryPlugin(Tab);
   
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): toast.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
+
   
     const NAME = 'toast';
     const DATA_KEY = 'bs.toast';
@@ -6508,11 +6018,7 @@
       delay: 5000
     };
     const SELECTOR_DATA_DISMISS = '[data-bs-dismiss="toast"]';
-    /**
-     * ------------------------------------------------------------------------
-     * Class Definition
-     * ------------------------------------------------------------------------
-     */
+
   
     class Toast extends BaseComponent {
       constructor(element, config) {
@@ -6523,7 +6029,7 @@
         this._hasKeyboardInteraction = false;
   
         this._setListeners();
-      } // Getters
+      } 
   
   
       static get DefaultType() {
@@ -6536,7 +6042,7 @@
   
       static get NAME() {
         return NAME;
-      } // Public
+      } 
   
   
       show() {
@@ -6601,7 +6107,7 @@
         }
   
         super.dispose();
-      } // Private
+      } 
   
   
       _getConfig(config) {
@@ -6666,7 +6172,7 @@
       _clearTimeout() {
         clearTimeout(this._timeout);
         this._timeout = null;
-      } // Static
+      }
   
   
       static jQueryInterface(config) {
@@ -6690,22 +6196,10 @@
       }
   
     }
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     * add .Toast to jQuery only if jQuery is present
-     */
-  
+
   
     defineJQueryPlugin(Toast);
-  
-    /**
-     * --------------------------------------------------------------------------
-     * Bootstrap (v5.0.1): index.umd.js
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     * --------------------------------------------------------------------------
-     */
+
     var index_umd = {
       Alert,
       Button,
@@ -6724,4 +6218,4 @@
     return index_umd;
   
   })));
-  //# sourceMappingURL=bootstrap.bundle.js.map
+  

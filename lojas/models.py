@@ -1,6 +1,9 @@
 from django.db import models
 
 class LojaData(models.Model):
+    class Meta:
+        verbose_name = 'Registro de Loja'
+    #    verbose_name_plural = ''
     #Dados técnicos
     url_cadastrado = models.CharField(max_length=50, help_text='O endereço final do link da página')
     caminho_de_arquivos = models.CharField(max_length=100, help_text='cidade/nome_da_empresa')

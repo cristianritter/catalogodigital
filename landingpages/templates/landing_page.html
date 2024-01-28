@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt">
@@ -23,8 +22,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#">Topo</a></li>
                         <li class="nav-item"><a class="nav-link" href="#services">Nossos Serviços</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#photos">Sobre a Empresa</a></li>
                         <li class="nav-item"><a class="nav-link" href="#new-contact">Contato</a></li>
                     </ul>
                 </div>
@@ -33,52 +32,42 @@
         <!-- Masthead-->
         <header class="masthead" id="masthead" style="background-position: center; text-align: center; height: 400px;">  
             <div class="container">
+                <div class="masthead-subheading">{{ descricao_curta }}</div>
+                <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
                 <div class="col">
-                    <div class="masthead-subheading">{{ descricao_curta }}</div>
-                    <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        {% if link_loja %}
-                        <a class="btn2 btn-primary2 text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
-                        {% else %}
-                        <a class="btn2 btn-primary2 text-uppercase" href="#new-contact">Entre em contato</a>
-                        {% endif %}
-                    </div>
+                    {% if link_loja %}
+                    <a class="btn2 btn-primary2 text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
+                    {% else %}
+                    <a class="btn2 btn-primary2 text-uppercase" href="#new-contact">Entre em contato</a>
+                    {% endif %}
                 </div>
             </div>   
         </header>
-        
-        <!-- Services -->
         <section class="page-section" id="services">
-            <div class="container">
-                <div style="max-width: 500px; margin: 0 auto;">
-                    <h2 class="text-center">{{lista_titulo}}</h2>
-                    <div class="text-left" style="margin: 0 20px;"> <!-- Adicionando margem nas laterais da lista -->
-                        <ul class="list-unstyled">
-                            {% for item in lista_items %}
-                            <li>
-                                <span class="text-secondary me-2"></span>
-                                <span class="fw fs-5">{{ item }}</span>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+            {% if lista_items.0 %}
+            <div class="container mb-5">
+                <h2 class="text-center">{{lista_titulo}}</h2>
+                <div class="text-left col-md-5 box mx-auto" > 
+                    <ul class="list-unstyled" style="list-style-image: url('{% static "common/landing_page/img/circle-icon.png"%}');">
+                        {% for item in lista_items %}
+                        <li>
+                            <span class="text-secondary me-2"></span>
+                            <span class="fw fs-5 text-uppercase">{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
+            {% endif %}
             <div class="container">
-                <div class="text-center">
-                    <div class="row text-center">
-                        {% for item1, item2 in pares_colunas %}
-                        <div class="col-md-4">
-                            <h3 class="my-3 text-uppercase">{{ item1 }}</h3>
-                            <p class="fw fs-5">{{ item2 }}</p>
-                        </div>    
-                        {% endfor %}
-                        <div class="p-3">
-                            <p><a href="{{reviews_link}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">consulte aqui nossas avaliações</a></p>
-                        </div>
-                    </div>
+                <div class="row text-center ">
+                    {% for item1, item2 in pares_colunas %}
+                    <div class="col-md-4">
+                        <h3 class="my-3 text-uppercase">{{ item1 }}</h3>
+                        <p class="fw fs-5">{{ item2 }}</p>
+                    </div>    
+                    {% endfor %}
+                    <p class="p-3"><a href="{{reviews_link}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">consulte aqui nossas avaliações</a></p>
                 </div>
             </div>
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -99,14 +88,12 @@
                 </button>
             </div>
         </section>    
-        <!-- New Contact Section -->
         <section class="page-section text-center" id="new-contact">
             <div class="container mx-auto">
                 <h2 class="section-heading text-uppercase">Contato</h2>
-                <!-- Contact Information -->
                 <div class="col-md-4 mx-auto text-center">
                     {% if horario_atendimento %}
-                    <p><strong>Horário de Atendimento:</strong> {{horario_atendimento}}</p>
+                    <p><strong>Atendimento:</strong> {{horario_atendimento}}</p>
                     {% endif %}
                     {% if numeros_telefone %}
                     <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
@@ -115,21 +102,18 @@
                     <p><a href="{{whats_link}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">Conversar no WhatsApp</a></p>
                     {% endif %}
                     {% if endereco %}
-                        <p><strong>Endereço:</strong> {{endereco}}</p>
-                        {% if gmaps_link %}
-                        <button class="btn2 btn-primary2 text-uppercase" onclick="carregarMapa()" id="map-button">Ver mapa</button>
-                        {% endif %}
-                        <a class="btn2 btn-primary2 text-uppercase" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank">Obter Direções</a>
+                    <p><strong>Endereço:</strong> {{endereco}}</p>
+                    {% if gmaps_link %}
+                    <button class="btn2 btn-primary2 text-uppercase" onclick="carregarMapa()" id="map-button">Ver mapa</button>
+                    {% endif %}
+                    <a class="btn2 btn-primary2 text-uppercase" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank">Obter Direções</a>
                     {% endif %}
                     {% if email %}
-                        <p><strong>E-mail:</strong> <a href="mailto:{{email_contato}}">{{email_contato}}</a></p>
+                    <p><strong>E-mail:</strong> <a href="mailto:{{email_contato}}">{{email_contato}}</a></p>
                     {% endif %}     
-                    </div>
-                <div class="col-md-8 mx-auto">
-                    <!-- Google Maps Embed with Margin -->
-                    <div class="embed-responsive embed-responsive-16by9 my-4" id="google-map-container">
-                        <!-- O script do Google Maps pode ser carregado dinamicamente aqui -->
-                    </div>
+                </div>
+                <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container">
+                <!-- O script do Google Maps pode ser carregado dinamicamente aqui -->
                 </div>
             </div>
         </section>  
@@ -153,18 +137,15 @@
         <!-- Footer-->    
         <footer class="footer py-4">
             <div class="container text-center">
-                <p class="mb-4"><a href="\seja_nosso_cliente" class="text-dark fs-5">Divulgue sua empresa aqui.</a></p>
-                <div class="row align-items-center">
-                    <div class="col-lg-3 text-lg-start">Copyright &copy; MK4DIGITAL 2024</div>
-                    <div class="col-lg-3 text-lg-start">Você é o visitante número <strong>{{contador_visitas}}</strong></div>
-                    <div class="col-lg-3 text-lg-start">Desenvolvido por <a href="https://www.linkedin.com/in/cristianritter/" class="text-dark">Cristian Ritter</a></div>
-                 </div>
+                <p class="mb-4"><a href="\" class="text-dark fs-5">Divulgue sua empresa com a gente</a></p>
+                <div class="">Você é o visitante número <strong>{{contador_visitas}}</strong></div>
+                <div class="">Copyright &copy; MK4DIGITAL 2024</div>
             </div>
         </footer>        
         <script defer src="{% static 'common/landing_page/js/scripts.js' %}"></script>
         <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">-->
-        <link href="{% static 'common/landing_page/css/carousel.css' %}" rel="stylesheet">
-        <script defer src="{% static 'common/landing_page/js/carousel.js'%}"></script>   
+        <link href="{% static 'common/landing_page/css/carousel.min.css' %}" rel="stylesheet">
+        <script defer src="{% static 'common/landing_page/js/carousel.min.js'%}"></script>   
         <script defer>
             document.addEventListener("DOMContentLoaded", function() {
             var masthead = document.getElementById("masthead");

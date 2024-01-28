@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro 404 - Página não encontrada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Alterado para preto */
+            color: #fff; /* Alterado para branco */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+        .robot-img {
+            max-width: 100%;
+            height: 150px;
+        }
+        p {
+            font-size: 18px;
+            color: #e4dede;
+            margin-top: 20px;
+            text-align: left;
+            line-height: 1.6;
+            
+        }
+        .bold {
+            font-weight: bold; /* Aplica negrito ao texto dentro da classe "bold" */
+        }
+        .right {
+            text-align: right;
+        }
+        
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'common/404/img/sad-robot.jpg'%}" alt="Robô Triste" class="robot-img">
+        <h1>404 - Not Found</h1>
+        <p class="">Infelizmente a página que você está procurando não foi encontrada.</p>
+        <p class="bold"> Mas não fique triste! Você pode continuar navegando a partir da nossa <a href="/">homepage</a>.</p>
+        <p></p>
+        <p class="right">Equipe MK4 DIGITAL</p>
+    </div>
+</body>
+</html>

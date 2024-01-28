@@ -51,7 +51,7 @@ class DefaultLandingPage(View):
                 'link_loja': landing_page_data.link_loja,
             } 
         else:
-            return render(request, '404.html')  
+            return render(request, '404-wall-e.html')  
         visitas = 1 + self.get_contagem()
         self.set_contagem(visitas)
         self.context['contador_visitas'] = visitas
