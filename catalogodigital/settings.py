@@ -39,7 +39,7 @@ else:
         }
     }
 CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_SECONDS = 60 * 60 * 24 * 7  # Cache válido por 15 minutos (900 segundos)
+CACHE_MIDDLEWARE_SECONDS = 60 * 5  
 
 if IS_HEROKU_APP:
     DATABASES = {

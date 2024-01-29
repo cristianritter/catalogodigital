@@ -68,7 +68,7 @@
             </div>
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    {% for filename in nomes_arquivos_imagens|slice:"1:" %}
+                    {% for filename in nomes_arquivos_imagens|slice:"2:" %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
                             <img src="{{ endereco_bucket }}{{ filename }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="200">
                         </div>
@@ -122,6 +122,16 @@
         </footer>        
         <script defer src="{% static 'common/landing_page/js/scripts.js' %}"></script>
         <link href="{% static 'common/landing_page/css/carousel.min.css' %}" rel="stylesheet">
-        <script defer src="{% static 'common/landing_page/js/carousel.min.js'%}"></script>       
+        <script defer src="{% static 'common/landing_page/js/carousel.min.js'%}"></script>    
+        <script>
+            window.onload = function() {
+                var highQualityImageUrl = '{{ endereco_bucket }}{{ nomes_arquivos_imagens.1 }}';   
+                var img = new Image();
+                img.onload = function() {
+                    document.getElementById('masthead').style.backgroundImage = 'url(' + highQualityImageUrl + ')';
+                };
+                img.src = highQualityImageUrl; 
+            };
+        </script>   
     </body>
 </html>
