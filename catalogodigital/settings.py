@@ -38,8 +38,8 @@ else:
             }
         }
     }
-
-CACHE_MIDDLEWARE_SECONDS = 60 * 60 * 24 * 7 
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 60 * 60 * 24 * 7  # Cache válido por 15 minutos (900 segundos)
 
 if IS_HEROKU_APP:
     DATABASES = {
@@ -87,6 +87,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
   # 'django_brotli.middleware.BrotliMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -96,6 +97,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 TEMPLATES = [
