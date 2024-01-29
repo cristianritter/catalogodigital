@@ -57,12 +57,12 @@
             {% endif %}
             <div class="container">
                 <div class="row text-center ">
-                    {% for item1, item2 in pares_colunas %}
+                    {% for chave, valor in dados_dict.items %}
                     <div class="col-md-4">
-                        <h3 class="my-3 text-uppercase">{{ item1 }}</h3>
-                        <p class="fw fs-5">{{ item2 }}</p>
-                    </div>    
-                    {% endfor %}
+                        <h3 class="my-3 text-uppercase">{{ chave }}</h3>
+                        <p class="fw fs-5">{{ valor }}</p>
+                    </div>
+                    {% endfor %}                    
                     <p class="p-3"><a href="{{reviews_link}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">consulte aqui nossas avaliações</a></p>
                 </div>
             </div>
