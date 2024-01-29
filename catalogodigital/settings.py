@@ -30,7 +30,7 @@ else:
         'default': {
             # Use django-bmemcached
             'BACKEND': 'django_bmemcached.memcached.BMemcached',
-            'TIMEOUT': 604800,
+            'TIMEOUT': None,
             'LOCATION': os.environ['MEMCACHIER_SERVERS'],
             'OPTIONS': {
                 'username': os.environ['MEMCACHIER_USERNAME'],
@@ -38,6 +38,8 @@ else:
             }
         }
     }
+
+CACHE_MIDDLEWARE_SECONDS = 60 * 60 * 24 * 7 
 
 if IS_HEROKU_APP:
     DATABASES = {
