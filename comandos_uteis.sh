@@ -7,3 +7,4 @@ heroku logs --tail -a catalogodigital
 heroku domains:add ajrcutelaria.mk4digital.com -a catalogodigital
 pip freeze > .\requirements.txt
 heroku logs --tail -a catalogodigital  
+pip install -r .\requirements.txt
