@@ -5,33 +5,29 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content={{meta_description}} />
-        <meta name="author" content="Cristian Ritter / Alex Amaro" />
         <link rel="icon" type="image/x-icon" href="{% static 'common/landing_page/favicon.ico' %}">
         <title>{{nome_empresa}} - {{descricao_curta}}</title>
-        <!--<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>--> 
         <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
-</head>               
+    </head>               
     <body id="page-top">
         <title>Seção de Serviços</title>           
-        <!-- Navigation-->
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav"> 
             <div class="container">
-                <a class="navbar-brand" href="/seja_nosso_cliente">MK4 Digital</a>
+                <a class="navbar-brand" href="/seja_nosso_cliente">ConectaPages</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#">Topo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#services">Nossos Serviços</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Serviços</a></li>
                         <li class="nav-item"><a class="nav-link" href="#new-contact">Contato</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
-        <header class="masthead" id="masthead" style="background-position: center; text-align: center; height: 400px;">  
-            <div class="container">
+        <header class="masthead" id="masthead" style="background-position: center; text-align: center; height: 400px; background-image: url('{{ endereco_bucket }}{{ nomes_arquivos_imagens.0 }}');">
+                    <div class="container">
                 <div class="masthead-subheading">{{ descricao_curta }}</div>
                 <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
                 <div class="col">
@@ -92,65 +88,40 @@
             <div class="container mx-auto">
                 <h2 class="section-heading text-uppercase">Contato</h2>
                 <div class="col-md-4 mx-auto text-center">
-                    {% if horario_atendimento %}
                     <p><strong>Atendimento:</strong> {{horario_atendimento}}</p>
-                    {% endif %}
-                    {% if numeros_telefone %}
                     <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
-                    {% endif %}
-                    {% if whats_link %}
                     <p><a href="{{whats_link}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">Conversar no WhatsApp</a></p>
-                    {% endif %}
-                    {% if endereco %}
                     <p><strong>Endereço:</strong> {{endereco}}</p>
                     {% if gmaps_link %}
                     <button class="btn2 btn-primary2 text-uppercase" onclick="carregarMapa()" id="map-button">Ver mapa</button>
+                    <script defer>
+                        function carregarMapa() {
+                            var iframe = document.createElement("iframe");
+                            iframe.setAttribute("src", "{{gmaps_link}}");
+                            iframe.setAttribute("width", "100%");
+                            iframe.setAttribute("height", "200");
+                            document.getElementById("google-map-container").appendChild(iframe);
+                            document.getElementById("map-button").style.display = "none";
+                        }
+                    </script>            
                     {% endif %}
                     <a class="btn2 btn-primary2 text-uppercase" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank">Obter Direções</a>
-                    {% endif %}
-                    {% if email %}
+                    {% if email_contato %}
                     <p><strong>E-mail:</strong> <a href="mailto:{{email_contato}}">{{email_contato}}</a></p>
                     {% endif %}     
                 </div>
-                <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container">
-                <!-- O script do Google Maps pode ser carregado dinamicamente aqui -->
-                </div>
+                <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container"></div>
             </div>
         </section>  
-        {% if gmaps_link %}
-        <script async>
-            function carregarMapa() {
-                // Coletar o elemento do iframe
-                var iframe = document.createElement("iframe");
-        
-                // Adiar a adição do atributo src até que o botão seja clicado
-                iframe.setAttribute("src", "{{gmaps_link}}");
-                iframe.setAttribute("width", "100%");
-                iframe.setAttribute("height", "200");
-                
-                // Adicionar o iframe ao contêiner
-                document.getElementById("google-map-container").appendChild(iframe);
-                document.getElementById("map-button").style.display = "none";
-            }
-        </script>
-        {% endif %}
-        <!-- Footer-->    
         <footer class="footer py-4">
             <div class="container text-center">
                 <p class="mb-4"><a href="\" class="text-dark fs-5">Divulgue sua empresa com a gente</a></p>
                 <div class="">Você é o visitante número <strong>{{contador_visitas}}</strong></div>
-                <div class="">Copyright &copy; MK4DIGITAL 2024</div>
+                <div class="text-uppercase">Copyright &copy; ConectaPages 2024</div>
             </div>
         </footer>        
         <script defer src="{% static 'common/landing_page/js/scripts.js' %}"></script>
-        <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">-->
         <link href="{% static 'common/landing_page/css/carousel.min.css' %}" rel="stylesheet">
-        <script defer src="{% static 'common/landing_page/js/carousel.min.js'%}"></script>   
-        <script defer>
-            document.addEventListener("DOMContentLoaded", function() {
-            var masthead = document.getElementById("masthead");
-            masthead.style.backgroundImage = "url('{{ endereco_bucket }}{{ nomes_arquivos_imagens.0 }}')";
-            });
-        </script>
+        <script defer src="{% static 'common/landing_page/js/carousel.min.js'%}"></script>       
     </body>
 </html>
