@@ -10,7 +10,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
-CSRF_TRUSTED_ORIGINS = ['https://admin.mk4digital.com']
+CSRF_TRUSTED_ORIGINS = ['https://admin.conectapages.com']
 
 if not IS_HEROKU_APP:
     DEBUG = True
@@ -24,8 +24,8 @@ if not IS_HEROKU_APP:
     }
 else:
     DEBUG = False
-    ALLOWED_HOSTS = ['.mk4digital.com', '*.mk4digital.com']
-    SUBDOMAIN_DOMAIN = "mk4digital.com"
+    ALLOWED_HOSTS = ['.conectapages.com', '*.conectapages.com']
+    SUBDOMAIN_DOMAIN = "conectapages.com"
     CACHES = {
         'default': {
             # Use django-bmemcached
@@ -36,6 +36,29 @@ else:
                 'username': os.environ['MEMCACHIER_USERNAME'],
                 'password': os.environ['MEMCACHIER_PASSWORD'],
             }
+        }
+    }
+
+if IS_HEROKU_APP:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('SUPABASE_DB_NAME'),
+            'USER': os.getenv('SUPABASE_USER'),
+            'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
+            'HOST': os.getenv('SUPABASE_HOST'), # ou o endereço do seu banco de dados
+            'PORT': os.getenv('SUPABASE_PORT'), # ou a porta do seu banco de dados
+            #'OPTIONS': {
+            #    'sslmode': 'verify-full',
+            #    'sslrootcert': 'catalogodigital/prod-ca-2021.crt', #precisa hospedar em algum lugar
+            #}
+        }
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 
@@ -72,29 +95,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
-if IS_HEROKU_APP:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.getenv('SUPABASE_DB_NAME'),
-            'USER': os.getenv('SUPABASE_USER'),
-            'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
-            'HOST': os.getenv('SUPABASE_HOST'), # ou o endereço do seu banco de dados
-            'PORT': os.getenv('SUPABASE_PORT'), # ou a porta do seu banco de dados
-            #'OPTIONS': {
-            #    'sslmode': 'verify-full',
-            #    'sslrootcert': 'catalogodigital/prod-ca-2021.crt', #precisa hospedar em algum lugar
-            #}
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
 
 TEMPLATES = [
     {

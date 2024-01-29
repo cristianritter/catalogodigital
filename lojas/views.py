@@ -16,7 +16,7 @@ class BaseLoja(View):
         loja__data = Loja.objects.filter(url_cadastrado=url_cadastrada).first()
         self.context = {
             'meta_description': loja__data.meta_description,
-            'caminho_arquivos': loja__data.caminho_de_arquivos,
+            'caminho_arquivos': loja__data.endereco_bucket,
             'nome_empresa': loja__data.nome_empresa,
             'slogam': loja__data.slogam,
             'titulo': loja__data.titulo,
