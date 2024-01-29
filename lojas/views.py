@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import View
-from .models import LojaData
+from .models import Loja
 import json
 
 def redirect_to_landingpage(request):
@@ -13,7 +13,7 @@ class BaseLoja(View):
     def __init__(self, *args, **kwargs):
         url_cadastrada = 'cardapio_simples'
         super().__init__(*args, **kwargs)
-        loja__data = LojaData.objects.filter(url_cadastrado=url_cadastrada).first()
+        loja__data = Loja.objects.filter(url_cadastrado=url_cadastrada).first()
         self.context = {
             'meta_description': loja__data.meta_description,
             'caminho_arquivos': loja__data.caminho_de_arquivos,

@@ -12,7 +12,7 @@ IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 CSRF_TRUSTED_ORIGINS = ['https://admin.mk4digital.com']
 
-if not IS_HEROKU_APP:
+if IS_HEROKU_APP:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
     SUBDOMAIN_DOMAIN = "localhost"
@@ -73,7 +73,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-if IS_HEROKU_APP:
+if not IS_HEROKU_APP:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
