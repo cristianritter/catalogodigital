@@ -70,7 +70,7 @@
                 <div class="carousel-inner">
                     {% for filename in nomes_arquivos_imagens|slice:"1:" %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{ endereco_bucket }}{{ filename }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="230">
+                            <img src="{{ endereco_bucket }}{{ filename }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="200">
                         </div>
                     {% endfor %} 
                 </div>
