@@ -11,10 +11,10 @@ def set_visitas(request):
     return HttpResponse(f'Contagem de visitas definida para {visitas_argumento}.')
 
 class DefaultLandingPage(View):
-    template_name = 'landing_page.html'
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {}
+        self.template_name = 'landing_page.html'
         if not cache.get('contador'):
             cache.set('contador', 0, timeout=None)
       

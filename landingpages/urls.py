@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 from django.urls import path, re_path
-from .views import DefaultLandingPage, Homepage, set_visitas
+from .views import DefaultLandingPage
 from django.views.generic import TemplateView
 
 app_name = 'landingpages'  
