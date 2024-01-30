@@ -37,7 +37,7 @@ class DefaultLandingPage(View):
                 'email_contato': landing_page_data.email_contato,
                 'endereco': landing_page_data.endereco,
                 'horario_atendimento': landing_page_data.horario_atendimento,
-                'whats_link': landing_page_data.link_whats,
+                'link_whats': landing_page_data.link_whats,
                 'reviews_link': landing_page_data.reviews_link,
                 'gmaps_link': landing_page_data.gmaps_link,
                 'link_loja': landing_page_data.link_loja,

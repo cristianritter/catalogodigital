@@ -14,18 +14,19 @@ class BaseLoja(View):
         url_cadastrada = 'cardapio_simples'
         super().__init__(*args, **kwargs)
         loja__data = Loja.objects.filter(url_cadastrado=url_cadastrada).first()
-        self.context = {
-            'meta_description': loja__data.meta_description,
-            'caminho_arquivos': loja__data.endereco_bucket,
-            'nome_empresa': loja__data.nome_empresa,
-            'slogam': loja__data.slogam,
-            'titulo': loja__data.titulo,
-            'paragrafo': loja__data.paragrafo,
-            'link_whats': loja__data.link_whats,
-            'link_instagram': loja__data.link_instagram,
-            'link_facebook': loja__data.link_facebook,
-            'produtos': json.loads(loja__data.produtos.lower()),
-        }
+        if loja__data and loja__data.on_air:
+            self.context = {
+                'meta_description': loja__data.meta_description,
+                'caminho_arquivos': loja__data.endereco_bucket,
+                'nome_empresa': loja__data.nome_empresa,
+                'slogam': loja__data.slogam,
+                'titulo': loja__data.titulo,
+                'paragrafo': loja__data.paragrafo,
+                'link_whats': loja__data.link_whats,
+                'link_facebook': loja__data.link_facebook,
+                'link_instagram': loja__data.link_instagram,
+                'produtos': json.loads(loja__data.produtos.lower()),
+            }
         print(self.context['produtos'])
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.context)
