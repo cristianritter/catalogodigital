@@ -19,12 +19,12 @@ class BaseLoja(View):
                 'meta_description': loja__data.meta_description,
                 'caminho_arquivos': loja__data.endereco_bucket,
                 'nome_empresa': loja__data.nome_empresa,
-                'slogam': loja__data.slogam,
-                'titulo': loja__data.titulo,
-                'paragrafo': loja__data.paragrafo,
                 'link_whats': loja__data.link_whats,
                 'link_facebook': loja__data.link_facebook,
                 'link_instagram': loja__data.link_instagram,
+                'slogam': loja__data.slogam,
+                'titulo': loja__data.titulo,
+                'paragrafo': loja__data.paragrafo,
                 'produtos': json.loads(loja__data.produtos.lower()),
             }
         print(self.context['produtos'])
