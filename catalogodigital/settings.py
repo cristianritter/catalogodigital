@@ -28,7 +28,6 @@ else:
     SUBDOMAIN_DOMAIN = "conectapages.com"
     CACHES = {
         'default': {
-            # Use django-bmemcached
             'BACKEND': 'django_bmemcached.memcached.BMemcached',
             'TIMEOUT': None,
             'LOCATION': os.environ['MEMCACHIER_SERVERS'],
@@ -38,8 +37,8 @@ else:
             }
         }
     }
-CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_SECONDS = 60 * 5  
+#CACHE_MIDDLEWARE_ALIAS = 'default'
+#CACHE_MIDDLEWARE_SECONDS = 60 * 5  
 
 if IS_HEROKU_APP:
     DATABASES = {
@@ -86,8 +85,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-  # 'django_brotli.middleware.BrotliMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
+#   'django_brotli.middleware.BrotliMiddleware',
+#   'django.middleware.cache.UpdateCacheMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -97,7 +96,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'django.middleware.cache.FetchFromCacheMiddleware',
+#   'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 TEMPLATES = [

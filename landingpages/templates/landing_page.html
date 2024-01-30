@@ -70,9 +70,9 @@
                 <div class="carousel-inner">
                     {% for filename in nomes_arquivos_imagens|slice:"2:" %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{ endereco_bucket }}{{ filename }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" width="300" height="200">
-                        </div>
-                    {% endfor %} 
+                        <img data-src="{{ endereco_bucket }}{{ filename }}" class="d-block w-100 lazy-load" alt="Imagem {{ forloop.counter }}" width="300" height="200">
+                    </div>
+                    {% endfor %}
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -126,11 +126,16 @@
         <script>
             window.onload = function() {
                 var highQualityImageUrl = '{{ endereco_bucket }}{{ nomes_arquivos_imagens.1 }}';   
+                var lazyImages = document.querySelectorAll("img.lazy-load");
                 var img = new Image();
                 img.onload = function() {
                     document.getElementById('masthead').style.backgroundImage = 'url(' + highQualityImageUrl + ')';
                 };
                 img.src = highQualityImageUrl; 
+                lazyImages.forEach(function(lazyImage) {
+                     lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy-load");
+                });
             };
         </script>   
     </body>
