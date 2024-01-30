@@ -67,7 +67,7 @@ ROOT_URLCONF = "catalogodigital.urls"
 SUBDOMAIN_URLCONFS = {
     None: 'landingpages.urls', 
     'www': 'landingpages.urls',
-    'landingpage': 'landingpages.urls',
+#    'landingpage': 'landingpages.urls',
     'loja': 'lojas.urls',
     'admin': 'admin.urls',
 }
