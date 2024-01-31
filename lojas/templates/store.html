@@ -31,11 +31,11 @@
     </style>
 	<div class="container">
 		<div class="placeholder">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'common/store/img/simple-house-01.jpg' %}">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="{{endereco_bucket}}/cover.webp">
 				<div class="tm-header">
 					<div class="row tm-header-inner">
 						<div class="col-md-6 col-12">
-							<img src="{% static 'common/store/img/simple-house-logo.png' %}" alt="Logo" class="tm-site-logo" /> 
+							<img src="{{endereco_bucket}}/logo.webp" alt="Logo" class="tm-site-logo" /> 
 							<div class="tm-site-text-box">
 								<h1 class="tm-site-title">{{nome_empresa}}</h1>
 								<h6 class="tm-site-description">{{slogam}}</h6>	
@@ -75,7 +75,7 @@
 						{% for item in items %}
 							<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 								<figure>
-									<img src="{% static caminho_arquivos|add:'/img/'|add:item.3 %}" alt="Image" class="img-fluid tm-gallery-img lightbox-img" />
+									<img src="{{endereco_bucket}}/{{item.3|add:'.webp'}}" alt="Image" class="img-fluid tm-gallery-img lightbox-img" />
 									<figcaption>
 										<h4 class="tm-gallery-title">{{ item.0 |title}}</h4>
 										<p class="tm-gallery-description">{{ item.1 |capfirst}}</p>

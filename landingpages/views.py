@@ -15,8 +15,8 @@ class DefaultLandingPage(View):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'landing_page.html'
-        if not cache.get('contador'):
-            cache.set('contador', 0, timeout=None)
+        if not cache.get('contador_lp'):
+            cache.set('contador_lp', 0, timeout=None)
       
     def get(self, request, *args, **kwargs):
         url_recebida = request.path.replace('/','')
@@ -44,8 +44,8 @@ class DefaultLandingPage(View):
             } 
         else:
             return render(request, '404-wall-e.html')  
-        visitas = 1 + cache.get('contador')
-        cache.set('contador', visitas, timeout=None)
+        visitas = 1 + cache.get('contador_lp')
+        cache.set('contador_lp', visitas, timeout=None)
         self.context['contador_visitas'] = visitas
         return render(request, self.template_name, self.context)
 

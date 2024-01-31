@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /admin/
+Disallow: /seja_nosso_cliente/
