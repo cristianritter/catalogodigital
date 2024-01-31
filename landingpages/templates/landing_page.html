@@ -8,7 +8,16 @@
         <link rel="icon" type="image/png" href="{% static 'common/landing_page/favicon.png' %}">
         <title>{{nome_empresa}} - {{descricao_curta}}</title>
         <link href="{% static 'common/landing_page/css/styles_old.css'%}" rel="stylesheet" />
-    </head>               
+    </head>   
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TKSFTQLMCG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-TKSFTQLMCG');
+    </script>            
     <body id="page-top">
         <title>Seção de Serviços</title>           
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav"> 
