@@ -2537,15 +2537,15 @@ section#contact .section-heading {
 }
 
 .btn-primary2 {
-  color: #fcf8f8;
-  background-color: #312c18;
-  border-color: #ec0808;
+  color: #ffffff;
+  background-color: #638186;
+  border-color: #ffffff;
 }
 
 .btn-primary2:hover {
   color: #fff;
-  background-color: #524a2d;
-  border-color:  #ec0808;
+  background-color: #638186;
+  border-color:  #14d4a4;
 }
 
 header.masthead {
