@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content={{meta_description}} />
-        <link rel="icon" type="image/x-icon" href="{% static 'common/landing_page/favicon.ico' %}">
+        <link rel="icon" type="image/png" href="{% static 'common/landing_page/favicon.png' %}">
         <title>{{nome_empresa}} - {{descricao_curta}}</title>
         <link href="{% static 'common/landing_page/css/styles_old.css'%}" rel="stylesheet" />
     </head>               
@@ -32,9 +32,9 @@
                 <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
                 <div class="col">
                     {% if link_loja %}
-                    <a class="btn2 btn-primary2 text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
+                    <a class="btn btn-primary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
                     {% else %}
-                    <a class="btn2 btn-primary2 text-uppercase" href="#new-contact">Entre em contato</a>
+                    <a class="btn btn-primary text-uppercase" href="#new-contact">Entre em contato</a>
                     {% endif %}
                 </div>
             </div>   
