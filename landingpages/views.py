@@ -23,7 +23,6 @@ class DefaultLandingPage(View):
         url_recebida = request.path.replace('/','')
         if not url_recebida: 
             url_recebida = 'seja_nosso_cliente'
-            print(LandingPage.objects.all())
         landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()
         if landing_page_data and landing_page_data.on_air:
             self.context = {
