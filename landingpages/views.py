@@ -1,4 +1,3 @@
-from django.db.models.base import Model
 from .models import LandingPage
 from django.core.cache import cache
 from django.shortcuts import render

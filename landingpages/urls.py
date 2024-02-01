@@ -1,4 +1,3 @@
-from django.http import HttpRequest
 from django.urls import path, re_path
 from .views import DefaultLandingPage, Sitemap
 from django.views.generic import TemplateView
