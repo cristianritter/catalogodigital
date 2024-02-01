@@ -1,8 +1,10 @@
+from django.db.models.base import Model
 from .models import LandingPage
 from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
+from django.contrib.sitemaps import Sitemap
 import json
 
 def set_visitas(request):
@@ -22,6 +24,7 @@ class DefaultLandingPage(View):
         url_recebida = request.path.replace('/','')
         if not url_recebida: 
             url_recebida = 'seja_nosso_cliente'
+            print(LandingPage.objects.all())
         landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()
         if landing_page_data and landing_page_data.on_air:
             self.context = {
@@ -55,3 +58,19 @@ class Homepage(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'portal.html')
 
+class Sitemap(Sitemap):
+    changefreq = 'weekly'
+
+    def items(self):
+        urls = ['/']  # Esta é a URL da página inicial
+        urls += ['/'+obj.url_cadastrado for obj in LandingPage.objects.filter(on_air=True)]
+        return urls
+    
+    def location(self, item):
+        return item
+
+    def priority(self, item):
+        if item == '/':
+            return 1.0  
+        else:
+            return 0.7  
