@@ -23,7 +23,6 @@ class DefaultLandingPage(View):
         url_recebida = request.path.replace('/','')
         if not url_recebida: 
             url_recebida = 'seja_nosso_cliente'
-            print(LandingPage.objects.all())
         landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()
         if landing_page_data and landing_page_data.on_air:
             try:
@@ -49,6 +48,8 @@ class DefaultLandingPage(View):
                 'endereco': landing_page_data.endereco,
                 'horario_atendimento': landing_page_data.horario_atendimento,
                 'link_whats': landing_page_data.link_whats,
+                'link_instagram': landing_page_data.link_instagram,
+                'link_facebook': landing_page_data.link_facebook,
                 'reviews_link': landing_page_data.reviews_link,
                 'gmaps_link': landing_page_data.gmaps_link,
                 'link_loja': landing_page_data.link_loja,

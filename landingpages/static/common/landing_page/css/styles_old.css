@@ -2559,3 +2559,14 @@ header.masthead {
   margin: auto; /* Centraliza o carrossel */
 }
 
+.facebook-icon {
+  color: #3b5998; /* cor do Facebook */
+  font-size: 24px; /* tamanho do ícone */
+  margin-right: 5px; /* espaçamento à direita */
+}
+
+.instagram-icon {
+  color: #bc2a8d; /* cor do Instagram */
+  font-size: 24px; /* tamanho do ícone */
+  margin-right: 5px; /* espaçamento à direita */
+}

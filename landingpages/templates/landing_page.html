@@ -101,8 +101,24 @@
                 <div class="col-md-4 mx-auto text-center">
                     <p><strong>Atendimento:</strong> {{horario_atendimento}}</p>
                     <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
-                    <p><a href="{{link_whats}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">Conversar no WhatsApp</a></p>
-                    <p><strong>Onde estamos:</strong> {{endereco}}</p>
+                    <a href="{{link_whats}}" target="_blank" class="btn2 btn-primary2 mb-4 text-uppercase">Conversar no WhatsApp</a>                        
+                   
+                    {% if link_facebook or link_instagram %}
+                    <div class="tm-description-box"> 
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+                        <div class="tm-social-buttons">
+                            <p><strong>Também estamos nas redes sociais:</strong>
+                            {% if link_facebook %}
+                                <a href="{{ link_facebook }}"><i class="fab fa-facebook-f facebook-icon"></i></a>
+                            {% endif %}
+                            {% if link_instagram %}
+                                <a href="{{ link_instagram }}"><i class="fab fa-instagram instagram-icon"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                   {% endif %}
+            
+                    <p><strong>Endereço:</strong> {{endereco}}</p>
                     {% if gmaps_link %}
                     <button class="btn2 btn-primary2 text-uppercase" onclick="carregarMapa()" id="map-button">Ver mapa</button>
                     <script defer>
@@ -120,14 +136,15 @@
                     {% if email_contato %}
                     <p class="my-4"><strong>E-mail:</strong> <a href="mailto:{{email_contato}}">{{email_contato}}</a></p>
                     {% endif %}     
-                </div>
+                </div>       
                 <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container"></div>
+                
             </div>
         </section>  
         <footer class="footer py-4">
             <div class="container text-center">
-                <p class="mb-4"><a href="\" class="text-dark fs-5">Divulgue sua empresa com a gente</a></p>
                 <div class="">Você é o visitante número <strong>{{contador_visitas}}</strong></div>
+                <a href="\">Seja visto. Divulgue sua empresa com a gente!</a>
                 <div class="text-uppercase">Copyright &copy; ConectaPages 2024</div>
             </div>
         </footer>        
