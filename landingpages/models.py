@@ -23,7 +23,7 @@ class LandingPage(PageWithBucket):
     #Dados Gerais da empresa
     descricao_curta = models.CharField(max_length=100, help_text='Resuma em uma sentença curta o que a empresa faz')
     lista_titulo = models.CharField(blank=True, max_length=50, help_text='Título da lista. Ex: "Produtos e Serviços"')
-    lista_items = models.TextField(blank=True, help_text='Itens da lista em formato de list ["abc", "cde"], ["efg"]')
+    lista_items = models.TextField(blank=True, help_text='Itens da lista em formato de list ["abc", "cde"]')
     colunas_items = models.TextField(blank=True, help_text='Conteúdo adicional no formato de dict. {"key": "value", "key2": "value2"}')
     numeros_telefone = models.CharField(blank=True, max_length=50, help_text='Números de telefone no formato (12) 98765 4321')
     email_contato = models.EmailField(blank=True, help_text='Email da empresa, se houver')

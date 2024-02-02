@@ -25,6 +25,15 @@ class DefaultLandingPage(View):
             url_recebida = 'seja_nosso_cliente'
         landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()
         if landing_page_data and landing_page_data.on_air:
+            try:
+                lista_items = json.loads(landing_page_data.lista_items)
+            except:
+                return HttpResponse("AVISO: Revise a construção da seção 'Lista items' na página de administração.")
+            try:
+                dados_dict = json.loads(landing_page_data.colunas_items),
+            except:
+                return HttpResponse("AVISO: Revise a construção da seção 'Coluna items' na página de administração.")
+           
             self.context = {
                 'endereco_bucket': landing_page_data.endereco_bucket+url_recebida+'/',
                 'nomes_arquivos_imagens': landing_page_data.nomes_arquivos_imagens.split(','),
@@ -32,8 +41,8 @@ class DefaultLandingPage(View):
                 'descricao_curta': landing_page_data.descricao_curta,
                 'meta_description': landing_page_data.meta_description,
                 'lista_titulo': landing_page_data.lista_titulo,
-                'lista_items': json.loads(landing_page_data.lista_items),
-                'dados_dict': json.loads(landing_page_data.colunas_items),
+                'lista_items': lista_items,
+                'dados_dict': dados_dict,
                 'numeros_telefone': landing_page_data.numeros_telefone,
                 'email_contato': landing_page_data.email_contato,
                 'endereco': landing_page_data.endereco,
