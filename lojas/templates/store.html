@@ -62,31 +62,32 @@
 				<nav>
 					<ul>
 						{% for category, items in produtos.items %}
-							<li class="tm-paging-item"><a href="#" class="tm-paging-link{% if forloop.first %} active{% endif %}">{{ category|title }}</a></li>
+							<li class="tm-paging-item"><a href="#" class="tm-paging-link{% if forloop.first %} active{% endif %}">{{ category }}</a></li>
 						{% endfor %}
 					</ul>
 				</nav>
 			</div>
 
-			<!-- Gallery -->
+			<!-- Gallery  CASE SENSITIVE !!!!-->
 			<div class="row tm-gallery">
 				{% for category, items in produtos.items %}
-					<div id="tm-gallery-page-{{ category }}" class="tm-gallery-page {% if not forloop.first %}hidden{% endif %}">
+					<div id='tm-gallery-page-{{category|cut:" "}}' class="tm-gallery-page {% if not forloop.first %}hidden{% endif %}">
 						{% for item in items %}
 							<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 								<figure>
-									<img src="{{endereco_bucket}}/{{item.3|add:'.webp'}}" alt="Image" class="img-fluid tm-gallery-img lightbox-img" />
+									<img src="{{ endereco_bucket }}/{{ item.id }}.webp" alt="Image" class="img-fluid tm-gallery-img lightbox-img" />
 									<figcaption>
-										<h4 class="tm-gallery-title">{{ item.0 |title}}</h4>
-										<p class="tm-gallery-description">{{ item.1 |capfirst}}</p>
-										<p class="tm-gallery-price">{{ item.2 }}</p>
+										<h4 class="tm-gallery-title">{{ item.nome }}</h4>
+										<p class="tm-gallery-description">{{ item.descrição | capfirst }}</p>
+										<p class="tm-gallery-price">{{ item.preço }}</p>
 									</figcaption>
 								</figure>
 							</article>
 						{% endfor %}
-					</div> <!-- gallery page {{ category }} -->
+					</div> 
 				{% endfor %}
 			</div>
+			
 			
 			<div class="tm-section tm-container-inner">
 				<div class="row">
@@ -134,7 +135,7 @@
 			
 
 		<footer class="tm-footer text-center">
-			<p class="mb-4"><a href="https://mk4digital.com" class="text-dark fs-5">Gostou dessa solução? Converse conosco.</a></p>
+			<p class="mb-4"><a href="/" class="text-dark fs-5">Gostou dessa solução? Converse conosco.</a></p>
 			<p>Copyright &copy; 2024 MK4 Digital 
             | Design: <a rel="nofollow" href="https://www.linkedin.com/in/cristianritter/">Cristian Ritter</a></p>
 		</footer>
@@ -143,11 +144,11 @@
 	<script src="{% static 'common/store/js/parallax.min.js' %}"></script>
 	<script>
 		$(document).ready(function(){
-			// Handle click on paging links
 			$('.tm-paging-link').click(function(e){
 				e.preventDefault();
 				
-				var page = $(this).text().toLowerCase();
+				var page = $(this).text().replace(/\s/g, '');
+				console.log(page)
 				$('.tm-gallery-page').addClass('hidden');
 				$('#tm-gallery-page-' + page).removeClass('hidden');
 				$('.tm-paging-link').removeClass('active');

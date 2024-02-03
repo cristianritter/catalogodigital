@@ -31,7 +31,7 @@ class BaseLoja(View):
                 'slogam': loja__data.slogam,
                 'titulo': loja__data.titulo,
                 'paragrafo': loja__data.paragrafo,
-                'produtos': json.loads(loja__data.produtos.lower()),
+                'produtos': json.loads(loja__data.produtos),
             } 
         else:
             return render(request, '404-wall-e.html')  
