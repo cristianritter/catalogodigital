@@ -30,7 +30,8 @@ class DefaultLandingPage(View):
             except:
                 return HttpResponse("AVISO: Revise a construção da seção 'Lista items' na página de administração.")
             try:
-                dados_dict = json.loads(landing_page_data.colunas_items),
+                dados_dict = json.loads(landing_page_data.colunas_items)
+                print(dados_dict)
             except:
                 return HttpResponse("AVISO: Revise a construção da seção 'Coluna items' na página de administração.")
            
