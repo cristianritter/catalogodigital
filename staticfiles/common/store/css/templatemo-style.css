@@ -474,11 +474,6 @@ p, address {
   margin-top: 40px;
 }
 
-.tm-footer a {
-  color: #626364;
-  text-decoration: none;
-}
-
 .tm-footer a:hover {
   color: #1A6692;
 }
@@ -852,8 +847,9 @@ address {
   padding: 5px 20px 30px;
 }
 
-.link-like {
-  color: blue;
+
+.tm-footer a {
+  color: #626364;
   text-decoration: underline;
   cursor: pointer;
 }
