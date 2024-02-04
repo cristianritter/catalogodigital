@@ -65,10 +65,9 @@ else:
 
 ROOT_URLCONF = "catalogodigital.urls"
 SUBDOMAIN_URLCONFS = {
-    None: 'landingpages.urls', 
-    'www': 'landingpages.urls',
-#    'landingpage': 'landingpages.urls',
-    'loja': 'lojas.urls',
+    None: 'landingpage.urls', 
+    'www': 'landingpage.urls',
+    'loja': 'loja.urls',
     'admin': 'admin.urls',
 }
 
@@ -81,8 +80,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'django.contrib.sitemaps',
     'import_export',
-    'landingpages',
-    'lojas',
+    'landingpage',
+    'loja',
 ]
 
 MIDDLEWARE = [

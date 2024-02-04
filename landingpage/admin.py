@@ -1,5 +1,5 @@
 from django.contrib import admin
-from landingpages.models import LandingPage
+from landingpage.models import LandingPage
 from import_export.admin import ImportExportModelAdmin
 
 admin.site.site_title = "ConectaPages"

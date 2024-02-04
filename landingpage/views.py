@@ -21,6 +21,7 @@ class DefaultLandingPage(View):
       
     def get(self, request, *args, **kwargs):
         url_recebida = request.path.replace('/','')
+        print(url_recebida)
         if not url_recebida: 
             url_recebida = 'seja_nosso_cliente'
         landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()

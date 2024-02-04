@@ -1,13 +1,13 @@
-from django.shortcuts import redirect
-from django.shortcuts import render
+#from django.shortcuts import redirect
+from subdomains.utils import reverse
+from django.shortcuts import redirect, render
 from django.views import View
 from .models import Loja
 import json
 from django.core.cache import cache
 
-def redirect_to_landingpage(request):
-    # Redireciona para a URL de landingpage
-    return redirect('landingpages:seja_nosso_cliente')
+def home(request):
+    return redirect(reverse('DefaultLandingPage', subdomain=None))
 
 class BaseLoja(View):
     def __init__(self, *args, **kwargs):

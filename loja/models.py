@@ -1,5 +1,5 @@
 from django.db import models
-from landingpages.models import PageWithBucket
+from landingpage.models import PageWithBucket
 
 class Loja(PageWithBucket):
     class Meta:
