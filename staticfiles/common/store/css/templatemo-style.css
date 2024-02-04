@@ -852,3 +852,8 @@ address {
   padding: 5px 20px 30px;
 }
 
+.link-like {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
