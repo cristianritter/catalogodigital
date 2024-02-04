@@ -8,5 +8,8 @@ class LojaAdmin(ImportExportModelAdmin):
         css = {
             'all': ('common/landing_page/css/admin_styles.css',),
         }
+    actions = None
+    list_display = ['nome_empresa', 'on_air', 'url_cadastrado']
+    search_fields = ['nome_empresa', 'url_cadastrado']
 
   
