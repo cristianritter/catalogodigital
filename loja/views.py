@@ -19,7 +19,7 @@ class LojaView(View):
         if loja__data and loja__data.on_air:
             self.context = {
                 'meta_description': loja__data.meta_description,
-                'endereco_bucket': loja__data.endereco_bucket+url+'store/',
+                'endereco_bucket': loja__data.endereco_bucket+url+'/store',
                 'nome_empresa': loja__data.nome_empresa,
                 'link_whats': loja__data.link_whats,
                 'link_facebook': loja__data.link_facebook,
