@@ -19,8 +19,8 @@ class HubAdmin(ImportExportModelAdmin):
             'all': ('common/landing_page/css/admin_styles.css',),
         }
     actions = None
-    list_display = [ 'on_air', 'url', 'get_included_lojas']
-    search_fields = ['url', 'get_included_lojas']
+    list_display = [ 'on_air', 'nome', 'url', 'get_included_lojas']
+    search_fields = ['url', 'nome', 'lojas__url_cadastrado']
 
     def get_included_lojas(self, obj):
         return ", ".join([loja.url_cadastrado for loja in obj.lojas.all()])

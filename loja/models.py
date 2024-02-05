@@ -18,6 +18,8 @@ class Hub(Page):
     class Meta:
         verbose_name = 'Registro de Hub'
         verbose_name_plural = 'Registros de Hubs'
+    nome = models.CharField(max_length=100, help_text="Nome do Food Park centralizador")
+    slogam = models.CharField(max_length=100, help_text="Slogam do Food Park centralizador")
     lojas = models.ManyToManyField(Loja)
     
    
