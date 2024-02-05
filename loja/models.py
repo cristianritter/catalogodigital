@@ -1,5 +1,5 @@
 from django.db import models
-from landingpage.models import PageWithBucket
+from landingpage.models import PageWithBucket, Page
 
 class Loja(PageWithBucket):
     class Meta:
@@ -13,3 +13,11 @@ class Loja(PageWithBucket):
                                 {"pizza": [["Pizza de Calabresa", "Calabresa, Queijo Chedar e massa especial", 59.90, "nome_do_arquivo"]\]}')   
     def __str__(self):
         return self.url_cadastrado
+    
+class Hub(Page):
+    class Meta:
+        verbose_name = 'Registro de Hub'
+        verbose_name_plural = 'Registros de Hubs'
+    lojas = models.ManyToManyField(Loja)
+    
+   

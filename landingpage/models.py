@@ -1,5 +1,13 @@
 from django.db import models
 
+class Page(models.Model):
+    class Meta:
+        abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
+    on_air = models.BooleanField(help_text='Indica se a página está no ar.')
+    url = models.CharField(max_length=50, help_text='O endereço final do link da página')
+    meta_description = models.CharField(blank=True, max_length=160, help_text='Uma descrição que vai aparecer para o usuário durante a busca')
+
+
 class PageWithBucket(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
