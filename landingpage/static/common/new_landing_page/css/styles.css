@@ -181,6 +181,10 @@ body {
 .footer {
   background-color: #f0f0f0; /* Adicione uma cor de fundo opcional para o rodapé */
   padding: 20px 0; /* Adicione preenchimento para separar o conteúdo do rodapé do contêiner */
+  max-width: 1320px;
+  margin-left: auto; /* Define 'margin-left: auto' para centralizar o elemento */
+  margin-right: auto; /* Define 'margin-right: auto' para centralizar o elemento */
+
 }
 
 .footer.container {
