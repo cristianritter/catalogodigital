@@ -24,11 +24,13 @@
     </script>            
     <header class="top-bar">
         <div class="container">
-            <img src="{% static 'common/landing_page/img/navbar-logo.svg' %}" alt="Logo da sua página" class="logo">
+            <a href="/">
+                <img src="{% static 'common/landing_page/img/navbar-logo.svg' %}" alt="Logo da sua página" class="logo">
+            </a>
         </div>
     </header>
     <body id="page-top">
-        <header class="masthead" id="masthead" style="background-position: center; text-align: center; height: 300px; max-width: 1320px; margin: 0 auto; background-image: url('{{ endereco_bucket }}{{ nomes_arquivos_imagens.0 }}');">
+        <header class="masthead main-content" id="masthead" style="background-position: center; text-align: center; height: 300px; max-width: 1320px; margin: 0 auto; background-image: url('{{ endereco_bucket }}{{ nomes_arquivos_imagens.0 }}');">
             <div class="container">
                 <div class="masthead-subheading">{{ descricao_curta }}</div>
                 <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
