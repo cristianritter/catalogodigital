@@ -86,7 +86,6 @@
             <a href="mailto:{{email_contato}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
             {% endif %}     
             {% if link_facebook or link_instagram %}
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
             <div class="tm-social-buttons espaco-duplo ">
                 <strong>Nos siga nas redes sociais:</strong>
                 {% if link_facebook %}
@@ -139,6 +138,10 @@
              lazyImage.src = lazyImage.dataset.src;
             lazyImage.classList.remove("lazy-load");
         });
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+        document.head.appendChild(link);
     };
 </script>   
 </body>
