@@ -1,4 +1,4 @@
-from .models import LandingPage
+from .models import LandingPage, Sistema
 from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
@@ -18,7 +18,8 @@ class DefaultLandingPage(View):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'landing_page.html'
-        cache.set(f'seja_nosso_cliente.landing', 0, timeout=60*60*24*7)
+        cache.set('file_bucket_address',Sistema.objects.get(on_air=True).repositorio_imagens, timeout=None)
+        cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url_cadastrado='seja_nosso_cliente'), timeout=60*60*24*7)
 
       
     def get(self, request, *args, **kwargs):
@@ -28,7 +29,7 @@ class DefaultLandingPage(View):
         data = cache.get(f'{url_recebida}.landing')
         if not data:
             cache.set(f'{url_recebida}.landing', 0, timeout=60*60*24)
-        landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()
+        landing_page_data = LandingPage.objects.get(url_cadastrado=url_recebida)
         if landing_page_data and landing_page_data.on_air:
             try:
                 lista_items = json.loads(landing_page_data.lista_items)
@@ -40,7 +41,7 @@ class DefaultLandingPage(View):
                 return HttpResponse("AVISO: Revise a construção da seção 'Coluna items' na página de administração.")
            
             self.context = {
-                'endereco_bucket': landing_page_data.endereco_bucket+url_recebida+'/',
+                'endereco_bucket': cache.get('file_bucket_address')+url_recebida+'/',
                 'nomes_arquivos_imagens': landing_page_data.nomes_arquivos_imagens.split(','),
                 'nome_empresa': landing_page_data.nome_empresa,
                 'descricao_curta': landing_page_data.descricao_curta,

@@ -26,7 +26,9 @@ class LandingPage(PageWithBucket):
         verbose_name = 'Registro de Landing Page'
         verbose_name_plural = 'Registros de Landing Pages'
     #Dados técnicos
-    nomes_arquivos_imagens = models.CharField(blank=True, max_length=300, help_text='nomes dos arquivos, separados por virgula')
+    nomes_arquivos_imagens = models.CharField(blank=True, max_length=300, help_text='Nomes dos arquivos de imagens(sem a extensão)\
+                                               separados por virgula. Um arquivo para a capa, em baixa qualidade, um para a capa em\
+                                               alta qualidade e o restante para o carousel.')
     #Dados Gerais da empresa
     descricao_curta = models.CharField(max_length=100, help_text='Resuma em uma sentença curta o que a empresa faz')
     lista_titulo = models.CharField(blank=True, max_length=50, help_text='Título da lista. Ex: "Produtos e Serviços"')
@@ -47,5 +49,7 @@ class Sistema(models.Model):
     class Meta:
         verbose_name = 'Configuração do Sistema'
         verbose_name_plural = 'Configurações do Sistema'
+    on_air = models.BooleanField(help_text='Indica se a configuração está ativa')
+    config_name = models.CharField(max_length=50, help_text='Nome da configuração do sistema')
     repositorio_imagens = models.CharField(max_length=200, help_text='https://gjvoxpezczvyqbnmonap.supabase.co/storage/v1/object/public/conecta_bucket/')
-
+    

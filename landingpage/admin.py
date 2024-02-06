@@ -1,5 +1,5 @@
 from django.contrib import admin
-from landingpage.models import LandingPage
+from landingpage.models import LandingPage, Sistema
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
@@ -34,3 +34,9 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
+@admin.register(Sistema)
+class SistemaAdmin(ImportExportModelAdmin):
+    actions = None
+
+    list_display = ('on_air', 'config_name', 'repositorio_imagens')
