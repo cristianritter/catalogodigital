@@ -26,7 +26,7 @@ class DefaultLandingPage(View):
             url_recebida = 'seja_nosso_cliente'
         data = cache.get(f'{url_recebida}.landing')
         if not data:
-            cache.set(f'{url_recebida}.landing', 0, timeout=60*2)
+            cache.set(f'{url_recebida}.landing', 0, timeout=60*5)
         landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()
         if landing_page_data and landing_page_data.on_air:
             try:
