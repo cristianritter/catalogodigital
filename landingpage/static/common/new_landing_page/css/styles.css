@@ -118,7 +118,7 @@ header.masthead .masthead-heading {
 }
 
 a {
-  color: #0f12a5;
+  color: #040533;
   text-decoration: None;
 }
 
@@ -148,3 +148,10 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(171, 31, 31, 0);
 }
+
+
+.justify {
+  display: flex;
+  justify-content: center;
+}
+
