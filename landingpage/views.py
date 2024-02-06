@@ -6,27 +6,28 @@ from django.http import HttpResponse
 from django.contrib.sitemaps import Sitemap
 import json
 
-def set_visitas(request):
-    visitas_argumento = int(request.GET.get('visitas', 0))
-    cache.set('pagina_visitas', str(visitas_argumento), timeout=None)
-    return HttpResponse(f'Contagem de visitas definida para {visitas_argumento}.')
+def update_cache(request, url):
+    if url:
+        resposta = cache.delete(f'{url}.landing')
+    else:
+        resposta = cache.clear()
+    return HttpResponse('Cache cleared!!!', resposta)    
 
 class DefaultLandingPage(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {}
-        self.template_name = 'new_landing_page.html'
-        if not cache.get('contador_lp'):
-            cache.set('contador_lp', 0, timeout=None)
+        self.template_name = 'landing_page.html'
+        cache.set(f'seja_nosso_cliente.landing', 0, timeout=60*60*24*7)
+
       
     def get(self, request, *args, **kwargs):
         url_recebida = request.path.replace('/','')
-        print(url_recebida)
         if not url_recebida: 
             url_recebida = 'seja_nosso_cliente'
         data = cache.get(f'{url_recebida}.landing')
         if not data:
-            cache.set(f'{url_recebida}.landing', 0, timeout=60*5)
+            cache.set(f'{url_recebida}.landing', 0, timeout=60*60*24)
         landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()
         if landing_page_data and landing_page_data.on_air:
             try:
@@ -60,9 +61,6 @@ class DefaultLandingPage(View):
             } 
         else:
             return render(request, '404-wall-e.html')  
-        visitas = 1 + cache.get('contador_lp')
-        cache.set('contador_lp', visitas, timeout=None)
-        self.context['contador_visitas'] = visitas
         return render(request, self.template_name, self.context)
 
 class Homepage(View):
@@ -88,48 +86,3 @@ class Sitemap(Sitemap):
         else:
             return 0.7  
 
-class NewLandingPage(View):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.context = {}
-        self.template_name = 'new_landing_page.html'
-        self.landing_page_data = LandingPage.objects.filter(url_cadastrado='ajr_cutelaria').first()
-      
-    def get(self, request, *args, **kwargs):
-        url_recebida='ajr_cutelaria'
-        if self.landing_page_data and self.landing_page_data.on_air:
-            try:
-                lista_items = json.loads(self.landing_page_data.lista_items)
-            except:
-                return HttpResponse("AVISO: Revise a construção da seção 'Lista items' na página de administração.")
-            try:
-                dados_dict = json.loads(self.landing_page_data.colunas_items)
-            except:
-                return HttpResponse("AVISO: Revise a construção da seção 'Coluna items' na página de administração.")
-           
-            self.context = {
-                'endereco_bucket': self.landing_page_data.endereco_bucket+url_recebida+'/',
-                'nomes_arquivos_imagens': self.landing_page_data.nomes_arquivos_imagens.split(','),
-                'nome_empresa': self.landing_page_data.nome_empresa,
-                'descricao_curta': self.landing_page_data.descricao_curta,
-                'meta_description': self.landing_page_data.meta_description,
-                'lista_titulo': self.landing_page_data.lista_titulo,
-                'lista_items': lista_items,
-                'dados_dict': dados_dict,
-                'numeros_telefone': self.landing_page_data.numeros_telefone,
-                'email_contato': self.landing_page_data.email_contato,
-                'endereco': self.landing_page_data.endereco,
-                'horario_atendimento': self.landing_page_data.horario_atendimento,
-                'link_whats': self.landing_page_data.link_whats,
-                'link_instagram': self.landing_page_data.link_instagram,
-                'link_facebook': self.landing_page_data.link_facebook,
-                'reviews_link': self.landing_page_data.reviews_link,
-                'gmaps_link': self.landing_page_data.gmaps_link,
-                'link_loja': self.landing_page_data.link_loja,
-            } 
-        else:
-            return render(request, '404-wall-e.html')  
-        visitas = 1 + cache.get('contador_lp')
-        cache.set('contador_lp', visitas, timeout=None)
-        self.context['contador_visitas'] = visitas
-        return render(request, self.template_name, self.context)

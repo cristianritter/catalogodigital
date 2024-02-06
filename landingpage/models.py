@@ -43,18 +43,9 @@ class LandingPage(PageWithBucket):
     def __str__(self):
         return self.url_cadastrado
 
-class Configuracao(models.Model):
+class Sistema(models.Model):
     class Meta:
         verbose_name = 'Configuração do Sistema'
         verbose_name_plural = 'Configurações do Sistema'
     repositorio_imagens = models.CharField(max_length=200, help_text='https://gjvoxpezczvyqbnmonap.supabase.co/storage/v1/object/public/conecta_bucket/')
- 
-    
 
-"""class PageViewsCounter(models.Model):
-    key = models.CharField(max_length=255, unique=True)
-    value = models.IntegerField(default=0)
-    def increment(self):
-        self.value += 1
-        self.save()
-"""
