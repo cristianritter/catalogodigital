@@ -76,9 +76,7 @@
         <button class="carousel-prev">&#10094;</button>
         <button class="carousel-next">&#10095;</button>
     </div>
-    
 </section>
-
 <section class="page-section text-center container" id="new-contact">
     <div class=" mx-auto ">
         <h2 class="section-heading text-uppercase espaco-duplo">Contato</h2>
@@ -92,10 +90,10 @@
             <div class="tm-social-buttons espaco-duplo ">
                 <strong>Nos siga nas redes sociais:</strong>
                 {% if link_facebook %}
-                <a href="{{ link_facebook }}"><i class="fab fa-facebook-f facebook-icon"></i></a>
+                <a href="{{ link_facebook }}" title="Siga-nos no Facebook"><i class="fab fa-facebook-f facebook-icon"></i></a>
                 {% endif %}
                 {% if link_instagram %}
-                <a href="{{ link_instagram }}"><i class="fab fa-instagram instagram-icon"></i></a>
+                <a href="{{ link_instagram }}" title="Siga-nos no Instagram"><i class="fab fa-instagram instagram-icon"></i></a>
                 {% endif %}
             </div>
             {% endif %}

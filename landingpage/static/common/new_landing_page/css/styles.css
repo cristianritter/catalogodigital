@@ -119,7 +119,7 @@ header.masthead .masthead-heading {
 
 a {
   color: #040533;
-  text-decoration: None;
+  text-decoration: underline;
 }
 
 h3,
