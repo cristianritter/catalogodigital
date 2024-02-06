@@ -36,25 +36,40 @@
             z-index: 1000;
         }
     </style>
+	<style>
+		.parallax-window {
+			background-image: url('{{ endereco_bucket }}/cover.webp');
+			background-size: cover;
+			position: relative;
+		}
+	
+		.parallax-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5); /* Ajuste a opacidade conforme necessário */
+		}
+	</style>
 	<div class="container">
-		<div class="placeholder">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="{{endereco_bucket}}/cover.webp">
-				<div class="tm-header">
-					<div class="row tm-header-inner">
-						<div class="col-md-6 col-12">
-							<img src="{{endereco_bucket}}/logo.webp" alt="Logo" class="tm-site-logo" /> 
-							<div class="tm-site-text-box">
-								<h1 class="tm-site-title">{{nome_empresa}}</h1>
-								<h6 class="tm-site-description">{{slogam}}</h6>	
-							</div>
+		<div class="parallax-window">
+			<div class="parallax-overlay"></div>
+			<div class="tm-header">
+				<div class="row tm-header-inner">
+					<div class="col-md-6 col-12">
+						<img src="{{ endereco_bucket }}/logo.webp" alt="Logo" class="tm-site-logo" />
+						<div class="tm-site-text-box">
+							<h1 class="tm-site-title">{{ nome_empresa }}</h1>
+							<h6 class="tm-site-description">{{ slogam }}</h6>
 						</div>
-						<nav class="col-md-6 col-12 tm-nav">
-							<ul class="tm-nav-ul">
-								<li class="tm-nav-li"><a href="#" class="tm-nav-link active">Home</a></li>
-								<li class="tm-nav-li"><a href="#promocoes" class="tm-nav-link">Promoções</a></li>
-							</ul>
-						</nav>	
 					</div>
+					<nav class="col-md-6 col-12 tm-nav">
+						<ul class="tm-nav-ul">
+							<li class="tm-nav-li"><a href="#" class="tm-nav-link active">Home</a></li>
+							<li class="tm-nav-li"><a href="#promocoes" class="tm-nav-link">Promoções</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>

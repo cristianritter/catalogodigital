@@ -853,3 +853,7 @@ address {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.imagem-escurecida {
+  filter: brightness(0.5); /* Valor entre 0 e 1 para escurecer a imagem */
+}

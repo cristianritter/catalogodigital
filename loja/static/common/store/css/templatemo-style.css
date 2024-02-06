@@ -190,6 +190,7 @@ html {
 .img-fluid {
   max-width: 250px;
   height: auto;
+  
 }
 
 body {
@@ -201,6 +202,7 @@ body {
 
 .container {
   background-color: white;
+  
 }
 
 p, address {
@@ -853,3 +855,4 @@ address {
   text-decoration: underline;
   cursor: pointer;
 }
+

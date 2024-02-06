@@ -7,7 +7,6 @@ class Page(models.Model):
     url = models.CharField(max_length=50, help_text='O endereço final do link da página')
     meta_description = models.CharField(blank=True, max_length=160, help_text='Uma descrição que vai aparecer para o usuário durante a busca')
 
-
 class PageWithBucket(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
@@ -44,6 +43,13 @@ class LandingPage(PageWithBucket):
     def __str__(self):
         return self.url_cadastrado
 
+class Configuracao(models.Model):
+    class Meta:
+        verbose_name = 'Configuração do Sistema'
+        verbose_name_plural = 'Configurações do Sistema'
+    repositorio_imagens = models.CharField(max_length=200, help_text='https://gjvoxpezczvyqbnmonap.supabase.co/storage/v1/object/public/conecta_bucket/')
+ 
+    
 
 """class PageViewsCounter(models.Model):
     key = models.CharField(max_length=255, unique=True)
