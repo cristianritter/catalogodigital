@@ -8,9 +8,9 @@
   vertical-align: middle;
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
@@ -19,62 +19,62 @@
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .btn:hover {
   color: #212529;
 }
 
-
 .btn-primary {
-    color: #ffffff;
-    background-color: #0766d3;
-    border-color: #020618;
-  }
-  
-  .btn-primary:hover {
-    color: #fff;
-    background-color: #0766d3;
-    border-color:  #14d4a4;
-  }
+  color: #ffffff;
+  background-color: #0766d3;
+  border-color: #020618;
+}
 
-  .container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    width: 95%;
-    padding-right: var(--bs-gutter-x, 0.75rem);
-    padding-left: var(--bs-gutter-x, 0.75rem);
-    margin-right: auto;
-    margin-left: auto;
-  }
-  
-  ul {
-    padding-left: 0rem;
-    margin: 20px 30px;
-    font-size: 18px; 
-    list-style-image: url('data:image/png;base64,UklGRigCAABXRUJQVlA4TBwCAAAvD8ADAE/koG0kSaqamV0qi+J4HH8A/92+3R0abiRJcpTu3dNaPYP//wRbe1in72CXdtBGkiN1z15A8iwexvOHkH/jzUzPfyAFAEAQAJJYYJIoQAAACriEK0DBAQi4E8uB6YGn9dtNV9No1r1JJSTYVE6KIiQOgZAKSLa2i0JsxYn5L3//W1VO2sdYMGzxOSp5SYX8hSMc4ucOt/SvWX/DFU4s6axDfC+aZI2G5OX0LjKnQHqy664YAc3bqd5L7bCeVXowUjB8VaHAnvIrqzosCMmCOkUOCtJZ6JemcFcWaAMEDDgkCwTTDPhLI9q5AgyED7iQPrWSgFEgJhFA/1MzhUkmYUBMslSUoc1QMX6FM4Iwm50C8gZj2v3Gn7CXs3QHltvlrqq0VDfnEO7tQyNBaDCdBhC2bTvWCr4/Pe+Hamje4mzbbEbWrGbb/Nbv3ltE/9W2bcO4bE49gzEGgBjL6AcAgpwuKvnTRQHgXNjU0T0xM1km/oMprsa2rv7nl7mFBkMhSAXNrbXjQ3enOxshh8wgt7T3VOR/3F8e7i35dCDd2Ts6Zs+uHD5LJYKmQMV9g48PNdYs+/dJ0u9R4J5/vbgpt9jyPg9W/R4Jv4H4/khO7tfteSoeMAXoUyvrVdVP11fHu1xEK43MDmy9Hb1vb0YdBkHQ6sOLsbVkYjlUx39KdU4H/f6Az5HxOEHVf7xek/sjIyIARIrC9SM=')
-  }
-  
-  li {
-    margin-bottom: 20px; /* Aumenta o espaço entre os itens da lista */
-  }
+.btn-primary:hover {
+  color: #ffffff;
+  background-color: #14d4a4;
+  border-color: #14d4a4;
+}
 
-  header.masthead {
-    padding-top: 5rem;
-    text-align: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: center center;
-    background-size: cover;
-    color: rgb(253, 253, 253);
-            
-  }
-  
-  header.masthead .masthead-subheading {
-    font-size: 1.5rem;
-    font-style: italic;
-    line-height: 1.5rem;
-    margin-bottom: 25px;
-    font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  }
+.container {
+  max-width: 1320px;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  width: 95%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+ul {
+  padding-left: 0rem;
+  margin: 20px 30px;
+  font-size: 18px;
+  list-style-image: url('data:image/png;base64,UklGRigCAABXRUJQVlA4TBwCAAAvD8ADAE/koG0kSaqamV0qi+J4HH8A/92+3R0abiRJcpTu3dNaPYP//wRbe1in72CXdtBGkiN1z15A8iwexvOHkH/jzUzPfyAFAEAQAJJYYJIoQAAACriEK0DBAQi4E8uB6YGn9dtNV9No1r1JJSTYVE6KIiQOgZAKSLa2i0JsxYn5L3//W1VO2sdYMGzxOSp5SYX8hSMc4ucOt/SvWX/DFU4s6axDfC+aZI2G5OX0LjKnQHqy664YAc3bqd5L7bCeVXowUjB8VaHAnvIrqzosCMmCOkUOCtJZ6JemcFcWaAMEDDgkCwTTDPhLI9q5AgyED7iQPrWSgFEgJhFA/1MzhUkmYUBMslSUoc1QMX6FM4Iwm50C8gZj2v3Gn7CXs3QHltvlrqq0VDfnEO7tQyNBaDCdBhC2bTvWCr4/Pe+Hamje4mzbbEbWrGbb/Nbv3ltE/9W2bcO4bE49gzEGgBjL6AcAgpwuKvnTRQHgXNjU0T0xM1km/oMprsa2rv7nl7mFBkMhSAXNrbXjQ3enOxshh8wgt7T3VOR/3F8e7i35dCDd2Ts6Zs+uHD5LJYKmQMV9g48PNdYs+/dJ0u9R4J5/vbgpt9jyPg9W/R4Jv4H4/khO7tfteSoeMAXoUyvrVdVP11fHu1xEK43MDmy9Hb1vb0YdBkHQ6sOLsbVkYjlUx39KdU4H/f6Az5HxOEHVf7xek/sjIyIARIrC9SM=')
+}
+
+li {
+  margin-bottom: 20px; /* Aumenta o espaço entre os itens da lista */
+}
+
+header.masthead {
+  padding-top: 5rem;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+  color: rgb(253, 253, 253);
+}
+
+header.masthead .masthead-subheading {
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.5rem;
+  margin-bottom: 25px;
+  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
 header.masthead .masthead-heading {
   font-size: 3.25rem;
@@ -109,12 +109,12 @@ header.masthead .masthead-heading {
   text-transform: uppercase;
 }
 
-.espaco-antes {
-  padding-top: 5px; /* Adicione a quantidade de espaço desejada */
-}
-
 .espaco-duplo {
   padding-top: 20px; /* Adicione a quantidade de espaço desejada */
+}
+
+.espaco-apos {
+  padding-bottom: 5px; /* Adicione a quantidade de espaço desejada */
 }
 
 a {
@@ -122,7 +122,10 @@ a {
   text-decoration: None;
 }
 
-h3,.h3,h2,.h2 {
+h3,
+.h3,
+h2,
+.h2 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -135,11 +138,9 @@ p {
   margin-bottom: 2rem;
 }
 
-
 body {
   margin: 0;
-    font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
+  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -149,9 +150,43 @@ body {
   -webkit-tap-highlight-color: rgba(171, 31, 31, 0);
 }
 
-
 .justify {
   display: flex;
   justify-content: center;
+}
+
+
+/* Adicione um estilo para o contêiner flexível */
+.container {
+  display: flex;
+  flex-direction: column; /* Organiza os itens em coluna */
+  justify-content: center; /* Centraliza os itens verticalmente */
+  align-items: center; /* Centraliza os itens horizontalmente */
+}
+
+/* Estilo para a classe row */
+.row {
+  display: flex;
+  flex-wrap: wrap; /* Faz os itens filhos envolverem para a próxima linha, se necessário */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+}
+
+/* Estilo para os itens filhos */
+.col-md-4 {
+  flex: 1; /* Permite que os itens cresçam e encolham dinamicamente */
+  margin: 10px; /* Adiciona margem entre os itens */
+  min-width: 200px;
+}
+
+.footer {
+  background-color: #f0f0f0; /* Adicione uma cor de fundo opcional para o rodapé */
+  padding: 20px 0; /* Adicione preenchimento para separar o conteúdo do rodapé do contêiner */
+}
+
+.footer.container {
+  max-width: 1200px; /* Defina a largura máxima do contêiner do rodapé */
+  margin: 0 auto; /* Centralize o contêiner na página */
+  display: flex; /* Use flexbox para alinhar itens horizontalmente */
+  justify-content: center; /* Alinhe os itens horizontalmente no centro */
 }
 
