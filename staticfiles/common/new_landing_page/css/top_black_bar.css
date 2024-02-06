@@ -3,23 +3,20 @@
     max-width: 650px; /* Ajuste conforme necessário */
     display: block;
     margin: 0; /* Remova a margem anterior */
-    padding: 10px; /* Adicione um preenchimento para espaçamento */
+    padding: 8px; /* Adicione um preenchimento para espaçamento */
     float: left; /* Faz com que o logo flutue para a esquerda */
 }
 
-/* Estilos para a barra superior */
 .top-bar {
+    max-width: 1320px;
     background-color: black;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
+    right: 0; /* Adiciona 'right: 0' para que o elemento ocupe toda a largura */
+    margin-left: auto; /* Define 'margin-left: auto' para centralizar o elemento */
+    margin-right: auto; /* Define 'margin-right: auto' para centralizar o elemento */
     z-index: 1000; /* para garantir que a barra fique sempre acima do conteúdo */
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
-}
-
-/* Estilos para o conteúdo principal */
-.main-content {
-    padding-top: 80px; /* Ajuste de acordo com a altura da barra superior */
+    padding: 8px 0;
 }
