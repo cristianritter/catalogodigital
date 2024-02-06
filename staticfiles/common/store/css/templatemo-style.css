@@ -190,6 +190,7 @@ html {
 .img-fluid {
   max-width: 250px;
   height: auto;
+  
 }
 
 body {
@@ -201,6 +202,7 @@ body {
 
 .container {
   background-color: white;
+  
 }
 
 p, address {
@@ -854,6 +856,3 @@ address {
   cursor: pointer;
 }
 
-.imagem-escurecida {
-  filter: brightness(0.5); /* Valor entre 0 e 1 para escurecer a imagem */
-}
