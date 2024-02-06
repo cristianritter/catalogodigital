@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content={{meta_description}} />
+        <title>{{nome_empresa}} - {{descricao_curta}}</title>
+        <link rel="icon" type="image/png" href="{% static 'common/landing_page/favicon.png' %}">
+        <link href="{% static 'common/new_landing_page/css/styles.css'%}" rel="stylesheet" />
+        <link href="{% static 'common/new_landing_page/css/top_black_bar.css'%}" rel="stylesheet" />
+        <link href="{% static 'common/new_landing_page/css/carousel.css'%}" rel="stylesheet" />
+        <script src="{% static 'common/new_landing_page/js/carousel.js'%}"></script>
+        
+    </head>   
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TKSFTQLMCG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-TKSFTQLMCG');
+    </script>            
+    <header class="top-bar">
+        <div class="container">
+            <img src="{% static 'common/landing_page/img/navbar-logo.svg' %}" alt="Logo da sua página" class="logo">
+        </div>
+    </header>
+    <body id="page-top">
+        <header class="masthead" id="masthead" style="background-position: center; text-align: center; height: 300px; max-width: 1320px; margin: 0 auto; background-image: url('{{ endereco_bucket }}{{ nomes_arquivos_imagens.0 }}');">
+            <div class="container">
+                <div class="masthead-subheading">{{ descricao_curta }}</div>
+                <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
+                <div class="col">
+                    {% if link_loja %}
+                    <a class="btn btn-primary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
+                    {% else %}
+                    <a class="btn btn-primary text-uppercase" href="#new-contact">Entre em contato</a>
+                    {% endif %}
+                </div>
+            </div>   
+        </header>
+        <section class="page-section container " id="services">
+            {% if lista_items.0 %}
+            <div class="container espaco-antes">
+                <h2 class="text-center my-3 text-uppercase">{{lista_titulo}}</h2>
+                <div class="text-left col-md-5 box mx-auto" > 
+                    <ul>
+                        {% for item in lista_items %}
+                        <li>
+                            <span class="text-secondary me-2"></span>
+                            <span class="fw fs-5 ">{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            <div class="container">
+                <div class="row text-center"> 
+                    {% for chave, valor in dados_dict.items %}
+                    <div class="col-md-4">
+                        <h3 class="my-3 text-uppercase">{{ chave }}</h3>
+                        <p class="fw fs-5">{{ valor }}</p>
+                    </div>
+                    {% endfor %}
+                    {% if reviews_link %}                    
+                    <p class="p-3"><a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4 ">Consulte aqui nossas avaliações</a></p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="carousel">
+                <div class="carousel-container">
+                  <div class="carousel-slide">
+                    {% for filename in nomes_arquivos_imagens|slice:"2:" %}
+                    <img src="{{ endereco_bucket }}{{ filename }}" alt="Imagem 1">
+                  {% endfor %}
+                  </div>
+                </div>
+                <button class="carousel-prev">&#10094;</button>
+                <button class="carousel-next">&#10095;</button>
+            </div>
+            
+        </section>    
+        <section class="page-section text-center container" id="new-contact">
+            <div class=" mx-auto ">
+                <h2 class="section-heading text-uppercase espaco-duplo">Contato</h2>
+                <div class="col-md-4 mx-auto text-center ">
+                    
+                    <a href="{{link_whats}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
+                    
+                    {% if email_contato %}
+                    <a href="mailto:{{email_contato}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
+                    {% endif %}     
+                
+                    {% if link_facebook or link_instagram %}
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+                    <div class="tm-social-buttons container">
+                        <strong>Nos siga nas redes sociais:</strong>
+                        {% if link_facebook %}
+                            <a href="{{ link_facebook }}"><i class="fab fa-facebook-f facebook-icon"></i></a>
+                        {% endif %}
+                        {% if link_instagram %}
+                            <a href="{{ link_instagram }}"><i class="fab fa-instagram instagram-icon"></i></a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
+                    
+                
+                    {% if gmaps_link %}
+                    <button class="btn btn-primary" onclick="carregarMapa()" id="map-button">Ver no mapa</button>
+                    <script defer>
+                        function carregarMapa() {
+                            var iframe = document.createElement("iframe");
+                            iframe.setAttribute("src", "{{gmaps_link}}");
+                            iframe.setAttribute("width", "100%");
+                            iframe.setAttribute("height", "200");
+                            document.getElementById("google-map-container").appendChild(iframe);
+                            document.getElementById("map-button").style.display = "none";
+                        }
+                    </script>            
+                    {% endif %}
+                    <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank">Obter Direções</a>
+                    <p><strong>Endereço:</strong> {{endereco}}</p>
+                    <p><strong>Atendemos de {{horario_atendimento}}</strong></p>
+                    
+                </div>       
+                <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container"></div>
+                
+            </div>
+        </section>  
+        <footer class="footer py-4">
+            <div class="container text-center espaco-duplo">
+                <div class="">Você é o visitante número <strong>{{contador_visitas}}</strong></div>
+                <div class="text-uppercase">Copyright&copy;<a href="\">ConectaPages</a> 2024</div>
+            </div>
+        </footer>        
+        <script>
+            window.onload = function() {
+                var highQualityImageUrl = '{{ endereco_bucket }}{{ nomes_arquivos_imagens.1 }}';   
+                var lazyImages = document.querySelectorAll("img.lazy-load");
+                var img = new Image();
+                img.onload = function() {
+                    document.getElementById('masthead').style.backgroundImage = 'url(' + highQualityImageUrl + ')';
+                };
+                img.src = highQualityImageUrl; 
+                lazyImages.forEach(function(lazyImage) {
+                     lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy-load");
+                });
+            };
+        </script>   
+    </body>
+</html>

@@ -1,0 +1,23 @@
+/* Estilos para a barra superior */
+.top-bar {
+    background-color: black;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* para garantir que a barra fique sempre acima do conteúdo */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+}
+
+/* Estilos para o logo */
+.logo {
+    max-width: 200px; /* Ajuste conforme necessário */
+    display: block;
+    margin: 0 auto;
+}
+
+/* Estilos para o conteúdo principal */
+.main-content {
+    padding-top: 80px; /* Ajuste de acordo com a altura da barra superior */
+}
