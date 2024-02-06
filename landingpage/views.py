@@ -15,7 +15,7 @@ class DefaultLandingPage(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {}
-        self.template_name = 'landing_page.html'
+        self.template_name = 'new_landing_page.html'
         if not cache.get('contador_lp'):
             cache.set('contador_lp', 0, timeout=None)
       
@@ -24,6 +24,9 @@ class DefaultLandingPage(View):
         print(url_recebida)
         if not url_recebida: 
             url_recebida = 'seja_nosso_cliente'
+        data = cache.get(f'{url_recebida}.landing')
+        if not data:
+            cache.set(f'{url_recebida}.landing', 0, timeout=60*2)
         landing_page_data = LandingPage.objects.filter(url_cadastrado=url_recebida).first()
         if landing_page_data and landing_page_data.on_air:
             try:
