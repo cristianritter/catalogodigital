@@ -82,11 +82,11 @@ class HubView(View):
         return render(request, self.template_name, self.context)
 
 class LojaSitemap(Sitemap):
-    changefreq = 'daily'
+    changefreq = 'weekly'
 
     def _urls(self, page, protocol, domain):
         return super(LojaSitemap, self)._urls(
-            page=page, protocol='https', domain='loja.onectapages.com')
+            page=page, protocol='https', domain='loja.conectapages.com')
 
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial
@@ -98,7 +98,7 @@ class LojaSitemap(Sitemap):
 
     def priority(self, item):
         if item == '/':
-            return 1.0  
+            return 0.8  
         else:
-            return 0.7  
+            return 0.6  
 
