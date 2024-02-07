@@ -3,9 +3,9 @@ from subdomains.utils import reverse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib.sitemaps import Sitemap
-from landingpage.models import Sistema
 from .models import Loja, Hub
 import json
+from os import getenv
 
 def home(request):
     return redirect(reverse('DefaultLandingPage', subdomain=None))
@@ -15,7 +15,7 @@ class LojaView(View):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'store.html'     
-        cache.set('file_bucket_address',Sistema.objects.get(on_air=True).repositorio_imagens, timeout=None)
+        cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
         
     def get(self, request, url, *args, **kwargs):
         loja__data = Loja.objects.filter(url_cadastrado=url.replace('/','')).first()
@@ -62,9 +62,9 @@ class HubView(View):
             portfolio_items = []
             for item in hub__data.lojas.all():
                 loja = {}
-                print(item.url_cadastrado)
-                loja['url'] = f'https://loja.conectapages.com/{item.url_cadastrado}'
-                loja['imagem'] = f'{item.endereco_bucket}{item.url_cadastrado}/store/cover.webp'
+                print(item.url)
+                loja['url'] = f'https://loja.conectapages.com/{item.url}'
+                loja['imagem'] = f'{item.endereco_bucket}{item.url}/store/cover.webp'
                 loja['heading'] = item.nome_empresa
                 loja['subheading'] = item.slogam
                 portfolio_items.append(loja)
@@ -90,7 +90,7 @@ class LojaSitemap(Sitemap):
 
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial
-        urls += ['/'+obj.url_cadastrado for obj in Loja.objects.filter(on_air=True)]
+        urls += ['/'+obj.url for obj in Loja.objects.filter(on_air=True)]
         return urls
     
     def location(self, item):

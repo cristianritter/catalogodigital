@@ -1,11 +1,11 @@
-from loja.models import Loja
-from .models import LandingPage, Sistema
+from .models import LandingPage
 from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.contrib.sitemaps import Sitemap
 import json
+from os import getenv
 
 def update_cache(request, url):
     if url:
@@ -19,47 +19,48 @@ class DefaultLandingPage(View):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'landing_page.html'
-        cache.set('file_bucket_address',Sistema.objects.get(on_air=True).repositorio_imagens, timeout=None)
-        cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url_cadastrado='seja_nosso_cliente'), timeout=60*60*24*7)
-
-      
+       
+        cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
+        cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url='seja_nosso_cliente'), timeout=60*60*24*7)
+   
     def get(self, request, *args, **kwargs):
         url_recebida = request.path.replace('/','')
         if not url_recebida: 
             url_recebida = 'seja_nosso_cliente'
         data = cache.get(f'{url_recebida}.landing')
         if not data:
-            cache.set(f'{url_recebida}.landing', 0, timeout=60*60*24)
-        landing_page_data = LandingPage.objects.get(url_cadastrado=url_recebida)
-        if landing_page_data and landing_page_data.on_air:
+            print('getting from posgtgres')
+            data = LandingPage.objects.get(url=url_recebida)
+            if data and data.on_air:
+                cache.set(f'{url_recebida}.landing', data, timeout=60*60*24)    
+        if data:
             try:
-                lista_items = json.loads(landing_page_data.lista_items)
+                lista_items = json.loads(data.lista_items)
             except:
                 return HttpResponse("AVISO: Revise a construção da seção 'Lista items' na página de administração.")
             try:
-                dados_dict = json.loads(landing_page_data.colunas_items)
+                dados_dict = json.loads(data.colunas_items)
             except:
-                return HttpResponse("AVISO: Revise a construção da seção 'Coluna items' na página de administração.")
-           
+                return HttpResponse("AVISO: Revise a construção da seção 'Coluna items' na página de administração.")           
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url_recebida+'/',
-                'nomes_arquivos_imagens': landing_page_data.nomes_arquivos_imagens.split(','),
-                'nome_empresa': landing_page_data.nome_empresa,
-                'descricao_curta': landing_page_data.descricao_curta,
-                'meta_description': landing_page_data.meta_description,
-                'lista_titulo': landing_page_data.lista_titulo,
+                'num_img_carousel': list(range(2, data.carousel_size+2)),
+                'nome_empresa': data.nome_empresa,
+                'descricao_curta': data.descricao_curta,
+                'meta_description': data.meta_description,
+                'lista_titulo': data.lista_titulo,
                 'lista_items': lista_items,
                 'dados_dict': dados_dict,
-                'numeros_telefone': landing_page_data.numeros_telefone,
-                'email_contato': landing_page_data.email_contato,
-                'endereco': landing_page_data.endereco,
-                'horario_atendimento': landing_page_data.horario_atendimento,
-                'link_whats': landing_page_data.link_whats,
-                'link_instagram': landing_page_data.link_instagram,
-                'link_facebook': landing_page_data.link_facebook,
-                'reviews_link': landing_page_data.reviews_link,
-                'gmaps_link': landing_page_data.gmaps_link,
-                'link_loja': landing_page_data.link_loja,
+                'numeros_telefone': data.numeros_telefone,
+                'email_contato': data.email_contato,
+                'endereco': data.endereco,
+                'horario_atendimento': data.horario_atendimento,
+                'link_whats': data.link_whats,
+                'link_instagram': data.link_instagram,
+                'link_facebook': data.link_facebook,
+                'reviews_link': data.reviews_link,
+                'gmaps_link': data.gmaps_link,
+                'link_loja': data.link_loja,
             } 
         else:
             return render(request, '404-wall-e.html')  
@@ -80,7 +81,7 @@ class RootSitemap(Sitemap):
 
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial
-        urls += ['/'+obj.url_cadastrado for obj in LandingPage.objects.filter(on_air=True)]
+        urls += ['/'+obj.url for obj in LandingPage.objects.filter(on_air=True)]
         return urls
     
     def location(self, item):

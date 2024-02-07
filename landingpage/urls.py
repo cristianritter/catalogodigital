@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import DefaultLandingPage, Homepage, RootSitemap, update_cache
+from .views import DefaultLandingPage, RootSitemap, update_cache
 from django.views.generic import TemplateView
 from django.contrib.sitemaps import views as sitemap_views
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from landingpage.models import LandingPage, Sistema
+from landingpage.models import LandingPage
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
@@ -16,8 +16,8 @@ class LandingPageAdmin(ImportExportModelAdmin):
             'all': ('common/landing_page/css/admin_styles.css',),
         }
     actions = None
-    list_display = ['nome_empresa', 'on_air', 'url_cadastrado', 'numeros_telefone']
-    search_fields = ['nome_empresa', 'url_cadastrado']
+    list_display = ['nome_empresa', 'on_air', 'url', 'numeros_telefone']
+    search_fields = ['nome_empresa', 'url']
 
 
 class UserAdmin(BaseUserAdmin):
@@ -35,8 +35,3 @@ class UserAdmin(BaseUserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
-@admin.register(Sistema)
-class SistemaAdmin(ImportExportModelAdmin):
-    actions = None
-
-    list_display = ('on_air', 'config_name', 'repositorio_imagens')

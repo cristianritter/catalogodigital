@@ -23,7 +23,7 @@
 
 <header class="masthead main-content" id="masthead">
     <div class="container">
-        <div class="background-image" style="background-image: url('{{ endereco_bucket }}{{ nomes_arquivos_imagens.0 }}.webp');"></div>
+        <div class="background-image" style="background-image: url('{{ endereco_bucket }}0.webp');"></div>
         <div class="masthead-subheading">{{ descricao_curta }}</div>
         <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
         <div class="col">
@@ -73,8 +73,8 @@
     <div class="carousel">
         <div class="carousel-container">
             <div class="carousel-slide">
-                {% for filename in nomes_arquivos_imagens|slice:"2:" %}
-                <img src="{{ endereco_bucket }}{{ filename }}.webp" alt="Imagem 1" width="350" height="200">
+                {% for image_num in num_img_carousel %}
+                <img src="{{ endereco_bucket }}{{ image_num }}.webp" alt="Imagem 1" width="350" height="200">
                 {% endfor %}
             </div>
         </div>
@@ -131,7 +131,7 @@
 
 <script>
    window.onload = function() {
-    var highQualityImageUrl = '{{ endereco_bucket }}{{ nomes_arquivos_imagens.1 }}.webp';   
+    var highQualityImageUrl = '{{ endereco_bucket }}1.webp';   
     var lazyImages = document.querySelectorAll("img.lazy-load");
     var img = new Image();
     img.onload = function() {
