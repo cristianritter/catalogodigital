@@ -32,7 +32,7 @@ class DefaultLandingPage(View):
         data = cache.get(f'{url_recebida}.landing')
         if not data:
             print('getting from posgtgres')
-            data = LandingPage.objects.get(url=url_recebida)
+            data = LandingPage.objects.filter(url=url_recebida).first()
             if data and data.on_air:
                 cache.set(f'{url_recebida}.landing', data, timeout=60*60*24)    
         if data:
