@@ -1,3 +1,4 @@
+from loja.models import Loja
 from .models import LandingPage, Sistema
 from django.core.cache import cache
 from django.shortcuts import render
@@ -70,8 +71,12 @@ class Homepage(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'portal.html')
 
-class Sitemap(Sitemap):
-    changefreq = 'weekly'
+class RootSitemap(Sitemap):
+    changefreq = 'daily'
+
+    def _urls(self, page, protocol, domain):
+        return super(RootSitemap, self)._urls(
+            page=page, protocol='https', domain='conectapages.com')
 
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial

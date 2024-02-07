@@ -11,7 +11,6 @@ class PageWithBucket(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     on_air = models.BooleanField(help_text='Indica se a página está no ar.')
-    endereco_bucket = models.CharField(max_length=200, help_text='https://gjvoxpezczvyqbnmonap.supabase.co/storage/v1/object/public/conecta_bucket/')
     url_cadastrado = models.CharField(max_length=50, help_text='O endereço final do link da página')
     meta_description = models.CharField(blank=True, max_length=160, help_text='Uma descrição que vai aparecer para o usuário durante a busca')
     nome_empresa = models.CharField(max_length=50, help_text='Servirá como título da página')

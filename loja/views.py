@@ -2,6 +2,8 @@ from django.core.cache import cache
 from subdomains.utils import reverse
 from django.shortcuts import redirect, render
 from django.views import View
+from django.contrib.sitemaps import Sitemap
+from landingpage.models import Sistema
 from .models import Loja, Hub
 import json
 
@@ -13,13 +15,14 @@ class LojaView(View):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'store.html'     
-         
+        cache.set('file_bucket_address',Sistema.objects.get(on_air=True).repositorio_imagens, timeout=None)
+        
     def get(self, request, url, *args, **kwargs):
         loja__data = Loja.objects.filter(url_cadastrado=url.replace('/','')).first()
         if loja__data and loja__data.on_air:
             self.context = {
                 'meta_description': loja__data.meta_description,
-                'endereco_bucket': loja__data.endereco_bucket+url+'/store',
+                'endereco_bucket': cache.get('file_bucket_address')+url+'/store',
                 'nome_empresa': loja__data.nome_empresa,
                 'link_whats': loja__data.link_whats,
                 'link_facebook': loja__data.link_facebook,
@@ -77,3 +80,25 @@ class HubView(View):
         else:
             return render(request, '404-wall-e.html')  
         return render(request, self.template_name, self.context)
+
+class LojaSitemap(Sitemap):
+    changefreq = 'daily'
+
+    def _urls(self, page, protocol, domain):
+        return super(LojaSitemap, self)._urls(
+            page=page, protocol='https', domain='loja.onectapages.com')
+
+    def items(self):
+        urls = ['/']  # Esta é a URL da página inicial
+        urls += ['/'+obj.url_cadastrado for obj in Loja.objects.filter(on_air=True)]
+        return urls
+    
+    def location(self, item):
+        return item
+
+    def priority(self, item):
+        if item == '/':
+            return 1.0  
+        else:
+            return 0.7  
+
