@@ -12,6 +12,8 @@ def update_cache(request, url):
         resposta = cache.delete(f'{url}.landing')
     else:
         resposta = cache.clear()
+    cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
+    cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url='seja_nosso_cliente'), timeout=60*60*24*7)
     return HttpResponse('Cache cleared!!!', resposta)    
 
 class DefaultLandingPage(View):
