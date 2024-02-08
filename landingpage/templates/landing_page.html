@@ -32,7 +32,9 @@
         </div>
         <div class="col">
             {% if link_loja %}
-            <a class="btn btn-primary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
+                {% for texto_botao, link in link_loja %}
+                <a class="btn btn-primary text-uppercase" href="{{ link }}">{{texto_botao}}</a>
+                {% endfor %}
             {% else %}
             <a class="btn btn-primary text-uppercase" href="#new-contact">Entre em contato</a>
             {% endif %}

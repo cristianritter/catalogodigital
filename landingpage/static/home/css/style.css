@@ -963,7 +963,3 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     transition: transform 0.3s ease-in-out; /* Adiciona uma transição suave */
 }
 
-/* Adiciona uma transformação sutil quando o mouse passa sobre o ícone */
-.welcome-hero-form-icon i:hover {
-    transform: scale(1.1); /* Aumenta ligeiramente o tamanho do ícone quando o mouse passa sobre ele */
-}
