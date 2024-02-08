@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="{{meta_description}}" />
+    <meta name="description" content="{{meta_description}} Acesse para entrar em contato ou obter mais informações." />
     <title>{{nome_empresa}} - {{descricao_curta}}</title>
     <link rel="icon" type="image/png" href="{% static 'common/landing_page/favicon.png' %}">
     <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
@@ -24,8 +24,12 @@
 <header class="masthead main-content" id="masthead">
     <div class="container">
         <div class="background-image" style="background-image: url('{{ endereco_bucket }}0.webp');"></div>
-        <div class="masthead-subheading">{{ descricao_curta }}</div>
-        <div class="masthead-heading text-uppercase">{{ nome_empresa }}</div>
+        <div class="masthead-subheading">
+            <h1>{{ descricao_curta }} </h1>
+        </div>
+        <div class="masthead-heading text-uppercase">
+            <h2>{{ nome_empresa }}</h1>
+        </div>
         <div class="col">
             {% if link_loja %}
             <a class="btn btn-primary text-uppercase" href="{{ link_loja }}">Acesse nossa loja virtual</a>
@@ -35,18 +39,14 @@
         </div>
     </div>   
 </header>
-
-
-
-<section class="page-section container" id="services">
+<section class="container" id="services">
     {% if lista_items.0 %}
-    <div class="container espaco-antes">
-        <h2 class="text-center text-uppercase">{{lista_titulo}}</h2>
-        <div class="text-left justify"> 
+    <div class="container">
+        <h3 class="text-center text-uppercase">{{lista_titulo}}</h2>
+        <div class="justify"> 
             <ul>
                 {% for item in lista_items %}
                 <li>
-                    <span class="text-secondary"></span>
                     <span >{{ item }}</span>
                 </li>
                 {% endfor %}
@@ -54,22 +54,24 @@
         </div>
     </div>
     {% endif %}
+    {% if dados_dict %}
     <div class="container">
         <div class="row text-center"> 
             {% for chave, valor in dados_dict.items %}
             <div class="col-md-4">
-                <h3 class="my-3 text-uppercase">{{ chave }}</h3>
-                <p class="fw fs-5">{{ valor }}</p>
+                <h3 class="text-uppercase">{{ chave }}</h3>
+                <p class="">{{ valor }}</p>
             </div>
             {% endfor %}
         </div>
         <div>
             {% if reviews_link %}                    
-            <p class="p-3"><a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4 ">Consulte aqui nossas avaliações</a></p>
+            <p><a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4 ">Consulte aqui nossas avaliações</a></p>
             {% endif %}
         </div>
     </div>
-    
+    {% endif %}
+    {% if num_img_carousel > 0 %}
     <div class="carousel">
         <div class="carousel-container">
             <div class="carousel-slide">
@@ -81,10 +83,11 @@
         <button class="carousel-prev">&#10094;</button>
         <button class="carousel-next">&#10095;</button>
     </div>
+    {% endif %}
 </section>
-<section class="page-section text-center container" id="new-contact">
+<section class=" text-center container" id="new-contact">
     <div class=" mx-auto ">
-        <h2 class="section-heading text-uppercase espaco-duplo">Contato</h2>
+        <h3 class="section-heading text-uppercase espaco-duplo">Contato</h3>
         <div class="col-md-4 mx-auto text-center ">
             <a href="{{link_whats}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
             {% if email_contato %}

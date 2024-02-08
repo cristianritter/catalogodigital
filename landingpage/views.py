@@ -5,6 +5,8 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib.sitemaps import Sitemap
 import json
+from django.conf import settings
+
 from os import getenv
 
 def update_cache(request, url):
@@ -29,7 +31,10 @@ class DefaultLandingPage(View):
         url_recebida = request.path.replace('/','')
         if not url_recebida: 
             url_recebida = 'seja_nosso_cliente'
-        data = cache.get(f'{url_recebida}.landing')
+        if settings.IS_HEROKU_APP:
+            data = cache.get(f'{url_recebida}.landing')
+        else:
+            data = None
         if not data:
             print('getting from posgtgres')
             data = LandingPage.objects.filter(url=url_recebida).first()
