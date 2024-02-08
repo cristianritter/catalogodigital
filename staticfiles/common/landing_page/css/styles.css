@@ -49,13 +49,13 @@
 
 ul {
   padding-left: 0rem;
-  margin: 20px 30px;
+  margin: 10px 30px;
   font-size: 18px;
   list-style-image: url('data:image/png;base64,UklGRigCAABXRUJQVlA4TBwCAAAvD8ADAE/koG0kSaqamV0qi+J4HH8A/92+3R0abiRJcpTu3dNaPYP//wRbe1in72CXdtBGkiN1z15A8iwexvOHkH/jzUzPfyAFAEAQAJJYYJIoQAAACriEK0DBAQi4E8uB6YGn9dtNV9No1r1JJSTYVE6KIiQOgZAKSLa2i0JsxYn5L3//W1VO2sdYMGzxOSp5SYX8hSMc4ucOt/SvWX/DFU4s6axDfC+aZI2G5OX0LjKnQHqy664YAc3bqd5L7bCeVXowUjB8VaHAnvIrqzosCMmCOkUOCtJZ6JemcFcWaAMEDDgkCwTTDPhLI9q5AgyED7iQPrWSgFEgJhFA/1MzhUkmYUBMslSUoc1QMX6FM4Iwm50C8gZj2v3Gn7CXs3QHltvlrqq0VDfnEO7tQyNBaDCdBhC2bTvWCr4/Pe+Hamje4mzbbEbWrGbb/Nbv3ltE/9W2bcO4bE49gzEGgBjL6AcAgpwuKvnTRQHgXNjU0T0xM1km/oMprsa2rv7nl7mFBkMhSAXNrbXjQ3enOxshh8wgt7T3VOR/3F8e7i35dCDd2Ts6Zs+uHD5LJYKmQMV9g48PNdYs+/dJ0u9R4J5/vbgpt9jyPg9W/R4Jv4H4/khO7tfteSoeMAXoUyvrVdVP11fHu1xEK43MDmy9Hb1vb0YdBkHQ6sOLsbVkYjlUx39KdU4H/f6Az5HxOEHVf7xek/sjIyIARIrC9SM=')
 }
 
 li {
-  margin-bottom: 20px; /* Aumenta o espaço entre os itens da lista */
+  margin-bottom: 5px; /* Aumenta o espaço entre os itens da lista */
 }
 
 header.masthead {
@@ -174,7 +174,6 @@ body {
 /* Estilo para os itens filhos */
 .col-md-4 {
   flex: 1; /* Permite que os itens cresçam e encolham dinamicamente */
-  margin: 10px; /* Adiciona margem entre os itens */
   min-width: 200px;
 }
 
@@ -212,4 +211,24 @@ body {
   margin-left: auto; /* Define 'margin-left: auto' para centralizar o elemento */
   margin-right: auto; /* Define 'margin-right: auto' para centralizar o elemento */
 
+}
+
+h1 {
+  font-size: 30px; /* 5% do tamanho da largura da viewport */
+  max-width: 90%; /* garante que o texto não ultrapasse a largura da tela */
+}
+h2 {
+font-size: 50px; /* 5% do tamanho da largura da viewport */
+max-width: 90%; /* garante que o texto não ultrapasse a largura da tela */
+}
+
+@media screen and (max-width: 800px) {
+  h1 {
+      font-size: 5vw; /* 5% do tamanho da largura da viewport */
+      max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
+  }
+  h2 {
+    font-size: 9vw; /* 5% do tamanho da largura da viewport */
+    max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
+  }
 }
