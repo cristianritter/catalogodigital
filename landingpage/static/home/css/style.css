@@ -262,6 +262,12 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 }
 .welcome-hero-txt { padding-top: 155px;}
 
+.welcome-hero-txt h1 {
+    font-size: 18px;
+    color: #fcfcfc;
+    margin-top: 25px;
+}
+
 .welcome-hero-txt h2 {
     font-size: 48px;
     color: #fff;
@@ -949,3 +955,15 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     100%  {bottom:7px;}
 }
 /*========================Thank you=================
+
+
+/* Adiciona uma aparência de cursor diferente quando o mouse passa sobre o ícone */
+.welcome-hero-form-icon i {
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out; /* Adiciona uma transição suave */
+}
+
+/* Adiciona uma transformação sutil quando o mouse passa sobre o ícone */
+.welcome-hero-form-icon i:hover {
+    transform: scale(1.1); /* Aumenta ligeiramente o tamanho do ícone quando o mouse passa sobre ele */
+}

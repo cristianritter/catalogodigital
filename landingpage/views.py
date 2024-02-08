@@ -78,7 +78,7 @@ class Homepage(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
     def get(self, request, *args, **kwargs):
-        return render(request, 'portal.html')
+        return render(request, 'home.html')
 
 class RootSitemap(Sitemap):
     changefreq = 'daily'

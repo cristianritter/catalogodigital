@@ -1,12 +1,12 @@
 from django.urls import path, re_path
-from .views import DefaultLandingPage, RootSitemap, update_cache
+from .views import DefaultLandingPage, Homepage, RootSitemap, update_cache
 from django.views.generic import TemplateView
 from django.contrib.sitemaps import views as sitemap_views
 
 app_name = 'landingpage'  
 
 urlpatterns = [
-#    path('home', Homepage.as_view(), name='home'),
+    path('home', Homepage.as_view(), name='home'),
     path('update_cache/<path:url>', update_cache, name='update_cache'),
     path('update_cache', update_cache, name='update_cache'),
     path('sitemap.xml', sitemap_views.sitemap, {'sitemaps': {'meu_sitemap': RootSitemap}}),

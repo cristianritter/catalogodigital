@@ -13,7 +13,9 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/c2674219e0.js" crossorigin="anonymous"></script>
         <!-- title of site -->
-        <title>Directory Landing Page</title>
+        <title>Encontre tudo que você precisa aqui</title>
+
+	   
 
         <!-- For favicon png -->
 		<link rel="shortcut icon" type="image/icon" href="{% static 'home/logo/favicon.png' %}">
@@ -84,7 +86,7 @@
 			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 			                    <i class="fa fa-bars"></i>
 			                </button>
-			                <a class="navbar-brand" href="home.html">MK4<span>Digital</span></a>
+			                <a class="navbar-brand" href="home.html">Conecta<span>Pages</span></a>
 
 			            </div><!--/.navbar-header-->
 			            <!-- End Header Navigation -->
@@ -114,30 +116,31 @@
 			<div class="container">
 				<div class="welcome-hero-txt">
 					<h2>O melhor lugar pra procurar e encontrar <br> tudo que você precisa </h2>
-					<p>
-						Find Best Place, Restaurant, Hotel, Real State and many more think in just One click 
-					</p>
+					<h1>
+						Encontre os melhores profissionais, serviços, lojas e muito mais na distância de um clique
+					</h1>
 				</div>
 				<div class="welcome-hero-serch-box">
 					<div class="welcome-hero-form">
 						<div class="single-welcome-hero-form">
-							<h3>what?</h3>
+							<h3>O que?</h3>
 							<form action="home.html">
-								<input type="text" placeholder="Ex: palce, resturent, food, automobile" />
+								<input type="text" placeholder="Ex: lugar, padaria, pedreiro, nutricionista" />
 							</form>
 							<div class="welcome-hero-form-icon">
 								<i class="flaticon-list-with-dots"></i>
 							</div>
 						</div>
 						<div class="single-welcome-hero-form">
-							<h3>location</h3>
+							<h3>Onde?</h3>
 							<form action="home.html">
-								<input type="text" placeholder="Ex: london, newyork, rome" />
+								<input id="cityInput" type="text" placeholder="Ex: Florianópolis, Porto Alegre, São Paulo" />
 							</form>
-							<div class="welcome-hero-form-icon">
+							<div class="welcome-hero-form-icon" id="gpsIcon">
 								<i class="flaticon-gps-fixed-indicator"></i>
 							</div>
 						</div>
+						
 					</div>
 					<div class="welcome-hero-serch">
 						<button class="welcome-hero-btn" onclick="window.location.href='#'">
@@ -164,28 +167,28 @@
 						<li>
 							<div class="single-list-topics-content">
 								<div class="single-list-topics-icon">
-									<i class="fas fa-utensils"></i>
+									<i class="fas fa-coffee"></i>
 								</div>
-								<h2><a href="#">Pra comer</a></h2>
-								<p>150 listings</p>
+								<h2><a href="#">Alimentação</a></h2>
+								<p>Restaurantes e cafés</p>
 							</div>
 						</li>
 						<li>
 							<div class="single-list-topics-content">
 								<div class="single-list-topics-icon">
-									<i class="fas fa-tree"></i>
+									<i class="fas fa-cocktail"></i>
 								</div>
-								<h2><a href="#">Pra Relaxar</a></h2>
-								<p>214 listings</p>
+								<h2><a href="#">Happy Hour</a></h2>
+								<p>Bares e Pubs</p>
 							</div>
 						</li>
 						<li>
 							<div class="single-list-topics-content">
 								<div class="single-list-topics-icon">
-									<i class="fas fa-user-tie"></i>
+									<i class="fas fa-briefcase"></i>
 								</div>
-								<h2><a href="#">Profissionais</a></h2>
-								<p>185 listings</p>
+								<h2><a href="#">Serviços</a></h2>
+								<p>Profissionais diversos</p>
 							</div>
 						</li>
 						<li>
@@ -194,16 +197,16 @@
 									<i class="fas fa-spa"></i>
 								</div>
 								<h2><a href="#">Saúde e Bem estar</a></h2>
-								<p>200 listings</p>
+								<p>Profissionais e clínicas</p>
 							</div>
 						</li>
 						<li>
 							<div class="single-list-topics-content">
 								<div class="single-list-topics-icon">
-									<i class="fas fa-laptop"></i>
+									<i class="fas fa-store"></i>
 								</div>
-								<h2><a href="#">Serviços</a></h2>
-								<p>120 listings</p>
+								<h2><a href="#">Comércio</a></h2>
+								<p>Varejo em geral</p>
 							</div>
 						</li>
 					</ul>
@@ -213,13 +216,13 @@
 		</section><!--/.list-topics-->
 		<!--list-topics end-->
 
-		<!--works start -->
+		<!--works start 
 		<section id="works" class="works">
 			<div class="container">
 				<div class="section-header">
 					<h2>como isso funciona</h2>
 					<p>entenda melhor sobre como nosso código trabalha por você</p>
-				</div><!--/.section-header-->
+				</div>
 				<div class="works-content">
 					<div class="row">
 						<div class="col-md-4 col-sm-6">
@@ -266,18 +269,18 @@
 						</div>
 					</div>
 				</div>
-			</div><!--/.container-->
+			</div>
 		
-		</section><!--/.works-->
-		<!--works end -->
+		</section>
+		works end -->
 
-		<!--explore start -->
+		<!--explore start 
 		<section id="explore" class="explore">
 			<div class="container">
 				<div class="section-header">
 					<h2>explore</h2>
 					<p>Explore novos lugares, experiências, comidas, serviços e muito mais.</p>
-				</div><!--/.section-header-->
+				</div>
 				<div class="explore-content">
 					<div class="row">
 						<div class=" col-md-4 col-sm-6">
@@ -678,13 +681,13 @@
 						</div>
 					</div>
 				</div>
-			</div><!--/.container-->
+			</div>
 
-		</section><!--/.explore-->
-		<!--explore end -->
+		</section>
+		explore end -->
 
 		
-		<!-- statistics strat -->
+		<!-- statistics strat 
 		<section id="statistics"  class="statistics">
 			<div class="container">
 				<div class="statistics-counter"> 
@@ -692,41 +695,41 @@
 						<div class="single-ststistics-box">
 							<div class="statistics-content">
 								<div class="counter">90 </div> <span>K+</span>
-							</div><!--/.statistics-content-->
+							</div>
 							<h3>Acessos</h3>
-						</div><!--/.single-ststistics-box-->
-					</div><!--/.col-->
+						</div>
+					</div>
 					<div class="col-md-3 col-sm-6">
 						<div class="single-ststistics-box">
 							<div class="statistics-content">
 								<div class="counter">40</div> <span>k+</span>
-							</div><!--/.statistics-content-->
+							</div>
 							<h3>Buscas</h3>
-						</div><!--/.single-ststistics-box-->
-					</div><!--/.col-->
+						</div>
+					</div>
 					<div class="col-md-3 col-sm-6">
 						<div class="single-ststistics-box">
 							<div class="statistics-content">
 								<div class="counter">65</div> <span>k+</span>
-							</div><!--/.statistics-content-->
+							</div>
 							<h3>Visitantes</h3>
-						</div><!--/.single-ststistics-box-->
-					</div><!--/.col-->
+						</div>
+					</div>
 					<div class="col-md-3 col-sm-6">
 						<div class="single-ststistics-box">
 							<div class="statistics-content">
 								<div class="counter">50</div> <span>+</span>
-							</div><!--/.statistics-content-->
+							</div>
 							<h3>Clientes Satisfeitos</h3>
-						</div><!--/.single-ststistics-box-->
-					</div><!--/.col-->
-				</div><!--/.statistics-counter-->	
-			</div><!--/.container-->
+						</div>
+					</div>
+				</div>	
+			</div>
 
-		</section><!--/.counter-->	
-		<!-- statistics end -->
+		</section>	
+		 statistics end -->
 
-		<!--subscription strat -->
+		<!--subscription strat 
 		<section id="contact"  class="subscription">
 			<div class="container">
 				<div class="subscribe-title text-center">
@@ -734,7 +737,7 @@
 						você quer adicionar o seu negócio na nossa lista?
 					</h2>
 					<p>
-						A MK4 Digital esta ansiosa para ajudar você a impulsionar o seu negócio.
+						A ConectaPages esta ansiosa para ajudar você a impulsionar o seu negócio.
 					</p>
 				</div>
 				<div class="row">
@@ -751,8 +754,8 @@
 				</div>
 			</div>
 
-		</section><!--/subscription-->	
-		<!--subscription end -->
+		</section>
+		subscription end -->
 
 		<!--footer start-->
 		<footer id="footer"  class="footer">
@@ -761,7 +764,7 @@
 		           	<div class="row">
 			           	<div class="col-sm-3">
 			           		 <div class="navbar-header">
-				                <a class="navbar-brand" href="home.html">MK4<span>DIGITAL</span></a>
+				                <a class="navbar-brand" href="home.html">Conecta<span>Pages</span></a>
 				            </div><!--/.navbar-header-->
 			           	</div>
 			           	<div class="col-sm-9">
@@ -777,7 +780,7 @@
 					<div class="row">
 						<div class="col-sm-5">
 							<p>
-								&copy;copyright. designed and developed by <a href="https://www.themesine.com/">themesine</a>
+								copyright &copy; ConectaPages</a>
 							</p><!--/p-->
 						</div>
 						<div class="col-sm-7">
@@ -831,6 +834,10 @@
 		     
         <!--Custom JS-->
         <script src="{% static 'home/js/custom.js' %}"></script>
+
+		<!-- For gps capture -->
+		<script src="{% static 'home/js/captura_local.js' %}"></script> 
+    
         
     </body>
 	
