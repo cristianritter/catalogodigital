@@ -224,11 +224,11 @@ max-width: 90%; /* garante que o texto não ultrapasse a largura da tela */
 
 @media screen and (max-width: 800px) {
   h1 {
-      font-size: 5vw; /* 5% do tamanho da largura da viewport */
+      font-size: 6vw; /* 5% do tamanho da largura da viewport */
       max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
   }
   h2 {
-    font-size: 9vw; /* 5% do tamanho da largura da viewport */
+    font-size: 10vw; /* 5% do tamanho da largura da viewport */
     max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
   }
 }
