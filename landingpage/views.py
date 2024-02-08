@@ -44,11 +44,11 @@ class DefaultLandingPage(View):
             try:
                 lista_items = json.loads(data.lista_items)
             except:
-                return HttpResponse("AVISO: Revise a construção da seção 'Lista items' na página de administração.")
+                lista_items = {}
             try:
                 dados_dict = json.loads(data.colunas_items)
             except:
-                return HttpResponse("AVISO: Revise a construção da seção 'Coluna items' na página de administração.")           
+                dados_dict = {}           
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url_recebida+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
