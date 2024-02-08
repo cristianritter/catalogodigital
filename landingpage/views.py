@@ -57,7 +57,6 @@ class DefaultLandingPage(View):
                 'nome_empresa': data.nome_empresa,
                 'descricao_curta': data.descricao_curta,
                 'meta_description': data.meta_description,
-                'lista_titulo': data.lista_titulo,
                 'lista_items': lista_items,
                 'dados_dict': dados_dict,
                 'numeros_telefone': data.numeros_telefone,
