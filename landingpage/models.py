@@ -25,7 +25,7 @@ class LandingPage(Page):
     endereco = models.CharField(blank=True, max_length=100, help_text="Endereço ou região da ede da empresa")
     horario_atendimento = models.CharField(blank=True, max_length=100, help_text='Horário de funcionamento')
     # Links (usando URLField)
-    link_loja = models.URLField(blank=True, help_text="Link para loja virtual")
+    link_loja = models.TextField(max_length=150, blank=True, help_text="Nome do botão e link para a loja no formato key:value")
     reviews_link = models.URLField(blank=True, help_text="Link para os reviews do google")
     gmaps_link = models.URLField(blank=True, max_length=500, help_text="Link para os mapas 'embedded' no formato 'https:\\....br' ")
     def __str__(self):
