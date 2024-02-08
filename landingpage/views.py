@@ -9,14 +9,16 @@ from django.conf import settings
 
 from os import getenv
 
-def update_cache(request, url):
+def update_cache(request, url=""):
     if url:
-        resposta = cache.delete(f'{url}.landing')
+        resposta = f"O endereço {url} foi atualizado."
+        cache.delete(f'{url}.landing')
     else:
-        resposta = cache.clear()
+        resposta = f"Todo conteúdo da cache foi apagado."
+        cache.clear()
     cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
     cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url='seja_nosso_cliente'), timeout=60*60*24*7)
-    return HttpResponse('Cache cleared!!!', resposta)    
+    return HttpResponse('Cache cleared!!!'+resposta)    
 
 class DefaultLandingPage(View):
     def __init__(self, *args, **kwargs):
