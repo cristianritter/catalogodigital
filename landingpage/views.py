@@ -50,6 +50,10 @@ class DefaultLandingPage(View):
             try:
                 dados_dict = json.loads(data.colunas_items)
             except:
+                dados_dict = {}  
+            try:
+                link_loja = json.loads(data.link_loja)
+            except:
                 dados_dict = {}           
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url_recebida+'/',
@@ -68,7 +72,7 @@ class DefaultLandingPage(View):
                 'link_facebook': data.link_facebook,
                 'reviews_link': data.reviews_link,
                 'gmaps_link': data.gmaps_link,
-                'link_loja': data.link_loja,
+                'link_loja': link_loja,
             } 
         else:
             return render(request, '404-wall-e.html')  
