@@ -17,18 +17,19 @@ class LandingPage(Page):
         verbose_name_plural = 'Registros de Landing Pages'
     carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')
     #Dados Gerais da empresa
-    descricao_curta = models.CharField(max_length=100, help_text='Resuma em uma sentença curta o que a empresa faz')
-    resumo_chave = models.TextField(max_length=300, help_text='Este resumo é o cabeçalho h2 de sua página. Deve ser uma descrição bem clara e objetiva e obrigatóriamente conter as palavras chaves de pesquisa.')
-    lista_items = models.TextField(blank=True, max_length=600,  help_text='Itens da lista em formato de list ["abc", "cde"]')
-    colunas_items = models.TextField(blank=True, help_text='Conteúdo adicional no formato de dict. {"key": "value", "key2": "value2"}')
-    numeros_telefone = models.CharField(blank=True, max_length=50, help_text='Números de telefone no formato (12) 98765 4321')
-    email_contato = models.EmailField(blank=True, help_text='Email da empresa, se houver')
-    endereco = models.CharField(blank=True, max_length=100, help_text="Endereço ou região da ede da empresa")
-    horario_atendimento = models.CharField(blank=True, max_length=100, help_text='Horário de funcionamento')
+    descricao_curta = models.CharField(max_length=100, help_text='Texto acima do nome da empresa(SubHeader). Síntese da atividade principal. (Obrigatório conter as PALAVRAS CHAVES)')
+    resumo_chave = models.TextField(max_length=300, help_text='Este resumo deve ser uma descrição bem clara e objetiva (Obrigatório conter variações das PALAVRAS CHAVES e o NOME DA CIDADE).')
+    lista_items = models.TextField(blank=True, max_length=600,  help_text='Seção de lista da página. Dict no formato {"Título da lista": ["item1","item2",...]')
+    colunas_items = models.TextField(blank=True, help_text='SEeão de colunas da página. Dict no formato {"Título1":"Conteúdo1","Título2":"Conteúdo2"},...')
+    numeros_telefone = models.CharField(blank=True, max_length=50, help_text='Ex: (12) 98765 4321 (São permitidos múltiplos números)')
+    email_contato = models.EmailField(blank=True, help_text='Ex: nome@empresa.com.br')
+    endereco = models.CharField(blank=True, max_length=100, help_text="Ex: Rua Duque de Caxias, 237")
+    cidade = models.CharField(max_length=50)
+    horario_atendimento = models.CharField(blank=True, max_length=100, help_text='Ex: Seg à Sex das 10h as 17h.')
     # Links (usando URLField)
-    link_loja = models.TextField(max_length=150, blank=True, help_text="Nome do botão e link para a loja no formato key:value")
-    reviews_link = models.URLField(blank=True, help_text="Link para os reviews do google")
-    gmaps_link = models.URLField(blank=True, max_length=500, help_text="Link para os mapas 'embedded' no formato 'https:\\....br' ")
+    link_loja = models.TextField(max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Dict no formato {"Conheça nossa Loja Virtual":"https://minhaloja.com.br" }')
+    reviews_link = models.URLField(blank=True, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
+    gmaps_link = models.URLField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
     def __str__(self):
         return self.url
 
