@@ -58,6 +58,14 @@ li {
   margin-bottom: 5px; /* Aumenta o espaço entre os itens da lista */
 }
 
+/* Arquivo styles.css */
+
+.lista {
+  font-size: 18px; /* Define o tamanho da fonte para o h1 */
+  font-weight:500;
+}
+
+
 header.masthead {
   padding-top: 5rem;
   text-align: center;
@@ -68,8 +76,10 @@ header.masthead {
   color: rgb(253, 253, 253);
 }
 
+
+
 header.masthead .masthead-subheading {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-style: italic;
   line-height: 1.5rem;
   margin-bottom: 25px;
@@ -77,11 +87,25 @@ header.masthead .masthead-subheading {
 }
 
 header.masthead .masthead-heading {
-  font-size: 3.25rem;
+  max-width: 90%; /* garante que o texto não ultrapasse a largura da tela */
+  font-size: 2.25rem;
   font-weight: 700;
   line-height: 3.25rem;
   margin-bottom: 2rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+
+@media screen and (max-width: 600px) {
+  header.masthead .masthead-heading {
+      font-size: 5vw; /* 5% do tamanho da largura da viewport */
+      max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
+  }
+  header.masthead .masthead-subheading {
+    font-size: 3vw; /* 5% do tamanho da largura da viewport */
+    max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
+  }
+
 }
 
 .text-center {
@@ -213,22 +237,9 @@ body {
 
 }
 
-h1 {
-  font-size: 30px; /* 5% do tamanho da largura da viewport */
-  max-width: 90%; /* garante que o texto não ultrapasse a largura da tela */
-}
-h2 {
-font-size: 50px; /* 5% do tamanho da largura da viewport */
-max-width: 90%; /* garante que o texto não ultrapasse a largura da tela */
+.resumo {
+  font-size: 1.25rem;
+  font-weight: 500;
+  font-style: normal;
 }
 
-@media screen and (max-width: 800px) {
-  h1 {
-      font-size: 6vw; /* 5% do tamanho da largura da viewport */
-      max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
-  }
-  h2 {
-    font-size: 10vw; /* 5% do tamanho da largura da viewport */
-    max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
-  }
-}

@@ -18,7 +18,8 @@ class LandingPage(Page):
     carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')
     #Dados Gerais da empresa
     descricao_curta = models.CharField(max_length=100, help_text='Resuma em uma sentença curta o que a empresa faz')
-    lista_items = models.TextField(blank=True, help_text='Itens da lista em formato de list ["abc", "cde"]')
+    resumo_chave = models.TextField(max_length=300, help_text='Este resumo é o cabeçalho h2 de sua página. Deve ser uma descrição bem clara e objetiva e obrigatóriamente conter as palavras chaves de pesquisa.')
+    lista_items = models.TextField(blank=True, max_length=600,  help_text='Itens da lista em formato de list ["abc", "cde"]')
     colunas_items = models.TextField(blank=True, help_text='Conteúdo adicional no formato de dict. {"key": "value", "key2": "value2"}')
     numeros_telefone = models.CharField(blank=True, max_length=50, help_text='Números de telefone no formato (12) 98765 4321')
     email_contato = models.EmailField(blank=True, help_text='Email da empresa, se houver')
