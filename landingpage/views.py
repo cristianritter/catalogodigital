@@ -52,7 +52,11 @@ class DefaultLandingPage(View):
             try:
                 link_loja = json.loads(data.link_loja)
             except:
-                link_loja = {}           
+                link_loja = {}
+            try:    
+                gmaps_link = data.gmaps_link.split('"')[1]     
+            except:
+                gmaps_link = ""
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url_recebida+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
@@ -70,7 +74,7 @@ class DefaultLandingPage(View):
                 'link_instagram': data.link_instagram,
                 'link_facebook': data.link_facebook,
                 'reviews_link': data.reviews_link,
-                'gmaps_link': data.gmaps_link.split('"')[1],
+                'gmaps_link': gmaps_link,
                 'link_loja': link_loja,
             } 
         else:
