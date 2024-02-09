@@ -29,7 +29,7 @@ class LandingPage(Page):
     # Links (usando URLField)
     link_loja = models.TextField(max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Dict no formato {"Conheça nossa Loja Virtual":"https://minhaloja.com.br" }')
     reviews_link = models.URLField(blank=True, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
-    gmaps_link = models.URLField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
+    gmaps_link = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
     def __str__(self):
         return self.url
 

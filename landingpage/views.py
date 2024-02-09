@@ -70,7 +70,7 @@ class DefaultLandingPage(View):
                 'link_instagram': data.link_instagram,
                 'link_facebook': data.link_facebook,
                 'reviews_link': data.reviews_link,
-                'gmaps_link': data.gmaps_link,
+                'gmaps_link': data.gmaps_link.split('"')[1],
                 'link_loja': link_loja,
             } 
         else:
