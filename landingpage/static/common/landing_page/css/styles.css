@@ -28,6 +28,7 @@
   color: #ffffff;
   background-color: #0766d3;
   border-color: #020618;
+  margin-bottom: 1rem;
 }
 
 .btn-primary:hover {
@@ -159,7 +160,7 @@ h2,
 
 p {
   margin-top: 0rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 body {

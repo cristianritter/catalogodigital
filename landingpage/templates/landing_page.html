@@ -97,6 +97,7 @@
     <div class=" mx-auto ">
         <h3 class="section-heading text-uppercase espaco-duplo">Contato</h3>
         <div class="col-md-4 mx-auto text-center ">
+            <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
             <a href="{{link_whats}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
             {% if email_contato %}
             <a href="mailto:{{email_contato}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
@@ -112,9 +113,10 @@
                 {% endif %}
             </div>
             {% endif %}
-            <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
+            <p><strong>Endereço:</strong> {{endereco}}</p>
             {% if gmaps_link %}
             <button class="btn btn-primary" onclick="carregarMapa()" id="map-button">Ver no mapa</button>
+            <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank" style="display: none;" id="directions-button">Dirigir até o local</a>            
             <script defer>
                 function carregarMapa() {
                     var iframe = document.createElement("iframe");
@@ -123,14 +125,13 @@
                     iframe.setAttribute("height", "200");
                     document.getElementById("google-map-container").appendChild(iframe);
                     document.getElementById("map-button").style.display = "none";
+                    document.getElementById("directions-button").style.display = "inline-block"; // Exibir o botão Obter Direções
                 }
-            </script>            
+            </script>                 
+            <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container"></div>
             {% endif %}
-            <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank">Obter Direções</a>
-            <p><strong>Endereço:</strong> {{endereco}}</p>
             <p><strong>Atendemos de {{horario_atendimento}}</strong></p>
         </div>       
-        <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container"></div>
     </div>
 </section>
 
