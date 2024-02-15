@@ -2,23 +2,11 @@ from .models import LandingPage
 from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse
 from django.contrib.sitemaps import Sitemap
 import json
 from django.conf import settings
 from os import getenv
 
-"""def update_cache(request, url=""):
-    if url:
-        resposta = f"O endereço {url} foi atualizado."
-        cache.delete(f'{url}.landing')
-    else:
-        resposta = f"Todo conteúdo da cache foi apagado."
-        cache.clear()
-    cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
-    cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url='seja_nosso_cliente'), timeout=60*60*24*7)
-    return HttpResponse('Cache cleared!!!'+resposta)    
-"""
 
 class DefaultLandingPage(View):
     def __init__(self, *args, **kwargs):
@@ -30,8 +18,8 @@ class DefaultLandingPage(View):
    
     def get(self, request, *args, **kwargs):
         url_recebida = request.path.replace('/','')
-        if not url_recebida: 
-            url_recebida = 'seja_nosso_cliente'
+#        if not url_recebida: 
+#            url_recebida = 'seja_nosso_cliente'
         if settings.IS_HEROKU_APP:
             data = cache.get(f'{url_recebida}.landing')
         else:

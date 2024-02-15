@@ -18,7 +18,7 @@ class LojaView(View):
         cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
         
     def get(self, request, url, *args, **kwargs):
-        loja__data = Loja.objects.filter(url_cadastrado=url.replace('/','')).first()
+        loja__data = Loja.objects.filter(url=url.replace('/','')).first()
         if loja__data and loja__data.on_air:
             self.context = {
                 'meta_description': loja__data.meta_description,
