@@ -1,5 +1,5 @@
 from django.contrib import admin
-from landingpage.models import LandingPage
+from landingpage.models import LandingPage, Cidade
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
@@ -18,7 +18,13 @@ class LandingPageAdmin(ImportExportModelAdmin):
     actions = None
     list_display = ['nome_empresa', 'on_air', 'url', 'numeros_telefone']
     search_fields = ['nome_empresa', 'url']
+    list_filter = ('cidades', 'on_air')
+    filter_horizontal = ('cidades',)
 
+@admin.register(Cidade)
+class CidadesAdmin(ImportExportModelAdmin):
+    actions = None
+    list_display = ["nome"]
 
 class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'get_full_name',  'last_login', 'email' )
@@ -31,6 +37,8 @@ class UserAdmin(BaseUserAdmin):
         else:
             return ''
     get_full_name.short_description = 'nome_completo'
+
+
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

@@ -1,6 +1,13 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 import json
+from django import forms
+
+class Cidade(models.Model):
+    nome = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome
 
 class Page(models.Model):
     class Meta:
@@ -25,7 +32,6 @@ class LandingPage(Page):
     class Meta:
         verbose_name = 'Registro de Landing Page'
         verbose_name_plural = 'Registros de Landing Pages'
-    carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')
 
     def clean(self):
         try:
@@ -57,8 +63,10 @@ class LandingPage(Page):
     numeros_telefone = models.CharField(blank=True, max_length=50, help_text='Ex: (12) 98765 4321 (São permitidos múltiplos números)')
     email_contato = models.EmailField(blank=True, help_text='Ex: nome@empresa.com.br')
     endereco = models.CharField(blank=True, max_length=100, help_text="Ex: Rua Duque de Caxias, 237")
-    cidade = models.CharField(max_length=50)
+    cidades = models.ManyToManyField(Cidade)
     horario_atendimento = models.CharField(blank=True, max_length=100, help_text='Ex: Seg à Sex das 10h as 17h.')
+
+    carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')
     
     # Links (usando URLField)
     link_loja = models.TextField(default='{}', max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Dict no formato {"Conheça nossa Loja Virtual":"https://minhaloja.com.br" }')
