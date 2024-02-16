@@ -282,7 +282,11 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     margin-top: 25px;
 }
 
-.welcome-hero-serch-box{margin-top: 78px;display: flex;}
+.welcome-hero-serch-box{
+    margin-top: 78px;
+    display: flex;
+}
+
 .welcome-hero-form {
     display: flex;
     background: #fff;
@@ -312,6 +316,13 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     text-transform: capitalize;
     font-weight: 500;
 }
+
+@media only screen and (max-width: 768px) {
+    .single-welcome-hero-form {
+        height: 100px;
+    }
+}
+
 .welcome-hero-form-icon {
     position: absolute;
     top: 20px;
@@ -359,7 +370,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    width: 205px;
+    width: 180px;
     height: 170px;
     background:#fff;
     border-radius: 3px;
