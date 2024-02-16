@@ -14,12 +14,14 @@ class DefaultLandingPage(View):
         self.context = {}
         self.template_name = 'landing_page.html'
         cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
-        cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url='seja_nosso_cliente'), timeout=None)
+        cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url='seja-nosso-cliente'), timeout=None)
    
     def get(self, request, *args, **kwargs):
-        url_recebida = request.path.replace('/','')
+        parametros_da_url = request.path.split('/') #cidade, nome-da-pagina
+        print(parametros_da_url)
+        url_recebida = parametros_da_url[-1]
 #        if not url_recebida: 
-#            url_recebida = 'seja_nosso_cliente'
+            #url_recebida = 'seja-nosso-cliente'
         if settings.IS_HEROKU_APP:
             data = cache.get(f'{url_recebida}.landing')
         else:
