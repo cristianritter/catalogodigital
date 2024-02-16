@@ -42,10 +42,9 @@ class DefaultLandingPage(View):
                 gmaps_link = data.gmaps_link.split('"')[1]     
             except:
                 gmaps_link = ""
-                for item in data.cidades.all():
-                    if parametros_da_url[-2] in str(item).lower():
-                        cidade = item
-                print(f'{data.categoria_servico} em {cidade}')
+
+            if not parametros_da_url[-2]:
+                parametros_da_url[-2] = str(data.cidades.first()).lower()
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url_recebida+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
