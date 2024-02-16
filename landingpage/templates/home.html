@@ -155,6 +155,21 @@
 
 		</section><!--/.list-topics-->
 
+		<section class="search-results">
+			{% if empresas %}
+			<h1>Resultados da Pesquisa</h1>
+            <ul class="business-list">
+                {% for empresa in empresas %}
+                    <li>
+                        <h2>{{ empresa.nome_empresa }}</h2>
+                        <p>Visite a <a href="{{ empresa.url }}">página da empresa</a></p>
+                    </li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+		</section>
+
 		<!--footer start-->
 		<footer id="footer"  class="footer">
 			<div class="container">

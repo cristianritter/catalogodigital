@@ -71,7 +71,13 @@ class Homepage(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
     def get(self, request, *args, **kwargs):
-        return render(request, 'home.html')
+        self.context = {
+            'empresas': [
+                {'nome_empresa': 'Adelcio-afiador',
+                'url': 'conectapages.com/adelcio-afiador'}
+            ]
+        }
+        return render(request, 'home.html', self.context)
 
 class RootSitemap(Sitemap):
     changefreq = 'daily'
