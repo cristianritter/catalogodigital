@@ -39,8 +39,8 @@
 
 .container {
   max-width: 1320px;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 0rem;
   width: 95%;
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
@@ -55,14 +55,8 @@ ul {
   list-style-image: url('data:image/png;base64,UklGRigCAABXRUJQVlA4TBwCAAAvD8ADAE/koG0kSaqamV0qi+J4HH8A/92+3R0abiRJcpTu3dNaPYP//wRbe1in72CXdtBGkiN1z15A8iwexvOHkH/jzUzPfyAFAEAQAJJYYJIoQAAACriEK0DBAQi4E8uB6YGn9dtNV9No1r1JJSTYVE6KIiQOgZAKSLa2i0JsxYn5L3//W1VO2sdYMGzxOSp5SYX8hSMc4ucOt/SvWX/DFU4s6axDfC+aZI2G5OX0LjKnQHqy664YAc3bqd5L7bCeVXowUjB8VaHAnvIrqzosCMmCOkUOCtJZ6JemcFcWaAMEDDgkCwTTDPhLI9q5AgyED7iQPrWSgFEgJhFA/1MzhUkmYUBMslSUoc1QMX6FM4Iwm50C8gZj2v3Gn7CXs3QHltvlrqq0VDfnEO7tQyNBaDCdBhC2bTvWCr4/Pe+Hamje4mzbbEbWrGbb/Nbv3ltE/9W2bcO4bE49gzEGgBjL6AcAgpwuKvnTRQHgXNjU0T0xM1km/oMprsa2rv7nl7mFBkMhSAXNrbXjQ3enOxshh8wgt7T3VOR/3F8e7i35dCDd2Ts6Zs+uHD5LJYKmQMV9g48PNdYs+/dJ0u9R4J5/vbgpt9jyPg9W/R4Jv4H4/khO7tfteSoeMAXoUyvrVdVP11fHu1xEK43MDmy9Hb1vb0YdBkHQ6sOLsbVkYjlUx39KdU4H/f6Az5HxOEHVf7xek/sjIyIARIrC9SM=')
 }
 
-li {
-  margin-bottom: 5px; /* Aumenta o espaço entre os itens da lista */
-}
-
-/* Arquivo styles.css */
-
 .lista {
-  font-size: 18px; /* Define o tamanho da fonte para o h1 */
+  font-size: 18px; 
   font-weight:500;
 }
 
@@ -81,30 +75,32 @@ header.masthead {
 
 
 header.masthead .masthead-subheading {
-  font-size: 1.25rem;
+  font-size: 2.25rem;
   font-style: italic;
-  line-height: 1.5rem;
+  line-height: 2.0rem;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 header.masthead .masthead-heading {
   max-width: 90%; /* garante que o texto não ultrapasse a largura da tela */
-  font-size: 2.25rem;
+  font-size: 4.25rem;
   font-weight: 700;
   line-height: 3.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   header.masthead .masthead-heading {
-      font-size: 5vw; /* 5% do tamanho da largura da viewport */
+      font-size: 10vw; /* 5% do tamanho da largura da viewport */
       max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
   }
   header.masthead .masthead-subheading {
-    font-size: 3vw; /* 5% do tamanho da largura da viewport */
-    max-width: 100%; /* garante que o texto não ultrapasse a largura da tela */
+    font-size: 6vw; /* 5% do tamanho da largura da viewport */
+    max-width: 95%; /* garante que o texto não ultrapasse a largura da tela */
   }
 
 }
@@ -134,6 +130,14 @@ header.masthead .masthead-heading {
   text-transform: uppercase;
 }
 
+.text-capitalize {
+  text-transform:capitalize;
+}
+
+.negrito {
+  font-weight: 800;
+}
+
 .espaco-duplo {
   padding-top: 20px; /* Adicione a quantidade de espaço desejada */
 }
@@ -147,22 +151,6 @@ a {
   text-decoration: underline;
 }
 
-h3,
-.h3,
-h2,
-.h2 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-p {
-  margin-top: 0rem;
-  margin-bottom: 0.5rem;
-}
-
 body {
   margin: 0;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -173,11 +161,6 @@ body {
   background-color: #fff;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(171, 31, 31, 0);
-}
-
-.justify {
-  display: flex;
-  justify-content: center;
 }
 
 
@@ -200,7 +183,6 @@ body {
 .col-md-4 {
   flex: 1; /* Permite que os itens cresçam e encolham dinamicamente */
   min-width: 300px;
-  padding: 15px;
 }
 
 .footer {
@@ -240,9 +222,24 @@ body {
 
 }
 
-.resumo {
-  font-size: 1.25rem;
-  font-weight: 200;
-  
+h1, h2 {
+  font-size: 1rem;  
+  max-width: 95%;
+  text-align: justify;
 }
 
+h2 {
+  font-weight: 300;
+}
+
+h1 {
+  font-weight: 500;
+}
+
+.justify {
+  text-align: justify;
+}
+
+p{
+  max-width: 95%;
+}

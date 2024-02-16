@@ -18,7 +18,6 @@ class DefaultLandingPage(View):
    
     def get(self, request, *args, **kwargs):
         parametros_da_url = request.path.split('/') #cidade, nome-da-pagina
-        #print(parametros_da_url)
         url_recebida = parametros_da_url[-1]
         data = cache.get(f'{url_recebida}.landing')
         if not data:
@@ -29,7 +28,7 @@ class DefaultLandingPage(View):
             try:
                 lista_items = json.loads(data.lista_items)
             except:
-                lista_items = {}
+                lista_items = []
             try:
                 dados_dict = json.loads(data.colunas_items)
             except:
@@ -45,13 +44,14 @@ class DefaultLandingPage(View):
 
             if not parametros_da_url[-2]:
                 parametros_da_url[-2] = str(data.cidades.first()).lower()
+                print(data.trend_words)
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url_recebida+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
                 'nome_empresa': data.nome_empresa,
                 'descricao_curta': data.descricao_curta,
                 'categoria_cidade': f'{data.categoria_servico} em {[cidade for cidade in data.cidades.all() if parametros_da_url[-2].lower() in str(cidade).lower()][0]}',
-                'resumo_chave': data.resumo_chave,
+                'trend_words': data.trend_words,
                 'lista_items': lista_items,
                 'dados_dict': dados_dict,
                 'numeros_telefone': data.numeros_telefone,

@@ -23,11 +23,11 @@
 <header class="masthead main-content" id="masthead">
     <div class="container">
         <div class="background-image" style="background-image: url('{{ endereco_bucket }}0.webp');"></div>
-        <div class="masthead-subheading">
-            <h1>{{ descricao_curta }} </h1>
+        <div class="masthead-subheading" >
+            {{ descricao_curta }} 
         </div>
-        <div class="masthead-heading text-uppercase">
-            <h1>{{ nome_empresa }}</h1>
+        <div class="masthead-heading text-uppercase" >
+            {{ nome_empresa }}
         </div>
         <div class="col">
             {% if link_loja %}
@@ -41,25 +41,23 @@
     </div>   
 </header>
 <section class="container" id="services">
-    {% if resumo_chave %}
+    {% if trend_words %}
     <div>
-        <h2 class="resumo justify">{{resumo_chave}}</h2>
+        <h1 class="mx-auto text-capitalize">{{nome_empresa}} - {{descricao_curta}} | serviços profissionais de {{categoria_cidade}}. {{trend_words}}</h1>
     </div>
     {% endif %}
     {% if lista_items %}
     <div class="container">
-        {% for chave, valor in lista_items.items %}
-        <h3 class="text-center text-uppercase">{{chave}}</h3>
-        <div class="justify"> 
+        <h2 class="text-center negrito text-uppercase">{{categoria_cidade}}</h2>
+        <div> 
             <ul>
-                {% for item in valor %}
+                {% for item in lista_items %}
                 <li>
-                    <h4 class="lista">{{ item }}</h4>
+                    <h3 class="lista justify">{{ item }}</h4>
                 </li>
                 {% endfor %}
             </ul>
         </div>
-        {% endfor %}
     </div>
     {% endif %}
     {% if dados_dict %}
@@ -68,7 +66,7 @@
             {% for chave, valor in dados_dict.items %}
             <div class="col-md-4">
                 <h3 class="text-uppercase">{{ chave }}</h3>
-                <p class="">{{ valor }}</p>
+                <p class="justify">{{ valor }}</p>
             </div>
             {% endfor %}
         </div>
@@ -95,7 +93,7 @@
 </section>
 <section class=" text-center container" id="new-contact">
     <div class=" mx-auto ">
-        <h3 class="section-heading text-uppercase espaco-duplo">Contato</h3>
+        <h3 class="text-uppercase espaco-duplo">Contato</h3>
         <div class="col-md-4 mx-auto text-center ">
             <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
             <a href="{{link_whats}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
