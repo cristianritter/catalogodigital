@@ -4,9 +4,8 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib.sitemaps import Sitemap
 import json
-from django.conf import settings
 from os import getenv
-
+from django.utils.text import slugify
 
 class DefaultLandingPage(View):
     def __init__(self, *args, **kwargs):
@@ -84,7 +83,12 @@ class RootSitemap(Sitemap):
 
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial
-        urls += ['/'+obj.url for obj in LandingPage.objects.filter(on_air=True)]
+        for item in LandingPage.objects.filter(on_air=True):
+            print(item)
+            for cidade in item.cidades.all():
+                cidade = str(cidade).split('-')[0]
+                urls += [f'/{slugify(cidade)}/{item.url}']
+        #urls += ['/'+obj.url for obj in LandingPage.objects.filter(on_air=True)]
         return urls
     
     def location(self, item):
