@@ -23,7 +23,6 @@ class Page(models.Model):
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
     url = models.CharField(max_length=50, help_text='A parte personalizada do endereço no final do link da página')
-    meta_description = models.CharField(blank=True, max_length=160, help_text='Descrição do site que vai aparecer para o usuário durante a busca.')
     link_whats = models.URLField(blank=True, help_text='https://api.whatsapp.com/send?phone=')
     link_facebook = models.URLField(blank=True, help_text='Link para a página do facebook')
     link_instagram = models.URLField(blank=True, help_text='Link para a página do instagram')

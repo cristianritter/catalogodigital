@@ -18,14 +18,9 @@ class DefaultLandingPage(View):
    
     def get(self, request, *args, **kwargs):
         parametros_da_url = request.path.split('/') #cidade, nome-da-pagina
-        print(parametros_da_url)
+        #print(parametros_da_url)
         url_recebida = parametros_da_url[-1]
-#        if not url_recebida: 
-            #url_recebida = 'seja-nosso-cliente'
-        if settings.IS_HEROKU_APP:
-            data = cache.get(f'{url_recebida}.landing')
-        else:
-            data = None
+        data = cache.get(f'{url_recebida}.landing')
         if not data:
             data = LandingPage.objects.filter(url=url_recebida).first()
             if data and data.on_air:
@@ -47,12 +42,16 @@ class DefaultLandingPage(View):
                 gmaps_link = data.gmaps_link.split('"')[1]     
             except:
                 gmaps_link = ""
+                for item in data.cidades.all():
+                    if parametros_da_url[-2] in str(item).lower():
+                        cidade = item
+                print(f'{data.categoria_servico} em {cidade}')
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url_recebida+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
                 'nome_empresa': data.nome_empresa,
                 'descricao_curta': data.descricao_curta,
-                'meta_description': data.meta_description,
+                'categoria_cidade': f'{data.categoria_servico} em {[cidade for cidade in data.cidades.all() if parametros_da_url[-2].lower() in str(cidade).lower()][0]}',
                 'resumo_chave': data.resumo_chave,
                 'lista_items': lista_items,
                 'dados_dict': dados_dict,
