@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 import json
+from django.contrib.auth.models import User, Permission
 
 class Cidade(models.Model):
     nome = models.CharField(max_length=100)
@@ -80,6 +81,14 @@ class LandingPage(Page):
     link_loja = models.TextField(default='{}', max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Dict no formato {"Conheça nossa Loja Virtual":"https://minhaloja.com.br" }')
     reviews_link = models.URLField(blank=True, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
     gmaps_link = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
+    
+    owner = models.ForeignKey(User, on_delete=models.PROTECT)
     def __str__(self):
         return self.url
+    
+class LandingPagePermission(models.Model):
+    class Meta:
+        permissions = [
+            ("can_access_own_products", "Can Access Own Products"),
+        ]
 

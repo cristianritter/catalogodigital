@@ -14,6 +14,16 @@ class LandingPageAdmin(ImportExportModelAdmin):
         css = {
             'all': ('common/landing_page/css/admin_styles.css',),
         }
+    
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        if request.user.is_superuser:
+            # Se o usuário é um superusuário, ele tem acesso a todos os produtos
+            return queryset
+        else:
+            # Filtra os produtos baseados no usuário logado
+            return queryset.filter(owner=request.user)
+    
     actions = None
     list_display = ['nome_empresa', 'on_air', 'url', 'numeros_telefone']
     search_fields = ['nome_empresa', 'url']
