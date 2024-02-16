@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib.sitemaps import Sitemap
 import json
-from os import getenv
+
 from django.utils.text import slugify
 
 class DefaultLandingPage(View):
@@ -12,9 +12,7 @@ class DefaultLandingPage(View):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'landing_page.html'
-        cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
-        cache.set('seja_nosso_cliente.landing', LandingPage.objects.get(url='seja-nosso-cliente'), timeout=None)
-   
+
     def get(self, request, *args, **kwargs):
         parametros_da_url = request.path.split('/') #cidade, nome-da-pagina
         url_recebida = parametros_da_url[-1]

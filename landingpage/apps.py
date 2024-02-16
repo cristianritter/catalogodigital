@@ -1,6 +1,6 @@
 from django.apps import AppConfig
-
-
+from os import getenv
+from django.core.cache import cache
 
 class LandingConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
@@ -18,3 +18,7 @@ class LandingConfig(AppConfig):
             name='Can Access Own Products',
             content_type=ContentType.objects.get_for_model(LandingPage),
         )
+        cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
+        for item in LandingPage.objects.all():
+            print(item.url)
+            cache.set(f'{item.url}.landing', LandingPage.objects.get(url=item.url), timeout=None)
