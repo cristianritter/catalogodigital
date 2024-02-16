@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Você encontrou o melhor serviço de {{categoria_cidade}}. Conheça e entre em contato concosco aqui." />
+    <meta name="description" content="Você encontrou o melhor serviço de {{categoria}} em {{cidade}}. Conheça e entre em contato concosco aqui." />
     <title>{{nome_empresa}} - {{descricao_curta}}</title>
     <link rel="icon" type="image/png" href="{% static 'common/landing_page/favicon.png' %}">
     <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
@@ -43,12 +43,12 @@
 <section class="container" id="services">
     {% if trend_words %}
     <div>
-        <h1 class="mx-auto text-capitalize">{{nome_empresa}} - {{descricao_curta}} | serviços profissionais de {{categoria_cidade}}. {{trend_words}}</h1>
+        <h1 class="mx-auto text-capitalize">{{nome_empresa}} - {{descricao_curta}} | serviços profissionais de {{categoria}} em {{cidade}}. {{trend_words}}</h1>
     </div>
     {% endif %}
     {% if lista_items %}
     <div class="container">
-        <h2 class="text-center negrito text-uppercase">{{categoria_cidade}}</h2>
+        <h2 class="text-center negrito text-uppercase">{{categoria}} em {{cidade}}</h2>
         <div> 
             <ul>
                 {% for item in lista_items %}
@@ -111,7 +111,9 @@
                 {% endif %}
             </div>
             {% endif %}
-            <p><strong>Endereço:</strong> {{endereco}}</p>
+            {%if endereço%}
+            <p><strong>Endereço:</strong> {{endereco}}, {{cidade}}</p>
+            {% endif %}
             {% if gmaps_link %}
             <button class="btn btn-primary" onclick="carregarMapa()" id="map-button">Ver no mapa</button>
             <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank" style="display: none;" id="directions-button">Dirigir até o local</a>            
