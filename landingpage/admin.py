@@ -34,11 +34,14 @@ class LandingPageAdmin(ImportExportModelAdmin):
 class CidadesAdmin(ImportExportModelAdmin):
     actions = None
     list_display = ["nome"]
+    search_fields = ['nome']
+
 
 @admin.register(CategoriaServico)
 class CategoriaServicoAdmin(ImportExportModelAdmin):
     actions = None
     list_display = ["nome"]
+    search_fields = ['nome']
 
 class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'get_full_name',  'last_login', 'email' )

@@ -4,6 +4,8 @@ import json
 from django.contrib.auth.models import User, Permission
 
 class Cidade(models.Model):
+    class Meta:
+        ordering = ['nome']
     nome = models.CharField(max_length=100)
 
     def __str__(self):
@@ -13,6 +15,7 @@ class CategoriaServico(models.Model):
     class Meta:
         verbose_name = 'Categoria de Serviço'
         verbose_name_plural = 'Categorias de Serviços'
+        ordering = ['nome']
 
     nome = models.CharField(max_length=100)
 
@@ -41,6 +44,7 @@ class LandingPage(Page):
     class Meta:
         verbose_name = 'Registro de Landing Page'
         verbose_name_plural = 'Registros de Landing Pages'
+        ordering = ['-on_air', 'nome_empresa']
 
     def clean(self):
         try:
