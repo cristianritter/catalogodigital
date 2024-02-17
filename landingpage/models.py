@@ -62,6 +62,15 @@ class LandingPage(Page):
                 json.loads(self.link_loja)
         except:
             raise ValidationError(f'O conteúdo de "Link loja" está incorreto.')
+        try:
+            if '<iframe src=' in self.gmaps_link:
+                https_part = self.gmaps_link.split('"')[1]
+                if not 'https://www.google.com/maps/' in https_part:
+                    raise Exception
+                self.gmaps_link = https_part
+                
+        except Exception as Err:
+            raise ValidationError('O conteúdo de "Gmaps link" está incorreto.')
 
     def save(self, *args, **kwargs):
         self.full_clean()
