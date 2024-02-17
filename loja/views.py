@@ -21,7 +21,6 @@ class LojaView(View):
         loja__data = Loja.objects.filter(url=url.replace('/','')).first()
         if loja__data and loja__data.on_air:
             self.context = {
-                'meta_description': loja__data.meta_description,
                 'endereco_bucket': cache.get('file_bucket_address')+url+'/store',
                 'nome_empresa': loja__data.nome_empresa,
                 'link_whats': loja__data.link_whats,
