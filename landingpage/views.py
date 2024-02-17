@@ -27,6 +27,17 @@ class DefaultLandingPage(View):
                 cidade = str(data.cidades.first()).lower()
                 if data.link_loja:
                     link_loja = json.loads(data.link_loja)
+                else:
+                    link_loja = ''
+                if data.lista_items:
+                    lista_items = json.loads(data.lista_items)
+                else:
+                    lista_items = ''
+                if data.colunas_items:
+                    colunas_items = json.loads(data.colunas_items)
+                else:
+                    colunas_items = ''
+                    
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
@@ -35,8 +46,8 @@ class DefaultLandingPage(View):
                 'categoria': data.categoria_servico,
                 'cidade': [_cidade for _cidade in data.cidades.all() if cidade in str(_cidade).lower()][0],
                 'trend_words': data.trend_words,
-                'lista_items': json.loads(data.lista_items),
-                'dados_dict': json.loads(data.colunas_items),
+                'lista_items': lista_items,
+                'dados_dict': colunas_items,
                 'numeros_telefone': data.numeros_telefone,
                 'email_contato': data.email_contato,
                 'endereco': data.endereco,
