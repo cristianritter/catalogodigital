@@ -25,18 +25,18 @@ class DefaultLandingPage(View):
         if data and data.on_air:
             if not cidade:
                 cidade = str(data.cidades.first()).lower()
-                if data.link_loja:
-                    link_loja = json.loads(data.link_loja)
-                else:
-                    link_loja = ''
-                if data.lista_items:
-                    lista_items = json.loads(data.lista_items)
-                else:
-                    lista_items = ''
-                if data.colunas_items:
-                    colunas_items = json.loads(data.colunas_items)
-                else:
-                    colunas_items = ''
+            if data.link_loja:
+                link_loja = json.loads(data.link_loja)
+            else:
+                link_loja = ''
+            if data.lista_items:
+                lista_items = json.loads(data.lista_items)
+            else:
+                lista_items = ''
+            if data.colunas_items:
+                colunas_items = json.loads(data.colunas_items)
+            else:
+                colunas_items = ''
                     
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url+'/',
@@ -44,7 +44,7 @@ class DefaultLandingPage(View):
                 'nome_empresa': data.nome_empresa,
                 'descricao_curta': data.descricao_curta,
                 'categoria': data.categoria_servico,
-                'cidade': [_cidade for _cidade in data.cidades.all() if cidade in str(_cidade).lower()][0],
+                'cidade': data.cidades.filter(nome__icontains=cidade).first(),
                 'trend_words': data.trend_words,
                 'lista_items': lista_items,
                 'dados_dict': colunas_items,
