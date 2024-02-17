@@ -5,6 +5,7 @@ from django.views import View
 from django.contrib.sitemaps import Sitemap
 from django.utils.text import slugify
 import json
+from django.db.models import Q
 
 class DefaultLandingPage(View):
     def __init__(self, *args, **kwargs):
@@ -63,18 +64,34 @@ class DefaultLandingPage(View):
             return render(request, '404-wall-e.html')  
         return render(request, self.template_name, self.context)
 
+
 class Homepage(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    def get(self, request, *args, **kwargs):
-        self.context = {
-            'empresas': [
-                {'nome_empresa': 'Adelcio-afiador',
-                'url': 'conectapages.com/adelcio-afiador'}
-            ]
-        }
-        return render(request, 'home.html', self.context)
 
+    def get(self, request, *args, **kwargs):
+        # Obtém os dados do formulário, se existirem
+        o_que = request.GET.get('q', '')
+        onde = request.GET.get('local', '')
+        resultados_busca = []
+        if o_que or onde:
+            result = LandingPage.objects.filter(
+                Q(nome_empresa__icontains=o_que) |
+                Q(categoria_servico__nome__icontains=o_que) |
+                Q(trend_words__icontains=o_que),
+                on_air=True
+            )
+            for negocio in result:
+                print (negocio.nome_empresa)
+                resultados_busca.append({'nome_empresa': negocio.nome_empresa, 'url': negocio.url})
+    
+        # Contexto para enviar para o template
+        self.context = {
+            'resultados_busca': resultados_busca
+        }
+
+        # Renderiza o template com os dados atualizados
+        return render(request, 'home.html', self.context)
 class RootSitemap(Sitemap):
     changefreq = 'daily'
 
