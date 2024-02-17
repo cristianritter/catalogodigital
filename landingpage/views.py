@@ -25,6 +25,8 @@ class DefaultLandingPage(View):
         if data and data.on_air:
             if not cidade:
                 cidade = str(data.cidades.first()).lower()
+                if data.link_loja:
+                    link_loja = json.loads(data.link_loja)
             self.context = {
                 'endereco_bucket': cache.get('file_bucket_address')+url+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
@@ -44,7 +46,7 @@ class DefaultLandingPage(View):
                 'link_facebook': data.link_facebook,
                 'reviews_link': data.reviews_link,
                 'gmaps_link': data.gmaps_link,
-                'link_loja': json.loads(data.link_loja),
+                'link_loja': link_loja,
             } 
         else:
             return render(request, '404-wall-e.html')  
