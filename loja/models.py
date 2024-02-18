@@ -20,5 +20,16 @@ class Hub(Page):
     nome = models.CharField(max_length=100, help_text="Nome do Food Park centralizador")
     slogam = models.CharField(max_length=100, help_text="Slogam do Food Park centralizador")
     lojas = models.ManyToManyField(Loja)
+
+class Item(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField(max_length=200)
+
+class CartItem(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+
     
    

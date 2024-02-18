@@ -81,15 +81,17 @@ class Homepage(View):
                 Q(trend_words__icontains=o_que),
                 on_air=True
             ).order_by('-id')[:10]
-            for negocio in result:
-                print (negocio.nome_empresa, negocio.categoria_servico)
-                resultados_busca.append(
-                    {'nome_empresa': negocio.nome_empresa, 
-                     'categoria': negocio.categoria_servico, 
-                     'cidades': ', '.join(list(negocio.cidades.values_list('nome', flat=True))),
-                     'url': negocio.url}
-                )
-    
+            if result:
+                for negocio in result:
+                    resultados_busca.append(
+                        {'nome_empresa': negocio.nome_empresa, 
+                        'categoria': negocio.categoria_servico, 
+                        'cidades': ', '.join(list(negocio.cidades.values_list('nome', flat=True))),
+                        'url': negocio.url}
+                    )
+            else:
+                resultados_busca = "nothing"
+
         # Contexto para enviar para o template
         self.context = {
             'resultados_busca': resultados_busca,

@@ -39,7 +39,8 @@ class HubView(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {}
-        self.template_name = 'hub.html'     
+        self.template_name = 'hub.html'    
+        cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None) 
         self.portfolio_items = [
             {
                 'link': 'https://loja.conectapages.com/japa',
@@ -62,14 +63,14 @@ class HubView(View):
             for item in hub__data.lojas.all():
                 loja = {}
                 print(item.url)
+                endereco_bucket = cache.get('file_bucket_address')
                 loja['url'] = f'https://loja.conectapages.com/{item.url}'
-                loja['imagem'] = f'{item.endereco_bucket}{item.url}/store/cover.webp'
+                loja['imagem'] = f'{endereco_bucket}{item.url}/store/cover.webp'
                 loja['heading'] = item.nome_empresa
                 loja['subheading'] = item.slogam
                 portfolio_items.append(loja)
 
             self.context = {
-                'meta_description': hub__data.meta_description,
                 #'endereco_bucket': loja__data.endereco_bucket+url+'/store/',
                 #'nome_empresa': loja__data.nome_empresa,
                 'nome': hub__data.nome,

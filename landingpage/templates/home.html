@@ -162,6 +162,9 @@
     {% if resultados_busca %}
     <section id="resultados" class="search-results">
         <h1>Resultados da Pesquisa</h1>
+        {% if resultados_busca == 'nothing'%}
+        Infelizmente sua busca não retornou resultados. Você pode tentar buscar novamente com outra palavra-chave.
+        {% else %}
         <ul class="business-list">
             {% for empresa in resultados_busca %}
             <li>
@@ -171,9 +174,8 @@
             </li>
             {% endfor %}
         </ul>
-        </div>
+        {% endif %}
     </section>
-    
     {% endif %}
 
     <!--footer start-->
