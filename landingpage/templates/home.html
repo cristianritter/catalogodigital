@@ -159,21 +159,21 @@
 
     </section>
     <!--/.list-topics-->
-
-    <section class="search-results">
-        {% if resultados_busca %}
+   
+    {% if resultados_busca %}
+    <section id="resultados" class="search-results">
         <h1>Resultados da Pesquisa</h1>
         <ul class="business-list">
             {% for empresa in resultados_busca %}
             <li>
                 <h2>{{ empresa.nome_empresa }}</h2>
-                <p>Visite a <a href="{{ empresa.url }}">página da empresa</a></p>
+                <p>Visite a <a href="{{ empresa.url }}" target="_blank">página da empresa</a></p>
             </li>
             {% endfor %}
         </ul>
         </div>
-        {% endif %}
     </section>
+    {% endif %}
 
     <!--footer start-->
     <footer id="footer" class="footer">
@@ -228,7 +228,13 @@
 
     <!-- For gps capture -->
     <script src="{% static 'home/js/captura_local.js' %}"></script>
-
+    <script>
+        window.onload = function() {
+            // Rola até o início dos resultados
+            document.getElementById('resultados').scrollIntoView();
+        };
+    </script>
+    
 
 </body>
 
