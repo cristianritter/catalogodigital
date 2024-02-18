@@ -70,7 +70,7 @@
 					<div class="welcome-hero-form">
 						<div class="single-welcome-hero-form">
 							<h3>O que?</h3>
-							<input type="text" name="q" placeholder="Ex: padaria, nutricionista" />
+							<input type="text" name="q" placeholder="{{ q_placeholder }}" />
 						</div>
 						<div class="single-welcome-hero-form" style="display: none;">
 							<h3>Onde?</h3>
@@ -156,7 +156,6 @@
             </div>
         </div>
       -->
-
     </section>
     <!--/.list-topics-->
    
@@ -167,12 +166,14 @@
             {% for empresa in resultados_busca %}
             <li>
                 <h2>{{ empresa.nome_empresa }}</h2>
+                <p>{{ empresa.categoria }} em {{ empresa.cidades }}</p>
                 <p>Visite a <a href="{{ empresa.url }}" target="_blank">página da empresa</a></p>
             </li>
             {% endfor %}
         </ul>
         </div>
     </section>
+    
     {% endif %}
 
     <!--footer start-->

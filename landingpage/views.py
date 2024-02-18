@@ -72,23 +72,28 @@ class Homepage(View):
         o_que = request.GET.get('q', '')
         onde = request.GET.get('local', '')
         resultados_busca = []
+        q_placeholder = "Ex. afiador, cutelaria"
         if o_que or onde:
+            q_placeholder = o_que
             result = LandingPage.objects.filter(
                 Q(nome_empresa__icontains=o_que) |
                 Q(categoria_servico__nome__icontains=o_que) |
                 Q(trend_words__icontains=o_que),
                 on_air=True
-            )
+            ).order_by('-id')[:10]
             for negocio in result:
-                print (negocio.nome_empresa)
+                print (negocio.nome_empresa, negocio.categoria_servico)
                 resultados_busca.append(
                     {'nome_empresa': negocio.nome_empresa, 
-                    'url': negocio.url}
+                     'categoria': negocio.categoria_servico, 
+                     'cidades': ', '.join(list(negocio.cidades.values_list('nome', flat=True))),
+                     'url': negocio.url}
                 )
     
         # Contexto para enviar para o template
         self.context = {
-            'resultados_busca': resultados_busca
+            'resultados_busca': resultados_busca,
+            'q_placeholder': q_placeholder
         }
 
         # Renderiza o template com os dados atualizados
