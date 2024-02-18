@@ -48,6 +48,15 @@ class LandingPage(Page):
 
     def clean(self):
         try:
+            nome_cidade = self.endereco.split(',')[-1].strip()
+            cidade = Cidade.objects.get(nome=nome_cidade)
+            self.cidades.add(cidade)
+        except Cidade.DoesNotExist:
+            raise ValidationError('A cidade {} não está cadastrada. Verifique o endereço'.format(nome_cidade))
+        except Exception as err:
+            raise ValidationError('Ocorreu um erro ao adicionar a cidade: {}'.format(err))
+
+        try:
             if self.lista_items:
                 json.loads(self.lista_items)
         except:
@@ -67,8 +76,7 @@ class LandingPage(Page):
                 https_part = self.gmaps_link.split('"')[1]
                 if not 'https://www.google.com/maps/' in https_part:
                     raise Exception
-                self.gmaps_link = https_part
-                
+                self.gmaps_link = https_part        
         except Exception as Err:
             raise ValidationError('O conteúdo de "Gmaps link" está incorreto.')
 
@@ -83,7 +91,7 @@ class LandingPage(Page):
     colunas_items = models.TextField(blank= True, default='{}', help_text='Seção de colunas da página. Dict no formato {"Título1":"Conteúdo1","Título2":"Conteúdo2"},...')
     numeros_telefone = models.CharField(blank=True, max_length=50, help_text='Ex: (12) 98765 4321 (São permitidos múltiplos números)')
     email_contato = models.EmailField(blank=True, help_text='Ex: nome@empresa.com.br')
-    endereco = models.CharField(blank=True, max_length=100, help_text="Ex: Rua Duque de Caxias, 237")
+    endereco = models.CharField(blank=True, max_length=100, help_text="Ex: Rua Duque de Caxias, 237, Centenário, Sapiranga - RS")
     cidades = models.ManyToManyField(Cidade)
     categoria_servico = models.ForeignKey(CategoriaServico, blank=True, on_delete=models.PROTECT)
     horario_atendimento = models.CharField(blank=True, max_length=100, help_text='Ex: Seg à Sex das 10h as 17h.')

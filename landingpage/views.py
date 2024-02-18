@@ -7,25 +7,25 @@ from django.utils.text import slugify
 import json
 from django.db.models import Q
 
-class DefaultLandingPage(View):
+class LandingPageView(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'landing_page.html'
 
     def get(self, request, *args, **kwargs):
+        data = None
         parametros_da_url = request.path.split('/') #cidade, nome-da-pagina
         url = parametros_da_url[-1]
-        cidade = parametros_da_url[-2]
-        data = cache.get(f'{url}.landing')
-        if not data:
-            data = LandingPage.objects.filter(url=url).first()
-            if data:
-                cache.set(f'{url}.landing', data, timeout=None)    
-    
+        url_cidade = parametros_da_url[-2]
+        if url_cidade.strip():
+            data = cache.get(f'{url}.landing')
+            if not data:
+                data = LandingPage.objects.filter(url=url).first()
+                if data:
+                    cache.set(f'{url}.landing', data, timeout=None)   
+            cidades = data.cidades.all().values_list('nome', flat=True)
         if data and data.on_air:
-            if not cidade:
-                cidade = str(data.cidades.first()).lower()
             if data.link_loja:
                 link_loja = json.loads(data.link_loja)
             else:
@@ -45,13 +45,13 @@ class DefaultLandingPage(View):
                 'nome_empresa': data.nome_empresa,
                 'descricao_curta': data.descricao_curta,
                 'categoria': data.categoria_servico,
-                'cidade': data.cidades.filter(nome__icontains=cidade).first(),
+                'cidade': cidades,
                 'trend_words': data.trend_words,
                 'lista_items': lista_items,
                 'dados_dict': colunas_items,
                 'numeros_telefone': data.numeros_telefone,
                 'email_contato': data.email_contato,
-                'endereco': data.endereco,
+                'endereco': data.endereco.split(','),
                 'horario_atendimento': data.horario_atendimento,
                 'link_whats': data.link_whats,
                 'link_instagram': data.link_instagram,
@@ -63,7 +63,6 @@ class DefaultLandingPage(View):
         else:
             return render(request, '404-wall-e.html')  
         return render(request, self.template_name, self.context)
-
 
 class Homepage(View):
     def __init__(self, *args, **kwargs):
@@ -92,6 +91,7 @@ class Homepage(View):
 
         # Renderiza o template com os dados atualizados
         return render(request, 'home.html', self.context)
+
 class RootSitemap(Sitemap):
     changefreq = 'daily'
 
@@ -102,9 +102,7 @@ class RootSitemap(Sitemap):
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial
         for item in LandingPage.objects.filter(on_air=True):
-            print(item)
-            for cidade in item.cidades.all():
-                cidade = str(cidade).split('-')[0]
+                cidade = item.endereco.split(',')[-1].split('-')[0]
                 urls += [f'/{slugify(cidade)}/{item.url}']
         #urls += ['/'+obj.url for obj in LandingPage.objects.filter(on_air=True)]
         return urls
