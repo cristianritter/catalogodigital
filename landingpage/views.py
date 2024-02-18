@@ -3,7 +3,6 @@ from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
 from django.contrib.sitemaps import Sitemap
-from django.utils.text import slugify
 import json
 from django.db.models import Q
 
@@ -82,7 +81,10 @@ class Homepage(View):
             )
             for negocio in result:
                 print (negocio.nome_empresa)
-                resultados_busca.append({'nome_empresa': negocio.nome_empresa, 'url': negocio.url})
+                resultados_busca.append(
+                    {'nome_empresa': negocio.nome_empresa, 
+                    'url': negocio.url}
+                )
     
         # Contexto para enviar para o template
         self.context = {
@@ -101,10 +103,7 @@ class RootSitemap(Sitemap):
 
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial
-        for item in LandingPage.objects.filter(on_air=True):
-                cidade = item.endereco.split(',')[-1].split('-')[0]
-                urls += [f'/{slugify(cidade)}/{item.url}']
-        #urls += ['/'+obj.url for obj in LandingPage.objects.filter(on_air=True)]
+        urls += ['/'+obj.url for obj in LandingPage.objects.filter(on_air=True)]
         return urls
     
     def location(self, item):

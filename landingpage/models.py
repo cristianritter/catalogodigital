@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 import json
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 class Cidade(models.Model):
     class Meta:
@@ -48,13 +49,19 @@ class LandingPage(Page):
 
     def clean(self):
         try:
-            nome_cidade = self.endereco.split(',')[-1].strip()
-            cidade = Cidade.objects.get(nome=nome_cidade)
-            self.cidades.add(cidade)
+            nome_cidade_estado = self.endereco.split(',')[-1].strip()
+        #    cidade = Cidade.objects.get(nome=nome_cidade_estado)
+        #    self.cidades.add(cidade)
         except Cidade.DoesNotExist:
             raise ValidationError('A cidade {} não está cadastrada. Verifique o endereço'.format(nome_cidade))
         except Exception as err:
             raise ValidationError('Ocorreu um erro ao adicionar a cidade: {}'.format(err))
+
+        try:
+            self.url.split('/')[2]
+        except:
+            cidade = slugify(self.endereco.split(',')[-1].split('-')[0])
+            self.url = f'{cidade}/{self.url}'
 
         try:
             if self.lista_items:
@@ -81,7 +88,7 @@ class LandingPage(Page):
             raise ValidationError('O conteúdo de "Gmaps link" está incorreto.')
 
     def save(self, *args, **kwargs):
-        self.full_clean()
+        #self.full_clean()
         super(Page, self).save(*args, **kwargs)
 
     #Dados Gerais da empresa
