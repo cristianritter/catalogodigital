@@ -50,16 +50,17 @@ class LandingPage(Page):
     def clean(self):
         try:
             nome_cidade_estado = self.endereco.split(',')[-1].strip()
-        #    cidade = Cidade.objects.get(nome=nome_cidade_estado)
+            cidade = Cidade.objects.get(nome=nome_cidade_estado)
         #    self.cidades.add(cidade)
         except Cidade.DoesNotExist:
-            raise ValidationError('A cidade {} não está cadastrada. Verifique o endereço'.format(nome_cidade))
+            raise ValidationError('A cidade {} não está cadastrada. Verifique o endereço'.format(nome_cidade_estado))
         except Exception as err:
             raise ValidationError('Ocorreu um erro ao adicionar a cidade: {}'.format(err))
 
         try:
-            self.url.split('/')[2]
+            self.url.split('/')[1]
         except:
+            print('ntrou')
             cidade = slugify(self.endereco.split(',')[-1].split('-')[0])
             self.url = f'{cidade}/{self.url}'
 
