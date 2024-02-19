@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-import json
+import ujson as json
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 
