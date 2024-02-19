@@ -14,17 +14,15 @@ class LandingPageView(View):
 
     def get(self, request, *args, **kwargs):
         data = None
-        parametros_da_url = request.path.split('/') #cidade, nome-da-pagina
-        url = parametros_da_url[-1]
-        url_cidade = parametros_da_url[-2]
-        if url_cidade.strip():
-            data = cache.get(f'{url}.landing')
-            if not data:
-                print('entrou')
-                data = LandingPage.objects.filter(url=url).first()
-                if data:
-                    cache.set(f'{url}.landing', data, timeout=None)   
-            cidades = data.cidades.all().values_list('nome', flat=True)
+        url = request.path[1:] #/cidade/pagina
+        data = cache.get(f'{url}.landing')
+        if not data:
+            print(url)
+            data = LandingPage.objects.filter(url=url).first()
+            print(data)
+            if data:
+                cache.set(f'{url}.landing', data, timeout=None)   
+        cidades = data.cidades.all().values_list('nome', flat=True)
         if data and data.on_air:
             if data.lista_items:
                 lista_items = json.loads(data.lista_items)
@@ -36,7 +34,7 @@ class LandingPageView(View):
                 colunas_items = ''
                     
             self.context = {
-                'endereco_bucket': cache.get('file_bucket_address')+url+'/',
+                'endereco_bucket': cache.get('file_bucket_address')+url.split('/')[1]+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
                 'nome_empresa': data.nome_empresa,
                 'descricao_curta': data.descricao_curta,
