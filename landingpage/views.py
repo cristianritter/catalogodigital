@@ -20,15 +20,12 @@ class LandingPageView(View):
         if url_cidade.strip():
             data = cache.get(f'{url}.landing')
             if not data:
+                print('entrou')
                 data = LandingPage.objects.filter(url=url).first()
                 if data:
                     cache.set(f'{url}.landing', data, timeout=None)   
             cidades = data.cidades.all().values_list('nome', flat=True)
         if data and data.on_air:
-            if data.link_loja:
-                link_loja = json.loads(data.link_loja)
-            else:
-                link_loja = ''
             if data.lista_items:
                 lista_items = json.loads(data.lista_items)
             else:
@@ -57,7 +54,7 @@ class LandingPageView(View):
                 'link_facebook': data.link_facebook,
                 'reviews_link': data.reviews_link,
                 'gmaps_link': data.gmaps_link,
-                'link_loja': link_loja,
+                'link_loja': data.link_loja.split('#'),
             } 
         else:
             return render(request, '404-wall-e.html')  

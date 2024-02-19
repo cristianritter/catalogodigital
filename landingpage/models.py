@@ -60,7 +60,6 @@ class LandingPage(Page):
         try:
             self.url.split('/')[1]
         except:
-            print('ntrou')
             cidade = slugify(self.endereco.split(',')[-1].split('-')[0])
             self.url = f'{cidade}/{self.url}'
 
@@ -69,16 +68,19 @@ class LandingPage(Page):
                 json.loads(self.lista_items)
         except:
             raise ValidationError(f'O conteúdo de "Lista items" está incorreto.')
+        
         try:
             if self.colunas_items:
                 json.loads(self.colunas_items)
         except:
             raise ValidationError(f'O conteúdo de "Colunas items" está incorreto.')
+        
         try:
             if self.link_loja:
-                json.loads(self.link_loja)
+                self.link_loja.split('#')[1]
         except:
             raise ValidationError(f'O conteúdo de "Link loja" está incorreto.')
+        
         try:
             if '<iframe src=' in self.gmaps_link:
                 https_part = self.gmaps_link.split('"')[1]
@@ -107,7 +109,7 @@ class LandingPage(Page):
     carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')
     
     # Links (usando URLField)
-    link_loja = models.TextField(default='{}', max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Dict no formato {"Conheça nossa Loja Virtual":"https://minhaloja.com.br" }')
+    link_loja = models.CharField(max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Conheça nossa Loja Virtual#https://minhaloja.com.br')
     reviews_link = models.URLField(blank=True, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
     gmaps_link = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
     

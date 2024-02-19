@@ -7,8 +7,6 @@ app_name = 'landingpage'
 
 urlpatterns = [
     path('home', Homepage.as_view(), name='home'),
-#    path('update_cache/<path:url>', update_cache, name='update_cache'),
-#    path('update_cache', update_cache, name='update_cache'),
     path('sitemap.xml', sitemap_views.sitemap, {'sitemaps': {'meu_sitemap': RootSitemap}}),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), name="robots.txt"),
     re_path(r'^.*$', LandingPageView.as_view(), name='LandingPageView'),   
