@@ -8,7 +8,7 @@
 @media screen and (max-width:1199px){
 	nav.navbar.bootsnav ul.nav > li > a { padding: 35px 10px;}
 	
-	.welcome-hero-txt h2{font-size: 40px;}
+	.welcome-hero-txt h1{font-size: 40px;}
 
 	.single-welcome-hero-form input {width: 177px;}
 	.welcome-hero-btn {width: 140px;}
@@ -46,7 +46,7 @@
 }/*max-width:768px*/
 
 @media screen and (max-width:767px){
-	.welcome-hero-txt h2 {font-size: 24px;}
+	.welcome-hero-txt h1 {font-size: 24px;}
 	.single-welcome-hero {height:auto;background: transparent;padding: 100px 0;display: block;}
 	.welcome-hero-txt {padding-top: 80px;}
 	.single-welcome-hero-form {flex-direction: column;width: 100%;background: #fff; margin: 15px 0;padding: 20px 0;}
@@ -62,7 +62,7 @@
 
 	.statistics{padding:60px 0;}
 
-	.subscribe-title h2 {line-height: 1.8;}
+	.subscribe-title h1 {line-height: 1.8;}
 	.appsLand-btn {position: relative;margin-top: 30px;}
 	.subscription-input-group .subscription-input-form {width: 450px;}
 
@@ -88,7 +88,7 @@
 @media screen and (max-width: 540px){
 	.header-top ul li.head-responsive-right {float: none!important;display: block;}
 	.select-opt,.header-top-contact{border:0;}
-	.subscribe-title h2 {font-size: 18px;}
+	.subscribe-title h1 {font-size: 18px;}
 }/*max-width:540px*/
 
 @media screen and (max-width: 480px){

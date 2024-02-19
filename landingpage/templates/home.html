@@ -51,20 +51,14 @@
 </script>
 
 <body>
-    <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-
-
     <!--welcome-hero start -->
     <section id="home" class="welcome-hero">
         <div class="container">
             <div class="welcome-hero-txt">
-                <h2>O melhor lugar pra procurar e encontrar <br> tudo que você precisa </h2>
-                <h1>
+                <h1>O melhor lugar pra procurar e encontrar <br> tudo que você precisa </h1>
+                <h2>
                     Encontre os melhores profissionais, serviços, lojas e muito mais na distância de um clique
-                </h1>
+                </h2>
             </div>
             <div class="welcome-hero-serch-box" >
                 <form id="search-form" method="GET" action="{% url 'home' %}" style="display: flex;">
@@ -162,14 +156,14 @@
    
     {% if resultados_busca %}
     <section id="resultados" class="search-results">
-        <h1>Resultados da Pesquisa</h1>
+        <h2>Resultados da Pesquisa</h2>
         {% if resultados_busca == 'nothing'%}
         Infelizmente sua busca não retornou resultados. Você pode tentar buscar novamente com outra palavra-chave.
         {% else %}
         <ul class="business-list">
             {% for empresa in resultados_busca %}
             <li>
-                <h2>{{ empresa.nome_empresa }}</h2>
+                <h3>{{ empresa.nome_empresa }}</h3>
                 <p>{{ empresa.categoria }} em {{ empresa.cidades }}</p>
                 <p>Visite a <a href="{{ empresa.url }}" target="_blank">página da empresa</a></p>
             </li>
@@ -209,10 +203,10 @@
                     <div class="col-sm-7">
                         <div class="footer-social">
                             <span><i class="fa fa-phone"> (48) 99681 0518</i></span>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" title="Siga-nos no Facebook"></a>><i class="fa fa-facebook"></i></a>
+                            <a href="#" title="Siga-nos no Twitter"></a>><i class="fa fa-twitter"></i></a>
+                            <a href="#" title="Siga-nos no LinkedIn"></a>><i class="fa fa-linkedin"></i></a>
+                            <a href="#" title="Siga-nos no Google Plus"></a>><i class="fa fa-google-plus"></i></a>
                         </div>
                     </div>
                 </div>

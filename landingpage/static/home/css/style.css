@@ -262,13 +262,13 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 }
 .welcome-hero-txt { padding-top: 155px;}
 
-.welcome-hero-txt h1 {
+.welcome-hero-txt h2 {
     font-size: 18px;
     color: #fcfcfc;
     margin-top: 25px;
 }
 
-.welcome-hero-txt h2 {
+.welcome-hero-txt h1 {
     font-size: 48px;
     color: #fff;
     font-weight: 700;
@@ -987,7 +987,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
-.search-results h1 {
+.search-results h2 {
     text-align: center;
     color: #333;
     margin-top: 0;
