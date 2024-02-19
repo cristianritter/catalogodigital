@@ -3,7 +3,7 @@ from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
 from django.contrib.sitemaps import Sitemap
-import json
+import ujson as json
 from django.db.models import Q
 
 class LandingPageView(View):
