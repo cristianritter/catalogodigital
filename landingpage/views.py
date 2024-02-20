@@ -1,3 +1,4 @@
+from os import getenv
 from .models import LandingPage
 from django.core.cache import cache
 from django.shortcuts import render
@@ -6,6 +7,8 @@ from django.contrib.sitemaps import Sitemap
 import ujson as json
 from django.db.models import Q
 
+BUCKET_ADDRESS = getenv('STORAGE_BUCKET')
+
 class LandingPageView(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -13,7 +16,6 @@ class LandingPageView(View):
         self.template_name = 'landing_page.html'
 
     def get(self, request, *args, **kwargs):
-        data = None
         url = request.path[1:] #/cidade/pagina
         data = cache.get(f'{url}.landing')
         if not data:
@@ -28,7 +30,7 @@ class LandingPageView(View):
                 colunas_items = ''
                     
             self.context = {
-                'endereco_bucket': cache.get('file_bucket_address')+url.split('/')[1]+'/',
+                'endereco_bucket': BUCKET_ADDRESS+url.split('/')[1]+'/',
                 'num_img_carousel': list(range(2, data.carousel_size+2)),
                 'nome_empresa': data.nome_empresa,
                 'descricao_curta': data.descricao_curta,
