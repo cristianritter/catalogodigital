@@ -20,9 +20,8 @@ class LandingPageView(View):
             data = LandingPage.objects.filter(url=url).first()
             if data:
                 cache.set(f'{url}.landing', data, timeout=None)   
-        cidades = data.cidades.all().values_list('nome', flat=True)
         if data and data.on_air:
-          
+            cidades = data.cidades.all().values_list('nome', flat=True)
             if data.colunas_items:
                 colunas_items = json.loads(data.colunas_items)
             else:
