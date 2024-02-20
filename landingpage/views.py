@@ -17,17 +17,12 @@ class LandingPageView(View):
         url = request.path[1:] #/cidade/pagina
         data = cache.get(f'{url}.landing')
         if not data:
-            print(url)
             data = LandingPage.objects.filter(url=url).first()
-            print(data)
             if data:
                 cache.set(f'{url}.landing', data, timeout=None)   
         cidades = data.cidades.all().values_list('nome', flat=True)
         if data and data.on_air:
-            if data.lista_items:
-                lista_items = json.loads(data.lista_items)
-            else:
-                lista_items = ''
+          
             if data.colunas_items:
                 colunas_items = json.loads(data.colunas_items)
             else:
@@ -41,7 +36,7 @@ class LandingPageView(View):
                 'categoria': data.categoria_servico,
                 'cidade': cidades,
                 'trend_words': data.trend_words,
-                'lista_items': lista_items,
+                'lista_items': data.lista_items.splitlines(),
                 'dados_dict': colunas_items,
                 'numeros_telefone': data.numeros_telefone,
                 'email_contato': data.email_contato,

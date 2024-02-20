@@ -62,12 +62,6 @@ class LandingPage(Page):
         except:
             cidade = slugify(self.endereco.split(',')[-1].split('-')[0])
             self.url = f'{cidade}/{self.url}'
-
-        try:
-            if self.lista_items:
-                json.loads(self.lista_items)
-        except:
-            raise ValidationError(f'O conteúdo de "Lista items" está incorreto.')
         
         try:
             if self.colunas_items:
