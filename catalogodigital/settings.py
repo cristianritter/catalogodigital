@@ -42,7 +42,7 @@ else:
 #CACHE_MIDDLEWARE_ALIAS = 'default'
 #CACHE_MIDDLEWARE_SECONDS = 60 * 5  
 
-if not IS_HEROKU_APP:
+if IS_HEROKU_APP:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
