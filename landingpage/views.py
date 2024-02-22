@@ -21,10 +21,10 @@ class LandingPageView(View):
         url = request.path[1:] #/cidade/pagina
         data = cache.get(f'{url}.landing')
         if not data:
+            print('entrou')
             data = LandingPage.objects.filter(url=url).first()
             if data:
                 cache.set(f'{url}.landing', data, timeout=None)  
-       
         if data and data.on_air:
             cidades = data.cidades.all().values_list('nome', flat=True)
             if data.colunas_items:
