@@ -7,8 +7,11 @@ from django.utils.text import slugify
 class Cidade(models.Model):
     class Meta:
         ordering = ['nome']
-    nome = models.CharField(max_length=100)
+        indexes = [
+            models.Index(fields=['nome'])
+        ]
 
+    nome = models.CharField(max_length=100)
     def __str__(self):
         return self.nome
 
@@ -17,7 +20,9 @@ class CategoriaServico(models.Model):
         verbose_name = 'Categoria de Serviço'
         verbose_name_plural = 'Categorias de Serviços'
         ordering = ['nome']
-
+        indexes = [
+            models.Index(fields=['nome'])
+        ]
     nome = models.CharField(max_length=100)
 
     def __str__(self):
@@ -32,6 +37,7 @@ class Page(models.Model):
     link_facebook = models.URLField(blank=True, help_text='Link para a página do facebook')
     link_instagram = models.URLField(blank=True, help_text='Link para a página do instagram')
     nome_empresa = models.CharField(max_length=50, help_text='Nome da empresa, da loja ou do concentrador')
+    redes_sociais = models.TextField(help_text='Links das redes sociais separados por linha')
 
     def clean(self):
         if ' ' in self.url:
@@ -46,6 +52,10 @@ class LandingPage(Page):
         verbose_name = 'Registro de Landing Page'
         verbose_name_plural = 'Registros de Landing Pages'
         ordering = ['-on_air', 'nome_empresa']
+        indexes = [
+            models.Index(fields=['url']),
+            models.Index(fields=['on_air'])
+        ]
 
     def clean(self):
         try:
@@ -106,7 +116,6 @@ class LandingPage(Page):
     link_loja = models.CharField(max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Conheça nossa Loja Virtual#https://minhaloja.com.br')
     reviews_link = models.URLField(blank=True, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
     gmaps_link = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
-    
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
     def __str__(self):
         return self.url

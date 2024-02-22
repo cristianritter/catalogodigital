@@ -19,6 +19,7 @@ class LandingConfig(AppConfig):
             content_type=ContentType.objects.get_for_model(LandingPage),
         )
         cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
-        for item in LandingPage.objects.all():
-            print(item.url)
-            cache.set(f'{item.url}.landing', LandingPage.objects.get(url=item.url), timeout=None)
+        
+        for url in LandingPage.objects.all().values_list('url', flat=True):
+            print(url)
+            cache.set(f'{url}.landing', LandingPage.objects.get(url=url), timeout=None)
