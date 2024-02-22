@@ -1,4 +1,6 @@
 from os import getenv
+
+from django.http import HttpResponse
 from .models import LandingPage
 from django.core.cache import cache
 from django.shortcuts import render
@@ -21,7 +23,8 @@ class LandingPageView(View):
         if not data:
             data = LandingPage.objects.filter(url=url).first()
             if data:
-                cache.set(f'{url}.landing', data, timeout=None)   
+                cache.set(f'{url}.landing', data, timeout=None)  
+       
         if data and data.on_air:
             cidades = data.cidades.all().values_list('nome', flat=True)
             if data.colunas_items:
@@ -113,3 +116,8 @@ class RootSitemap(Sitemap):
         else:
             return 0.7  
 
+def favicon_view(request):
+    # Lógica para ler e retornar o conteúdo do arquivo favicon.ico
+    with open('landingpage/static/home/logo/favicon.ico', 'rb') as f:
+        favicon = f.read()
+    return HttpResponse(favicon, content_type='image/x-icon')
