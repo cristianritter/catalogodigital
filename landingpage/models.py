@@ -37,7 +37,7 @@ class Page(models.Model):
     link_facebook = models.URLField(blank=True, help_text='Link para a página do facebook')
     link_instagram = models.URLField(blank=True, help_text='Link para a página do instagram')
     nome_empresa = models.CharField(max_length=50, help_text='Nome da empresa, da loja ou do concentrador')
-    redes_sociais = models.TextField(help_text='Links das redes sociais separados por linha')
+    #redes_sociais = models.TextField(help_text='Links das redes sociais separados por linha')
 
     def clean(self):
         if ' ' in self.url:
