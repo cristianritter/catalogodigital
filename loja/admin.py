@@ -1,5 +1,5 @@
 from django.contrib import admin
-from loja.models import Hub, Loja
+from loja.models import Hub, Loja, ProductCategory, Item, Cart, CartItem
 from import_export.admin import ImportExportModelAdmin
 
 @admin.register(Loja)
@@ -26,5 +26,20 @@ class HubAdmin(ImportExportModelAdmin):
         return ", ".join([loja.url for loja in obj.lojas.all()])
     get_included_lojas.short_description = 'Lojas Incluídas'
 
+@admin.register(ProductCategory)
+class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'store')
+
+@admin.register(Item)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'description', 'category')
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('id', 'store')
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('cart', 'item', 'quantity')
 
   

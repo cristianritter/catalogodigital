@@ -4,6 +4,51 @@ import ujson as json
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 
+class Empresa(models.Model):
+    nome = models.CharField(max_length=100)
+    endereco = models.CharField(max_length=255)
+    telefone = models.CharField(max_length=20)
+    email = models.EmailField()
+    descricao = models.TextField()
+
+    def __str__(self):
+        return self.nome
+
+
+class Cliente(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    
+    def __str__(self):
+        return self.nome
+
+
+class Servico(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField()
+    duracao = models.IntegerField()  # em minutos
+
+    def __str__(self):
+        return self.nome
+    
+
+class Funcionario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
+
+class Agendamento(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
+    funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
+    data_hora = models.DateTimeField()
+    
+    def __str__(self):
+        return f"{self.cliente} - {self.servico} - {self.data_hora}"
+
+
 class Cidade(models.Model):
     class Meta:
         ordering = ['nome']
@@ -125,4 +170,5 @@ class LandingPagePermission(models.Model):
         permissions = [
             ("can_access_own_products", "Can Access Own Products"),
         ]
+
 
