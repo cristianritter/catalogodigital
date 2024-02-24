@@ -2,7 +2,9 @@ from django.contrib import admin
 from landingpage.models import CategoriaServico, LandingPage, Cidade, Empresa, Agendamento, Funcionario, Servico
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
+from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
+
+from django.contrib.auth.models import User, Group
 
 admin.site.site_title = "ConectaPages"
 admin.site.site_header = "ConectaPages"
@@ -55,9 +57,15 @@ class UserAdmin(ImportExportModelAdmin, BaseUserAdmin):
             return ''
     get_full_name.short_description = 'nome_completo'
 
+class GroupAdmin(ImportExportModelAdmin, BaseGroupAdmin):
+    pass
+
+
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
+admin.site.unregister(Group)
+admin.site.register(Group, GroupAdmin)
 @admin.register(Empresa)
 class EmpresaAdmin(admin.ModelAdmin):
     pass
