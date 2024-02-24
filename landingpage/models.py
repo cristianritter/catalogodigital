@@ -1,16 +1,64 @@
-from django.db import models
-from django.core.exceptions import ValidationError
 import ujson as json
+from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
+
+
+class MultipleURLsField(models.TextField):
+    description = "Field to store multiple URLs separated by comma"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def validate_urls(self, value):
+        urls = value.split(',')
+        validate_url = URLValidator()
+        for url in urls:
+            url = url.strip()
+            if url:
+                validate_url(url)
+            else:
+                raise ValidationError('Empty URL is not allowed')
+
+    def clean(self, value, model_instance):
+        self.validate_urls(value)
+        return value
+
+
+class CategoriaServico(models.Model):
+    class Meta:
+        verbose_name = 'Categoria de Serviço'
+        verbose_name_plural = 'Categorias de Serviços'
+        ordering = ['nome']
+        indexes = [
+            models.Index(fields=['nome'])
+        ]
+    nome = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome
+    
 
 class Empresa(models.Model):
-    nome = models.CharField(max_length=100)
-    endereco = models.CharField(max_length=255)
-    telefone = models.CharField(max_length=20)
-    email = models.EmailField()
-    descricao = models.TextField()
-
+    class Meta:
+        verbose_name = 'Registro de Empresa'
+        verbose_name_plural = 'Registros de Empresas'
+        ordering = ['nome']
+        indexes = [
+            models.Index(fields=['nome']),
+        ]
+    categoria_servico = models.ForeignKey(CategoriaServico, on_delete=models.PROTECT, help_text='Categoria dos serviços que a empresa oferece.')
+    responsaveis = models.ManyToManyField(User, help_text='Usuários que terão acesso aos produtos desta empresa.')
+    nome = models.CharField(max_length=100, help_text='Nome da empresa')
+    endereco = models.CharField(max_length=255, help_text='Rua, número, Bairro, Cidade - DF')
+    descricao = models.TextField(blank=True, max_length=50, help_text='')
+    telefone = models.CharField(blank=True, max_length=20, help_text='(11) 3212 4567')
+    celular_whats = models.CharField(blank=True, max_length=20, help_text='55 11 99988 7766')
+    email = models.EmailField(blank=True, max_length=40, help_text='Email da empresa')
+    links_redes_sociais = MultipleURLsField(blank=True, max_length=250, help_text='Links das redes sociais separados por vírgula.')
+    horario_atendimento = models.CharField(blank=True, max_length=100, help_text='Exemplo: Seg à Sex das 10h as 17h.')
     def __str__(self):
         return self.nome
 
@@ -60,18 +108,7 @@ class Cidade(models.Model):
     def __str__(self):
         return self.nome
 
-class CategoriaServico(models.Model):
-    class Meta:
-        verbose_name = 'Categoria de Serviço'
-        verbose_name_plural = 'Categorias de Serviços'
-        ordering = ['nome']
-        indexes = [
-            models.Index(fields=['nome'])
-        ]
-    nome = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.nome
 
 class Page(models.Model):
     class Meta:
