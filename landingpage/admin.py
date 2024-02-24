@@ -43,7 +43,7 @@ class CategoriaServicoAdmin(ImportExportModelAdmin):
     list_display = ["nome"]
     search_fields = ['nome']
 
-class UserAdmin(BaseUserAdmin):
+class UserAdmin(ImportExportModelAdmin, BaseUserAdmin):
     list_display = ('username', 'get_full_name',  'last_login', 'email' )
     search_fields = ('username', 'get_full_name', 'email')
     actions = None
