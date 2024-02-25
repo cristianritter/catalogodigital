@@ -82,11 +82,7 @@ class Page(models.Model):
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
     url = models.CharField(max_length=50, help_text='A parte personalizada do endereço no final do link da página')
-    link_whats = models.URLField(blank=True, help_text='https://api.whatsapp.com/send?phone=')
-    link_facebook = models.URLField(blank=True, help_text='Link para a página do facebook')
-    link_instagram = models.URLField(blank=True, help_text='Link para a página do instagram')
-    nome_empresa = models.CharField(max_length=50, help_text='Nome da empresa, da loja ou do concentrador')
- 
+   
     def clean(self):
         if ' ' in self.url:
             raise ValidationError(f'O conteúdo de "Url: {self.url}" não pode conter espaços em branco.')
@@ -100,7 +96,7 @@ class LandingPage(Page):
     class Meta:
         verbose_name = 'Registro de Landing Page'
         verbose_name_plural = 'Registros de Landing Pages'
-        ordering = ['-on_air', 'nome_empresa']
+        #ordering = ['-on_air', 'nome_empresa']
         indexes = [
             models.Index(fields=['url']),
             models.Index(fields=['on_air'])

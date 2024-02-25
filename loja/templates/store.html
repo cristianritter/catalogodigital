@@ -23,7 +23,7 @@
 <body> 
 	{% if link_whats %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <a href="{{link_whats}}" class="btn btn-success floating-button" target="_blank">
+    <a href="https://api.whatsapp.com/send?phone={{link_whats}}" class="btn btn-success floating-button" target="_blank">
 		<i class="fab fa-whatsapp  fa-3x"></i>
 		Atendimento
 	</a>
@@ -38,7 +38,7 @@
     </style>
 	<style>
 		.parallax-window {
-			background-image: url('{{ endereco_bucket }}/cover.webp');
+			background-image: url('{{ bucket }}/cover.webp');
 			background-size: cover;
 			background-position: center;
 			position: relative;
@@ -59,7 +59,7 @@
 			<div class="tm-header">
 				<div class="row tm-header-inner">
 					<div class="col-md-6 col-12">
-						<img src="{{ endereco_bucket }}/logo.webp" alt="Logo" class="tm-site-logo" />
+						<img src="{{ bucket }}/logo.webp" alt="Logo" class="tm-site-logo" />
 						<div class="tm-site-text-box">
 							<h1 class="tm-site-title">{{ nome_empresa }}</h1>
 							<h6 class="tm-site-description">{{ slogam }}</h6>
@@ -98,7 +98,7 @@
 						{% for item in items %}
 							<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 								<figure>
-									<img src="{{ endereco_bucket }}/{{ item.id }}.webp" alt="Image" class="img-fluid tm-gallery-img lightbox-img" />
+									<img src="{{ bucket }}/{{ item.id }}.webp" alt="Image" class="img-fluid tm-gallery-img lightbox-img" />
 									<figcaption>
 										<h4 class="tm-gallery-title">{{ item.nome }}</h4>
 										<p class="tm-gallery-description">{{ item.descrição | capfirst }}</p>
@@ -130,17 +130,14 @@
 							{% endif %}
 						</div>
 					</div>
-					{% if link_facebook or link_instagram %}
+					{% if social_media %}
 					<div class="col-md-6">
 						<div class="tm-description-box"> 
 							<!-- Botões de Acesso às Redes Sociais -->
 							<div class="tm-social-buttons">
-								{% if link_facebook %}
-									<a href="{{ link_facebook }}" class="btn btn-primary"><i class="fab fa-facebook-f" title="Link para o facebook."></i></a>
-								{% endif %}
-								{% if link_instagram %}
-									<a href="{{ link_instagram }}" class="btn btn-danger"><i class="fab fa-instagram" title="Link para o instagram."></i></a>
-								{% endif %}
+								{% for platform, link in social_media.items %}
+								<a href="{{ link }}" class="btn btn-danger" title="Siga-nos no {{ platform }}"><i class="fab fa-{{platform}} {{platform}}-icon "></i></a>
+								{% endfor %}
 								<!-- Adicione mais ícones de redes sociais conforme necessário -->
 							</div>
 							<!-- Descrição das Redes Sociais -->

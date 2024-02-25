@@ -27,8 +27,8 @@ class LandingPageAdmin(ImportExportModelAdmin):
             return queryset.filter(owner=request.user)
     
     actions = None
-    list_display = ['nome_empresa', 'on_air', 'url', 'numeros_telefone']
-    search_fields = ['nome_empresa', 'url']
+    #list_display = ['empresa__name', 'on_air', 'url', 'numeros_telefone']
+    #search_fields = ['empresa__name', 'url']
     list_filter = ('on_air', 'cidades', 'categoria_servico')
     filter_horizontal = ('cidades',)
 

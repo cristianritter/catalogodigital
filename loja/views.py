@@ -6,6 +6,9 @@ from django.contrib.sitemaps import Sitemap
 from .models import Loja, Hub
 import json
 from os import getenv
+from landingpage.utils import Generate
+
+BUCKET_ADDRESS = getenv('STORAGE_BUCKET')
 
 def home(request):
     return redirect(reverse('DefaultLandingPage', subdomain=None))
@@ -15,21 +18,23 @@ class LojaView(View):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'store.html'     
-        cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
         
     def get(self, request, url, *args, **kwargs):
         loja__data = Loja.objects.filter(url=url.replace('/','')).first()
         if loja__data and loja__data.on_air:
+            social_media = Generate._generate_social_links(loja__data.empresa.social_media)
+            is_whats = True
             self.context = {
-                'endereco_bucket': cache.get('file_bucket_address')+url+'/store',
-                'nome_empresa': loja__data.nome_empresa,
-                'link_whats': loja__data.link_whats,
-                'link_facebook': loja__data.link_facebook,
-                'link_instagram': loja__data.link_instagram,
-                'slogam': loja__data.slogam,
+                'bucket': BUCKET_ADDRESS+url+'/store',
+                'nome_empresa': loja__data.empresa.name,
+                'link_whats': Generate._generate_whats_number(loja__data.empresa.phone_numbers, is_whats),
+                #'link_facebook': loja__data.link_facebook,
+                #'link_instagram': loja__data.link_instagram,
+                'slogam': loja__data.empresa.tagline,
                 'titulo': loja__data.titulo,
                 'paragrafo': loja__data.paragrafo,
                 'produtos': json.loads(loja__data.produtos),
+                'social_media': social_media,
             } 
         else:
             return render(request, '404-wall-e.html')  
@@ -40,7 +45,6 @@ class HubView(View):
         super().__init__(*args, **kwargs)
         self.context = {}
         self.template_name = 'hub.html'    
-        cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None) 
         self.portfolio_items = [
             {
                 'link': 'https://loja.conectapages.com/japa',
@@ -63,11 +67,10 @@ class HubView(View):
             for item in hub__data.lojas.all():
                 loja = {}
                 print(item.url)
-                endereco_bucket = cache.get('file_bucket_address')
                 loja['url'] = f'https://loja.conectapages.com/{item.url}'
-                loja['imagem'] = f'{endereco_bucket}{item.url}/store/cover.webp'
-                loja['heading'] = item.nome_empresa
-                loja['subheading'] = item.slogam
+                loja['imagem'] = f'{BUCKET_ADDRESS}{item.url}/store/cover.webp'
+                loja['heading'] = item.empresa.name
+                loja['subheading'] = item.empresa.tagline
                 portfolio_items.append(loja)
 
             self.context = {

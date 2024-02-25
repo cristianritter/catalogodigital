@@ -7,6 +7,7 @@ from django.views import View
 from django.contrib.sitemaps import Sitemap
 import ujson as json
 from django.db.models import Q
+from landingpage.utils import Generate
 
 BUCKET_ADDRESS = getenv('STORAGE_BUCKET')
 
@@ -16,33 +17,24 @@ class LandingPageView(View):
         self.context = {}
         self.template_name = 'landing_page.html'
 
-    def _generate_whats_number(self, phone, phone_is_whats):
-        if not phone_is_whats: return ""
-        clear_number = ''.join(filter(str.isdigit, phone))
-        whats_number = "55" + clear_number
-        return whats_number
-
-
-    def _generate_social_links(self, links):
-        dictn = {}
-        for link in links:
-            if 'facebook' in link:
-                dictn['facebook'] = link
-            elif 'instagram' in link:
-                dictn['instagram'] = link                
-        return dictn
-    
-
     def get(self, request, *args, **kwargs):
-        url = request.path[1:] #/cidade/pagina
-        data = cache.get(f'{url}.landing')
+        # Recupera a url recebida /cidade/pagina
+        url = request.path[1:]
+        
+        # Tenta recuperar os dados da cache
+        data = cache.get(f'{url}')
+
+        # Adiciona os dados da consulta de landingpage a um dict
+        #landingpage_cache = {}
+        #for field in data._meta.fields:
+        #    landingpage_cache[field.name] = getattr(data, field.name)
+
         if not data:
-            print('entrou')
             data = LandingPage.objects.filter(url=url).first()
             if data:
-                cache.set(f'{url}.landing', data, timeout=None)  
+                cache.set(f'{url}', data, timeout=None)  
         if data and data.on_air:
-            social_media = self._generate_social_links([data.link_instagram, data.link_facebook])
+            social_media = Generate._generate_social_links([data.link_instagram, data.link_facebook])
             service_areas = data.empresa.service_areas.all().values_list('nome', flat=True)
             if data.colunas_items:
                 colunas_items = json.loads(data.colunas_items)
@@ -58,7 +50,7 @@ class LandingPageView(View):
                 'address': data.empresa.address.split(','),
                 'opening_hours': data.empresa.opening_hours,
                 'phone_numbers': data.empresa.phone_numbers,
-                'whats_number': self._generate_whats_number(data.numeros_telefone, is_whats),
+                'whats_number': Generate._generate_whats_number(data.numeros_telefone, is_whats),
                 'e_mail': data.empresa.e_mail,
                 'social_media': social_media,
                 'lista_items': data.lista_items.splitlines(),
