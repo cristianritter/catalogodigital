@@ -66,18 +66,23 @@ admin.site.register(User, UserAdmin)
 
 admin.site.unregister(Group)
 admin.site.register(Group, GroupAdmin)
-@admin.register(Empresa)
-class EmpresaAdmin(admin.ModelAdmin):
-    pass
 
+@admin.register(Empresa)
+class EmpresaAdmin(ImportExportModelAdmin):
+    class Meta:
+       css = {
+            'all': ('common/landing_page/css/admin_styles.css',),
+        }
+    actions = None
+   
 @admin.register(Agendamento)
-class AgendamentoAdmin(admin.ModelAdmin):
+class AgendamentoAdmin(ImportExportModelAdmin):
     pass
 
 @admin.register(Funcionario)
-class FuncionarioAdmin(admin.ModelAdmin):
+class FuncionarioAdmin(ImportExportModelAdmin):
     pass
 
 @admin.register(Servico)
-class ServicoAdmin(admin.ModelAdmin):
+class ServicoAdmin(ImportExportModelAdmin):
     pass

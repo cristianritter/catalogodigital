@@ -39,7 +39,6 @@ class LandingPageView(View):
                 'descricao_curta': data.descricao_curta,
                 'categoria': data.categoria_servico,
                 'cidade': cidades,
-                'trend_words': data.trend_words,
                 'lista_items': data.lista_items.splitlines(),
                 'dados_dict': colunas_items,
                 'numeros_telefone': data.numeros_telefone,
@@ -52,6 +51,15 @@ class LandingPageView(View):
                 'reviews_link': data.reviews_link,
                 'gmaps_link': data.gmaps_link,
                 'link_loja': data.link_loja.split('#'),
+                'category': None,
+                'company_name': None,
+                'tagline': None,
+                'address': None,
+                'phone_numbers': None,
+                'is_whatsapp': True,
+                'e_mails': None,
+                'social_media_links': None,
+                'opening_hours': None,
             } 
         else:
             return render(request, '404-wall-e.html')  
