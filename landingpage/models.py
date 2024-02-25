@@ -27,10 +27,10 @@ class MultipleURLsField(models.TextField):          # Created Field Type For Mul
         return value
 
 
-class CategoriaServico(models.Model):               #         
+class Categoria(models.Model):               #         
     class Meta:
-        verbose_name = 'Categoria de Serviço'
-        verbose_name_plural = 'Categorias de Serviços'
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
         ordering = ['nome']
         indexes = [
             models.Index(fields=['nome'])
@@ -61,16 +61,19 @@ class Empresa(models.Model):
         indexes = [
             models.Index(fields=['name']),
         ]
-    category = models.ForeignKey(CategoriaServico, on_delete=models.PROTECT, help_text='Categoria dos serviços que a empresa oferece.')
-    owners = models.ManyToManyField(User, help_text='Usuários que terão acesso de editor.')
     name = models.CharField(max_length=100, help_text='Nome da empresa')
     tagline = models.CharField(max_length=50, help_text='Texto em destaque que descreve a essência da marca.')
+    owners = models.ManyToManyField(User, help_text='Usuários que terão acesso de editor.')
+    category = models.ForeignKey(Categoria, on_delete=models.PROTECT, help_text='Categoria dos serviços que a empresa oferece.')
+    service_areas = models.ManyToManyField(Cidade)
     address = models.CharField(max_length=255, help_text='Precisa conter no mínimo: Bairro, Cidade - DF')
+    opening_hours = models.CharField(max_length=100, help_text='Exemplo: Seg à Sex das 10h as 17h.')
     phone_numbers = models.CharField(max_length=50, help_text='Um ou mais números no modelo 55 11 99887 6543 separados por vírgula.')
     is_whatsapp = models.BooleanField(help_text='Indica se o primeiro número informado é um contato do whatsapp.')
-    e_mails = models.EmailField(blank=True, max_length=40, help_text='Email da empresa')
-    social_media_links = MultipleURLsField(blank=True, max_length=250, help_text='Links das redes sociais separados por vírgula.')
-    opening_hours = models.CharField(max_length=100, help_text='Exemplo: Seg à Sex das 10h as 17h.')
+    e_mail = models.EmailField(blank=True, max_length=40, help_text='Email da empresa')
+    social_media = MultipleURLsField(blank=True, max_length=250, help_text='Links das redes sociais separados por vírgula.')
+    g_business = models.URLField(blank=True, max_length=50, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
+    g_embbedmaps = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
     def __str__(self):
         return self.name
 
@@ -83,8 +86,7 @@ class Page(models.Model):
     link_facebook = models.URLField(blank=True, help_text='Link para a página do facebook')
     link_instagram = models.URLField(blank=True, help_text='Link para a página do instagram')
     nome_empresa = models.CharField(max_length=50, help_text='Nome da empresa, da loja ou do concentrador')
-    #redes_sociais = models.TextField(help_text='Links das redes sociais separados por linha')
-
+ 
     def clean(self):
         if ' ' in self.url:
             raise ValidationError(f'O conteúdo de "Url: {self.url}" não pode conter espaços em branco.')
@@ -146,6 +148,7 @@ class LandingPage(Page):
         super(Page, self).save(*args, **kwargs)
 
     #Dados Gerais da empresa
+    empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
     descricao_curta = models.CharField(max_length=100, help_text='Texto acima do nome da empresa(SubHeader). Síntese da atividade principal. (Obrigatório conter as PALAVRAS CHAVES)')
     lista_items = models.TextField(blank=True, default='[]', max_length=600,  help_text='Seção de lista da página. Um item por linha.')
     colunas_items = models.TextField(blank= True, default='{}', help_text='Seção de colunas da página. Dict no formato {"Título1":"Conteúdo1","Título2":"Conteúdo2"},...')
@@ -153,7 +156,7 @@ class LandingPage(Page):
     email_contato = models.EmailField(blank=True, help_text='Ex: nome@empresa.com.br')
     endereco = models.CharField(blank=True, max_length=100, help_text="Ex: Rua Duque de Caxias, 237, Centenário, Sapiranga - RS")
     cidades = models.ManyToManyField(Cidade)
-    categoria_servico = models.ForeignKey(CategoriaServico, blank=True, on_delete=models.PROTECT)
+    categoria_servico = models.ForeignKey(Categoria, on_delete=models.PROTECT)
     horario_atendimento = models.CharField(blank=True, max_length=100, help_text='Ex: Seg à Sex das 10h as 17h.')
 
     carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')
@@ -169,7 +172,7 @@ class LandingPage(Page):
 class Cliente(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField()
-    
+
     def __str__(self):
         return self.nome
 

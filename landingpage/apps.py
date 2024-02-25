@@ -18,7 +18,7 @@ class LandingConfig(AppConfig):
             name='Can Access Own Products',
             content_type=ContentType.objects.get_for_model(LandingPage),
         )
-        cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
+        #cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
         
         #for url in LandingPage.objects.all().values_list('url', flat=True):
         #    print(url)

@@ -1,5 +1,4 @@
 from os import getenv
-
 from django.http import HttpResponse
 from .models import LandingPage
 from django.core.cache import cache
@@ -17,6 +16,23 @@ class LandingPageView(View):
         self.context = {}
         self.template_name = 'landing_page.html'
 
+    def _generate_whats_number(self, phone, phone_is_whats):
+        if not phone_is_whats: return ""
+        clear_number = ''.join(filter(str.isdigit, phone))
+        whats_number = "55" + clear_number
+        return whats_number
+
+
+    def _generate_social_links(self, links):
+        dictn = {}
+        for link in links:
+            if 'facebook' in link:
+                dictn['facebook'] = link
+            elif 'instagram' in link:
+                dictn['instagram'] = link                
+        return dictn
+    
+
     def get(self, request, *args, **kwargs):
         url = request.path[1:] #/cidade/pagina
         data = cache.get(f'{url}.landing')
@@ -26,40 +42,32 @@ class LandingPageView(View):
             if data:
                 cache.set(f'{url}.landing', data, timeout=None)  
         if data and data.on_air:
-            cidades = data.cidades.all().values_list('nome', flat=True)
+            social_media = self._generate_social_links([data.link_instagram, data.link_facebook])
+            service_areas = data.empresa.service_areas.all().values_list('nome', flat=True)
             if data.colunas_items:
                 colunas_items = json.loads(data.colunas_items)
             else:
                 colunas_items = ''
-                    
+            is_whats = True        
             self.context = {
-                'endereco_bucket': BUCKET_ADDRESS+url.split('/')[1]+'/',
-                'num_img_carousel': list(range(2, data.carousel_size+2)),
-                'nome_empresa': data.nome_empresa,
-                'descricao_curta': data.descricao_curta,
-                'categoria': data.categoria_servico,
-                'cidade': cidades,
+                'bucket': BUCKET_ADDRESS+url+'/',
+                'img_carousel': list(range(2, data.carousel_size+2)),
+                'nome_empresa': data.empresa.name,
+                'category': data.empresa.category,
+                'service_areas': service_areas,
+                'address': data.empresa.address.split(','),
+                'opening_hours': data.empresa.opening_hours,
+                'phone_numbers': data.empresa.phone_numbers,
+                'whats_number': self._generate_whats_number(data.numeros_telefone, is_whats),
+                'e_mail': data.empresa.e_mail,
+                'social_media': social_media,
                 'lista_items': data.lista_items.splitlines(),
                 'dados_dict': colunas_items,
-                'numeros_telefone': data.numeros_telefone,
-                'email_contato': data.email_contato,
-                'endereco': data.endereco.split(','),
-                'horario_atendimento': data.horario_atendimento,
-                'link_whats': data.link_whats,
-                'link_instagram': data.link_instagram,
-                'link_facebook': data.link_facebook,
                 'reviews_link': data.reviews_link,
                 'gmaps_link': data.gmaps_link,
                 'link_loja': data.link_loja.split('#'),
-                'category': None,
-                'company_name': None,
-                'tagline': None,
-                'address': None,
-                'phone_numbers': None,
-                'is_whatsapp': True,
-                'e_mails': None,
-                'social_media_links': None,
-                'opening_hours': None,
+                'company_name': data.nome_empresa,
+                'tagline': data.descricao_curta,
             } 
         else:
             return render(request, '404-wall-e.html')  

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from landingpage.models import CategoriaServico, LandingPage, Cidade, Empresa, Agendamento, Funcionario, Servico
+from landingpage.models import Categoria, LandingPage, Cidade, Empresa, Agendamento, Funcionario, Servico
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
@@ -39,7 +39,7 @@ class CidadesAdmin(ImportExportModelAdmin):
     search_fields = ['nome']
 
 
-@admin.register(CategoriaServico)
+@admin.register(Categoria)
 class CategoriaServicoAdmin(ImportExportModelAdmin):
     actions = None
     list_display = ["nome"]

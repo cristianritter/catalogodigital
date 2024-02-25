@@ -4,13 +4,13 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content='{{categoria}} em{{endereco|slice:"-1:"|join:", "}} e região. Telefone, localização, fotos e avaliações aqui.' />
+        <meta name="description" content='{{category}} em{{address|last}}. Telefone, localização, fotos e avaliações aqui.' />
         <link rel="icon" type="image/png" href="{% static 'common/landing_page/favicon.ico' %}">
         <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
         <link href="{% static 'common/landing_page/css/top_black_bar.css'%}" rel="stylesheet" />
         <link href="{% static 'common/landing_page/css/carousel.css'%}" rel="stylesheet" />
         <script src="{% static 'common/landing_page/js/carousel.js'%}"></script>
-        <title>{{nome_empresa}} - {{descricao_curta}}</title>
+        <title>{{nome_empresa}} - {{tagline}}</title>
     </head>   
 
     <body id="page-top">
@@ -23,9 +23,9 @@
         </header>
         <header class="masthead main-content" id="masthead">
             <div class="container">
-                <div class="background-image" style="background-image: url('{{ endereco_bucket }}0.webp');"></div>
+                <div class="background-image" style="background-image: url('{{ bucket }}0.webp');"></div>
                 <div class="masthead-subheading" >
-                    {{ descricao_curta }} 
+                    {{ tagline }} 
                 </div>
                 <div class="masthead-heading text-uppercase" >
                     {{ nome_empresa }}
@@ -43,12 +43,12 @@
         </header>
         <section class="container" id="services">
             <div>
-                <h1 class="mx-auto text-capitalize">{{nome_empresa}} - serviço de {{categoria}} em 
-                    {{cidade|join:", "}}. </h1>
+                <h1 class="mx-auto text-capitalize">{{nome_empresa}} - serviço de {{category}} em 
+                    {{service_areas|join:", "}}. </h1>
             </div>
             {% if lista_items %}
             <div class="container">
-                <h2 class="text-center negrito text-uppercase">{{categoria}} em {{endereco|last}}</h2>
+                <h2 class="text-center negrito text-uppercase">{{category}} em {{address|last}}</h2>
                 <div> 
                     <ul>
                         {% for item in lista_items %}
@@ -79,12 +79,12 @@
             </div>
             {% endif %}
 
-            {% if num_img_carousel.0 %}
+            {% if img_carousel.0 %}
             <div class="carousel">
                 <div class="carousel-container">
                     <div class="carousel-slide">
-                        {% for image_num in num_img_carousel %}
-                        <img src="{{ endereco_bucket }}{{ image_num }}.webp" alt="Imagem 1" width="350" height="200">
+                        {% for image_num in img_carousel %}
+                        <img src="{{ bucket }}{{ image_num }}.webp" alt="Imagem 1" width="350" height="200">
                         {% endfor %}
                     </div>
                 </div>
@@ -95,33 +95,31 @@
 
         </section>
 
-        
+
         <section class=" text-center container" id="new-contact">
             <div class=" mx-auto ">
                 <h3 class="text-uppercase espaco-duplo">Contato</h3>
                 <div class="col-md-4 mx-auto text-center ">
-                    <p><strong>Telefone:</strong> {{numeros_telefone}}</p>
-                    <a href="{{link_whats}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
-                    {% if email_contato %}
-                    <a href="mailto:{{email_contato}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
+                    <p><strong>Telefone:</strong> {{phone_numbers}}</p>
+                    {% if whats_number %}
+                    <a href="https://api.whatsapp.com/send?phone={{whats_number}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
+                    {% endif %}
+                    {% if e_mail %}
+                    <a href="mailto:{{e_mail}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
                     {% endif %}     
-                    {% if link_facebook or link_instagram %}
-                    <div class="tm-social-buttons espaco-duplo ">
+                    {% if social_media %}
+                    <div class="tm-social-buttons espaco-duplo">
                         <strong>Nos siga nas redes sociais:</strong>
-                        {% if link_facebook %}
-                        <a href="{{ link_facebook }}" title="Siga-nos no Facebook"><i class="fab fa-facebook-f facebook-icon"></i></a>
-                        {% endif %}
-                        {% if link_instagram %}
-                        <a href="{{ link_instagram }}" title="Siga-nos no Instagram"><i class="fab fa-instagram instagram-icon"></i></a>
-                        {% endif %}
+                        {% for platform, link in social_media.items %}
+                            <a href="{{ link }}" title="Siga-nos no {{ platform }}"><i class="fab fa-{{platform}} {{platform}}-icon "></i></a>
+                        {% endfor %}
                     </div>
                     {% endif %}
-                    {%if endereco %}
-                    <p><strong>Endereço:</strong> {{endereco|join:", "}}</p>
-                    {% endif %}
+                
+                    <p><strong>Endereço:</strong> {{address|join:", "}}</p>
                     {% if gmaps_link %}
                     <button class="btn btn-primary" onclick="carregarMapa()" id="map-button">Ver no mapa</button>
-                    <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{endereco}}" target="_blank" style="display: none;" id="directions-button">Dirigir até o local</a>            
+                    <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{address}}" target="_blank" style="display: none;" id="directions-button">Dirigir até o local</a>            
                     <script defer>
                         function carregarMapa() {
                             var iframe = document.createElement("iframe");
@@ -135,7 +133,7 @@
                     </script>                 
                     <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container"></div>
                     {% endif %}
-                    <p><strong>Atendemos de {{horario_atendimento}}</strong></p>
+                    <p><strong>Atendemos de {{opening_hours}}</strong></p>
                 </div>       
             </div>
         </section>
@@ -148,7 +146,7 @@
 
         <script>
         window.onload = function() {
-            var highQualityImageUrl = '{{ endereco_bucket }}1.webp';   
+            var highQualityImageUrl = '{{ bucket }}1.webp';   
             var lazyImages = document.querySelectorAll("img.lazy-load");
             var img = new Image();
             img.onload = function() {
