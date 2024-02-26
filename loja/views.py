@@ -61,19 +61,17 @@ class HubView(View):
             # Adicione outros itens do portfólio conforme necessário
         ] 
     def get(self, request, url, *args, **kwargs):
-        print(url)
-        print(Empresa.objects.filter(name__iexact=url.replace('-', ' ')))
-        hub__data = Hub.objects.filter(empresa=Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()).first()
+        empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
+        hub__data = Hub.objects.filter(empresa=empresa).first()
         
         if hub__data and hub__data.on_air:
-            pass
             portfolio_items = []
             for item in hub__data.lojas.all():
-                pass
                 loja = {}
-                #print(item.url)
-                loja['url'] = f'https://loja.conectapages.com/{Generate._generate_url(hub__data.empresa.name, hub__data.empresa.address)}'
-                #loja['imagem'] = f'{BUCKET_ADDRESS}{item.url}/store/cover.webp'
+                url = Generate._generate_url(item.empresa.name, item.empresa.address)
+                print(url)
+                loja['url'] = f'https://loja.conectapages.com/{url}'
+                loja['imagem'] = f'{BUCKET_ADDRESS}{url}/store/cover.webp'
                 loja['heading'] = item.empresa.name
                 loja['subheading'] = item.empresa.tagline
                 portfolio_items.append(loja)
