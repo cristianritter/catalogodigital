@@ -68,7 +68,7 @@ class Empresa(models.Model):
     service_areas = models.ManyToManyField(Cidade)
     address = models.CharField(max_length=255, help_text='Precisa conter no mínimo: Bairro, Cidade - DF')
     opening_hours = models.CharField(max_length=100, help_text='Exemplo: Seg à Sex das 10h as 17h.')
-    phone_numbers = models.CharField(max_length=50, help_text='Um ou mais números no modelo 55 11 99887 6543 separados por vírgula.')
+    phone_numbers = models.CharField(max_length=50, help_text='Um ou mais números no modelo (11) 99887 6543 separados por vírgula.')
     is_whatsapp = models.BooleanField(help_text='Indica se o primeiro número informado é um contato do whatsapp.')
     e_mail = models.EmailField(blank=True, max_length=40, help_text='Email da empresa')
     social_media = MultipleURLsField(blank=True, max_length=250, help_text='Links das redes sociais separados por vírgula.')
@@ -81,15 +81,9 @@ class Page(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
-    url = models.CharField(max_length=50, help_text='A parte personalizada do endereço no final do link da página')
+    #url = models.CharField(blank=True, max_length=50, default='', help_text='URL da página, deixe em branco para criar automaticamente')
    
-    def clean(self):
-        if ' ' in self.url:
-            raise ValidationError(f'O conteúdo de "Url: {self.url}" não pode conter espaços em branco.')
 
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super(Page, self).save(*args, **kwargs)
 
 
 class LandingPage(Page):
@@ -98,11 +92,13 @@ class LandingPage(Page):
         verbose_name_plural = 'Registros de Landing Pages'
         #ordering = ['-on_air', 'nome_empresa']
         indexes = [
-            models.Index(fields=['url']),
+#            models.Index(fields=['url']),
             models.Index(fields=['on_air'])
         ]
 
     def clean(self):
+        #f'{slugify(self.empresa.address).split("-")[-2].lower()}/{slugify(self.empresa.name)}'
+        
         try:
             nome_cidade_estado = self.endereco.split(',')[-1].strip()
             cidade = Cidade.objects.get(nome=nome_cidade_estado)
@@ -111,12 +107,6 @@ class LandingPage(Page):
             raise ValidationError('A cidade {} não está cadastrada. Verifique o endereço'.format(nome_cidade_estado))
         except Exception as err:
             raise ValidationError('Ocorreu um erro ao adicionar a cidade: {}'.format(err))
-
-        try:
-            self.url.split('/')[1]
-        except:
-            cidade = slugify(self.endereco.split(',')[-1].split('-')[0])
-            self.url = f'{cidade}/{self.url}'
         
         try:
             if self.colunas_items:
@@ -163,7 +153,7 @@ class LandingPage(Page):
     gmaps_link = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
     def __str__(self):
-        return self.url
+        return self.empresa.name
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=100)

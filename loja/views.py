@@ -3,7 +3,7 @@ from subdomains.utils import reverse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib.sitemaps import Sitemap
-from .models import Loja, Hub
+from .models import Loja, Hub, Empresa
 import json
 from os import getenv
 from landingpage.utils import Generate
@@ -61,14 +61,19 @@ class HubView(View):
             # Adicione outros itens do portfólio conforme necessário
         ] 
     def get(self, request, url, *args, **kwargs):
-        hub__data = Hub.objects.filter(url=url.replace('/','')).first()
+        print(url)
+        print(Empresa.objects.filter(name__iexact=url.replace('-', ' ')))
+        hub__data = Hub.objects.filter(empresa=Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()).first()
+        
         if hub__data and hub__data.on_air:
+            pass
             portfolio_items = []
             for item in hub__data.lojas.all():
+                pass
                 loja = {}
-                print(item.url)
-                loja['url'] = f'https://loja.conectapages.com/{item.url}'
-                loja['imagem'] = f'{BUCKET_ADDRESS}{item.url}/store/cover.webp'
+                #print(item.url)
+                loja['url'] = f'https://loja.conectapages.com/{Generate._generate_url(hub__data.empresa.name, hub__data.empresa.address)}'
+                #loja['imagem'] = f'{BUCKET_ADDRESS}{item.url}/store/cover.webp'
                 loja['heading'] = item.empresa.name
                 loja['subheading'] = item.empresa.tagline
                 portfolio_items.append(loja)

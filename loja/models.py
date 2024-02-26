@@ -13,7 +13,7 @@ class Loja(Page):
     paragrafo = models.TextField(max_length=600, help_text='Parágrafo de boas vindas')
     produtos = models.TextField(help_text='Informações do produto passadas no formato Json. Ex: {"pizza": ["Pizza de Calabresa", "Calabresa, Queijo Chedar e massa especial", 59.90, "nome_do_arquivo"]}')   
     def __str__(self):
-        return self.url
+        return self.empresa.name
     
 class ProductCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -48,6 +48,9 @@ class Hub(Page):
     nome = models.CharField(max_length=100, help_text="Nome do Food Park centralizador")
     slogam = models.CharField(max_length=100, help_text="Slogam do Food Park centralizador")
     lojas = models.ManyToManyField(Loja)
+
+    def __str__(self):
+        return self.empresa.name
 
     
    
