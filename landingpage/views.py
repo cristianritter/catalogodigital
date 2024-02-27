@@ -1,6 +1,6 @@
 from os import getenv
 from django.http import HttpResponse
-from .models import LandingPage
+from .models import Empresa, LandingPage
 from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
@@ -18,23 +18,12 @@ class LandingPageView(View):
         self.template_name = 'landing_page.html'
 
     def get(self, request, *args, **kwargs):
-        # Recupera a url recebida /cidade/pagina
-        url = request.path[1:]
+        url = request.path[1:].split('/')[1]
         
-        # Tenta recuperar os dados da cache
-        data = cache.get(f'{url}')
-
-        # Adiciona os dados da consulta de landingpage a um dict
-        #landingpage_cache = {}
-        #for field in data._meta.fields:
-        #    landingpage_cache[field.name] = getattr(data, field.name)
-
-        if not data:
-            data = LandingPage.objects.filter(url=url).first()
-            if data:
-                cache.set(f'{url}', data, timeout=None)  
+        empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
+        data = LandingPage.objects.filter(empresa=empresa).first()
         if data and data.on_air:
-            social_media = Generate._generate_social_links([data.link_instagram, data.link_facebook])
+            social_media = Generate._generate_social_links(data.empresa.social_media)
             service_areas = data.empresa.service_areas.all().values_list('nome', flat=True)
             if data.colunas_items:
                 colunas_items = json.loads(data.colunas_items)
@@ -50,16 +39,16 @@ class LandingPageView(View):
                 'address': data.empresa.address.split(','),
                 'opening_hours': data.empresa.opening_hours,
                 'phone_numbers': data.empresa.phone_numbers,
-                'whats_number': Generate._generate_whats_number(data.numeros_telefone, is_whats),
+                'whats_number': Generate._generate_whats_number(data.empresa.phone_numbers, is_whats),
                 'e_mail': data.empresa.e_mail,
                 'social_media': social_media,
                 'lista_items': data.lista_items.splitlines(),
                 'dados_dict': colunas_items,
-                'reviews_link': data.reviews_link,
-                'gmaps_link': data.gmaps_link,
-                'link_loja': data.link_loja.split('#'),
-                'company_name': data.nome_empresa,
-                'tagline': data.descricao_curta,
+                'reviews_link': data.empresa.g_business,
+                'gmaps_link': data.empresa.g_embbedmaps,
+                'link_loja': data.empresa.website.split('#'),
+                'company_name': data.empresa.name,
+                'tagline': data.empresa.tagline,
             } 
         else:
             return render(request, '404-wall-e.html')  

@@ -74,6 +74,8 @@ class Empresa(models.Model):
     social_media = MultipleURLsField(blank=True, max_length=250, help_text='Links das redes sociais separados por vírgula.')
     g_business = models.URLField(blank=True, max_length=50, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
     g_embbedmaps = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
+    website = models.CharField(max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Conheça nossa Loja Virtual#https://minhaloja.com.br')
+
     def __str__(self):
         return self.name
 
@@ -81,10 +83,7 @@ class Page(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
-    #url = models.CharField(blank=True, max_length=50, default='', help_text='URL da página, deixe em branco para criar automaticamente')
    
-
-
 
 class LandingPage(Page):
     class Meta:
@@ -102,7 +101,6 @@ class LandingPage(Page):
         try:
             nome_cidade_estado = self.endereco.split(',')[-1].strip()
             cidade = Cidade.objects.get(nome=nome_cidade_estado)
-        #    self.cidades.add(cidade)
         except Cidade.DoesNotExist:
             raise ValidationError('A cidade {} não está cadastrada. Verifique o endereço'.format(nome_cidade_estado))
         except Exception as err:
@@ -130,28 +128,12 @@ class LandingPage(Page):
             raise ValidationError('O conteúdo de "Gmaps link" está incorreto.')
 
     def save(self, *args, **kwargs):
-        #self.full_clean()
         super(Page, self).save(*args, **kwargs)
 
-    #Dados Gerais da empresa
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
-    descricao_curta = models.CharField(max_length=100, help_text='Texto acima do nome da empresa(SubHeader). Síntese da atividade principal. (Obrigatório conter as PALAVRAS CHAVES)')
     lista_items = models.TextField(blank=True, default='[]', max_length=600,  help_text='Seção de lista da página. Um item por linha.')
     colunas_items = models.TextField(blank= True, default='{}', help_text='Seção de colunas da página. Dict no formato {"Título1":"Conteúdo1","Título2":"Conteúdo2"},...')
-    numeros_telefone = models.CharField(blank=True, max_length=50, help_text='Ex: (12) 98765 4321 (São permitidos múltiplos números)')
-    email_contato = models.EmailField(blank=True, help_text='Ex: nome@empresa.com.br')
-    endereco = models.CharField(blank=True, max_length=100, help_text="Ex: Rua Duque de Caxias, 237, Centenário, Sapiranga - RS")
-    cidades = models.ManyToManyField(Cidade)
-    categoria_servico = models.ForeignKey(Categoria, on_delete=models.PROTECT)
-    horario_atendimento = models.CharField(blank=True, max_length=100, help_text='Ex: Seg à Sex das 10h as 17h.')
-
     carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')
-    
-    # Links (usando URLField)
-    link_loja = models.CharField(max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Conheça nossa Loja Virtual#https://minhaloja.com.br')
-    reviews_link = models.URLField(blank=True, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
-    gmaps_link = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
-    owner = models.ForeignKey(User, on_delete=models.PROTECT)
     def __str__(self):
         return self.empresa.name
 

@@ -29,8 +29,8 @@ class LandingPageAdmin(ImportExportModelAdmin):
     actions = None
     #list_display = ['empresa__name', 'on_air', 'url', 'numeros_telefone']
     #search_fields = ['empresa__name', 'url']
-    list_filter = ('on_air', 'cidades', 'categoria_servico')
-    filter_horizontal = ('cidades',)
+#    list_filter = ('on_air')
+#    filter_horizontal = ('cidades',)
 
 @admin.register(Cidade)
 class CidadesAdmin(ImportExportModelAdmin):

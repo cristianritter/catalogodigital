@@ -20,16 +20,17 @@ class LojaView(View):
         self.template_name = 'store.html'     
         
     def get(self, request, url, *args, **kwargs):
-        loja__data = Loja.objects.filter(url=url.replace('/','')).first()
+        print(request.path)
+        url = request.path[1:].split('/')[1]
+        empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
+        loja__data = Loja.objects.filter(empresa=empresa).first()
         if loja__data and loja__data.on_air:
             social_media = Generate._generate_social_links(loja__data.empresa.social_media)
             is_whats = True
             self.context = {
-                'bucket': BUCKET_ADDRESS+url+'/store',
+                'bucket': BUCKET_ADDRESS+request.path[1:]+'/store',
                 'nome_empresa': loja__data.empresa.name,
                 'link_whats': Generate._generate_whats_number(loja__data.empresa.phone_numbers, is_whats),
-                #'link_facebook': loja__data.link_facebook,
-                #'link_instagram': loja__data.link_instagram,
                 'slogam': loja__data.empresa.tagline,
                 'titulo': loja__data.titulo,
                 'paragrafo': loja__data.paragrafo,
@@ -61,6 +62,7 @@ class HubView(View):
             # Adicione outros itens do portfólio conforme necessário
         ] 
     def get(self, request, url, *args, **kwargs):
+        url = request.path[1:].split('/')[1]
         empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
         hub__data = Hub.objects.filter(empresa=empresa).first()
         
