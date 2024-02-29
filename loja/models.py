@@ -1,13 +1,10 @@
 from django.db import models
 from landingpage.models import Page, Empresa
 
-
-
 class Loja(Page):
     class Meta:
         verbose_name = 'Registro de Loja'
         verbose_name_plural = 'Registros de Lojas'
-    #Dados Gerais da empresa
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
     titulo = models.CharField(max_length=100, help_text='Tema central na página')
     paragrafo = models.TextField(max_length=600, help_text='Parágrafo de boas vindas')

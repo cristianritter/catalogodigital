@@ -7,9 +7,9 @@ class LandingConfig(AppConfig):
     name = "landingpage"
 
     def ready(self):
-        import landingpage.signals # não pode retirar, usado para limpar a cache
+        #import landingpage.signals # não pode retirar, usado para limpar a cache
         from django.contrib.auth.models import Permission
-        from .models import LandingPagePermission
+        #from .models import LandingPagePermission
         from landingpage.models import LandingPage
         from django.contrib.contenttypes.models import ContentType
     
@@ -18,8 +18,3 @@ class LandingConfig(AppConfig):
             name='Can Access Own Products',
             content_type=ContentType.objects.get_for_model(LandingPage),
         )
-        #cache.set('file_bucket_address', getenv('STORAGE_BUCKET'), timeout=None)
-        
-        #for url in LandingPage.objects.all().values_list('url', flat=True):
-        #    print(url)
-        #    cache.set(f'{url}.landing', LandingPage.objects.get(url=url), timeout=None)

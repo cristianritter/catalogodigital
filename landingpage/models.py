@@ -1,31 +1,10 @@
-import ujson as json
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.text import slugify
-from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
+import ujson as json
 
-
-class MultipleURLsField(models.TextField):          # Created Field Type For Multiple URL At The Same Field
-    description = "Field to store multiple URLs separated by comma"
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def validate_urls(self, value):
-        urls = value.split(',')
-        validate_url = URLValidator()
-        for url in urls:
-            url = url.strip()
-            if url:
-                validate_url(url)
-            else:
-                raise ValidationError('Empty URL is not allowed')
-
-    def clean(self, value, model_instance):
-        self.validate_urls(value)
-        return value
-
+from landingpage.model_fields import MultipleURLsField
 
 class Categoria(models.Model):               #         
     class Meta:
@@ -35,32 +14,62 @@ class Categoria(models.Model):               #
         indexes = [
             models.Index(fields=['nome'])
         ]
+
     nome = models.CharField(max_length=100)
 
     def __str__(self):
         return self.nome
     
-
 class Cidade(models.Model):
     class Meta:
+        verbose_name = 'Cidade'
+        verbose_name_plural = 'Cidades'
         ordering = ['nome']
         indexes = [
             models.Index(fields=['nome'])
         ]
 
     nome = models.CharField(max_length=50)
+
     def __str__(self):
         return self.nome
 
-
 class Empresa(models.Model):
     class Meta:
-        verbose_name = 'Cadastro de Negócio'
-        verbose_name_plural = 'Cadastro de Negócios'
+        verbose_name = 'Negócio'
+        verbose_name_plural = 'Negócios'
         ordering = ['name']
         indexes = [
             models.Index(fields=['name']),
         ]
+
+    def clean(self):
+        
+        # Verificação do campo website externo
+        try:
+            if self.website:
+                urlValidate = URLValidator()
+                urlValidate(self.website.split('#')[1])
+        except:
+            raise ValidationError(f'O Website não está configurado corretamente.')
+        
+        # Verificação do link para o mapa do Google 
+        try:
+            if '<iframe src=' in self.g_embbedmaps:
+                https_part = self.g_embbedmaps.split('"')[1]
+                if not 'https://www.google.com/maps/' in https_part:
+                    raise Exception
+                self.gmaps_link = https_part        
+        except Exception as Err:
+            raise ValidationError('O link do mapa do Google está incorreto.')
+        
+        # Verificação da cidade cadastrada no endereço
+        try:
+            nome_cidade_estado = self.address.split(',')[-1].strip()
+            Cidade.objects.get(nome=nome_cidade_estado)
+        except Cidade.DoesNotExist:
+            raise ValidationError('A cidade {} não está cadastrada. Verifique o endereço'.format(nome_cidade_estado))
+        
     name = models.CharField(max_length=100, help_text='Nome da empresa')
     tagline = models.CharField(max_length=50, help_text='Texto em destaque que descreve a essência da marca.')
     owners = models.ManyToManyField(User, help_text='Usuários que terão acesso de editor.')
@@ -74,7 +83,7 @@ class Empresa(models.Model):
     social_media = MultipleURLsField(blank=True, max_length=250, help_text='Links das redes sociais separados por vírgula.')
     g_business = models.URLField(blank=True, max_length=50, help_text="Link obtido abrindo o google empresas e clicando em Share > Send a link. Ex: https://maps.app.goo.gl/pTZvag2fg7ytV74eA")
     g_embbedmaps = models.CharField(blank=True, max_length=500, help_text="Link obtido abrindo o google empresas e clicando em Share > Embed a map > Small.")
-    website = models.CharField(max_length=150, blank=True, help_text='Nome do botão e link para para site externo. Conheça nossa Loja Virtual#https://minhaloja.com.br')
+    website = models.CharField(max_length=150, blank=True, help_text='Nome do botão e link para para site. Ex. Conheça nossa Loja Virtual # https://minhaloja.com.br')
 
     def __str__(self):
         return self.name
@@ -84,7 +93,6 @@ class Page(models.Model):
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
    
-
 class LandingPage(Page):
     class Meta:
         verbose_name = 'Registro de Landing Page'
@@ -96,37 +104,12 @@ class LandingPage(Page):
         ]
 
     def clean(self):
-        #f'{slugify(self.empresa.address).split("-")[-2].lower()}/{slugify(self.empresa.name)}'
-        
-        try:
-            nome_cidade_estado = self.endereco.split(',')[-1].strip()
-            cidade = Cidade.objects.get(nome=nome_cidade_estado)
-        except Cidade.DoesNotExist:
-            raise ValidationError('A cidade {} não está cadastrada. Verifique o endereço'.format(nome_cidade_estado))
-        except Exception as err:
-            raise ValidationError('Ocorreu um erro ao adicionar a cidade: {}'.format(err))
-        
         try:
             if self.colunas_items:
                 json.loads(self.colunas_items)
         except:
             raise ValidationError(f'O conteúdo de "Colunas items" está incorreto.')
         
-        try:
-            if self.link_loja:
-                self.link_loja.split('#')[1]
-        except:
-            raise ValidationError(f'O conteúdo de "Link loja" está incorreto.')
-        
-        try:
-            if '<iframe src=' in self.gmaps_link:
-                https_part = self.gmaps_link.split('"')[1]
-                if not 'https://www.google.com/maps/' in https_part:
-                    raise Exception
-                self.gmaps_link = https_part        
-        except Exception as Err:
-            raise ValidationError('O conteúdo de "Gmaps link" está incorreto.')
-
     def save(self, *args, **kwargs):
         super(Page, self).save(*args, **kwargs)
 
@@ -144,7 +127,6 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nome
 
-
 class Servico(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
@@ -153,13 +135,11 @@ class Servico(models.Model):
     def __str__(self):
         return self.nome
     
-
 class Funcionario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
-
 
 class Agendamento(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
@@ -169,15 +149,6 @@ class Agendamento(models.Model):
     
     def __str__(self):
         return f"{self.cliente} - {self.servico} - {self.data_hora}"
-
-
-
-
     
-class LandingPagePermission(models.Model):
-    class Meta:
-        permissions = [
-            ("can_access_own_products", "Can Access Own Products"),
-        ]
 
 

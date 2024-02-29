@@ -1,6 +1,9 @@
 from django.utils.text import slugify
+
+
 class Generate():
     
+
     def _generate_whats_number(phone, phone_is_whats):
         if not phone_is_whats: return ""
         clear_number = ''.join(filter(str.isdigit, phone))

@@ -38,7 +38,6 @@ class CidadesAdmin(ImportExportModelAdmin):
     list_display = ["nome"]
     search_fields = ['nome']
 
-
 @admin.register(Categoria)
 class CategoriaServicoAdmin(ImportExportModelAdmin):
     actions = None
@@ -59,7 +58,6 @@ class UserAdmin(ImportExportModelAdmin, BaseUserAdmin):
 
 class GroupAdmin(ImportExportModelAdmin, BaseGroupAdmin):
     pass
-
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
