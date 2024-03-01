@@ -5,6 +5,7 @@ from django.core.cache import cache
 class LandingConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "landingpage"
+    verbose_name = 'empresas e serviços'
 
     def ready(self):
         #import landingpage.signals # não pode retirar, usado para limpar a cache

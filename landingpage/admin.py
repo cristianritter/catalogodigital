@@ -1,5 +1,5 @@
 from django.contrib import admin
-from landingpage.models import Categoria, LandingPage, Cidade, Empresa, Agendamento, Funcionario, Servico
+from landingpage.models import Categoria, LandingPage, Cidade, Empresa, Agendamento, Servico
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
@@ -73,14 +73,6 @@ class EmpresaAdmin(ImportExportModelAdmin):
         }
     actions = None
    
-@admin.register(Agendamento)
-class AgendamentoAdmin(ImportExportModelAdmin):
-    pass
-
-@admin.register(Funcionario)
-class FuncionarioAdmin(ImportExportModelAdmin):
-    pass
-
 @admin.register(Servico)
 class ServicoAdmin(ImportExportModelAdmin):
     pass

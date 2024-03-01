@@ -3,7 +3,7 @@ from subdomains.utils import reverse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib.sitemaps import Sitemap
-from .models import Loja, Hub, Empresa
+from .models import Store, Hub, Empresa
 import json
 from os import getenv
 from landingpage.utils import Generate
@@ -23,7 +23,7 @@ class LojaView(View):
         print(request.path)
         url = request.path[1:].split('/')[1]
         empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
-        loja__data = Loja.objects.filter(empresa=empresa).first()
+        loja__data = Store.objects.filter(empresa=empresa).first()
         if loja__data and loja__data.on_air:
             social_media = Generate._generate_social_links(loja__data.empresa.social_media)
             is_whats = True
@@ -98,7 +98,7 @@ class LojaSitemap(Sitemap):
 
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial
-        urls += ['/'+obj.url for obj in Loja.objects.filter(on_air=True)]
+        urls += ['/'+obj.url for obj in Store.objects.filter(on_air=True)]
         return urls
     
     def location(self, item):

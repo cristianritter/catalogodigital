@@ -8,8 +8,8 @@ from landingpage.model_fields import MultipleURLsField
 
 class Categoria(models.Model):               #         
     class Meta:
-        verbose_name = 'Categoria'
-        verbose_name_plural = 'Categorias'
+        verbose_name = '     Ramos de atuação'
+        verbose_name_plural = '     Ramos de atuação'
         ordering = ['nome']
         indexes = [
             models.Index(fields=['nome'])
@@ -36,8 +36,8 @@ class Cidade(models.Model):
 
 class Empresa(models.Model):
     class Meta:
-        verbose_name = 'Negócio'
-        verbose_name_plural = 'Negócios'
+        verbose_name = '     Empresa'
+        verbose_name_plural = '     Empresas'
         ordering = ['name']
         indexes = [
             models.Index(fields=['name']),
@@ -72,7 +72,8 @@ class Empresa(models.Model):
         
     name = models.CharField(max_length=100, help_text='Nome da empresa')
     tagline = models.CharField(max_length=50, help_text='Texto em destaque que descreve a essência da marca.')
-    owners = models.ManyToManyField(User, help_text='Usuários que terão acesso de editor.')
+    owners = models.ManyToManyField(User, related_name='owners_empresas', help_text='Usuários que terão acesso de editor.')
+    employees = models.ManyToManyField(User, blank=True, related_name='employees_empresas', help_text='Funcionários da empresa.')
     category = models.ForeignKey(Categoria, on_delete=models.PROTECT, help_text='Categoria dos serviços que a empresa oferece.')
     service_areas = models.ManyToManyField(Cidade)
     address = models.CharField(max_length=255, help_text='Precisa conter no mínimo: Bairro, Cidade - DF')
@@ -95,8 +96,8 @@ class Page(models.Model):
    
 class LandingPage(Page):
     class Meta:
-        verbose_name = 'Registro de Landing Page'
-        verbose_name_plural = 'Registros de Landing Pages'
+        verbose_name = '    Landing Page'
+        verbose_name_plural = '   Landing Pages'
         #ordering = ['-on_air', 'nome_empresa']
         indexes = [
 #            models.Index(fields=['url']),
@@ -128,6 +129,9 @@ class Cliente(models.Model):
         return self.nome
 
 class Servico(models.Model):
+    class Meta:
+        verbose_name = '     Serviço sob agendamento'
+        verbose_name_plural = '    Serviços sob agendamento'
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
     duracao = models.IntegerField()  # em minutos
@@ -135,20 +139,12 @@ class Servico(models.Model):
     def __str__(self):
         return self.nome
     
-class Funcionario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user.username
-
 class Agendamento(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
-    funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
+    funcionario = models.ForeignKey(User, on_delete=models.CASCADE)
     data_hora = models.DateTimeField()
     
     def __str__(self):
         return f"{self.cliente} - {self.servico} - {self.data_hora}"
     
-
-

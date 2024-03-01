@@ -1,9 +1,11 @@
 from django.contrib import admin
-from loja.models import Hub, Loja, ProductCategory, Item, Cart, CartItem
+from loja.models import Hub, Store, Shelf, Item, Cart, CartItem
 from import_export.admin import ImportExportModelAdmin
+from .forms import ItemForm
 
-@admin.register(Loja)
-class LojaAdmin(ImportExportModelAdmin):
+
+@admin.register(Store)
+class StoreAdmin(ImportExportModelAdmin):
     class Media:
         css = {
             'all': ('common/landing_page/css/admin_styles.css',),
@@ -26,20 +28,15 @@ class HubAdmin(ImportExportModelAdmin):
     #    return ", ".join([loja.url for loja in obj.lojas.all()])
     #get_included_lojas.short_description = 'Lojas Incluídas'
 
-@admin.register(ProductCategory)
+@admin.register(Shelf)
 class ProductCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'store')
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'description', 'category')
+    form = ItemForm
+    list_display = ('name', 'price', 'description')
 
-@admin.register(Cart)
-class CartAdmin(admin.ModelAdmin):
-    list_display = ('id', 'store')
 
-@admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('cart', 'item', 'quantity')
 
   
