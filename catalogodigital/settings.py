@@ -7,6 +7,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+BUCKET_NAME = os.getenv('BUCKET_NAME')
 
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
@@ -37,10 +38,6 @@ else:
             }
         }
     }
-
-
-#CACHE_MIDDLEWARE_ALIAS = 'default'
-#CACHE_MIDDLEWARE_SECONDS = 60 * 5  
 
 if IS_HEROKU_APP:
     DATABASES = {
@@ -81,14 +78,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django.contrib.sitemaps',
+    'django_object_actions',
     'import_export',
     'landingpage',
     'loja',
 ]
 
 MIDDLEWARE = [
-#   'django_brotli.middleware.BrotliMiddleware',
-#   'django.middleware.cache.UpdateCacheMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -98,7 +94,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-#   'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 TEMPLATES = [

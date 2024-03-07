@@ -21,7 +21,7 @@ class LojaView(View):
         
     def get(self, request, url, *args, **kwargs):
         print(request.path)
-        url = request.path[1:].split('/')[1]
+        url = request.path[1:].split('/')[-1]
         empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
         loja__data = Store.objects.filter(empresa=empresa).first()
         if loja__data and loja__data.on_air:
@@ -62,7 +62,7 @@ class HubView(View):
             # Adicione outros itens do portfólio conforme necessário
         ] 
     def get(self, request, url, *args, **kwargs):
-        url = request.path[1:].split('/')[1]
+        url = request.path[1:].split('/')[-1]
         empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
         hub__data = Hub.objects.filter(empresa=empresa).first()
         

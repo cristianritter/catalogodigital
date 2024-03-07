@@ -1,8 +1,7 @@
 from django.contrib import admin
-from loja.models import Hub, Store, Shelf, Item, Cart, CartItem
+from loja.models import Hub, Store, Shelf, Item
 from import_export.admin import ImportExportModelAdmin
 from .forms import ItemForm
-
 
 @admin.register(Store)
 class StoreAdmin(ImportExportModelAdmin):
@@ -29,11 +28,11 @@ class HubAdmin(ImportExportModelAdmin):
     #get_included_lojas.short_description = 'Lojas Incluídas'
 
 @admin.register(Shelf)
-class ProductCategoryAdmin(admin.ModelAdmin):
+class ShelfAdmin(ImportExportModelAdmin):
     list_display = ('name', 'store')
 
 @admin.register(Item)
-class ItemAdmin(admin.ModelAdmin):
+class ItemAdmin(ImportExportModelAdmin):
     form = ItemForm
     list_display = ('name', 'price', 'description')
 

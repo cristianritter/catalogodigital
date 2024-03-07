@@ -1,8 +1,12 @@
 from django.contrib import admin
+from landingpage.forms import LandingPageForm
 from landingpage.models import Categoria, LandingPage, Cidade, Empresa, Agendamento, Servico
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
+from django_object_actions import DjangoObjectActions
+from landingpage.utils import Storage
+from catalogodigital import settings
 
 from django.contrib.auth.models import User, Group
 
@@ -11,26 +15,32 @@ admin.site.site_header = "ConectaPages"
 admin.site.index_title = "Gerenciamento do Sistema"
 
 @admin.register(LandingPage)
-class LandingPageAdmin(ImportExportModelAdmin):
+class LandingPageAdmin(DjangoObjectActions, ImportExportModelAdmin):
     class Media:
         css = {
             'all': ('common/landing_page/css/admin_styles.css',),
         }
     
+    form = LandingPageForm
+    actions = None    
+    change_actions = ('clear_bucket_files',)
+    readonly_fields = ['image_tag']
+    list_display = ['empresa', 'on_air', 'CidadeEstado', 'URL', 'Telefones']
+    search_fields = ['empresa__name', 'empresa__phone_numbers', 'empresa__address']
+    list_filter = ['on_air', ]
+#    filter_horizontal = ('Cidade',)
+
+    def clear_bucket_files(modeladmin, request, queryset):
+        Storage.clear_folder_supabase(settings.BUCKET_NAME, '')
+        #upload_to_supabase(settings.BUCKET_NAME, file_name, file_content)
+
+    # Filtra os produtos baseados no usuário logado
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         if request.user.is_superuser:
-            # Se o usuário é um superusuário, ele tem acesso a todos os produtos
             return queryset
         else:
-            # Filtra os produtos baseados no usuário logado
             return queryset.filter(owner=request.user)
-    
-    actions = None
-    #list_display = ['empresa__name', 'on_air', 'url', 'numeros_telefone']
-    #search_fields = ['empresa__name', 'url']
-#    list_filter = ('on_air')
-#    filter_horizontal = ('cidades',)
 
 @admin.register(Cidade)
 class CidadesAdmin(ImportExportModelAdmin):

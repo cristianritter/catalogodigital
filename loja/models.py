@@ -16,7 +16,6 @@ class Shelf(models.Model):
     class Meta:
         verbose_name = '  Shelf'
         verbose_name_plural = '  Shelves'
-    
     name = models.CharField(max_length=100)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     def __str__(self):
@@ -26,14 +25,11 @@ class Item(models.Model):
     class Meta:
         verbose_name = ' Item'
         verbose_name_plural = ' Items'
-
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     imagem_url = models.CharField(max_length=255, blank=True, null=True)
-    _shelf = models.ForeignKey(Shelf, on_delete=models.CASCADE)
-    
-
+    shelf = models.ForeignKey(Shelf, on_delete=models.PROTECT)
     def __str__(self):
         return self.name
     
@@ -55,7 +51,6 @@ class Hub(Page):
     nome = models.CharField(max_length=100, help_text="Nome do Food Park centralizador")
     slogam = models.CharField(max_length=100, help_text="Slogam do Food Park centralizador")
     lojas = models.ManyToManyField(Store)
-
     def __str__(self):
         return self.empresa.name
 

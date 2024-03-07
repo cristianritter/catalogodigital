@@ -1,7 +1,7 @@
 from os import getenv
 from django.http import HttpResponse
 from .models import Empresa, LandingPage
-from django.core.cache import cache
+#from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
 from django.contrib.sitemaps import Sitemap
@@ -18,8 +18,7 @@ class LandingPageView(View):
         self.template_name = 'landing_page.html'
 
     def get(self, request, *args, **kwargs):
-        url = request.path[1:].split('/')[1]
-        
+        url:list = request.path[1:].split('/')[-1]
         empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
         data = LandingPage.objects.filter(empresa=empresa).first()
         if data and data.on_air:
@@ -29,7 +28,7 @@ class LandingPageView(View):
                 colunas_items = json.loads(data.colunas_items)
             else:
                 colunas_items = ''
-            is_whats = True        
+            is_whats = True
             self.context = {
                 'bucket': BUCKET_ADDRESS+url+'/',
                 'img_carousel': list(range(2, data.carousel_size+2)),
@@ -83,13 +82,11 @@ class Homepage(View):
             else:
                 resultados_busca = "nothing"
 
-        # Contexto para enviar para o template
         self.context = {
             'resultados_busca': resultados_busca,
             'q_placeholder': q_placeholder
         }
 
-        # Renderiza o template com os dados atualizados
         return render(request, 'home.html', self.context)
 
 class RootSitemap(Sitemap):
