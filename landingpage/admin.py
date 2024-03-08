@@ -5,8 +5,8 @@ from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django_object_actions import DjangoObjectActions
-from landingpage.utils import Storage
-from catalogodigital import settings
+from landingpage.utils import Storage, Generate
+
 
 from django.contrib.auth.models import User, Group
 
@@ -25,15 +25,14 @@ class LandingPageAdmin(DjangoObjectActions, ImportExportModelAdmin):
     actions = None    
     change_actions = ('clear_bucket_files',)
     readonly_fields = ['image_tag']
-    list_display = ['empresa', 'on_air', 'CidadeEstado', 'URL', 'Telefones']
+    list_display = ['empresa', 'on_air', 'cidadeestado', 'url', 'telefones']
     search_fields = ['empresa__name', 'empresa__phone_numbers', 'empresa__address']
     list_filter = ['on_air', ]
 #    filter_horizontal = ('Cidade',)
 
     def clear_bucket_files(modeladmin, request, queryset):
-        Storage.clear_folder_supabase(settings.BUCKET_NAME, '')
-        #upload_to_supabase(settings.BUCKET_NAME, file_name, file_content)
-
+        Storage.clear_folder_supabase(Generate._generate_company_path(queryset.empresa.name, queryset.empresa.address)+'/')
+  
     # Filtra os produtos baseados no usuário logado
     def get_queryset(self, request):
         queryset = super().get_queryset(request)

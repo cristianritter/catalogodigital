@@ -1,4 +1,3 @@
-from os import getenv
 from django.http import HttpResponse
 from .models import Empresa, LandingPage
 #from django.core.cache import cache
@@ -7,9 +6,9 @@ from django.views import View
 from django.contrib.sitemaps import Sitemap
 import ujson as json
 from django.db.models import Q
-from landingpage.utils import Generate
+from landingpage.utils import Generate, Storage
 
-BUCKET_ADDRESS = getenv('STORAGE_BUCKET')
+BUCKET_URL = Storage.get_bucket_url('')
 
 class LandingPageView(View):
     def __init__(self, *args, **kwargs):
@@ -30,7 +29,7 @@ class LandingPageView(View):
                 colunas_items = ''
             is_whats = True
             self.context = {
-                'bucket': BUCKET_ADDRESS+url+'/',
+                'bucket': BUCKET_URL+url+'/',
                 'img_carousel': list(range(2, data.carousel_size+2)),
                 'nome_empresa': data.empresa.name,
                 'category': data.empresa.category,

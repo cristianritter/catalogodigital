@@ -5,7 +5,7 @@ from django.core.validators import URLValidator
 import ujson as json
 from landingpage.model_fields import MultipleURLsField
 from django.utils.text import slugify
-from .utils import Storage
+from .utils import Storage, Generate
 from catalogodigital import settings
 
 class Categoria(models.Model):               #         
@@ -95,27 +95,15 @@ class LandingPage(Page):
         #]
 
     def image_tag(self):
-        from django.utils.html import mark_safe
-        html_preview = ""
-        bucket_link = Storage.get_bucket_url(settings.BUCKET_NAME)
-        for file_name in Storage.get_bucket_file_list(settings.BUCKET_NAME, ''):
-            # Adiciona a tag HTML para a imagem com o nome do arquivo ao lado
-            html_preview += f'<div style="display: flex; align-items: center;">'
-            html_preview += f'<img src="{bucket_link}/{file_name}" width="150" height="150" />'
-            html_preview += f'<a href="{bucket_link}/{file_name}" target="_blank" style="margin-left: 10px;">{file_name}</a></div>'
-        return mark_safe(html_preview)
-
-    image_tag.short_description = 'Imagens no Bucket'
-
+        return Storage.get_image_tag(Generate._generate_company_path(self.empresa.name, self.empresa.address))
+        
+    def cidadeestado(self):
+        return Generate._generate_cidade_estado(self.empresa.address)
     
-    def CidadeEstado(self):
-        return f'{self.empresa.address.split(",")[-1].strip()}'
+    def url(self):
+        return Generate._generate_company_path(self.empresa.name, self.empresa.address)
     
-    def URL(self):
-        city = self.CidadeEstado().split("-")[0]
-        return f'{city}/{slugify(self.empresa.name)}'.lower()
-    
-    def Telefones(self):
+    def telefones(self):
         return self.empresa.phone_numbers
         
     def clean(self):
@@ -124,9 +112,12 @@ class LandingPage(Page):
                 json.loads(self.colunas_items)
         except:
             raise ValidationError(f'O conteúdo de "Colunas items" está incorreto.')
-    
+        
     def save(self, *args, **kwargs):
         super(Page, self).save(*args, **kwargs)
+
+    image_tag.short_description = 'Imagens no Bucket'
+    cidadeestado.short_description = 'Cidade / Estado'
 
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
     lista_items = models.TextField(blank=True, default='[]', max_length=600,  help_text='Seção de lista da página. Um item por linha.')
