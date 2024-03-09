@@ -8,7 +8,7 @@ import ujson as json
 from django.db.models import Q
 from landingpage.utils import Generate, Storage
 
-BUCKET_URL = Storage.get_bucket_url('')
+BUCKET_URL = Storage.get_bucket_url('')[:-1]
 
 class LandingPageView(View):
     def __init__(self, *args, **kwargs):
@@ -17,8 +17,8 @@ class LandingPageView(View):
         self.template_name = 'landing_page.html'
 
     def get(self, request, *args, **kwargs):
-        url:list = request.path[1:].split('/')[-1]
-        empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
+        url_last:list = request.path[1:].split('/')[-1]
+        empresa = Empresa.objects.filter(name__iexact=url_last.replace('-', ' ')).first()
         data = LandingPage.objects.filter(empresa=empresa).first()
         if data and data.on_air:
             social_media = Generate._generate_social_links(data.empresa.social_media)
@@ -28,8 +28,9 @@ class LandingPageView(View):
             else:
                 colunas_items = ''
             is_whats = True
+            this_bucket_url = (BUCKET_URL+request.path+'/')
             self.context = {
-                'bucket': BUCKET_URL+url+'/',
+                'bucket': this_bucket_url,
                 'img_carousel': list(range(2, data.carousel_size+2)),
                 'nome_empresa': data.empresa.name,
                 'category': data.empresa.category,
@@ -65,18 +66,17 @@ class Homepage(View):
         if o_que or onde:
             q_placeholder = o_que
             result = LandingPage.objects.filter(
-                Q(nome_empresa__icontains=o_que) |
-                Q(categoria_servico__nome__icontains=o_que) |
-                Q(trend_words__icontains=o_que),
+                Q(empresa__name__icontains=o_que) |
+                Q(empresa__category__name__icontains=o_que),
                 on_air=True
             ).order_by('-id')[:10]
             if result:
-                for negocio in result:
+                for landingpage in result:
                     resultados_busca.append(
-                        {'nome_empresa': negocio.nome_empresa, 
-                        'categoria': negocio.categoria_servico, 
-                        'cidades': ', '.join(list(negocio.cidades.values_list('nome', flat=True))),
-                        'url': negocio.url}
+                        {'nome_empresa': landingpage.empresa.name, 
+                        'categoria': landingpage.empresa.category, 
+                        'cidades': ', '.join(list(landingpage.empresa.service_areas.values_list('nome', flat=True))),
+                        'url': Generate._generate_company_path(landingpage.empresa.name, landingpage.empresa.address)}
                     )
             else:
                 resultados_busca = "nothing"
@@ -89,15 +89,15 @@ class Homepage(View):
         return render(request, 'home.html', self.context)
 
 class RootSitemap(Sitemap):
-    changefreq = 'daily'
+    changefreq = 'weekly'
 
     def _urls(self, page, protocol, domain):
         return super(RootSitemap, self)._urls(
-            page=page, protocol='https', domain='conectapages.com')
+            page=page, protocol='https', domain='www.conectapages.com')
 
     def items(self):
         urls = ['/']  # Esta é a URL da página inicial
-        urls += ['/'+obj.url for obj in LandingPage.objects.filter(on_air=True)]
+        urls += ['/'+Generate._generate_company_path(obj.empresa.name, obj.empresa.address) for obj in LandingPage.objects.filter(on_air=True)]
         return urls
     
     def location(self, item):

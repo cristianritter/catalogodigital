@@ -4,21 +4,19 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 import ujson as json
 from landingpage.model_fields import MultipleURLsField
-from django.utils.text import slugify
 from .utils import Storage, Generate
-from catalogodigital import settings
 
-class Categoria(models.Model):               #         
+class Category(models.Model):               #         
     class Meta:
         verbose_name = '     Ramos de atuação'
         verbose_name_plural = '     Ramos de atuação'
-        ordering = ['nome']
-        indexes = [
-            models.Index(fields=['nome'])
-        ]
-    nome = models.CharField(max_length=100)
+        ordering = ['name']
+        #indexes = [
+        #    models.Index(fields=['name'])
+        #]
+    name = models.CharField(max_length=100)
     def __str__(self):
-        return self.nome
+        return self.name
     
 class Cidade(models.Model):
     class Meta:
@@ -65,7 +63,7 @@ class Empresa(models.Model):
     tagline = models.CharField(max_length=50, help_text='Texto em destaque que descreve a essência da marca.')
     owners = models.ManyToManyField(User, related_name='owners', help_text='Usuários que terão acesso de editor.')
     employees = models.ManyToManyField(User, blank=True, related_name='employees', help_text='Funcionários da empresa.')
-    category = models.ForeignKey(Categoria, on_delete=models.PROTECT, help_text='Categoria dos serviços que a empresa oferece.')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, help_text='Categoria dos serviços que a empresa oferece.')
     service_areas = models.ManyToManyField(Cidade)
     address = models.CharField(max_length=255, help_text='Precisa conter no mínimo: Bairro, Cidade - DF')
     opening_hours = models.CharField(max_length=100, help_text='Exemplo: Seg à Sex das 10h as 17h.')

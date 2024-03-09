@@ -21,7 +21,8 @@ class Generate():
         return dictn
     
     def _generate_company_path(company_name, company_address):
-         return f'{slugify(company_address).split("-")[-2].lower()}/{slugify(company_name)}'
+         
+         return f'{slugify(company_address.split(",")[-1].split("-")[-2]).lower()}/{slugify(company_name)}'
 
     def _generate_cidade_estado(address):
         return address.split(",")[-1].strip()
@@ -69,6 +70,7 @@ class Storage():
  
     @staticmethod    
     def get_image_tag(path=''):
+        print(path)
         from django.utils.html import mark_safe
         html_preview = ""
         bucket_link = Storage.get_bucket_url(path+'/')
