@@ -1,14 +1,13 @@
 from django.contrib import admin
 from landingpage.forms import LandingPageForm
-from landingpage.models import Category, LandingPage, Cidade, Empresa, Agendamento, Servico
+from landingpage.models import Category, LandingPage, Cidade, Empresa, Servico
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django_object_actions import DjangoObjectActions
 from landingpage.utils import Storage, Generate
-
-
 from django.contrib.auth.models import User, Group
+
 
 admin.site.site_title = "ConectaPages"
 admin.site.site_header = "ConectaPages"
@@ -24,8 +23,8 @@ class LandingPageAdmin(DjangoObjectActions, ImportExportModelAdmin):
     form = LandingPageForm
     actions = None    
     change_actions = ('clear_bucket_files',)
-    readonly_fields = ['image_tag']
-    list_display = ['empresa', 'on_air', 'cidadeestado', 'url', 'telefones']
+    readonly_fields = ['image_tag', 'landingpage_link', 'url']
+    list_display = ['empresa', 'on_air', 'cidadeestado', 'telefones']
     search_fields = ['empresa__name', 'empresa__phone_numbers', 'empresa__address']
     list_filter = ['on_air', ]
 #    filter_horizontal = ('Cidade',)
@@ -53,6 +52,18 @@ class CategoriaServicoAdmin(ImportExportModelAdmin):
     list_display = ["name"]
     search_fields = ['name']
 
+@admin.register(Empresa)
+class EmpresaAdmin(ImportExportModelAdmin):
+    class Meta:
+       css = {
+            'all': ('common/landing_page/css/admin_styles.css',),
+        }
+    actions = None
+   
+@admin.register(Servico)
+class ServicoAdmin(ImportExportModelAdmin):
+    pass
+
 class UserAdmin(ImportExportModelAdmin, BaseUserAdmin):
     list_display = ('username', 'get_full_name',  'last_login', 'email' )
     search_fields = ('username', 'get_full_name', 'email')
@@ -73,15 +84,3 @@ admin.site.register(User, UserAdmin)
 
 admin.site.unregister(Group)
 admin.site.register(Group, GroupAdmin)
-
-@admin.register(Empresa)
-class EmpresaAdmin(ImportExportModelAdmin):
-    class Meta:
-       css = {
-            'all': ('common/landing_page/css/admin_styles.css',),
-        }
-    actions = None
-   
-@admin.register(Servico)
-class ServicoAdmin(ImportExportModelAdmin):
-    pass

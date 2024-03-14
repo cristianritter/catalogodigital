@@ -27,8 +27,11 @@ class Generate():
     def _generate_cidade_estado(address):
         return address.split(",")[-1].strip()
     
+    def _generate_landingpage_link(company_name, company_address):
+        from django.utils.html import mark_safe
+        html_preview = f'<a href="{settings.DOMAIN}/{Generate._generate_company_path(company_name, company_address)}" target="_blank">Abrir</a>'
+        return mark_safe(html_preview)
     
-
 class Storage():
     
     supabase_url = os.getenv('SUPABASE_URL')

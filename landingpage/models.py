@@ -6,6 +6,7 @@ import ujson as json
 from landingpage.model_fields import MultipleURLsField
 from .utils import Storage, Generate
 
+
 class Category(models.Model):               #         
     class Meta:
         verbose_name = '     Ramos de atuação'
@@ -81,6 +82,7 @@ class Page(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
+    url = models.CharField(max_length=30, editable=False, help_text='Endereço de url da página.')
    
 class LandingPage(Page):
     class Meta:
@@ -95,10 +97,13 @@ class LandingPage(Page):
     def image_tag(self):
         return Storage.get_image_tag(Generate._generate_company_path(self.empresa.name, self.empresa.address))
         
+    def landingpage_link(self):
+        return Generate._generate_landingpage_link(self.empresa.name, self.empresa.address)
+
     def cidadeestado(self):
         return Generate._generate_cidade_estado(self.empresa.address)
     
-    def url(self):
+    def PageTest(self):
         return Generate._generate_company_path(self.empresa.name, self.empresa.address)
     
     def telefones(self):
@@ -112,6 +117,7 @@ class LandingPage(Page):
             raise ValidationError(f'O conteúdo de "Colunas items" está incorreto.')
         
     def save(self, *args, **kwargs):
+        self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
         super(Page, self).save(*args, **kwargs)
 
     image_tag.short_description = 'Imagens no Bucket'

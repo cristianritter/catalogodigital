@@ -3,7 +3,6 @@ from .views import LandingPageView, Homepage, RootSitemap, favicon_view
 from django.views.generic import TemplateView
 from django.contrib.sitemaps import views as sitemap_views
 
-
 app_name = 'landingpage'  
 
 urlpatterns = [

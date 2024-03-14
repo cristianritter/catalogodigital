@@ -17,37 +17,35 @@ class LandingPageView(View):
         self.template_name = 'landing_page.html'
 
     def get(self, request, *args, **kwargs):
-        url_last:list = request.path[1:].split('/')[-1]
-        empresa = Empresa.objects.filter(name__iexact=url_last.replace('-', ' ')).first()
-        data = LandingPage.objects.filter(empresa=empresa).first()
-        if data and data.on_air:
-            social_media = Generate._generate_social_links(data.empresa.social_media)
-            service_areas = data.empresa.service_areas.all().values_list('nome', flat=True)
-            if data.colunas_items:
-                colunas_items = json.loads(data.colunas_items)
+        landingpage_data = LandingPage.objects.filter(url=request.path).first()
+        if landingpage_data and landingpage_data.on_air:
+            social_media = Generate._generate_social_links(landingpage_data.empresa.social_media)
+            service_areas = landingpage_data.empresa.service_areas.all().values_list('nome', flat=True)
+            if landingpage_data.colunas_items:
+                colunas_items = json.loads(landingpage_data.colunas_items)
             else:
                 colunas_items = ''
             is_whats = True
             this_bucket_url = (BUCKET_URL+request.path+'/')
             self.context = {
                 'bucket': this_bucket_url,
-                'img_carousel': list(range(2, data.carousel_size+2)),
-                'nome_empresa': data.empresa.name,
-                'category': data.empresa.category,
+                'img_carousel': list(range(2, landingpage_data.carousel_size+2)),
+                'nome_empresa': landingpage_data.empresa.name,
+                'category': landingpage_data.empresa.category,
                 'service_areas': service_areas,
-                'address': data.empresa.address.split(','),
-                'opening_hours': data.empresa.opening_hours,
-                'phone_numbers': data.empresa.phone_numbers,
-                'whats_number': Generate._generate_whats_number(data.empresa.phone_numbers, is_whats),
-                'e_mail': data.empresa.e_mail,
+                'address': landingpage_data.empresa.address.split(','),
+                'opening_hours': landingpage_data.empresa.opening_hours,
+                'phone_numbers': landingpage_data.empresa.phone_numbers,
+                'whats_number': Generate._generate_whats_number(landingpage_data.empresa.phone_numbers, is_whats),
+                'e_mail': landingpage_data.empresa.e_mail,
                 'social_media': social_media,
-                'lista_items': data.lista_items.splitlines(),
+                'lista_items': landingpage_data.lista_items.splitlines(),
                 'dados_dict': colunas_items,
-                'reviews_link': data.empresa.g_business,
-                'gmaps_link': data.empresa.g_embbedmaps,
-                'link_loja': data.empresa.website.split('#'),
-                'company_name': data.empresa.name,
-                'tagline': data.empresa.tagline,
+                'reviews_link': landingpage_data.empresa.g_business,
+                'gmaps_link': landingpage_data.empresa.g_embbedmaps,
+                'link_loja': landingpage_data.empresa.website.split('#'),
+                'company_name': landingpage_data.empresa.name,
+                'tagline': landingpage_data.empresa.tagline,
             } 
         else:
             return render(request, '404-wall-e.html')  

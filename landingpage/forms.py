@@ -1,7 +1,7 @@
 from django import forms
 from .models import LandingPage
 from landingpage.utils import Storage, Generate
-from django.core.exceptions import ValidationError
+#from django.core.exceptions import ValidationError
 
 class LandingPageForm(forms.ModelForm):
     
