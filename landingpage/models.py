@@ -6,6 +6,25 @@ import ujson as json
 from landingpage.model_fields import MultipleURLsField
 from .utils import Storage, Generate
 
+class Common(models.Model):
+    class Meta:
+        abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
+    pass
+
+class Page(models.Model):
+    class Meta:
+        abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
+    on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
+    url = models.CharField(max_length=30, editable=False, help_text='Endereço de url da página.')
+
+class FileUpload(models.Model):
+    class Meta:
+        abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
+    def image_tag(self):
+        print(self.shelf)
+        return Storage.get_image_tag(Generate._generate_company_path(self.empresa.name, self.empresa.address))
+    image_tag.short_description = 'Imagens no Bucket'
+
 
 class Category(models.Model):               #         
     class Meta:
@@ -78,13 +97,7 @@ class Empresa(models.Model):
     def __str__(self):
         return self.name
 
-class Page(models.Model):
-    class Meta:
-        abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
-    on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
-    url = models.CharField(max_length=30, editable=False, help_text='Endereço de url da página.')
-   
-class LandingPage(Page):
+class LandingPage(Page, FileUpload):
     class Meta:
         verbose_name = '    Landing Page'
         verbose_name_plural = '   Landing Pages'
@@ -94,9 +107,6 @@ class LandingPage(Page):
         #    models.Index(fields=['on_air'])
         #]
 
-    def image_tag(self):
-        return Storage.get_image_tag(Generate._generate_company_path(self.empresa.name, self.empresa.address))
-        
     def landingpage_link(self):
         return Generate._generate_landingpage_link(self.empresa.name, self.empresa.address)
 
@@ -120,7 +130,6 @@ class LandingPage(Page):
         self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
         super(Page, self).save(*args, **kwargs)
 
-    image_tag.short_description = 'Imagens no Bucket'
     cidadeestado.short_description = 'Cidade / Estado'
 
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)

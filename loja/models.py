@@ -1,5 +1,7 @@
 from django.db import models
-from landingpage.models import Page, Empresa
+from landingpage.models import Common, Page, Empresa
+from landingpage.utils import Generate, Storage
+
 
 class Store(Page):
     class Meta:
@@ -21,10 +23,12 @@ class Shelf(models.Model):
     def __str__(self):
         return self.name
 
+
 class Item(models.Model):
     class Meta:
         verbose_name = ' Item'
         verbose_name_plural = ' Items'
+
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
@@ -33,6 +37,12 @@ class Item(models.Model):
     def __str__(self):
         return self.name
     
+    def image_tag(self):
+        return Storage.get_image_tag(Generate._generate_company_path(self.shelf.store.empresa.name, self.shelf.store.empresa.address) + '/store/shelfs/items/')
+    image_tag.short_description = 'Imagens no Bucket'
+
+    
+
 class Cart(models.Model):
     session_key = models.CharField(max_length=40)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
@@ -43,16 +53,19 @@ class CartItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
-class Hub(Page):
+class Hub(models.Model):
     class Meta:
         verbose_name = 'Concentrador'
         verbose_name_plural = 'Concentradores'
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
-    nome = models.CharField(max_length=100, help_text="Nome do Food Park centralizador")
-    slogam = models.CharField(max_length=100, help_text="Slogam do Food Park centralizador")
     lojas = models.ManyToManyField(Store)
     def __str__(self):
         return self.empresa.name
+    
+    def image_tag(self):
+        return Storage.get_image_tag(Generate._generate_company_path(self.empresa.name, self.empresa.address) + '/')
+    image_tag.short_description = 'Imagens no Bucket'
+
 
     
    
