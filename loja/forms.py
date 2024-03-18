@@ -1,40 +1,44 @@
 from django import forms
-from .models import Item, Hub
-from landingpage.utils import Storage, Generate
-#from django.core.exceptions import ValidationError
+from .models import Item, Hub, Store
+from landingpage.utils import Storage
+
+def cleanImageCounter(self):
+    if (self.cleaned_data[self.fileUploadField] != None):
+            filesAlreadyOnDestCounter = len(Storage.get_bucket_file_list(self.destFolder))
+            print('files:', filesAlreadyOnDestCounter)
+            if ( filesAlreadyOnDestCounter >= self.numberMaxOfFilesOnDestination): 
+                raise forms.ValidationError(f'O número máximo de arquivos permitidos neste diretório é {self.numberMaxOfFilesOnDestination}')
+    self.save()
+    
 
 class ItemForm(forms.ModelForm):
-    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        try:
+            self.destFolder = 'items/' + str(self.instance.id) + '/'   
+            self.fileUploadField = 'fileUploadField'
+            self.numberMaxOfFilesOnDestination = 1
+        except Exception as err: print(err)
     class Meta:
         model = Item
         fields = '__all__'
-    #self = None
     
-    fileUpload = forms.ImageField(required=False, label='Upload de arquivo')
-
-    def clean_fileUpload(self):        
-        numberMaxOfFilesOnDestination = 1
-        destinationFolder = Generate._generate_company_path(
-                            self.instance.shelf.store.empresa.name, self.instance.shelf.store.empresa.address) + '/store/shelfs/items/'
-        
-        filesAlreadyOnDestCounter = len(Storage.get_bucket_file_list(destinationFolder))
-        if ( filesAlreadyOnDestCounter >= numberMaxOfFilesOnDestination): 
-            raise forms.ValidationError(f'O número máximo de arquivos permitidos neste diretório é {numberMaxOfFilesOnDestination}')
-        self.save()
+    fileUploadField = forms.ImageField(required=False, label='Upload de arquivo')
+ 
+    def clean_fileUploadField(self):         
+        cleanImageCounter(self)
             
     def save(self, commit=True):
         instance = super().save(commit=False)
-        imageFieldName = 'fileUpload'
-        if not self.cleaned_data[imageFieldName]:
+        if not self.cleaned_data[self.fileUploadField]:
+            print('retornou')
             return instance
-        
-        destinationFolder = Generate._generate_company_path(
-                    instance.shelf.store.empresa.name, instance.shelf.store.empresa.address ) + '/store/shelfs/items/'
-
+        print('instancia',instance)
+ 
         try:
-            file_content = self.cleaned_data[imageFieldName].read()
-            file_name = self.cleaned_data[imageFieldName].name
-            Storage.upload_to_supabase(destinationFolder + file_name, file_content)
+            file_content = self.cleaned_data[self.fileUploadField].read()
+            file_name = self.cleaned_data[self.fileUploadField].name
+            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content)
         except Exception as er:
             print('erro', er)
         if commit:
@@ -42,39 +46,70 @@ class ItemForm(forms.ModelForm):
         return instance
 
 
-class HubForm(forms.ModelForm):
-    
+class StoreForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        try:
+            self.destFolder = 'store/' + str(self.instance.id) + '/'  
+            self.fileUploadField = 'fileUploadField'
+            self.numberMaxOfFilesOnDestination = 1
+        except: pass
     class Meta:
-        model = Item
+        model = Store
         fields = '__all__'
     
-    fileUpload = forms.ImageField(required=False, label='Upload de arquivo')
+    fileUploadField = forms.ImageField(required=False, label='Upload de arquivo')
 
-    def clean_fileUpload(self):        
-        numberMaxOfFilesOnDestination = 1
-        destinationFolder = Generate._generate_company_path(
-                            self.instance.empresa.name, self.instance.empresa.address) + '/'
-        
-        filesAlreadyOnDestCounter = len(Storage.get_bucket_file_list(destinationFolder))
-        if ( filesAlreadyOnDestCounter >= numberMaxOfFilesOnDestination): 
-            raise forms.ValidationError(f'O número máximo de arquivos permitidos neste diretório é {numberMaxOfFilesOnDestination}')
-        self.save()
+
+    def clean_fileUploadField(self):        
+        cleanImageCounter(self)
             
     def save(self, commit=True):
         instance = super().save(commit=False)
-        imageFieldName = 'fileUpload'
-        if not self.cleaned_data[imageFieldName]:
+        if not self.cleaned_data[self.fileUploadField]:
             return instance
         
-        destinationFolder = Generate._generate_company_path(
-                    instance.empresa.name, instance.empresa.address ) + '/'
-
         try:
-            file_content = self.cleaned_data[imageFieldName].read()
-            file_name = self.cleaned_data[imageFieldName].name
-            Storage.upload_to_supabase(destinationFolder + file_name, file_content)
+            file_content = self.cleaned_data[self.fileUploadField].read()
+            file_name = self.cleaned_data[self.fileUploadField].name
+            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content)
         except Exception as er:
             print('erro', er)
+        
+        if commit:
+            instance.save()
+        return instance
+
+class HubForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        try:
+            self.destFolder = 'hubs/' + str(self.instance.id) + '/'  
+            self.fileUploadField = 'fileUploadField'
+            self.numberMaxOfFilesOnDestination = 1
+        except: pass
+    class Meta:
+        model = Hub
+        fields = '__all__'
+    
+    fileUploadField = forms.ImageField(required=False, label='Upload de arquivo')
+
+
+    def clean_fileUploadField(self):        
+        cleanImageCounter(self)
+            
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if not self.cleaned_data[self.fileUploadField]:
+            return instance
+        
+        try:
+            file_content = self.cleaned_data[self.fileUploadField].read()
+            file_name = self.cleaned_data[self.fileUploadField].name
+            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content)
+        except Exception as er:
+            print('erro', er)
+        
         if commit:
             instance.save()
         return instance

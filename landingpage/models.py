@@ -6,16 +6,17 @@ import ujson as json
 from landingpage.model_fields import MultipleURLsField
 from .utils import Storage, Generate
 
-class Common(models.Model):
-    class Meta:
-        abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
-    pass
 
 class Page(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
     url = models.CharField(max_length=30, editable=False, help_text='Endereço de url da página.')
+
+    def save(self, *args, **kwargs):
+        self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
+        super(Page, self).save(*args, **kwargs)
+
 
 class FileUpload(models.Model):
     class Meta:
@@ -107,8 +108,8 @@ class LandingPage(Page, FileUpload):
         #    models.Index(fields=['on_air'])
         #]
 
-    def landingpage_link(self):
-        return Generate._generate_landingpage_link(self.empresa.name, self.empresa.address)
+    def page_link(self):
+        return Generate._generate_page_link(self.empresa.name, self.empresa.address)
 
     def cidadeestado(self):
         return Generate._generate_cidade_estado(self.empresa.address)
@@ -127,7 +128,7 @@ class LandingPage(Page, FileUpload):
             raise ValidationError(f'O conteúdo de "Colunas items" está incorreto.')
         
     def save(self, *args, **kwargs):
-        self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
+#        self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
         super(Page, self).save(*args, **kwargs)
 
     cidadeestado.short_description = 'Cidade / Estado'

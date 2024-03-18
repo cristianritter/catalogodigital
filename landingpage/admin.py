@@ -13,8 +13,6 @@ admin.site.site_title = "ConectaPages"
 admin.site.site_header = "ConectaPages"
 admin.site.index_title = "Gerenciamento do Sistema"
 
-class Page():
-    pass
 
 class CommonAdmin(DjangoObjectActions, ImportExportModelAdmin):
     # For Actions Buttons and Import/Export Function
@@ -22,7 +20,6 @@ class CommonAdmin(DjangoObjectActions, ImportExportModelAdmin):
         css = {
             'all': ('common/landing_page/css/admin_styles.css',), # Enables red * on required fields
         }     
-
     # Return only results that the user has rights
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
@@ -41,7 +38,7 @@ class FileUploadAdmin(CommonAdmin):
 class LandingPageAdmin(FileUploadAdmin):
     form = LandingPageForm
     actions = None    
-    readonly_fields = FileUploadAdmin.readonly_fields + ('landingpage_link', 'url',)
+    readonly_fields = FileUploadAdmin.readonly_fields + ('page_link', 'url',)
     list_display = ['empresa', 'on_air', 'cidadeestado', 'telefones']
     search_fields = ['empresa__name', 'empresa__phone_numbers', 'empresa__address']
     list_filter = ['on_air', ]

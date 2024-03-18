@@ -62,18 +62,15 @@ class HubView(View):
             # Adicione outros itens do portfólio conforme necessário
         ] 
     def get(self, request, url, *args, **kwargs):
-        url = request.path[1:].split('/')[-1]
-        empresa = Empresa.objects.filter(name__iexact=url.replace('-', ' ')).first()
-        hub__data = Hub.objects.filter(empresa=empresa).first()
-        
+        hub__data = Hub.objects.filter(url=(request.path).replace('/hub','')).first()
         if hub__data and hub__data.on_air:
             portfolio_items = []
             for item in hub__data.lojas.all():
                 loja = {}
-                url = Generate._generate_url(item.empresa.name, item.empresa.address)
+                url = Generate._generate_company_path(item.empresa.name, item.empresa.address)
                 print(url)
                 loja['url'] = f'https://loja.conectapages.com/{url}'
-                loja['imagem'] = f'{BUCKET_ADDRESS}{url}/store/cover.webp'
+                loja['imagem'] = f'{BUCKET_ADDRESS}{url}/0.webp'
                 loja['heading'] = item.empresa.name
                 loja['subheading'] = item.empresa.tagline
                 portfolio_items.append(loja)
@@ -81,8 +78,8 @@ class HubView(View):
             self.context = {
                 #'endereco_bucket': loja__data.endereco_bucket+url+'/store/',
                 #'nome_empresa': loja__data.nome_empresa,
-                'nome': hub__data.nome,
-                'slogam': hub__data.slogam,
+                'nome': hub__data.empresa.name,
+                'slogam': hub__data.empresa.tagline,
                 'portfolio_items': portfolio_items,
             } 
         else:

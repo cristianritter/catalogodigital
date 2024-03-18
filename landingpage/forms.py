@@ -11,22 +11,24 @@ class LandingPageForm(forms.ModelForm):
     
     fileUpload = forms.ImageField(required=False, label='Upload de arquivo')
 
-    def clean_fileUpload(self):        
+    def clean_fileUpload(self):    
+        imageFieldName = 'fileUpload'    
         numberMaxOfFilesOnDestination = 6
         destinationFolder = Generate._generate_company_path(
                             self.instance.empresa.name, self.instance.empresa.address) + '/'
         
         filesAlreadyOnDestCounter = len(Storage.get_bucket_file_list(destinationFolder))
-        if ( filesAlreadyOnDestCounter >= numberMaxOfFilesOnDestination): 
+        print(filesAlreadyOnDestCounter)
+        if ( filesAlreadyOnDestCounter >= numberMaxOfFilesOnDestination and self.cleaned_data[imageFieldName]): 
             raise forms.ValidationError(f'O número máximo de arquivos permitidos neste diretório é {numberMaxOfFilesOnDestination}')
         self.save()
             
     def save(self, commit=True):
         instance = super().save(commit=False)
+        imageFieldName = 'fileUpload'
         if not self.cleaned_data[imageFieldName]:
             return instance
         
-        imageFieldName = 'fileUpload'
         destinationFolder = Generate._generate_company_path(
                     instance.empresa.name, instance.empresa.address ) + '/'
 

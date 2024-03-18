@@ -2,6 +2,11 @@ from django.utils.text import slugify
 import os
 import supabase
 from catalogodigital import settings
+from PIL import Image
+from io import BytesIO
+from django.utils.html import mark_safe
+
+
 
 class Generate():
     
@@ -27,9 +32,13 @@ class Generate():
     def _generate_cidade_estado(address):
         return address.split(",")[-1].strip()
     
-    def _generate_landingpage_link(company_name, company_address):
+    def _generate_page_link(company_name, company_address, prefix=''):
         from django.utils.html import mark_safe
-        html_preview = f'<a href="{settings.DOMAIN}/{Generate._generate_company_path(company_name, company_address)}" target="_blank">Abrir</a>'
+        if 'hub' in prefix:
+            domain = 'loja.'+settings.DOMAIN
+        else:
+            domain = settings.DOMAIN
+        html_preview = f'<a href="//{domain}/{prefix}{Generate._generate_company_path(company_name, company_address)}" target="_blank">Abrir</a>'
         return mark_safe(html_preview)
     
 class Storage():
@@ -40,6 +49,7 @@ class Storage():
         
     @staticmethod
     def upload_to_supabase(filepath, file_content):
+        (filepath, file_content) = Convertions.converter_para_webp(filepath, file_content)
         supabase_client = supabase.create_client(Storage.supabase_url, Storage.supabase_key)
         bucket = supabase_client.storage.get_bucket(Storage.supabase_bucket_name)
         response = bucket.upload( filepath, file_content, 
@@ -49,7 +59,7 @@ class Storage():
     
     @staticmethod
     def clear_folder_supabase(path):
-        print(path)
+        print('path',path)
         supabase_client = supabase.create_client(Storage.supabase_url, Storage.supabase_key)
         bucket = supabase_client.storage.get_bucket(Storage.supabase_bucket_name)
         arquivos_list = list(map(lambda d: path+d['name'], bucket.list(os.path.dirname(path))))
@@ -68,17 +78,19 @@ class Storage():
     def get_bucket_file_list(path):
         supabase_client = supabase.create_client(Storage.supabase_url, Storage.supabase_key)
         bucket = supabase_client.storage.get_bucket(Storage.supabase_bucket_name)
-        arquivos_list = list(map(lambda d: d['name'], bucket.list(os.path.dirname(path))))
+        dir = os.path.dirname(path)
+        arquivos_list = list(map(lambda d: d['name'], bucket.list(dir))) # somedir/somefile
         return arquivos_list
  
     @staticmethod    
     def get_image_tag(path=''):
         print(path)
-        from django.utils.html import mark_safe
         html_preview = ""
         bucket_link = Storage.get_bucket_url(path+'/')
         for file in Storage.get_bucket_file_list(path+'/'):
+            print('files in bucket: ', file)
             if not '.webp' in file:
+                print('continuou')
                 continue
             # Adiciona a tag HTML para a imagem com o nome do arquivo ao lado
             html_preview += f'<div style="display: flex; align-items: center;">'
@@ -86,3 +98,14 @@ class Storage():
             html_preview += f'<a href="{bucket_link}/{file}" target="_blank" style="margin-left: 10px;">{file}</a></div>'
         return mark_safe(html_preview)
     
+class Convertions():
+
+    def converter_para_webp(filepath, file_content):
+        img = Image.open(BytesIO(file_content))
+        # Converter para o formato WebP
+        buffer = BytesIO()
+        img.save(buffer, format="WEBP")
+        buffer.seek(0)
+        filename= ('').join(filepath.split('.')[:-1])+'.webp'
+        print(filename)
+        return (filename ,buffer.getvalue())
