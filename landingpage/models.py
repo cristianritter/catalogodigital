@@ -10,8 +10,9 @@ from .utils import Storage, Generate
 class Page(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
-    on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.')
-    url = models.CharField(max_length=30, editable=False, help_text='Endereço de url da página.')
+    
+    on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.', db_index=True)
+    url = models.CharField(max_length=30, editable=False,  help_text='Endereço de url da página.', db_index=True)
 
     def save(self, *args, **kwargs):
         self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
@@ -21,10 +22,6 @@ class Page(models.Model):
 class FileUpload(models.Model):
     class Meta:
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
-    def image_tag(self):
-        print(self.shelf)
-        return Storage.get_image_tag(Generate._generate_company_path(self.empresa.name, self.empresa.address))
-    image_tag.short_description = 'Imagens no Bucket'
 
 
 class Category(models.Model):               #         
@@ -99,6 +96,9 @@ class Empresa(models.Model):
         return self.name
 
 class LandingPage(Page, FileUpload):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.destFolder = 'landingpages/' + str(self.id)  
     class Meta:
         verbose_name = '    Landing Page'
         verbose_name_plural = '   Landing Pages'
@@ -108,8 +108,15 @@ class LandingPage(Page, FileUpload):
         #    models.Index(fields=['on_air'])
         #]
 
-    def page_link(self):
-        return Generate._generate_page_link(self.empresa.name, self.empresa.address)
+    def image_tag(self):
+        itemImagePath = Storage.get_image_tag(self.destFolder)
+        return itemImagePath
+    image_tag.short_description = 'Imagens no Bucket'
+
+
+    def web_address(self):
+        return Generate._generate_web_address(self.empresa.name, self.empresa.address)
+    web_address.short_description = 'Página web'
 
     def cidadeestado(self):
         return Generate._generate_cidade_estado(self.empresa.address)
@@ -128,12 +135,12 @@ class LandingPage(Page, FileUpload):
             raise ValidationError(f'O conteúdo de "Colunas items" está incorreto.')
         
     def save(self, *args, **kwargs):
-#        self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
+        self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
         super(Page, self).save(*args, **kwargs)
 
     cidadeestado.short_description = 'Cidade / Estado'
 
-    empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
+    empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT, db_index=True)
     lista_items = models.TextField(blank=True, default='[]', max_length=600,  help_text='Seção de lista da página. Um item por linha.')
     colunas_items = models.TextField(blank= True, default='{}', help_text='Seção de colunas da página. Dict no formato {"Título1":"Conteúdo1","Título2":"Conteúdo2"},...')
     carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')

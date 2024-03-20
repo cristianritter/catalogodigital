@@ -9,8 +9,8 @@
         <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
         <link href="{% static 'common/landing_page/css/top_black_bar.css'%}" rel="stylesheet" />
         <link href="{% static 'common/landing_page/css/carousel.css'%}" rel="stylesheet" />
-        <script src="{% static 'common/landing_page/js/carousel.js'%}"></script>
-        <title>{{nome_empresa}} - {{tagline}}</title>
+        <script src="{% static 'common/landing_page/js/carousel.js'%}" async></script>
+        <title>{{company_name}} - {{tagline}}</title>
     </head>   
 
     <body id="page-top">
@@ -23,12 +23,12 @@
         </header>
         <header class="masthead main-content" id="masthead">
             <div class="container">
-                <div class="background-image" style="background-image: url('{{ bucket }}0.webp');"></div>
+                <div class="background-image" style="background-image: url('{{ bucket }}heading_small.webp');"></div>
                 <div class="masthead-subheading" >
                     {{ tagline }} 
                 </div>
                 <div class="masthead-heading text-uppercase" >
-                    {{ nome_empresa }}
+                    {{ company_name }}
                 </div>
                 <div class="col">
                     {% if link_loja %}
@@ -43,7 +43,7 @@
         </header>
         <section class="container" id="services">
             <div>
-                <h1 class="mx-auto text-capitalize">{{nome_empresa}} - serviço de {{category}} em 
+                <h1 class="mx-auto text-capitalize">{{company_name}} - serviço de {{category}} em 
                     {{service_areas|join:", "}}. </h1>
             </div>
             {% if lista_items %}
@@ -102,7 +102,7 @@
                 <div class="col-md-4 mx-auto text-center ">
                     <p><strong>Telefone:</strong> {{phone_numbers}}</p>
                     {% if whats_number %}
-                    <a href="https://api.whatsapp.com/send?phone={{whats_number}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
+                    <a href="https://api.whatsapp.com/send?phone={{whats_number.0}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
                     {% endif %}
                     {% if e_mail %}
                     <a href="mailto:{{e_mail}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
@@ -133,7 +133,7 @@
                     </script>                 
                     <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container"></div>
                     {% endif %}
-                    <p><strong>Atendemos de {{opening_hours}}</strong></p>
+                    <p><strong>Atendemos de {{opening_hours.0}}</strong></p>
                 </div>       
             </div>
         </section>
@@ -146,7 +146,7 @@
 
         <script>
         window.onload = function() {
-            var highQualityImageUrl = '{{ bucket }}1.webp';   
+            var highQualityImageUrl = '{{ bucket }}heading_large.webp';   
             var lazyImages = document.querySelectorAll("img.lazy-load");
             var img = new Image();
             img.onload = function() {

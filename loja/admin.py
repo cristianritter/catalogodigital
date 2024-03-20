@@ -5,9 +5,9 @@ from .forms import ItemForm, HubForm, StoreForm
 from landingpage.admin import CommonAdmin
 from landingpage.utils import Storage
 
-def clearBucketDirectory(queryset):
-    destFolder = 'hubs/' + str(queryset.id) + '/'
-    Storage.clear_folder_supabase(destFolder)
+def clearBucketDirectory(path):
+    print('apagando arquivos de: ', path)
+    Storage.clear_folder_supabase(path)
 
 class FileUploadAdmin(CommonAdmin):
     change_actions = ('clear_bucket_files',)
@@ -16,14 +16,14 @@ class FileUploadAdmin(CommonAdmin):
 @admin.register(Store)
 class StoreAdmin(FileUploadAdmin):
     form = StoreForm
-    readonly_fields = FileUploadAdmin.readonly_fields + ('page_link', 'url',)
+    readonly_fields = FileUploadAdmin.readonly_fields + ('web_address', 'url',)
     class Media:
         css = {
             'all': ('common/landing_page/css/admin_styles.css',),
         }
     actions = None
     def clear_bucket_files(self, request, queryset):
-        clearBucketDirectory(queryset)
+        clearBucketDirectory('stores/' + str(queryset.id) + '/')
 
     #readonly_fields = ('image_filename',)
     #list_display = ['nome_empresa', 'on_air', 'url']
@@ -32,14 +32,14 @@ class StoreAdmin(FileUploadAdmin):
 @admin.register(Hub)
 class HubAdmin(FileUploadAdmin):
     form = HubForm
-    readonly_fields = FileUploadAdmin.readonly_fields + ('page_link', 'url',)
+    readonly_fields = FileUploadAdmin.readonly_fields + ('web_address', 'url',)
     class Media:
         css = {
             'all': ('common/landing_page/css/admin_styles.css',),
         }
     actions = None
     def clear_bucket_files(self, request, queryset):
-        clearBucketDirectory(queryset)
+        clearBucketDirectory('hubs/' + str(queryset.id) + '/')
 
     #list_display = [ 'on_air', 'nome', 'url', 'get_included_lojas']
     #search_fields = ['url', 'nome', 'lojas__url']
@@ -55,7 +55,7 @@ class ItemAdmin(FileUploadAdmin):
     readonly_fields = FileUploadAdmin.readonly_fields + ('image_filename',)
     list_display = ('name', 'price', 'description')
     def clear_bucket_files(self, request, queryset):
-        clearBucketDirectory(queryset)
+       clearBucketDirectory('items/' + str(queryset.id) + '/')
 
 
 

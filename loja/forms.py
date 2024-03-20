@@ -38,7 +38,7 @@ class ItemForm(forms.ModelForm):
         try:
             file_content = self.cleaned_data[self.fileUploadField].read()
             file_name = self.cleaned_data[self.fileUploadField].name
-            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content)
+            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content, (250,250))
         except Exception as er:
             print('erro', er)
         if commit:
@@ -50,16 +50,16 @@ class StoreForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         try:
-            self.destFolder = 'store/' + str(self.instance.id) + '/'  
+            self.destFolder = 'stores/' + str(self.instance.id) + '/'  
             self.fileUploadField = 'fileUploadField'
             self.numberMaxOfFilesOnDestination = 1
         except: pass
     class Meta:
         model = Store
         fields = '__all__'
-    
-    fileUploadField = forms.ImageField(required=False, label='Upload de arquivo')
 
+    uploadType = forms.ChoiceField(choices=[('cover', 'Imagem de capa'), ('logo', 'Imagem de Logotipo')], label='O que você está enviando?')
+    fileUploadField = forms.ImageField(required=False, label='Upload de arquivo')
 
     def clean_fileUploadField(self):        
         cleanImageCounter(self)
@@ -72,7 +72,11 @@ class StoreForm(forms.ModelForm):
         try:
             file_content = self.cleaned_data[self.fileUploadField].read()
             file_name = self.cleaned_data[self.fileUploadField].name
-            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content)
+            if self.cleaned_data['uploadType'] == 'cover':
+                size = (800,400)
+            if self.cleaned_data['uploadType'] == 'logo':
+                size = (150, 150)
+            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content, size)
         except Exception as er:
             print('erro', er)
         
@@ -106,7 +110,7 @@ class HubForm(forms.ModelForm):
         try:
             file_content = self.cleaned_data[self.fileUploadField].read()
             file_name = self.cleaned_data[self.fileUploadField].name
-            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content)
+            Storage.upload_to_supabase(self.destFolder + '/' + file_name, file_content, size=(800,400))
         except Exception as er:
             print('erro', er)
         

@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from .models import Empresa, LandingPage
+from .models import LandingPage
 #from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
@@ -17,38 +17,51 @@ class LandingPageView(View):
         self.template_name = 'landing_page.html'
 
     def get(self, request, *args, **kwargs):
-        landingpage_data = LandingPage.objects.filter(url=request.path).first()
-        if landingpage_data and landingpage_data.on_air:
-            social_media = Generate._generate_social_links(landingpage_data.empresa.social_media)
-            service_areas = landingpage_data.empresa.service_areas.all().values_list('nome', flat=True)
-            if landingpage_data.colunas_items:
-                colunas_items = json.loads(landingpage_data.colunas_items)
-            else:
-                colunas_items = ''
-            is_whats = True
-            this_bucket_url = (BUCKET_URL+request.path+'/')
-            self.context = {
-                'bucket': this_bucket_url,
-                'img_carousel': list(range(2, landingpage_data.carousel_size+2)),
-                'nome_empresa': landingpage_data.empresa.name,
-                'category': landingpage_data.empresa.category,
-                'service_areas': service_areas,
-                'address': landingpage_data.empresa.address.split(','),
-                'opening_hours': landingpage_data.empresa.opening_hours,
-                'phone_numbers': landingpage_data.empresa.phone_numbers,
-                'whats_number': Generate._generate_whats_number(landingpage_data.empresa.phone_numbers, is_whats),
-                'e_mail': landingpage_data.empresa.e_mail,
-                'social_media': social_media,
-                'lista_items': landingpage_data.lista_items.splitlines(),
-                'dados_dict': colunas_items,
-                'reviews_link': landingpage_data.empresa.g_business,
-                'gmaps_link': landingpage_data.empresa.g_embbedmaps,
-                'link_loja': landingpage_data.empresa.website.split('#'),
-                'company_name': landingpage_data.empresa.name,
-                'tagline': landingpage_data.empresa.tagline,
-            } 
-        else:
-            return render(request, '404-wall-e.html')  
+        landingpage_data = LandingPage.objects.select_related('empresa').filter(url=request.path).first()
+        print(request.path, landingpage_data)
+        if not landingpage_data or not landingpage_data.on_air:
+            return render(request, '404-wall-e.html') 
+        
+        self.context = {
+            'bucket': (BUCKET_URL+'/landingpages/' + str(landingpage_data.id) +'/'),
+            'img_carousel': list(range(2, landingpage_data.carousel_size+2)),
+            'company_name': landingpage_data.empresa.name,
+            'tagline': landingpage_data.empresa.tagline,
+            'category': landingpage_data.empresa.category,
+            'address': landingpage_data.empresa.address.split(','),
+            'phone_numbers': landingpage_data.empresa.phone_numbers,
+            'lista_items': landingpage_data.lista_items.splitlines(),   
+        }
+        
+        if (landingpage_data.empresa.social_media):
+            print('social media entrou')
+            self.context['social_media'] = Generate._generate_social_links(landingpage_data.empresa.social_media)
+        
+        if landingpage_data.empresa.service_areas:
+            self.context['service_areas'] = landingpage_data.empresa.service_areas.all().values_list('nome', flat=True)
+        
+        if landingpage_data.colunas_items:
+            self.context['dados_dict'] = json.loads(landingpage_data.colunas_items)
+        
+        if landingpage_data.empresa.is_whatsapp:
+            print('entrou')
+            self.context['whats_number'] = Generate._generate_whats_number(landingpage_data.empresa.phone_numbers),
+
+        if landingpage_data.empresa.e_mail:
+            self.context['e_mail'] = landingpage_data.empresa.e_mail,
+        
+        if landingpage_data.empresa.opening_hours:
+            self.context['opening_hours'] = landingpage_data.empresa.opening_hours,
+        
+        if landingpage_data.empresa.website:
+            self.context['link_loja'] = landingpage_data.empresa.website.split('#'),
+        
+        if landingpage_data.empresa.g_embbedmaps:
+            self.context['gmaps_link'] = landingpage_data.empresa.g_embbedmaps,
+        
+        if landingpage_data.empresa.g_business:
+            self.context['reviews_link'] = landingpage_data.empresa.g_business,
+
         return render(request, self.template_name, self.context)
 
 class Homepage(View):

@@ -10,10 +10,10 @@ from django.utils.html import mark_safe
 
 class Generate():
     
-    def _generate_whats_number(phone, phone_is_whats):
-        if not phone_is_whats: return ""
+    def _generate_whats_number(phone):
         clear_number = ''.join(filter(str.isdigit, phone))
         whats_number = "55" + clear_number
+        print(whats_number)
         return whats_number
 
     def _generate_social_links(links):
@@ -32,13 +32,13 @@ class Generate():
     def _generate_cidade_estado(address):
         return address.split(",")[-1].strip()
     
-    def _generate_page_link(company_name, company_address, prefix=''):
+    def _generate_web_address(company_name, company_address, prefix=''):
         from django.utils.html import mark_safe
         if 'hub' in prefix:
             domain = 'loja.'+settings.DOMAIN
         else:
             domain = settings.DOMAIN
-        html_preview = f'<a href="//{domain}/{prefix}{Generate._generate_company_path(company_name, company_address)}" target="_blank">Abrir</a>'
+        html_preview = f'<a href="//{domain}/{prefix}{Generate._generate_company_path(company_name, company_address)}" target="_blank">Visualizar</a>'
         return mark_safe(html_preview)
     
 class Storage():
@@ -48,8 +48,8 @@ class Storage():
     supabase_bucket_name = os.getenv('BUCKET_NAME').upper()
         
     @staticmethod
-    def upload_to_supabase(filepath, file_content):
-        (filepath, file_content) = Convertions.converter_para_webp(filepath, file_content)
+    def upload_to_supabase(filepath, file_content, size: tuple, quality=90):
+        file_content = Convertions.convertImageToWebp(file_content, size, quality=quality)
         supabase_client = supabase.create_client(Storage.supabase_url, Storage.supabase_key)
         bucket = supabase_client.storage.get_bucket(Storage.supabase_bucket_name)
         response = bucket.upload( filepath, file_content, 
@@ -64,7 +64,9 @@ class Storage():
         bucket = supabase_client.storage.get_bucket(Storage.supabase_bucket_name)
         arquivos_list = list(map(lambda d: path+d['name'], bucket.list(os.path.dirname(path))))
         print(arquivos_list)
-        response = bucket.remove(arquivos_list)
+        response = "Diretório vazio."
+        if (len(arquivos_list) > 0):
+            response = bucket.remove(arquivos_list)
         return response
     
     @staticmethod
@@ -100,12 +102,26 @@ class Storage():
     
 class Convertions():
 
-    def converter_para_webp(filepath, file_content):
-        img = Image.open(BytesIO(file_content))
-        # Converter para o formato WebP
-        buffer = BytesIO()
-        img.save(buffer, format="WEBP")
-        buffer.seek(0)
-        filename= ('').join(filepath.split('.')[:-1])+'.webp'
-        print(filename)
-        return (filename ,buffer.getvalue())
+ def convertImageToWebp(file_content, size, quality=90):
+    img = Image.open(BytesIO(file_content))
+    
+    # Redimensionar para que a altura ou largura seja igual ao valor máximo especificado
+    largura, altura = size
+    largura_original, altura_original = img.size
+    proporcao = max(largura / largura_original, altura / altura_original)
+    nova_largura = int(largura_original * proporcao)
+    nova_altura = int(altura_original * proporcao)
+    img = img.resize((nova_largura, nova_altura))
+    
+    # Fazer corte (crop)
+    esquerda = (nova_largura - largura) // 2
+    topo = (nova_altura - altura) // 2
+    direita = esquerda + largura
+    inferior = topo + altura
+    img = img.crop((esquerda, topo, direita, inferior))
+    
+    # Converter para o formato WebP
+    buffer = BytesIO()
+    img.save(buffer, format="WEBP", quality=quality, optimize=True)
+    buffer.seek(0)
+    return (buffer.getvalue())

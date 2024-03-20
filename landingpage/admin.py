@@ -5,7 +5,7 @@ from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django_object_actions import DjangoObjectActions 
-from landingpage.utils import Storage, Generate
+from landingpage.utils import Storage
 from django.contrib.auth.models import User, Group
 
 
@@ -13,6 +13,9 @@ admin.site.site_title = "ConectaPages"
 admin.site.site_header = "ConectaPages"
 admin.site.index_title = "Gerenciamento do Sistema"
 
+def clearBucketDirectory(path):
+    print('apagando arquivos de: ', path)
+    Storage.clear_folder_supabase(path)
 
 class CommonAdmin(DjangoObjectActions, ImportExportModelAdmin):
     # For Actions Buttons and Import/Export Function
@@ -31,15 +34,15 @@ class CommonAdmin(DjangoObjectActions, ImportExportModelAdmin):
 class FileUploadAdmin(CommonAdmin):
     change_actions = ('clear_bucket_files',)
     readonly_fields = ('image_tag',)
-    def clear_bucket_files(modeladmin, request, queryset):
-        Storage.clear_folder_supabase(Generate._generate_company_path(queryset.empresa.name, queryset.empresa.address)+'/')
 
 @admin.register(LandingPage)
 class LandingPageAdmin(FileUploadAdmin):
     form = LandingPageForm
-    actions = None    
-    readonly_fields = FileUploadAdmin.readonly_fields + ('page_link', 'url',)
-    list_display = ['empresa', 'on_air', 'cidadeestado', 'telefones']
+    actions = None  
+    def clear_bucket_files(self, request, queryset):
+        clearBucketDirectory('landingpages/' + str(queryset.id) + '/')  
+    readonly_fields = FileUploadAdmin.readonly_fields + ('web_address', 'url',)
+    list_display = ['empresa', 'on_air', 'cidadeestado', 'telefones', 'web_address']
     search_fields = ['empresa__name', 'empresa__phone_numbers', 'empresa__address']
     list_filter = ['on_air', ]
 #    filter_horizontal = ('Cidade',)

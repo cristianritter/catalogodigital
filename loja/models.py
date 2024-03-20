@@ -6,13 +6,13 @@ from landingpage.utils import Generate, Storage
 class Store(Page):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.destFolder = 'store/' + str(self.id)  
+        self.destFolder = 'stores/' + str(self.id)  
     class Meta:
         verbose_name = '   Store'
         verbose_name_plural = '   Stores'
 
-    def page_link(self):
-        return Generate._generate_page_link(self.empresa.name, self.empresa.address, prefix='hub/')
+    def web_address(self):
+        return Generate._generate_web_address(self.empresa.name, self.empresa.address, prefix='hub/')
 
     def image_tag(self):
         itemImagePath = Storage.get_image_tag(self.destFolder)
@@ -78,8 +78,8 @@ class Hub(Page):
         verbose_name = 'Concentrador'
         verbose_name_plural = 'Concentradores'
 
-    def page_link(self):
-        return Generate._generate_page_link(self.empresa.name, self.empresa.address, prefix='hub/')
+    def web_address(self):
+        return Generate._generate_web_address(self.empresa.name, self.empresa.address, prefix='hub/')
 
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
     lojas = models.ManyToManyField(Store)
