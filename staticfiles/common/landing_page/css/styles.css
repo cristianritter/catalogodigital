@@ -183,7 +183,6 @@ body {
 .col-md-4 {
   flex: 1; /* Permite que os itens cresçam e encolham dinamicamente */
   min-width: 300px;
-  margin-left: 15px;
 }
 
 .footer {
