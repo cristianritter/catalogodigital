@@ -30,7 +30,8 @@ class LandingPageView(View):
             'category': landingpage_data.empresa.category,
             'address': landingpage_data.empresa.address.split(','),
             'phone_numbers': landingpage_data.empresa.phone_numbers,
-            'lista_items': landingpage_data.lista_items.splitlines(),   
+            'lista_items': landingpage_data.lista_items.splitlines(),
+            'heading_style': landingpage_data.heading_style,   
         }
         
         if (landingpage_data.empresa.social_media):
@@ -44,7 +45,6 @@ class LandingPageView(View):
             self.context['dados_dict'] = json.loads(landingpage_data.colunas_items)
         
         if landingpage_data.empresa.is_whatsapp:
-            print('entrou')
             self.context['whats_number'] = Generate._generate_whats_number(landingpage_data.empresa.phone_numbers)
 
         if landingpage_data.empresa.e_mail:

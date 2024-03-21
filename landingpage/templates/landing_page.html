@@ -23,14 +23,24 @@
         </header>
         <header class="masthead main-content" id="masthead">
             <div class="container">
-                <div class="background-image" style="background-image: url('{{ bucket }}heading_small.webp');"></div>
+                {% if heading_style == 3 %}
+                <div class="background-image" style="background-image: url('{{ bucket }}heading_small.webp');filter: brightness(1);  max-width: 400px;"></div>
+                {% elif heading_style == 2 %}
+                <div class="background-image" style="background-image: url('{{ bucket }}heading_small.webp'); background-size: cover;"></div>    
+                {% elif heading_style == 0 %}
+                <div class="background-image" style="background-color: rgb(2, 48, 53);"></div>
+                {% else %}
+                <div class="background-image" style="background-color: rgb(228, 193, 129);"></div>
+                {% endif %}
+                {% if heading_style < 3 %}
                 <div class="masthead-subheading" >
                     {{ tagline }} 
                 </div>
                 <div class="masthead-heading text-uppercase" >
                     {{ company_name }}
                 </div>
-                <div class="col">
+                {% endif %}  
+                <div class="col head_bt">
                     {% if link_loja %}
                         {% for texto_botao, link in link_loja.items %}
                         <a class="btn btn-primary text-uppercase" href="{{ link }}" target="_blank">{{texto_botao}}</a>
@@ -143,7 +153,7 @@
                 <div class="mx-auto">Copyright&copy; <a href="/">ConectaPages</a> 2024</div>
             </div>
         </footer>        
-
+        {% if heading_style > 1 %}
         <script>
         window.onload = function() {
             var highQualityImageUrl = '{{ bucket }}heading_large.webp';   
@@ -155,14 +165,21 @@
             img.src = highQualityImageUrl; 
             lazyImages.forEach(function(lazyImage) {
                 lazyImage.src = lazyImage.dataset.src;
-                lazyImage.classList.remove("lazy-load");
+                //lazyImage.classList.remove("lazy-load");
             });
+            
+        };
+        </script>  
+        {% endif %}
+        <script>
+        window.onload = function() {
             var link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
             document.head.appendChild(link);
         };
+        </script> 
 
-        </script>   
+
     </body>
 </html>

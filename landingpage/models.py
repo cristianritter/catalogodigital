@@ -113,7 +113,6 @@ class LandingPage(Page, FileUpload):
         return itemImagePath
     image_tag.short_description = 'Imagens no Bucket'
 
-
     def web_address(self):
         return Generate._generate_web_address(self.empresa.name, self.empresa.address)
     web_address.short_description = 'Página web'
@@ -144,7 +143,13 @@ class LandingPage(Page, FileUpload):
     lista_items = models.TextField(blank=True, default='[]', max_length=600,  help_text='Seção de lista da página. Um item por linha.')
     colunas_items = models.TextField(blank= True, default='{}', help_text='Seção de colunas da página. Dict no formato {"Título1":"Conteúdo1","Título2":"Conteúdo2"},...')
     carousel_size = models.IntegerField(help_text='Quantidade de imagens no carossel da página.')
-    
+    heading_style = models.IntegerField(default=0, choices=[
+                                                                (0, 'Dark'),
+                                                                (1, 'Light'),
+                                                                (2, 'Texto sobre a imagem'),
+                                                                (3, 'Texto na imagem')
+                                                            ])
+
     def __str__(self):
         return f'{self.empresa.name}'
 
