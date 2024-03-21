@@ -12,7 +12,7 @@ class Page(models.Model):
         abstract = True  # Define essa classe como abstrata para que não seja criada como tabela no banco de dados
     
     on_air = models.BooleanField(default=False, help_text='Indica se a página está no ar.', db_index=True)
-    url = models.CharField(max_length=30, editable=False,  help_text='Endereço de url da página.', db_index=True)
+    url = models.CharField(max_length=60, editable=False,  help_text='Endereço de url da página.', db_index=True)
 
     def save(self, *args, **kwargs):
         self.url='/'+Generate._generate_company_path(self.empresa.name, self.empresa.address)
