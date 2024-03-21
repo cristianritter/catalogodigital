@@ -23,13 +23,7 @@ class CommonAdmin(DjangoObjectActions, ImportExportModelAdmin):
         css = {
             'all': ('common/landing_page/css/admin_styles.css',), # Enables red * on required fields
         }     
-    # Return only results that the user has rights
-    def get_queryset(self, request):
-        queryset = super().get_queryset(request)
-        if request.user.is_superuser:
-            return queryset
-        else:
-            return queryset.filter(empresa__owners=request.user)
+    
 
 class FileUploadAdmin(CommonAdmin):
     change_actions = ('clear_bucket_files',)
@@ -38,7 +32,15 @@ class FileUploadAdmin(CommonAdmin):
 @admin.register(LandingPage)
 class LandingPageAdmin(FileUploadAdmin):
     form = LandingPageForm
-    actions = None  
+    actions = None 
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        if request.user.is_superuser:
+            return queryset
+        else:
+            return queryset.filter(empresa__owners=request.user)
+        
     def clear_bucket_files(self, request, queryset):
         clearBucketDirectory('landingpages/' + str(queryset.id) + '/')  
     readonly_fields = FileUploadAdmin.readonly_fields + ('web_address', 'url',)
@@ -67,6 +69,14 @@ class EmpresaAdmin(CommonAdmin):
         }
     actions = None
    
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        if request.user.is_superuser:
+            return queryset
+        else:
+            return queryset.filter(owners=request.user)
+
+
 @admin.register(Servico)
 class ServicoAdmin(ImportExportModelAdmin):
     pass
