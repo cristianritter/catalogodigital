@@ -36,7 +36,7 @@ class LandingPageForm(forms.ModelForm):
             file_content = self.cleaned_data[self.fileUploadField].read()
             if self.cleaned_data['uploadType'] == 'cover':
                 size = (400,400)
-                Storage.upload_to_supabase(self.destFolder + 'heading_large.webp', file_content, size, quality=92)
+                Storage.upload_to_supabase(self.destFolder + 'heading_large.webp', file_content, size, quality=98)
                 Storage.upload_to_supabase(self.destFolder + 'heading_small.webp', file_content, size, quality=20)
             if self.cleaned_data['uploadType'] == 'carousel':
                 size = (350, 200)
