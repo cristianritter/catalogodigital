@@ -60,7 +60,7 @@ class CategoriaServicoAdmin(ImportExportModelAdmin):
     search_fields = ['name']
 
 @admin.register(Empresa)
-class EmpresaAdmin(ImportExportModelAdmin):
+class EmpresaAdmin(CommonAdmin):
     class Meta:
        css = {
             'all': ('common/landing_page/css/admin_styles.css',),
