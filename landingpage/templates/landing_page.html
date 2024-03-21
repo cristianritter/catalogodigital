@@ -102,7 +102,7 @@
                 <div class="col-md-4 mx-auto text-center ">
                     <p><strong>Telefone:</strong> {{phone_numbers}}</p>
                     {% if whats_number %}
-                    <a href="https://api.whatsapp.com/send?phone={{whats_number.0}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
+                    <a href="https://api.whatsapp.com/send?phone={{whats_number}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
                     {% endif %}
                     {% if e_mail %}
                     <a href="mailto:{{e_mail}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
@@ -133,7 +133,7 @@
                     </script>                 
                     <div class="embed-responsive embed-responsive-16by9 my-4 col-md-4 mx-auto" id="google-map-container"></div>
                     {% endif %}
-                    <p><strong>Atendemos de {{opening_hours.0}}</strong></p>
+                    <p><strong>Atendemos de {{opening_hours}}</strong></p>
                 </div>       
             </div>
         </section>

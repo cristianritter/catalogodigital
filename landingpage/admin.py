@@ -76,6 +76,12 @@ class EmpresaAdmin(CommonAdmin):
         else:
             return queryset.filter(owners=request.user)
 
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        if not request.user.is_superuser:
+            # Remover os campos que você não quer exibir para usuários não superusuários
+            fields = [field for field in fields if field not in ['owners', 'employees']]
+        return fields
 
 @admin.register(Servico)
 class ServicoAdmin(ImportExportModelAdmin):

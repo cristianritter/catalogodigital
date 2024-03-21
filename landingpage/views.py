@@ -45,22 +45,22 @@ class LandingPageView(View):
         
         if landingpage_data.empresa.is_whatsapp:
             print('entrou')
-            self.context['whats_number'] = Generate._generate_whats_number(landingpage_data.empresa.phone_numbers),
+            self.context['whats_number'] = Generate._generate_whats_number(landingpage_data.empresa.phone_numbers)
 
         if landingpage_data.empresa.e_mail:
-            self.context['e_mail'] = landingpage_data.empresa.e_mail,
+            self.context['e_mail'] = landingpage_data.empresa.e_mail
         
         if landingpage_data.empresa.opening_hours:
-            self.context['opening_hours'] = landingpage_data.empresa.opening_hours,
+            self.context['opening_hours'] = landingpage_data.empresa.opening_hours
         
         if landingpage_data.empresa.website:
-            self.context['link_loja'] = landingpage_data.empresa.website.split('#'),
+            self.context['link_loja'] = landingpage_data.empresa.website.split('#')
         
         if landingpage_data.empresa.g_embbedmaps:
-            self.context['gmaps_link'] = landingpage_data.empresa.g_embbedmaps,
+            self.context['gmaps_link'] = landingpage_data.empresa.g_embbedmaps
         
         if landingpage_data.empresa.g_business:
-            self.context['reviews_link'] = landingpage_data.empresa.g_business,
+            self.context['reviews_link'] = landingpage_data.empresa.g_business
 
         return render(request, self.template_name, self.context)
 
