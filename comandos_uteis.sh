@@ -8,3 +8,4 @@ heroku domains:add ajrcutelaria.mk4digital.com -a catalogodigital
 pip freeze > .\requirements.txt
 heroku logs --tail -a catalogodigital  
 pip install -r .\requirements.txt
+heroku run python manage.py createsuperuser -a catalogodigital
