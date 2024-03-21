@@ -1,2 +1,1 @@
-User-agent: *
-Disallow: 
+# Robots.txt vazio permitindo acesso a todos os bots
