@@ -12,7 +12,14 @@
         <script src="{% static 'common/landing_page/js/carousel.js'%}" async></script>
         <title>{{company_name}} - {{tagline}}</title>
     </head>   
-
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TKSFTQLMCG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-TKSFTQLMCG');
+    </script>            
     <body id="page-top">
         <header class="top-bar">
             <div class="container logo">
@@ -177,7 +184,5 @@
             link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
             document.head.appendChild(link);
         </script> 
-
-
     </body>
 </html>
