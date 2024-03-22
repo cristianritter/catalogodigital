@@ -16,13 +16,13 @@ class Generate():
         print(whats_number)
         return whats_number
 
-    def _generate_social_links(links):
+    def _generate_social_links(links : str):
         dictn = {}
-        for link in links:
+        for link in links.splitlines():
             if 'facebook' in link:
                 dictn['facebook'] = link
             elif 'instagram' in link:
-                dictn['instagram'] = link                
+                dictn['instagram'] = link    
         return dictn
     
     def _generate_company_path(company_name, company_address):
