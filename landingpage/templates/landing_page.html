@@ -9,7 +9,7 @@
         <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
         <link href="{% static 'common/landing_page/css/top_black_bar.css'%}" rel="stylesheet" />
         <link href="{% static 'common/landing_page/css/carousel.css'%}" rel="stylesheet" />
-        <script src="{% static 'common/landing_page/js/carousel.js'%}" async></script>
+        <script src="{% static 'common/landing_page/js/carousel.js'%}" defer></script>
         <title>{{company_name}} - {{tagline}}</title>
     </head>   
     <!-- Google tag (gtag.js) -->
@@ -172,7 +172,7 @@
             img.src = highQualityImageUrl; 
             lazyImages.forEach(function(lazyImage) {
                 lazyImage.src = lazyImage.dataset.src;
-                //lazyImage.classList.remove("lazy-load");
+                lazyImage.classList.remove("lazy-load");
             });
             
         };
