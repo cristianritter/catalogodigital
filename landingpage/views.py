@@ -73,12 +73,13 @@ class Homepage(View):
         o_que = request.GET.get('q', '')
         onde = request.GET.get('local', '')
         resultados_busca = []
-        q_placeholder = "Ex. afiador, cutelaria"
+        q_placeholder = "Ex. afiador, advogado"
         if o_que or onde:
             q_placeholder = o_que
+            search_slicing = int(len(o_que)/2)+1
             result = LandingPage.objects.filter(
                 Q(empresa__name__icontains=o_que) |
-                Q(empresa__category__name__icontains=o_que),
+                Q(empresa__category__name__icontains=o_que[:search_slicing]),
                 on_air=True
             ).order_by('-id')[:10]
             if result:
