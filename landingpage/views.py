@@ -45,7 +45,7 @@ class LandingPageView(View):
             self.context['dados_dict'] = json.loads(landingpage_data.colunas_items)
         
         if landingpage_data.empresa.is_whatsapp:
-            self.context['whats_number'] = Generate._generate_whats_number(landingpage_data.empresa.phone_numbers)
+            self.context['whats_number'] = Generate._generate_whats_number(landingpage_data.empresa.phone_numbers.split(',')[0])
 
         if landingpage_data.empresa.e_mail:
             self.context['e_mail'] = landingpage_data.empresa.e_mail
