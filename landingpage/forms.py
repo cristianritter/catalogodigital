@@ -31,15 +31,16 @@ class LandingPageForm(forms.ModelForm):
         instance = super().save(commit=False)
         if not self.cleaned_data[self.fileUploadField]:
             return instance
-        
         try:
             file_content = self.cleaned_data[self.fileUploadField].read()
+            file_name = self.cleaned_data[self.fileUploadField].name
             if self.cleaned_data['uploadType'] == 'cover':
                 size = (400,400)
                 Storage.upload_to_supabase(self.destFolder + 'heading_large.webp', file_content, size, quality=100)
                 Storage.upload_to_supabase(self.destFolder + 'heading_small.webp', file_content, size, quality=20)
             if self.cleaned_data['uploadType'] == 'carousel':
                 size = (350, 200)
+                Storage.upload_to_supabase(self.destFolder + file_name.split('.')[0] +'.webp', file_content, size, quality=100)
 
         except Exception as er:
             print('erro', er)
