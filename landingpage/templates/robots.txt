@@ -1,1 +1,2 @@
-# Robots.txt vazio permitindo acesso a todos os bots
+User-agent: *
+Allow: /

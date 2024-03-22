@@ -50,10 +50,10 @@
                 <div class="col head_bt">
                     {% if link_loja %}
                         {% for texto_botao, link in link_loja.items %}
-                        <a class="btn btn-primary text-uppercase" href="{{ link }}" target="_blank">{{texto_botao}}</a>
+                        <a class="btn btn-primary text-uppercase" href="{{ link }}" target="_blank" id="ir-para-loja-button">{{texto_botao}}</a>
                         {% endfor %}
                     {% else %}
-                    <a class="btn btn-primary text-uppercase" href="#new-contact">Entre em contato</a>
+                    <a class="btn btn-primary text-uppercase" href="#new-contact" id="entre-em-contato-button">Entre em contato</a>
                     {% endif %}
                 </div>
             </div>   
@@ -92,7 +92,7 @@
             
             {% if reviews_link %}                    
             <div class="container">
-                    <a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4 ">Consulte aqui nossas avaliações</a>
+                    <a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4" id="ver-avaliacoes-button">Consulte aqui nossas avaliações</a>
             </div>
             {% endif %}
 
@@ -119,7 +119,7 @@
                 <div class="col-md-4 mx-auto text-center ">
                     <p><strong>Telefone:</strong> {{phone_numbers}}</p>
                     {% if whats_number %}
-                    <a href="https://api.whatsapp.com/send?phone={{whats_number}}" target="_blank" class="btn btn-primary mb-4 ">Conversar no WhatsApp</a>                        
+                    <a href="https://api.whatsapp.com/send?phone={{whats_number}}" target="_blank" class="btn btn-primary mb-4" id="chamar-no-whatsapp-button">Conversar no WhatsApp</a>                        
                     {% endif %}
                     {% if e_mail %}
                     <a href="mailto:{{e_mail}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
