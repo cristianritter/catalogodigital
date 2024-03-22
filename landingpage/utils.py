@@ -102,20 +102,16 @@ class Storage():
     
 class Convertions():
 
- def convertImageToWebp(file_content, size, quality=90):
+ def convertImageToWebp(file_content, size, quality):
     img = Image.open(BytesIO(file_content))
     
-    # Redimensionar para que a altura ou largura seja igual ao valor máximo especificado
-    largura, altura = size
-    largura_original, altura_original = img.size
-    proporcao = max(largura / largura_original, altura / altura_original)
-    nova_largura = int(largura_original * proporcao)
-    nova_altura = int(altura_original * proporcao)
-    img = img.resize((nova_largura, nova_altura))
+    # Redimensionar mantendo a proporção original
+    img.thumbnail(size, Image.LANCZOS)
     
-    # Fazer corte (crop)
-    esquerda = (nova_largura - largura) // 2
-    topo = (nova_altura - altura) // 2
+    # Centralizar e cortar a imagem
+    largura, altura = size
+    esquerda = (img.width - largura) // 2
+    topo = (img.height - altura) // 2
     direita = esquerda + largura
     inferior = topo + altura
     img = img.crop((esquerda, topo, direita, inferior))
@@ -123,5 +119,6 @@ class Convertions():
     # Converter para o formato WebP
     buffer = BytesIO()
     img.save(buffer, format="WEBP", quality=quality, optimize=True)
+    print(quality, size)
     buffer.seek(0)
-    return (buffer.getvalue())
+    return buffer.getvalue()
