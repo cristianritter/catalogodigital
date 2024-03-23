@@ -5,39 +5,37 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content='{{category}} em{{address|last}}. Telefone, localização, fotos e avaliações aqui.' />
+        <script src="{% static 'landingpage/js/gmaps.js' %}"></script>
+        <script defer src="{% static 'landingpage/js/carousel.js'%}"></script>
+        <script defer src="{% static 'landingpage/js/onload.js' %}"></script>
+        <script defer src="{% static 'landingpage/js/font_awesome.js' %}"></script>
+        <!-- Google tag (gtag.js) -->
+        <script defer src="https://www.googletagmanager.com/gtag/js?id=G-TKSFTQLMCG"></script>
+        <script defer src="{% static 'common/gtag/gtag.js' %}"></script>
         <link rel="icon" type="image/png" href="{% static 'common/favicon/favicon-128x128.png' %}">
-        <link href="{% static 'common/landing_page/css/styles.css'%}" rel="stylesheet" />
-        <link href="{% static 'common/landing_page/css/top_black_bar.css'%}" rel="stylesheet" />
-        <link href="{% static 'common/landing_page/css/carousel.css'%}" rel="stylesheet" />
-        <script src="{% static 'common/landing_page/js/carousel.js'%}" defer></script>
+        <link href="{% static 'landingpage/css/styles.css'%}" rel="stylesheet" />
+        <link href="{% static 'landingpage/css/top_black_bar.css'%}" rel="stylesheet" />
+        <link href="{% static 'landingpage/css/carousel.css'%}" rel="stylesheet" />
         <title>{{company_name}} - {{tagline}}</title>
     </head>   
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TKSFTQLMCG"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-TKSFTQLMCG');
-    </script>            
     <body id="page-top">
         <header class="top-bar">
             <div class="container logo">
                 <a href="/">
-                    <img src="{% static 'common/landing_page/img/logo.svg' %}" width="150" height="26" alt="Logo da página" class="logo">
+                    <img src="{% static 'landingpage/img/logo.svg' %}" width="150" height="26" alt="Logo da página" class="logo">
                 </a>
             </div>
         </header>
         <header class="masthead main-content" id="masthead">
             <div class="container">
                 {% if heading_style == 3 %}
-                <div class="background-image" style="background-image: url('{{ bucket }}heading_small.webp');filter: brightness(1);  max-width: 400px;"></div>
+                <div class="background-image" id="background-image" style="background-image: url('{{ bucket }}heading_small.webp');filter: brightness(1);  max-width: 400px;" highQualityImageUrl="{{ bucket }}heading_large.webp"></div>
                 {% elif heading_style == 2 %}
-                <div class="background-image" style="background-image: url('{{ bucket }}heading_small.webp'); background-size: cover;"></div>    
+                <div class="background-image" id="background-image" style="background-image: url('{{ bucket }}heading_small.webp'); background-size: cover;" highQualityImageUrl="{{ bucket }}heading_large.webp"></div>    
                 {% elif heading_style == 0 %}
-                <div class="background-image" style="background-color: rgb(2, 48, 53);"></div>
+                <div class="background-image" id="background-image" style="background-color: rgb(2, 48, 53);"></div>
                 {% else %}
-                <div class="background-image" style="background-color: rgb(228, 193, 129);"></div>
+                <div class="background-image" id="background-image" style="background-color: rgb(228, 193, 129);"></div>
                 {% endif %}
                 {% if heading_style < 3 %}
                 <div class="masthead-subheading" >
@@ -89,13 +87,11 @@
                 </div>
             </div>
             {% endif %}
-            
             {% if reviews_link %}                    
             <div class="container">
                     <a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4" id="ver-avaliacoes-button">Consulte aqui nossas avaliações</a>
             </div>
             {% endif %}
-
             {% if img_carousel.0 %}
             <div class="carousel">
                 <div class="carousel-container">
@@ -109,15 +105,12 @@
                 <button class="carousel-next">&#10095;</button>
             </div>
             {% endif %}
-
         </section>
-
-
         <section class=" text-center container" id="new-contact">
             <div class=" mx-auto ">
                 <h3 class="text-uppercase espaco-duplo">Contato</h3>
                 <div class="col-md-4 mx-auto text-center ">
-                    <p><strong>Telefone:</strong> {{phone_numbers}}</p>
+                    <p><strong>Telefone(s):</strong> {{phone_numbers}}</p>
                     {% if whats_number %}
                     <a href="https://api.whatsapp.com/send?phone={{whats_number}}" target="_blank" class="btn btn-primary mb-4" id="chamar-no-whatsapp-button">Conversar no WhatsApp</a>                        
                     {% endif %}
@@ -132,57 +125,22 @@
                         {% endfor %}
                     </div>
                     {% endif %}
-                
                     <p><strong>Endereço:</strong> {{address|join:", "}}</p>
                     {% if gmaps_link %}
                     <button class="btn btn-primary" onclick="carregarMapa()" id="map-button">Ver no mapa</button>
-                    <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{address}}" target="_blank" style="display: none;" id="directions-button">Dirigir até o local</a>            
-                    <script defer>
-                        function carregarMapa() {
-                            var iframe = document.createElement("iframe");
-                            iframe.setAttribute("src", "{{gmaps_link}}");
-                            iframe.setAttribute("width", "100%");
-                            iframe.setAttribute("height", "200");
-                            document.getElementById("google-map-container").appendChild(iframe);
-                            document.getElementById("map-button").style.display = "none";
-                            document.getElementById("directions-button").style.display = "inline-block"; // Exibir o botão Obter Direções
-                        }
-                    </script>                 
-                    <div class="embed-responsive embed-responsive-16by9 col-md-4 mx-auto" id="google-map-container"></div>
+                    <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{address}}" target="_blank" style="display: none;" id="directions-button">Dirigir até o local</a>                             
+                    <div class="embed-responsive embed-responsive-16by9 col-md-4 mx-auto" id="google-map-container" data-gmaps-link="{{ gmaps_link }}"></div>
                     {% endif %}
                     <p><strong>Atendemos de {{opening_hours}}</strong></p>
                 </div>       
             </div>
         </section>
-
         <footer class="footer">
             <div class="row">
                 <div class="mx-auto">Copyright&copy; ConectaPages 2024</div>
             </div>
         </footer>        
         {% if heading_style > 1 %}
-        <script>
-        window.onload = function() {
-            var highQualityImageUrl = '{{ bucket }}heading_large.webp';   
-            var lazyImages = document.querySelectorAll("img.lazy-load");
-            var img = new Image();
-            img.onload = function() {
-                document.querySelector('#masthead .background-image').style.backgroundImage = 'url(' + highQualityImageUrl + ')';
-            };
-            img.src = highQualityImageUrl; 
-            lazyImages.forEach(function(lazyImage) {
-                lazyImage.src = lazyImage.dataset.src;
-                lazyImage.classList.remove("lazy-load");
-            });
-            
-        };
-        </script>  
         {% endif %}
-        <script>
-            var link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
-            document.head.appendChild(link);
-        </script> 
     </body>
 </html>
