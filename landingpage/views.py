@@ -122,7 +122,8 @@ class RootSitemap(Sitemap):
             return 0.7  
 
 def favicon_view(request):
+    print('buscando favicon')
     # Lógica para ler e retornar o conteúdo do arquivo favicon.ico
-    with open('landingpage/static/home/logo/favicon.ico', 'rb') as f:
+    with open('landingpage/static/common/favicon/favicon-128x128.png', 'rb') as f:
         favicon = f.read()
-    return HttpResponse(favicon, content_type='image/x-icon')
+    return HttpResponse(favicon, content_type='image/png')
