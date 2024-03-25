@@ -45,8 +45,8 @@ class LandingPageAdmin(FileUploadAdmin):
         clearBucketDirectory('landingpages/' + str(queryset.id) + '/')  
     readonly_fields = FileUploadAdmin.readonly_fields + ('web_address', 'url',)
     list_display = ['empresa', 'on_air', 'cidadeestado', 'telefones', 'web_address']
-    search_fields = ['empresa__name', 'empresa__phone_numbers', 'empresa__address']
-    list_filter = ['on_air', ]
+    search_fields = ['empresa__name', 'empresa__phone_numbers', 'empresa__address', 'empresa__owners__username']
+    list_filter = ['on_air', 'empresa__owners__username']
 #    filter_horizontal = ('Cidade',)
   
 @admin.register(Cidade)
