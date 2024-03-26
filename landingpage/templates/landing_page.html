@@ -11,7 +11,12 @@
         <script defer src="{% static 'landingpage/js/font_awesome.js' %}"></script>
         <!-- Google tag (gtag.js) -->
         <script defer src="https://www.googletagmanager.com/gtag/js?id=G-TKSFTQLMCG"></script>
-        <script defer src="{% static 'common/gtag/gtag.js' %}"></script>
+        <script defer>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TKSFTQLMCG');
+        </script>
         <link rel="icon" type="image/png" href="{% static 'common/favicon/favicon-128x128.png' %}">
         <link href="{% static 'landingpage/css/styles.css'%}" rel="stylesheet" />
         <link href="{% static 'landingpage/css/top_black_bar.css'%}" rel="stylesheet" />
@@ -143,5 +148,14 @@
         {% if heading_style > 1 %}
         {% endif %}
     </body>
-    <script defer src="{% static 'landingpage/js/gtag_engaging.js' %}"></script>
+    <script defer>
+     document.getElementById('chamar-no-whatsapp-button').addEventListener('click', function() 
+    {
+        // Envia um evento personalizado para o Google Analytics quando o botão é clicado
+        gtag('event', 'clique_em_chamar_no_whats', {
+            'event_category': 'clique_em_chamar_no_whats',
+            'event_label': 'clique_em_chamar_no_whats Clicado'
+        });
+    });
+    </script>
 </html>
