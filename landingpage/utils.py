@@ -6,8 +6,6 @@ from PIL import Image
 from io import BytesIO
 from django.utils.html import mark_safe
 
-
-
 class Generate():
     
     def _generate_whats_number(phone):
@@ -54,7 +52,7 @@ class Storage():
         bucket = supabase_client.storage.get_bucket(Storage.supabase_bucket_name)
         response = bucket.upload( filepath, file_content, 
                                  {'content-type':'image/webp',
-                                  'cache-control':'604800'})
+                                  'cache-control':'7200'})
         return response
     
     @staticmethod

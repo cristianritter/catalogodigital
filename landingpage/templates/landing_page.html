@@ -34,13 +34,13 @@
         <header class="masthead main-content" id="masthead">
             <div class="container">
                 {% if heading_style == 3 %}
-                <div class="background-image" id="background-image" style="background-image: url('{{ bucket }}heading_small.webp');filter: brightness(1);  max-width: 400px;" highQualityImageUrl="{{ bucket }}heading_large.webp"></div>
+                <div class="background-image" id="background-image" style="background-image: url('{{ bucket }}heading_small.webp');filter: brightness(1);  max-width: 400px; max-height: 400px;" highQualityImageUrl="{{ bucket }}heading_large.webp"></div>
                 {% elif heading_style == 2 %}
-                <div class="background-image" id="background-image" style="background-image: url('{{ bucket }}heading_small.webp'); background-size: cover;" highQualityImageUrl="{{ bucket }}heading_large.webp"></div>    
+                <div class="background-image" id="background-image" style="background-image: url('{{ bucket }}heading_small.webp'); background-size: cover; max-height: 400px;" highQualityImageUrl="{{ bucket }}heading_large.webp"></div>    
                 {% elif heading_style == 0 %}
-                <div class="background-image" id="background-image" style="background-color: rgb(2, 48, 53);"></div>
+                <div class="background-image" id="background-image" style="background-color: rgb(2, 48, 53); max-height: 400px;"></div>
                 {% else %}
-                <div class="background-image" id="background-image" style="background-color: rgb(228, 193, 129);"></div>
+                <div class="background-image" id="background-image" style="background-color: rgb(228, 193, 129); max-height: 400px;"></div>
                 {% endif %}
                 {% if heading_style < 3 %}
                 <div class="masthead-subheading" >
@@ -94,7 +94,7 @@
             {% endif %}
             {% if reviews_link %}                    
             <div class="container">
-                    <a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4" id="ver-avaliacoes-button">Consulte aqui nossas avaliações</a>
+                    <a href="{{reviews_link}}" target="_blank" class="btn btn-primary mb-4" id="click-open-reviews-button">Consulte aqui nossas avaliações</a>
             </div>
             {% endif %}
             {% if img_carousel.0 %}
@@ -117,10 +117,10 @@
                 <div class="col-md-4 mx-auto text-center ">
                     <p><strong>Telefone(s):</strong> {{phone_numbers}}</p>
                     {% if whats_number %}
-                    <a href="https://api.whatsapp.com/send?phone={{whats_number}}" target="_blank" class="btn btn-primary mb-4" id="chamar-no-whatsapp-button">Conversar no WhatsApp</a>                        
+                    <a href="https://api.whatsapp.com/send?phone={{whats_number}}" target="_blank" class="btn btn-primary mb-4" id="click-whats-chat-button">Conversar no WhatsApp</a>                        
                     {% endif %}
                     {% if e_mail %}
-                    <a href="mailto:{{e_mail}}" target="_blank" class="btn btn-primary mb-4">Enviar um e-mail</a>                        
+                    <a href="mailto:{{e_mail}}" target="_blank" class="btn btn-primary mb-4" id="click-send-email-button">Enviar um e-mail</a>                        
                     {% endif %}     
                     {% if social_media %}
                     <div class="tm-social-buttons espaco-duplo">
@@ -133,7 +133,7 @@
                     <p><strong>Endereço:</strong> {{address|join:", "}}</p>
                     {% if gmaps_link %}
                     <button class="btn btn-primary" onclick="carregarMapa()" id="map-button">Ver no mapa</button>
-                    <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{address}}" target="_blank" style="display: none;" id="directions-button">Dirigir até o local</a>                             
+                    <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&destination={{address}}" target="_blank" style="display: none;" id="click-get-directions-button">Dirigir até o local</a>                             
                     <div class="embed-responsive embed-responsive-16by9 col-md-4 mx-auto" id="google-map-container" data-gmaps-link="{{ gmaps_link }}"></div>
                     {% endif %}
                     <p><strong>Atendemos de {{opening_hours}}</strong></p>
@@ -149,13 +149,37 @@
         {% endif %}
     </body>
     <script defer>
-     document.getElementById('chamar-no-whatsapp-button').addEventListener('click', function() 
+    document.getElementById('click-whats-chat-button').addEventListener('click', function() 
     {
         // Envia um evento personalizado para o Google Analytics quando o botão é clicado
-        gtag('event', 'clique_em_chamar_no_whats', {
-            'event_category': 'clique_em_chamar_no_whats',
-            'event_label': 'clique_em_chamar_no_whats Clicado'
+        gtag('event', 'click-whats-chat-button', {
+            'event_category': 'click-whats-chat-button',
+            'event_label': 'click-whats-chat-button'
         });
     });
-    </script>
+    document.getElementById('click-get-directions-button').addEventListener('click', function() 
+    {
+        // Envia um evento personalizado para o Google Analytics quando o botão é clicado
+        gtag('event', 'click-get-directions-button', {
+            'event_category': 'click-get-directions-button',
+            'event_label': 'click-get-directions-button'
+        });
+    });
+    document.getElementById('click-send-email-button').addEventListener('click', function() 
+    {
+        // Envia um evento personalizado para o Google Analytics quando o botão é clicado
+        gtag('event', 'click-send-email-button', {
+            'event_category': 'click-send-email-button',
+            'event_label': 'click-send-email-button'
+        });
+    });
+    document.getElementById('click-open-reviews-button').addEventListener('click', function() 
+    {
+        // Envia um evento personalizado para o Google Analytics quando o botão é clicado
+        gtag('event', 'click-open-reviews-button', {
+            'event_category': 'click-open-reviews-button',
+            'event_label': 'click-open-reviews-button'
+        });
+    });
+    </script>    
 </html>
