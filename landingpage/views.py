@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from .models import LandingPage
+from .models import LandingPage, Empresa
 #from django.core.cache import cache
 from django.shortcuts import render
 from django.views import View
@@ -25,12 +25,12 @@ class LandingPageView(View):
             'empresa__phone_numbers',
             'empresa__is_whatsapp',
             'empresa__social_media',
-            'empresa__service_areas__nome',
             'empresa__e_mail',
             'empresa__opening_hours',
             'empresa__website',
             'empresa__g_embbedmaps',
             'empresa__g_business',
+            'empresa__id',
             'id',
             'carousel_size',
             'on_air',
@@ -38,7 +38,6 @@ class LandingPageView(View):
             'colunas_items',
             'heading_style'
         ).first()
-        print(request.path, landingpage_data)
         if not landingpage_data['on_air']:
             return render(request, '404-wall-e.html') 
         
@@ -52,14 +51,11 @@ class LandingPageView(View):
             'phone_numbers': landingpage_data['empresa__phone_numbers'],
             'lista_items': landingpage_data['lista_items'].splitlines(),
             'heading_style': landingpage_data['heading_style'],   
+            'service_areas': Empresa.objects.filter(id=landingpage_data['empresa__id']).values_list('service_areas__nome', flat=True)
         }
-        
         if (landingpage_data['empresa__social_media']):
             self.context['social_media'] = Generate._generate_social_links(landingpage_data['empresa__social_media'])
-        
-        if landingpage_data['empresa__service_areas__nome']:
-            self.context['service_areas'] = [landingpage_data['empresa__service_areas__nome']]
-        
+                
         if landingpage_data['colunas_items']:
             self.context['dados_dict'] = json.loads(landingpage_data['colunas_items'])
         
